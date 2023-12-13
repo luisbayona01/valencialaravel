@@ -38,6 +38,7 @@
 
 										<th>Nombres</th>
 										<th>Apellidos</th>
+                                        <th>Username</th>
 										<th>Email</th>
 									    <th>rol</th>
 
@@ -51,6 +52,7 @@
 
 											<td>{{ $user->nombres }}</td>
 											<td>{{ $user->apellidos }}</td>
+                                            <td>{{ $user->username }}</td>
 											<td>{{ $user->email }}</td>
 
 

@@ -16,7 +16,11 @@
             {{ Form::text('email', $user->email, ['class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : ''), 'placeholder' => 'Email','required' => 'required']) }}
              <div class="invalid-feedback"> el   campo Email es obligatorio  </div>
         </div>
-
+     <div class="form-group">
+            {{ Form::label('username') }}
+            {{ Form::text('username', $user->username, ['class' => 'form-control' . ($errors->has('username') ? ' is-invalid' : ''), 'placeholder' => 'Username','required' => 'required']) }}
+             <div class="invalid-feedback"> el   campo username es obligatorio  </div>
+        </div>
 
 
      <div class="form-group">

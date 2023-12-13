@@ -21,7 +21,7 @@ class UserController extends Controller
     {
         $users = DB::table('users as U')
                     ->join('roles as R', 'R.id', '=', 'U.idrol')
-                    ->select('U.id','U.nombres', 'U.apellidos', 'U.email', 'R.name as rollname')
+                    ->select('U.id','U.nombres', 'U.apellidos', 'U.email','U.username', 'R.name as rollname')
                     ->get();
         return view('user.index', compact('users'));
                     /* return view('user.index', compact('users'))
@@ -53,7 +53,7 @@ class UserController extends Controller
     {
         $users = DB::table('users as U')
                             ->join('roles as R', 'R.id', '=', 'U.idrol')
-                            ->select('U.id','U.nombres', 'U.apellidos', 'U.email', 'R.name as rollname')
+                            ->select('U.id','U.nombres', 'U.apellidos', 'U.email','U.username' ,'R.name as rollname')
                             ->where('U.id', '=', $id)
                             ->get();
 
@@ -90,7 +90,8 @@ class UserController extends Controller
         //request()->validate(User::$rules);
 
         $user->update($request->all());
-
+ return redirect()->route('users.index')
+            ->with('success', 'User update successfully');
     }
 
     /**
@@ -109,7 +110,8 @@ class UserController extends Controller
     {
 
         $password='Etra1234';
-        $data = User::where('email', '=', $request->email)->get();
+
+        $data = User::where('email', '=', $request->email)->orWhere('username', $request->input('username'))->get();
         if (count($data) != 0) {
             $respuesta = "este usuario  ya esta registrado ";
 
@@ -121,6 +123,7 @@ class UserController extends Controller
                 "apellidos" => $request->apellidos,
                 "identificacion" => $request->identificacion,
                 "telefono" => $request->telefono,
+                "username">$request->username,
                 "email" => $request->email,
                 'password' => bcrypt($password),
                 "idrol" => $request->idrol]);

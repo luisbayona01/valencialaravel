@@ -47,7 +47,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['nombres','apellidos','email','idrol','password'];
+    protected $fillable = ['nombres','apellidos','email','idrol','password','username'];
 
 
     /**
@@ -66,7 +66,7 @@ class User extends Authenticatable
         return $this->hasOne('App\Role', 'id', 'idrol');
     }
       public function rolname()
-    {    //$var="hola";
+    {
        $idrol= \Illuminate\Support\Facades\Auth::user()->idrol;
        $roname= DB::table('roles')->select('name')->where('id', '=', $idrol)->first();
        return $roname->name;
