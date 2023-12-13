@@ -108,7 +108,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-       $password='Etra1234';
+        $password='Etra1234';
         $data = User::where('email', '=', $request->email)->get();
         if (count($data) != 0) {
             $respuesta = "este usuario  ya esta registrado ";
@@ -123,7 +123,7 @@ class UserController extends Controller
                 "telefono" => $request->telefono,
                 "email" => $request->email,
                 'password' => bcrypt($password),
-                "tipousario" => $request->idrol]);
+                "idrol" => $request->idrol]);
 
             if ($Usuarios->save()) {
 

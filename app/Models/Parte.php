@@ -31,10 +31,10 @@ use Illuminate\Database\Eloquent\Model;
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class Parte extends Model
-{   
+{
     protected $table = 'parte';
      protected $primaryKey = 'id';
-     public $timestamps = false; 
+     public $timestamps = false;
     static $rules = [
     ];
 
@@ -45,7 +45,7 @@ class Parte extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_localizacion','idtipoparte','creadopor','fechacreacion','reportadoPor','fechareporte','obscreadorparte','asignadoA','fechaAsignacion','obsOperador','validado_por','fecha_validacion','obscliente','estadoparte_id'];
+    protected $fillable = ['id_localizacion','idtipoparte','creadopor','fechacreacion','reportadopor','fechareporte','obscreadorparte','asignadoa','fechaAsignacion','obsOperador','validado_por','fecha_validacion','obscliente','estadoparte_id'];
 
 
     /**
@@ -55,7 +55,7 @@ class Parte extends Model
     {
         return $this->hasOne('App\Estadoparte', 'id', 'estadoparte_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -63,7 +63,7 @@ class Parte extends Model
     {
         return $this->hasOne('App\Localizacion', 'id', 'id_localizacion');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -71,7 +71,7 @@ class Parte extends Model
     {
         return $this->hasOne('App\Tipoparte', 'id', 'idtipoparte');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -79,6 +79,6 @@ class Parte extends Model
     {
         return $this->hasOne('App\User', 'id', 'creadopor');
     }
-    
+
 
 }

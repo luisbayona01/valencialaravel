@@ -52,6 +52,9 @@ $("#fechaAsignacion").datetimepicker({
         <!-- Inicia el div con la clase "card-header" -->
         <div class="card-header">
             <span class="card-title">{{ __('Creacion') }} De  Partes</span>
+                       <div>
+                            <img src="{{asset('img/icono_representativo_caratula.png')}}" class="card-img-top" style="width: 30rem;">
+                        </div>
         </div>
         <!-- Termina el div con la clase "card-header" -->
 
