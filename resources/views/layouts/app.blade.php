@@ -24,6 +24,7 @@
 
 </head>
 <body>
+
  {{--str_replace('http://commonly-blessed-python.ngrok-free.app/','https://commonly-blessed-python.ngrok-free.app/', asset('') ) --}}
     <div id="app">
         <main class="py-4">

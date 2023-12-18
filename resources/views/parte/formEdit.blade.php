@@ -9,7 +9,7 @@
   @if (Auth::user()->idrol!=4)
   @php
     $dnone = 'd-none';
-@endphp    
+@endphp
   @else
       @php
     $dnone = '';
@@ -39,7 +39,7 @@
                 <div class="form-group">
                     {{ Form::label('No') }}
                     <p class="form-control" id="idparte">{{ $no}} </p>
-                
+
                 </div>
             </div>
             <div class="col">
@@ -77,7 +77,7 @@
         <div class="row" bis_skin_checked="1">
             <div class="col-sm-6" bis_skin_checked="1">
                 <div class="form-group">
-                    {{ Form::label('reportadoPor') }}
+                    {{ Form::label('Comunicado por') }}
                     {{ Form::select('reportadopor',$reportadopor,$parte->reportadopor, ['class' => 'form-control' . ($errors->has('reportadoPor') ? ' is-invalid' : ''), 'placeholder' => 'selecione', 'required' => 'required', 'disabled' =>'disabled']) }}
                    <div class="invalid-feedback">
                         porfavor seleccione una  opcion
@@ -86,7 +86,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    {{ Form::label('fechareporte') }}
+                    {{ Form::label('Fecha comunicación') }}
                     <div class="input-group date">
 
                         {{ Form::text('fechareporte', $parte->fechareporte, ['class' => 'form-control', 'placeholder' => 'Fechareporte', 'required' => 'required', 'disabled' =>'disabled']) }}
@@ -106,7 +106,7 @@
         <div class="row" bis_skin_checked="1">
             <div class="col-sm-6" bis_skin_checked="1">
                 <div class="form-group">
-                    {{ Form::label('asignado A') }}
+                    {{ Form::label('Reparado por') }}
                     {{ Form::select('asignadoa',$asignadoa,$parte->asignadoa, ['class' => 'form-control' . ($errors->has('asignadoa') ? ' is-invalid' : ''), 'placeholder' => 'seleccione', 'required' => 'required']) }}
                   <div class="invalid-feedback">
                         porfavor asigne un usuario
@@ -120,7 +120,7 @@
 
           <div class="col-sm-6">
                 <div class="form-group">
-                    {{ Form::label('fechaAsignacion') }}
+                    {{ Form::label('Fecha reparación') }}
                     <div class="input-group date">
 
                         {{ Form::text('fechaAsignacion', $parte->fechaAsignacion, ['class' => 'form-control', 'placeholder' => 'fechaAsignacion', 'required' => 'required', 'disabled' =>'disabled']) }}
@@ -181,12 +181,13 @@
    <label for="Select">Select</label>
            <div class="form-group">
             <button type="button" class="btn btn-info" id="selecione"><i class="fa fa-check-square" aria-hidden="true"></i></button>
-           </div>        
+           </div>
 </div>
     </div>
 </div>
 
  <div class="contenido d-none">
+    <div class="table-responsive">
    <table class="table table-bordered">
          <thead>
     <tr>
@@ -201,12 +202,12 @@
 
   </tbody>
    </table>
-
+</div>
  </div>
 
         <div class="form-group {{$dnone}}">
             {{ Form::label('observaciones del operador') }}
-            {{ Form::textarea('obsOperador', $parte->obsOperador, ['class' => 'form-control' . ($errors->has('obsOperador') ? ' is-invalid' : ''), 
+            {{ Form::textarea('obsOperador', $parte->obsOperador, ['class' => 'form-control' . ($errors->has('obsOperador') ? ' is-invalid' : ''),
            'placeholder' => 'Obsoperador','rows' => 5,
             'required' => Auth::user()->id_rol == 4 ? 'required' : ''
      ]) }}

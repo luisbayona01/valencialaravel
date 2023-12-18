@@ -21,3 +21,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/partes/elementos/{id}',[App\Http\Controllers\ElementosController::class,'list_data_elements_api_elemntparte']);
 
 Route::post('/partes/addelement',[App\Http\Controllers\ElementosController::class,'save_ajax_api_elementos']);
+URL::forceScheme('https');
