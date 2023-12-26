@@ -17,7 +17,7 @@ trait AuthenticateUsers
      */
     public function login(Request $request)
     {
-        $data = $request->only('email', 'password');
+        $data = $request->only('username', 'password');
 
         if (!Auth::attempt($data)) {
             return response()->json([

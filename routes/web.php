@@ -33,3 +33,5 @@ Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'Logout
 //Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+URL::forceScheme('https');

@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <link rel="shortcut icon" href="{{ asset('img/Isotipo-Krypto.ico') }}" />
+    <link rel="shortcut icon" href="{{ asset('img/icono-negro.png') }}" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -12,7 +12,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Etra Valencia</title>
 
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -39,8 +39,13 @@
 
     <script src="{{ str_replace('http://commonly-blessed-python.ngrok-free.app/','https://commonly-blessed-python.ngrok-free.app/',asset('js/bootstrap-datetimepicker.min.js')) }}"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <!-- Fonts -->
+ <script>
+$(".table").DataTable({
+    responsive: true
+});
+ </script>
 
 
     <style>
@@ -77,39 +82,41 @@
             <a href="{{ url('/home') }}" class="sidebar-link collapsed">
                 <!-- Opening div for sidebar-link -->
 
-                <i class="fa fa-tachometer"></i> <span class="align-middle">inicio</span>
+                <i class="fa fa-tachometer"></i> <span class="align-middle">Inicio</span>
             </a>
             <!-- Closing div for sidebar-link -->
 
-            <li class="">
-                <!-- Opening div for the first list item -->
+            <!-- Administracion CRUD usuarios al sistema -->
 
-                <a data-target="#usuarios" data-toggle="collapse" class="sidebar-link collapsed">
-                    <!-- Opening div for sidebar-link -->
+            <a href="{{ url('/users') }}" class="sidebar-link collapsed">
+                <!-- Opening div for sidebar-link -->
 
-                    <i class="fa fa-users"></i> <span class="">ADMINISTRACION DE USUARIOS</span>
-                </a>
-                <!-- Closing div for sidebar-link -->
+                <i class="fa fa-user-plus"></i> <span class="align-middle">Administración usuarios</span>
+            </a>
 
-                <ul id="usuarios" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                    <!-- Opening div for sidebar-dropdown -->
 
-                    <li class="sidebar-item "><a class="sidebar-link" href="{{ url('/users') }}">Creacion y listado de usuarios</a></li>
-                    <li class="sidebar-item "><a class="sidebar-link" href="{{ url('/roles') }}">Creacion y listado de roles</a></li>
+            <!-- Nivel de Adminitracion de Perfiles de acceso al sistema -->
 
-                </ul>
-                <!-- Closing div for sidebar-dropdown -->
 
-            </li>
-            <!-- Closing div for the first list item -->
+            <a href="{{ url('/roles') }}" class="sidebar-link collapsed">
+                <!-- Opening div for sidebar-link -->
+                <i class="fa fa-users"></i> <span class="align-middle">Administración perfiles</span>
+            </a>
 
-            <li class="sidebar-item">
+
+            <a href="javascript:void(0);" onclick="gestionPartes()" class="sidebar-link collapsed">
+                <!-- Opening div for sidebar-link -->
+                <i class="fa fa-check-square"></i> <span class="align-middle">Gestión de partes</span>
+            </a>
+
+
+
+            <li >
                 <!-- Opening div for the second list item -->
 
                 <a data-target="#NOMINA" data-toggle="collapse" class="sidebar-link collapsed">
                     <!-- Opening div for sidebar-link -->
-
-                    <i class="fa fa-pencil-square-o"></i> <span class="align-middle">Gestion de partes </span>
+                    <i class="fa fa-check-square"></i> <span class="align-middle">Gestion de partes </span>
                 </a>
                 <!-- Closing div for sidebar-link -->
 
@@ -121,9 +128,12 @@
 
                 </ul>
                 <!-- Closing div for sidebar-dropdown -->
+                <!-- onclick="gestionPartes()" style="cursor:pointer" -->
 
             </li>
             <!-- Closing div for the second list item -->
+
+
 
         </ul>
         <!-- Closing div for sidebar-nav -->

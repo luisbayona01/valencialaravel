@@ -5,16 +5,41 @@
 @endsection
 
 @section('content')
+ <style>
+
+.Activo {
+    background-color: #FFD700;
+
+    }
+.Aceptado{
+background-color:#00FF00 !important;
+}
+
+.Rechazado{
+background-color:#FF0000 !important;
+}
+.Certificado{
+background-color:#FF8C00 !important;
+ }
+.Comprobado{
+background-color:#4169E1 !important;
+color: #ffFF ;
+ }
+</style>
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-
+                          <div >
+                            <img src="{{asset('img/icono_representativo_caratula.png')}}" class="card-img-top" style="width: 30rem;">
+                        </div>
+                            <!--
                             <span id="card_title">
                                 {{ __('Parte') }}
                             </span>
+                            --> 
 
                              <div class="float-right">
                                 <a href="{{ route('partes.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
@@ -31,7 +56,7 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped" id="table-parte">
                                 <thead class="thead">
                                     <tr>
                                         <th>No parte</th>
@@ -44,9 +69,8 @@
 										<th>Fecha reporte</th>
 										<th>Obsrvacion ini</th>
 										<th>Responsable</th>
-										<th>Fechaasignacion</th>
-										<th>Obsoperador</th>
-										 <th>Estadoparte</th>
+										<th>Fecha asignacion</th>
+									   <th>Estado parte</th>
 
                                         <th></th>
                                     </tr>
@@ -65,7 +89,7 @@
 											<td>{{ $parte->obscreadorparte }}</td>
 											<td>{{ $parte->asignadoA }}</td>
 											<td>{{ $parte->fechaAsignacion }}</td>
-											<td>{{ $parte->estadoparte }}</td>
+											<td><span class="{{ $parte->estadoparte }}"> {{ $parte->estadoparte }}</span> </td>
 
                                             <td>
 
@@ -76,7 +100,13 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                        
                         </div>
+                    </div>
+                    <div style="text-align: right;">
+                    <a  href='home'>
+                    <img style="width: 5%; height: 5%; text-align: right; margin-top: 10px; " src=" {{ asset(url('img/volver.png')) }}" class='accionSeguimiento3' alt='Abrir'>
+                    </a>
                     </div>
                 </div>
 

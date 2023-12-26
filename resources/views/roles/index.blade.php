@@ -13,12 +13,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Role') }}
+                                {{ __('Nivel de Perfiles') }}
                             </span>
 
                              <div class="float-right">
                                 <a href="{{ route('roles.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                  {{ __('Nuevo Perfil') }}
                                 </a>
                               </div>
                         </div>
@@ -51,11 +51,11 @@
 
                                             <td>
                                                 <form action="{{ route('roles.destroy',$role->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('roles.show',$role->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('roles.edit',$role->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    <!--<a class="btn btn-sm btn-primary " href="{{ route('roles.show',$role->id) }}"><i class=""></i> {{ __('Ver') }}</a>-->
+                                                    <a class="btn btn-sm btn-success" href="{{ route('roles.edit',$role->id) }}"><i class=""></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class=""></i> {{ __('Eliminar') }}</button>
                                                 </form>
                                             </td>
                                         </tr>
