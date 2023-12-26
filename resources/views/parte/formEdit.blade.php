@@ -201,7 +201,6 @@
 
   </tbody>
    </table>
-
  </div>
 
         <div class="form-group {{$dnone}}">
