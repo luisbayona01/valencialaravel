@@ -74,8 +74,8 @@
                 <div class="form-group">
                     {{ Form::label('Fecha del reporte') }}
                     <div class="input-group date">
-
-                        {{ Form::text('fechareporte', $parte->fechareporte, ['class' => 'form-control', 'placeholder' => 'Indique una fecha', 'required' => 'required']) }}
+  
+                        {{ Form::text('fechareporte', $parte->fechareporte, ['class' => 'form-control', 'placeholder' => 'Indique una fecha', 'id'=>'fechareporte', 'required' => 'required' ]) }}
                         <div class="input-group-addon input-group-append" bis_skin_checked="1">
                             <div class="input-group-text" bis_skin_checked="1">
                                 <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
@@ -107,7 +107,7 @@
                     {{ Form::label('Fecha de asignación') }}
                     <div class="input-group date">
 
-                        {{ Form::text('fechaAsignacion', $parte->fechaAsignacion, ['class' => 'form-control', 'placeholder' => 'Indique una fecha', 'required' => 'required']) }}
+                        {{ Form::text('fechaAsignacion', $parte->fechaAsignacion, ['class' => 'form-control', 'placeholder' => 'Indique una fecha','id'=>'fechaAsignacion', 'required' => 'required']) }}
                         <div class="input-group-addon input-group-append" bis_skin_checked="1">
                             <div class="input-group-text" bis_skin_checked="1">
                                 <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
