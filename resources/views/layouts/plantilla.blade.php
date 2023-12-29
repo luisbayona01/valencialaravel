@@ -21,23 +21,23 @@
 
 
 
-    <link href="{{ str_replace('http://commonly-blessed-python.ngrok-free.app/','https://commonly-blessed-python.ngrok-free.app/', asset('css/app.css')) }}" rel="stylesheet">
+    <link href="{{  asset('css/app.css') }}" rel="stylesheet">
 
-    <link href="{{str_replace('http://commonly-blessed-python.ngrok-free.app/','https://commonly-blessed-python.ngrok-free.app/', asset('css/light.css')) }}" rel="stylesheet">
-    <link href="{{str_replace('http://commonly-blessed-python.ngrok-free.app/','https://commonly-blessed-python.ngrok-free.app/', asset('css/toastr.min.css')) }}" rel="stylesheet">
-    <link href="{{str_replace('http://commonly-blessed-python.ngrok-free.app/','https://commonly-blessed-python.ngrok-free.app/', asset('css/font-awesome/css/font-awesome.min.css')) }}"rel="stylesheet">
-    <link href="{{str_replace('http://commonly-blessed-python.ngrok-free.app/','https://commonly-blessed-python.ngrok-free.app/', asset('css/bootstrap-datetimepicker.min.css')) }}"rel="stylesheet">
+    <link href="{{ asset('css/light.css') }}" rel="stylesheet">
+    <link href="{{asset('css/toastr.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/font-awesome/css/font-awesome.min.css') }}"rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-datetimepicker.min.css') }}"rel="stylesheet">
 
     <!-- Scripts -->
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="{{ str_replace('http://commonly-blessed-python.ngrok-free.app/','https://commonly-blessed-python.ngrok-free.app/',asset('js/settings.js') )}}"></script>
-    <script src="{{ str_replace('http://commonly-blessed-python.ngrok-free.app/','https://commonly-blessed-python.ngrok-free.app/',asset('js/app.js')) }}"></script>
-    <script src="{{str_replace('http://commonly-blessed-python.ngrok-free.app/','https://commonly-blessed-python.ngrok-free.app/', asset('js/toastr.min.js')) }}"></script>
+    <script src="{{ asset('js/settings.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{asset('js/toastr.min.js') }}"></script>
 
-    <script src="{{ str_replace('http://commonly-blessed-python.ngrok-free.app/','https://commonly-blessed-python.ngrok-free.app/',asset('js/moment-with-locales.min.js')) }}"></script>
+    <script src="{{ asset('js/moment-with-locales.min.js') }}"></script>
 
-    <script src="{{ str_replace('http://commonly-blessed-python.ngrok-free.app/','https://commonly-blessed-python.ngrok-free.app/',asset('js/bootstrap-datetimepicker.min.js')) }}"></script>
+    <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
     <!-- Fonts -->

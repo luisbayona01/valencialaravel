@@ -163,14 +163,21 @@
 
     </div>
 
+<<<<<<< HEAD
     <div class="box-footer mt-20" style="margin-top: 10px; padding: 5px 5px 5px 5px">
+=======
+    <div class="box-footer mt-20"style="margin-top: 10px;">
+>>>>>>> dbf8a5172a9079112eb3e19a6b645406ce16241c
         <button type="submit" class="btn btn-primary">{{ __('Registrar') }}</button>
 
         <button type="button" class="btn btn-danger" id="backButton">
         Cancelar
         </button>
     </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> dbf8a5172a9079112eb3e19a6b645406ce16241c
         <script>
         document.getElementById('backButton').addEventListener('click', function() {
             window.history.back();

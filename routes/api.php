@@ -24,6 +24,6 @@ Route::post('/partes/addelement',[App\Http\Controllers\ElementosController::clas
 
 
 Route::post('/partes/updateElement',[App\Http\Controllers\ElementosController::class,'updateElementos']);
- 
+
 
  /**/

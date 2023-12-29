@@ -26,7 +26,11 @@ public  function save_ajax_api_elementos(request $request){
 
 public function  list_data_elements_api_elemntparte($id){
   $resultados = DB::table('elemtos_parte as Ep')
+<<<<<<< HEAD
     ->select('Ep.cantidad', 'Ep.precio_total', 'P.id as numeroparte', 'DSlP.elemento', 'DSlP.descripcion', 'DSlP.precio as precioU','Ep.idelementos_parte')
+=======
+    ->select('Ep.cantidad', 'Ep.precio_total', 'P.id as numeroparte', 'DSlP.elemento', 'DSlP.descripcion', 'DSlP.precio as precioU')
+>>>>>>> dbf8a5172a9079112eb3e19a6b645406ce16241c
     ->join('parte as P', 'P.id', '=', 'Ep.parteid')
     ->join('descripcionelementos as DSlP', 'DSlP.id', '=', 'Ep.elementosd_id')
     ->where('P.id',$id)
@@ -36,6 +40,7 @@ public function  list_data_elements_api_elemntparte($id){
   return $resultados;
   }
 
+<<<<<<< HEAD
 
 
 
@@ -60,4 +65,6 @@ public function  list_data_elements_api_elemntparte($id){
 
    }
 
+=======
+>>>>>>> dbf8a5172a9079112eb3e19a6b645406ce16241c
   }

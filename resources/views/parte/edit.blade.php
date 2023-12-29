@@ -35,6 +35,7 @@
                         $(".contenido").removeClass("d-none");
                         $(".contenidoElements").html("");
                         data.forEach(item => {
+<<<<<<< HEAD
                           console.log('iditem',item.idelementos_parte);
                             let rows = `<tr>
                     <td style="text-align: center;">${item.elemento}</td>
@@ -50,6 +51,15 @@
                       </i></a>
                       <a style="text-align: center; margin-left: 10px; font-size: 1.3em; " type="button" class="b" id="selecione"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </td>
+=======
+                           
+                            let rows = `<tr>
+                    <td>${item.elemento}</td>
+                    <td>${item.descripcion}</td>
+                    <td>${item.precioU}€</td>
+                    <td>${item.cantidad}Unid</td>
+                    <td>${item.precio_total}€</td>
+>>>>>>> dbf8a5172a9079112eb3e19a6b645406ce16241c
                 </tr>`;
                             $(".contenidoElements").append(rows)
                         });
@@ -66,17 +76,23 @@
 
         }
 
+<<<<<<< HEAD
     
+=======
+>>>>>>> dbf8a5172a9079112eb3e19a6b645406ce16241c
         // Espera a que el DOM esté listo
         $(document).ready(function() {
           $("#showE").click(function(){
             $("#elementos").removeClass('d-none')
               })
             lisdataelements();
+<<<<<<< HEAD
              $(document).on('click', '.fa-trash', function() {
                 // Find the closest <tr> element and remove it
                 $(this).closest('tr').remove();
             });
+=======
+>>>>>>> dbf8a5172a9079112eb3e19a6b645406ce16241c
             $("#selecione").click(function() {
 
                 if ($("#codigo").val() == '') {
@@ -149,6 +165,7 @@
                 }, false);
             });
         });
+<<<<<<< HEAD
 
 $(document).on('click', '.fa-pencil-square-o', function() {
    
@@ -222,6 +239,8 @@ fetch(url, {
 
 
 
+=======
+>>>>>>> dbf8a5172a9079112eb3e19a6b645406ce16241c
     </script>
     <section class="content container-fluid">
         <div class="">
@@ -249,8 +268,11 @@ fetch(url, {
                             @csrf
 
                             @include('parte.formEdit')
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> dbf8a5172a9079112eb3e19a6b645406ce16241c
 
                         </form>
                             

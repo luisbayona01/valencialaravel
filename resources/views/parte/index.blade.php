@@ -38,7 +38,7 @@ color: #ffFF ;
                             <span id="card_title">
                                 {{ __('Parte') }}
                             </span>
-                            --> 
+                            -->
 
                              <div class="float-right">
                                 <a href="{{ route('partes.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
@@ -99,7 +99,7 @@ color: #ffFF ;
                                     @endforeach
                                 </tbody>
                             </table>
-                        
+
                         </div>
                     </div>
                     <div style="text-align: right;">

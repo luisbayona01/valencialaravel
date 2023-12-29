@@ -8,8 +8,8 @@
         padding: 15px 15px 15px 15px; /* Ajusta el espacio interno de las celdas según tus preferencias */
     }
 
-    
-    
+
+
     #elementos button {
         border: 1px solid #ddd; /* Ajusta el grosor y color del borde según tus preferencias */
         padding: 5px; /* Ajusta el espacio interno de las celdas según tus preferencias */
@@ -45,7 +45,7 @@
         font-weight: bold;
         color: black;
     }
-   
+
 
 </style>
 <div class="box box-info padding-1" style="background-color:
@@ -69,7 +69,7 @@
   @if (Auth::user()->idrol!=4)
   @php
     $dnone = 'd-none';
-@endphp    
+@endphp
   @else
       @php
     $dnone = '';
@@ -94,7 +94,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
@@ -102,7 +101,7 @@
                 <div class="form-group" style="text-align: center; width: 55%">
                     {{ Form::label('No') }}
                     <p class="form-control" id="idparte">{{ $no}} </p>
-                
+
                 </div>
             </div>
             <div class="col">
@@ -210,7 +209,7 @@
             {!! $errors->first('obscreadorparte', '<div class="invalid-feedback">:message</div>') !!}
         </div>
     </div>
-    
+
 </div>
 <hr style="border-width: 2px;">
 
@@ -270,7 +269,7 @@
 
         <div class="form-group {{$dnone}}">
             {{ Form::label('Observaciones del operador') }}
-            {{ Form::textarea('obsOperador', $parte->obsOperador, ['class' => 'form-control' . ($errors->has('obsOperador') ? ' is-invalid' : ''), 
+            {{ Form::textarea('obsOperador', $parte->obsOperador, ['class' => 'form-control' . ($errors->has('obsOperador') ? ' is-invalid' : ''),
            'placeholder' => 'Ingrese las novedades Halladas','rows' => 5,
             'required' => Auth::user()->id_rol == 4 ? 'required' : ''
      ]) }}
