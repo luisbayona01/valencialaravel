@@ -6,15 +6,15 @@ use DB;
 class ElementosController extends Controller
 {
 public  function save_ajax_api_elementos(request $request){
-     
+
 
        Elementosparte::create(['cantidad'=>$request->input('cantidad'),
-                            'precio_total'=>$request->input('total') , 
-                            'parteid'=>$request->idparte , 
+                            'precio_total'=>$request->input('total') ,
+                            'parteid'=>$request->idparte ,
                             'elementosd_id'=>$request->input('idelemento')
                           ]);
 
-   
+
                 return response()->json([
                         'ok' => true,
                         'menssage' => 'Se agrego un nuevo elemento al parte',
@@ -22,34 +22,29 @@ public  function save_ajax_api_elementos(request $request){
 
 
  }
-  
+
 
 public function  list_data_elements_api_elemntparte($id){
   $resultados = DB::table('elemtos_parte as Ep')
-<<<<<<< HEAD
     ->select('Ep.cantidad', 'Ep.precio_total', 'P.id as numeroparte', 'DSlP.elemento', 'DSlP.descripcion', 'DSlP.precio as precioU','Ep.idelementos_parte')
-=======
-    ->select('Ep.cantidad', 'Ep.precio_total', 'P.id as numeroparte', 'DSlP.elemento', 'DSlP.descripcion', 'DSlP.precio as precioU')
->>>>>>> dbf8a5172a9079112eb3e19a6b645406ce16241c
     ->join('parte as P', 'P.id', '=', 'Ep.parteid')
     ->join('descripcionelementos as DSlP', 'DSlP.id', '=', 'Ep.elementosd_id')
     ->where('P.id',$id)
     ->get();
-  
-  
+
+
   return $resultados;
   }
 
-<<<<<<< HEAD
 
 
 
    public function updateElementos(Request $request){
-         
-        $data = $request->all();   
+
+        $data = $request->all();
         $id= $request->id ;
        $elementoParte = Elementosparte::find($id);
-           //dd($elementoParte);    
+           //dd($elementoParte);
 
             unset($data['id']);
         $elementoParte->fill($data);
@@ -57,7 +52,7 @@ public function  list_data_elements_api_elemntparte($id){
         // Guarda los cambios en la base de datos
         $elementoParte->save();
 
-     
+
                 return response()->json([
                         'ok' => true,
                         'menssage' => 'Se edito un  elemento al parte',
@@ -65,6 +60,4 @@ public function  list_data_elements_api_elemntparte($id){
 
    }
 
-=======
->>>>>>> dbf8a5172a9079112eb3e19a6b645406ce16241c
   }
