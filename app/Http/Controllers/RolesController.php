@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use  Spatie\Permission\Models\Role;;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use App\Models\Roles;
 use Illuminate\Http\Request;
 
@@ -47,6 +48,7 @@ class RolesController extends Controller
 
         $role = Role::create($request->all());
 
+   //Role::create
         return redirect()->route('roles.index')
             ->with('success', 'Role created successfully.');
     }

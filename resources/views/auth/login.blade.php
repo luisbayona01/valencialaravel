@@ -117,17 +117,16 @@
                                 throw new Error('Network response was not ok');
                             }
                             return response
-                        .json(); // Puedes cambiar esto según el formato de respuesta que esperas
+                        .json();
                         })
                         .then(data => {
                             // Manejar la respuesta exitosa
                             if(data['ok']==false){
                               toastr.error(data['user'])
                              } else{
-                              var token = data.token;
-        window.location.href = "{{ url('/home') }}";
-        // Almacena el token en localStorage o en cookies para su uso posterior
-        //localStorage.setItem('access_token', token);
+                              //var token = data.token;
+                  window.location.href = "{{ url('/home') }}";
+
                              }
 
                             //alert("success");
@@ -163,11 +162,11 @@
                     <div class="form-group mx-sm-4 pt-3">
                         <label></label>
 
-                        <input id="email" type="email" class="form-control" name="email" value="" required
-                            placeholder="Ingrese su Correo" />
+                        <input id="email" type="text" class="form-control" name="username" value="" required
+                            placeholder="Ingrese su usuario" />
 
                         <span class="invalid-feedback" role="alert">
-                            el campo email es obligatorio
+                            el campo username es obligatorio
                         </span>
 
                     </div>

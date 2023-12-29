@@ -18,7 +18,7 @@
 
                              <div class="float-right">
                                 <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                  {{ __('Nuevo Usuario') }}
                                 </a>
                               </div>
                         </div>
@@ -31,14 +31,15 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-hover"  >
                                 <thead class="thead">
-                                    <tr>
+                                    <tr style="text-align: center;">
 
 
 										<th>Nombres</th>
 										<th>Apellidos</th>
-										<th>Email</th>
+                                        <th>Usuario</th>
+										<th>E-mail</th>
 									    <th>rol</th>
 
                                         <th></th>
@@ -51,18 +52,19 @@
 
 											<td>{{ $user->nombres }}</td>
 											<td>{{ $user->apellidos }}</td>
+                                            <td>{{ $user->username }}</td>
 											<td>{{ $user->email }}</td>
 
 
-											<td>{{ $user->rollname}}</td>
+											<td style="text-align: center;">{{ $user->rollname}}</td>
 
-                                            <td>
+                                            <td style="text-align: center;">
                                                 <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('users.show',$user->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('users.show',$user->id) }}"><i class=""></i> {{ __('Ver') }}</a>
+                                                    <a  class="btn btn-sm btn-success" href="{{ route('users.edit',$user->id) }}"><i class=""></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class=""></i> {{ __('Eliminar') }}</button>
                                                 </form>
                                             </td>
                                         </tr>

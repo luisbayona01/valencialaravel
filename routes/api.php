@@ -14,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+/*Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
+
+Route::get('/partes/elementos/{id}',[App\Http\Controllers\ElementosController::class,'list_data_elements_api_elemntparte']);
+
+Route::post('/partes/addelement',[App\Http\Controllers\ElementosController::class,'save_ajax_api_elementos']);
+
+
+Route::post('/partes/updateElement',[App\Http\Controllers\ElementosController::class,'updateElementos']);
+ 
+
+ /**/

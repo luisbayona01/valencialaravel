@@ -5,20 +5,44 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid">
+ <style>
+
+.Aceptado {
+    background-color: #FFD700;
+    }
+.Comprobado{
+background-color:#00FF00 !important;
+}
+
+.Verificado{
+background-color:#fdcae1 !important;
+}
+.Certificado{
+background-color:#AFEEEE !important;
+ }
+.Rechazado{
+background-color:#F08080 !important;
+color: #ffFF ;
+ }
+</style>
+    <div class="container-fluid" >
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-
+                          <div >
+                            <img src="{{asset('img/icono_representativo_caratula.png')}}" class="card-img-top" style="width: 30rem;">
+                        </div>
+                            <!--
                             <span id="card_title">
                                 {{ __('Parte') }}
                             </span>
+                            --> 
 
                              <div class="float-right">
                                 <a href="{{ route('partes.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                  {{ __('Nuevo parte') }}
                                 </a>
                               </div>
                         </div>
@@ -31,52 +55,57 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped" id="table-parte" border="1">
                                 <thead class="thead">
-                                    <tr>
+                                    <tr style="text-align: center;">
                                         <th>No parte</th>
-
 										<th>Ubicacion novedad</th>
 										<th>tipo parte</th>
 										<th>Creado por</th>
 										<th>Fecha creacion</th>
 										<th>Reportado por</th>
 										<th>Fecha reporte</th>
-										<th>Obsrvacion ini</th>
+										<th style="text-align: center;">Obsrvacion iniciales</th>
 										<th>Responsable</th>
-										<th>Fechaasignacion</th>
-										<th>Obsoperador</th>
-										 <th>Estadoparte</th>
+										<th style="text-align: center;">Fecha asignacion</th>
+								        <th>Estado</th>
+                                        <th>Acción</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($partes as $parte)
-                                        <tr>
-                                            <td>{{  $parte->id }}</td>
+                                        <tr style="font-size:0.9em;">
+                                            <td style="text-align: center;">{{  $parte->id }}</td>
 
-											<td>{{ $parte->cod_localizacion }}</td>
+											<td style="text-align: center;">{{ $parte->cod_localizacion }}</td>
 											<td>{{ $parte->tipoparte }}</td>
 											<td>{{ $parte->partecreadopor }}</td>
-											<td>{{ $parte->fechacreacion }}</td>
+											<td style="text-align: center;">{{ $parte->fechacreacion }}</td>
 											<td>{{ $parte->reportadoPor }}</td>
-											<td>{{ $parte->fechareporte }}</td>
+											<td style="text-align: center;">{{ $parte->fechareporte }}</td>
 											<td>{{ $parte->obscreadorparte }}</td>
 											<td>{{ $parte->asignadoA }}</td>
 											<td>{{ $parte->fechaAsignacion }}</td>
-											<td>{{ $parte->estadoparte }}</td>
+											<td ><span class="{{ $parte->estadoparte }}" style="display: block; width: 100%; height: 100%; text-align: center;"> {{ $parte->estadoparte }}</span> </td>
 
                                             <td>
 
-                                          <a class="btn btn-sm btn-success" href="{{ route('partes.edit',$parte->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                          <a class="btn btn-sm btn-success" href="{{ route('partes.edit',$parte->id) }}" ><i "></i> {{ __('Editar') }}</a>
 
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
+                        
                         </div>
+                    </div>
+                    <div style="text-align: right;">
+                    <a  href='home'>
+                    <img style="width: 2%; height: 2%; text-align: right; margin-top: 10px; " src=" {{ asset(url('img/volver.png')) }}" class='accionSeguimiento3' alt='Abrir'>
+                    </a>
                     </div>
                 </div>
 

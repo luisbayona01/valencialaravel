@@ -38,8 +38,8 @@ class User extends Authenticatable
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 
-    
-    
+
+
     //protected $perPage = 20;
 
     /**
@@ -47,7 +47,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['nombres','apellidos','email','idrol'];
+    protected $fillable = ['nombres','apellidos','email','idrol','password','username'];
 
 
     /**
@@ -57,7 +57,7 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Parte', 'creadopor', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -66,11 +66,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Role', 'id', 'idrol');
     }
       public function rolname()
-    {    //$var="hola";
+    {
        $idrol= \Illuminate\Support\Facades\Auth::user()->idrol;
-       $roname= DB::table('roles')->select('name')->where('id', '=', $idrol)->first();        
-       return $roname->name; 
+       $roname= DB::table('roles')->select('name')->where('id', '=', $idrol)->first();
+       return $roname->name;
     }
-    
+
 
 }

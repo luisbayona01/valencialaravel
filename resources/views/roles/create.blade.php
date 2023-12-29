@@ -1,7 +1,7 @@
 @extends('layouts.plantilla')
 
 @section('template_title')
-    {{ __('Create') }} Role
+    {{ __('Nuevo') }} Role
 @endsection
 
 <script>
@@ -36,7 +36,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Create') }} Role</span>
+                        <span class="card-title">{{ __('Nuevo') }} Rol</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{str_replace('http://commonly-blessed-python.ngrok-free.app/','https://commonly-blessed-python.ngrok-free.app/', route('roles.store')) }}"  role="form" enctype="multipart/form-data" id="CreateRol" class="needs-validation" novalidate>

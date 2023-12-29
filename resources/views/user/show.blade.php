@@ -14,7 +14,7 @@
                             <span class="card-title">{{ __('perfil') }} Usuario</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ url('/home') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary" href="{{ url('/users') }}"> {{ __('Volver') }}</a>
                         </div>
                     </div>
 
@@ -27,6 +27,10 @@
                         <div class="form-group">
                             <strong>Apellidos:</strong>
                             {{ $user->apellidos }}
+                        </div>
+                       <div class="form-group">
+                            <strong>Username:</strong>
+                            {{ $user->username }}
                         </div>
                         <div class="form-group">
                             <strong>Email:</strong>
