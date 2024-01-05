@@ -121,9 +121,6 @@
         </div>
 
 
-
-
-
         <div class="form-group">
             {{ Form::label('Observaciones') }}
             {{ Form::textarea('obscreadorparte', $parte->obscreadorparte, [

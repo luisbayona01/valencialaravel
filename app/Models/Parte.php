@@ -80,5 +80,12 @@ class Parte extends Model
         return $this->hasOne('App\User', 'id', 'creadopor');
     }
 
+    public function images()
+    {
+        return $this->hasMany(ParteImage::class);
+    }
+
+
+
 
 }

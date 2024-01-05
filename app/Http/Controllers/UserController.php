@@ -7,6 +7,7 @@ use App\Models\Roles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use DB;
+
 /**
  * Class UserController
  * @package App\Http\Controllers
@@ -21,12 +22,16 @@ class UserController extends Controller
     {
         $users = DB::table('users as U')
                     ->join('roles as R', 'R.id', '=', 'U.idrol')
-                    ->select('U.id','U.nombres', 'U.apellidos', 'U.email','U.username', 'R.name as rollname')
+                    ->select('U.id','U.nombres', 'U.apellidos', 'U.email','U.username', 'U.password', 'R.name as rollname')
                     ->get();
         return view('user.index', compact('users'));
                     /* return view('user.index', compact('users'))
                     ->with('i', (request()->input('page', 1) - 1) * $users->perPage())*/;
+
     }
+
+
+
 
 
     public function create()
@@ -53,7 +58,7 @@ class UserController extends Controller
     {
         $users = DB::table('users as U')
                             ->join('roles as R', 'R.id', '=', 'U.idrol')
-                            ->select('U.id','U.nombres', 'U.apellidos', 'U.email','U.username' ,'R.name as rollname')
+                            ->select('U.id','U.nombres', 'U.apellidos', 'U.email','U.username','U.password' ,'R.name as rollname')
                             ->where('U.id', '=', $id)
                             ->get();
 
@@ -89,9 +94,15 @@ class UserController extends Controller
     {
         //request()->validate(User::$rules);
 
+    // Check if the password is present in the request
+    if ($request->has('password')) {
+    // Hash the new password
+        $request->merge(['password' => bcrypt($request->input('password'))]);
+    }
+
         $user->update($request->all());
- return redirect()->route('users.index')
-            ->with('success', 'User update successfully');
+        return redirect()->route('users.index')
+            ->with('success', 'Usuario Editado Correctamente');
     }
 
     /**
@@ -104,12 +115,16 @@ class UserController extends Controller
         $user = User::find($id)->delete();
 
         return redirect()->route('users.index')
-            ->with('success', 'User deleted successfully');
+            ->with('success', 'Usuario eliminado del sistema');
     }
+
     public function store(Request $request)
     {
 
-        $password='Etra1234';
+        //$password='Etra1234';//
+
+         $password = $request->input('password');
+
 
         $data = User::where('email', '=', $request->email)->orWhere('username', $request->input('username'))->get();
         if (count($data) != 0) {
@@ -123,7 +138,7 @@ class UserController extends Controller
                 "apellidos" => $request->apellidos,
                 "identificacion" => $request->identificacion,
                 "telefono" => $request->telefono,
-                "username">$request->username,
+                "username"=>$request->username,
                 "email" => $request->email,
                 'password' => bcrypt($password),
                 "idrol" => $request->idrol]);
@@ -156,6 +171,9 @@ class UserController extends Controller
                                                                     'telefono',
                                                                     'email')->find($usuarioid);
        return  $userData;
+
     }
 
 }
+
+

@@ -25,5 +25,16 @@ Route::post('/partes/addelement',[App\Http\Controllers\ElementosController::clas
 
 Route::post('/partes/updateElement',[App\Http\Controllers\ElementosController::class,'updateElementos']);
 
+Route::post('/partes/destroy',[App\Http\Controllers\ElementosController::class,'deleteElementos']);
+
+Route::get('/another-page', function () {
+    return view('another_page');
+})->name('another_page');
+
+
+//Route::resource('elementoParte', 'ElementosController');
+
+
+
 
  /**/

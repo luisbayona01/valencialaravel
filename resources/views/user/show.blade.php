@@ -10,15 +10,15 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="float-left">
-                            <span class="card-title">{{ __('perfil') }} Usuario</span>
+                        <div class="float-left" style="padding: 5% 5% 0% 3%">
+                            <span class="card-title" style="font-weight: bold; color: black;">{{ __('Perfil') }} De Usuario</span>
                         </div>
                         <div class="float-right">
                             <a class="btn btn-primary" href="{{ url('/users') }}"> {{ __('Volver') }}</a>
                         </div>
                     </div>
 
-                    <div class="card-body">
+                    <div class="card-body" style="padding: 0% 5% 5% 5%">
 
                         <div class="form-group">
                             <strong>Nombres:</strong>
@@ -33,11 +33,15 @@
                             {{ $user->username }}
                         </div>
                         <div class="form-group">
+                            <strong>Contraseña:</strong>
+                            {{ $user->password }}
+                        </div>
+                        <div class="form-group">
                             <strong>Email:</strong>
                             {{ $user->email }}
                         </div>
                         <div class="form-group">
-                            <strong>roll:</strong>
+                            <strong>Perfil:</strong>
                             {{ $user->rollname }}
                         </div>
 

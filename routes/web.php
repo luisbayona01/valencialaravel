@@ -30,6 +30,13 @@ Route::resource('roles',  App\Http\Controllers\RolesController::class)->middlewa
 
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'Logout'])->name('logout')->middleware('auth');
 
+Route::get('/gestorParte', function () {
+    return view('gestorParte');
+})->name('gestorParte');
+
+
+Route::resource('elementoParte', 'ElementosController');
+
 //Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

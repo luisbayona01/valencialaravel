@@ -31,7 +31,7 @@ $(document).ready(function () {
                 @includeif('partials.errors')
 
                 <div class="card card-default">
-                    <div class="card-header">
+                    <div class="card-header" style="padding: 5% 5% 5% 5%">
                         <span class="card-title">{{ __('Crear') }} Usuarios</span>
                     </div>
                     <div class="card-body">

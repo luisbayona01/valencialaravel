@@ -102,11 +102,16 @@ color: #ffFF ;
 
                         </div>
                     </div>
-                    <div style="text-align: right;">
-                    <a  href='home'>
-                    <img style="width: 2%; height: 2%; text-align: right; margin-top: 10px; " src=" {{ asset(url('img/volver.png')) }}" class='accionSeguimiento3' alt='Abrir'>
-                    </a>
+
+                    <div style="text-align: right; padding: 0px 10px 10px 10px">
+                        <button href="" type="button" onclick="goBack()" class="btn btn-secondary" style="text-align: right;">Volver</button>
                     </div>
+                    <script>
+                        // JavaScript function to go back to the previous page
+                        function goBack() {
+                        window.history.back();
+                        }
+                    </script>
                 </div>
 
             </div>

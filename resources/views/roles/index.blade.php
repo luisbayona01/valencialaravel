@@ -12,7 +12,7 @@
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                            <span id="card_title">
+                            <span id="card_title" style="padding: 1% 1% 1% 1%; font-weight: bold; color: black;">
                                 {{ __('Nivel de Perfiles') }}
                             </span>
 
@@ -30,7 +30,7 @@
                     @endif
 
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="padding: 1% 5% 0% 5%">
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
@@ -64,6 +64,15 @@
                             </table>
                         </div>
                     </div>
+                    <div style="text-align: right; padding: 0px 10px 10px 10px">
+                        <button type="button" onclick="goToHome()" class="btn btn-secondary" style="text-align: right;">Volver</button>
+                    </div>
+                    </div>
+                    <script>
+                        function goToHome() {
+                            window.location.href = "{{ url('/home') }}";
+                        }
+                    </script>
                 </div>
                 {!! $roles->links() !!}
             </div>

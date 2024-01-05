@@ -17,7 +17,7 @@ public  function save_ajax_api_elementos(request $request){
 
                 return response()->json([
                         'ok' => true,
-                        'menssage' => 'Se agrego un nuevo elemento al parte',
+                        'menssage' => 'Elemento agregado',
                     ]);
 
 
@@ -40,7 +40,7 @@ public function  list_data_elements_api_elemntparte($id){
 
 
    public function updateElementos(Request $request){
-
+//    dd('Se ejecutó la función');
         $data = $request->all();
         $id= $request->id ;
        $elementoParte = Elementosparte::find($id);
@@ -52,11 +52,24 @@ public function  list_data_elements_api_elemntparte($id){
         // Guarda los cambios en la base de datos
         $elementoParte->save();
 
-
-                return response()->json([
+            return response()->json([
                         'ok' => true,
-                        'menssage' => 'Se edito un  elemento al parte',
+                        'menssage' => 'Elemento editado',
                     ]);
+
+   }
+
+   public function deleteElementos(Request $request){
+
+       $id=  $request->id;
+
+       Elementosparte::find($id)->delete();
+       //return response()->json(['message' => 'Elemento eliminado correctamente']);
+
+       return response()->json([
+        'ok' => true,
+        'menssage' => 'Elemento eliminado correctamente',
+    ]);
 
    }
 

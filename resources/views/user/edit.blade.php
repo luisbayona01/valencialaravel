@@ -31,7 +31,7 @@ $(document).ready(function () {
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} User</span>
+                        <span style="font-weight: bold; color: black;" class="card-title">{{ __('Editar') }} Usuario</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ str_replace('http://commonly-blessed-python.ngrok-free.app/','https://commonly-blessed-python.ngrok-free.app/',route('users.update', $user->id)) }}"  role="form" enctype="multipart/form-data" id="EditarUser" class="needs-validation" novalidate>

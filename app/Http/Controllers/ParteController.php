@@ -11,6 +11,11 @@ use Illuminate\Support\Carbon;
  use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Descripcionelementos;
+use App\Models\ElementoParte;
+use App\Models\Elementosparte; // Import the Element model or replace it with the appropriate model namespace
+use Illuminate\Support\Facades\Storage;
+
+
 
 /**
  * Class ParteController
@@ -62,6 +67,8 @@ if ($rolUsuario == 1) {
 
 $partes = $partes->get();
 
+
+
         return view('parte.index', compact('partes'));
 
     }
@@ -76,12 +83,19 @@ $partes = $partes->get();
         $localizaciones = Localizacion::pluck(DB::raw("CONCAT(cod_localizacion, ', ', descripcion, ', ', zona) as ubicacion"), 'id');
         $tipoparte= Tipoparte::pluck('nombre', 'id');
         $reportadopor = User::where('id', '!=',Auth::user()->id)->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
-         
-   
+
+
          $asignadoa = User::where('idrol', '=','4')->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
      //dd($reportadopor);
    //dd($reportadopor);
       return view('parte.create', compact('parte','no','localizaciones','tipoparte','currentDateTime','reportadopor','asignadoa'));
+    }
+
+    public function mostrarPartes()
+    {
+        $totalPartes = Parte::count();
+
+        return view('/home.blade.php', ['totalPartes' => $totalPartes]);
     }
 
 
@@ -94,7 +108,11 @@ $partes = $partes->get();
         $parte = Parte::create($datos);
 
         return redirect()->route('partes.index')
-        ->with('success', 'Parte created successfully.');
+        ->with('success', 'Parte creado Correctamente!');
+
+        // Validate and store the uploaded image
+
+        //dd($request->hasFile('imgParte') );
     }
 
 
@@ -121,6 +139,8 @@ $partes = $partes->get();
             break;
 
         case 4:
+
+
             $query->where('idrol', '=', '5');
             break;
 
@@ -130,9 +150,11 @@ $partes = $partes->get();
             // Lógica si no coincide con ninguno de los casos anteriores
             break;
     }
-})->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"), 'id');
-        
-       /* elmentos*/    
+        })->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"), 'id');
+
+
+
+       /* elmentos*/
           $Descripcionelementos = Descripcionelementos::pluck(DB::raw("CONCAT(descripcion,'-',elemento,'-',precio) as valor"), 'id');
     return view('parte.edit', compact('parte','no','localizaciones','tipoparte','currentDateTime','reportadopor','asignadoa','Descripcionelementos'));
     }
@@ -140,10 +162,14 @@ $partes = $partes->get();
 
     public function update(Request $request,$id)
     {
+
         //request()->validate(Parte::$rules);
        //$rolUsuario = Auth::user()->idrol;
-      $data=$request->all();
-     switch (Auth::user()->idrol) {
+        $data=$request->all();
+//      dd($data);
+
+
+      switch (Auth::user()->idrol) {
         case 1:
              //data['estadoparte_id']=
             break;
@@ -166,9 +192,29 @@ $partes = $partes->get();
         $Parte->save();
 
         return redirect()->route('partes.index')
-            ->with('success', 'Parte updated successfully');
+            ->with('success', 'Elemento actualizado correctamente');
     }
-  
-   
+
+     public function destroy($id)
+    {
+        $Parte = User::find($id)->delete();
+
+        return redirect()->route('partes.index')
+            ->with('success', 'Elemento eliminado correctamente');
+    }
+
+    // app/Http/Controllers/PartesController.php
+
+// app/Http/Controllers/ParteController.php
+
+public function deleteElement($id)
+{
+    // Logic to delete the element from the database based on $idelementosParte
+    // Return a response, for example:
+    return response()->json(['message' => 'Element deleted successfully']);
+}
+
+
+
 }
 

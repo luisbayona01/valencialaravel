@@ -35,7 +35,7 @@
                         $(".contenido").removeClass("d-none");
                         $(".contenidoElements").html("");
                         data.forEach(item => {
-                          console.log('iditem',item.idelementos_parte);
+                            console.log('iditem', item.idelementos_parte);
                             let rows = `<tr>
                     <td style="text-align: center;">${item.elemento}</td>
                     <td>${item.descripcion}</td>
@@ -43,14 +43,25 @@
                     <td style="text-align: right;">${item.cantidad} </td>
                     <td style="text-align: right;">${item.precio_total} € </td>
                     <td style="text-align: center;">
-                      <a style="text-align: center; margin-right: 10px; font-size: 1.3em; " type="button" class="b" id="selecione">
-                      <i class="fa fa-pencil-square-o" aria-hidden="true">
-                     <input type="hidden" class="idelementoP" value='${item.idelementos_parte}'>
+                    <form action="{{ route('partes.destroy', $parte->id) }}" method="POST">
+                        <a style="text-align: center; margin-right: 10px; font-size: 1.3em; " type="button" class="b" id="selecione">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true">
+                        <input type="hidden" class="idelementoP" value='${item.idelementos_parte}'>
+                        </i></a>
+                        @csrf
+                        <a style="text-align: center; margin-right: 10px; font-size: 1.3em; " type="button" class="b" id="selecione">
+                        <i class="fa fa-trash" aria-hidden="true">
+                        <input type="hidden" class="idelementoP" value='${item.idelementos_parte}'>
 
-                      </i></a>
-                      <a style="text-align: center; margin-left: 10px; font-size: 1.3em; " type="button" class="b" id="selecione"><i class="fa fa-trash" aria-hidden="true"></i></a>
+
+
+                        </i></a>
+
+                      </form>
+
                     </td>
                 </tr>`;
+                            //<input type="hidden" class="idelementoP" value='${item.idelemento_parte}'> //
                             $(".contenidoElements").append(rows)
                         });
                         // Hacer algo con los datos recibidos
@@ -66,14 +77,23 @@
 
         }
 
+        function limpiarCampos() {
+    // Limpiar los campos del container
+    $("#codigo").val('');
+    $("#descripcionelementos").val('');
+    $("#precio").val('');
+    $("#cantidad").val('');
+    // Otros campos que desees limpiar
+}
+
 
         // Espera a que el DOM esté listo
         $(document).ready(function() {
-          $("#showE").click(function(){
-            $("#elementos").removeClass('d-none')
-              })
+            $("#showE").click(function() {
+                $("#elementos").removeClass('d-none')
+            })
             lisdataelements();
-             $(document).on('click', '.fa-trash', function() {
+            $(document).on('click', '.fa-trash', function() {
                 // Find the closest <tr> element and remove it
                 $(this).closest('tr').remove();
             });
@@ -128,6 +148,7 @@
                         //console.log('Respuesta del servidor:', data);
                         toastr.success(data['menssage'])
                         lisdataelements();
+                        limpiarCampos(); // Llama a la función para limpiar los campos
                     })
                     .catch(error => {
                         console.error('Error:', error);
@@ -150,79 +171,104 @@
             });
         });
 
-$(document).on('click', '.fa-pencil-square-o', function() {
+        $(document).on('click', '.fa-pencil-square-o', function() {
+
+            var $row = $(this).closest('tr');
+
+            // Get the current quantity and total values
+            var currentQuantity = $row.find('td:eq(3)').text();
+            var currentTotal = $row.find('td:eq(4)').text();
+
+            // Prompt the user to enter a new quantity
+            var newQuantity = prompt('Ingrese nueva cantidad:', currentQuantity);
+
+            // Validate if the user entered a valid number
+            if (newQuantity !== null && !isNaN(newQuantity) && newQuantity !== '') {
+                // Update the quantity in the table
+                $row.find('td:eq(3)').text(newQuantity);
+                var idelementosParte = $row.find('.idelementoP').val();
+
+                console.log('idelementosParte:', idelementosParte);
+                // Calculate the new total and update the total column
+                var pricePerUnit = parseFloat(currentTotal) / parseInt(currentQuantity);
+                var newTotal = pricePerUnit * parseInt(newQuantity);
+                $row.find('td:eq(4)').text(newTotal.toFixed(2) + ' €');
+                //console.log('iddel  clivk',newQuantity);
+                //console.log('newtotal',newTotal);
+                ajaxactulizar(newQuantity, idelementosParte, newTotal);
+            }
+        });
 
 
-var $row = $(this).closest('tr');
+        function ajaxactulizar(cantidad, id, precio_total) {
 
-    // Get the current quantity and total values
-    var currentQuantity = $row.find('td:eq(3)').text();
-    var currentTotal = $row.find('td:eq(4)').text();
+            const url = '/api/partes/updateElement';
 
-    // Prompt the user to enter a new quantity
-    var newQuantity = prompt('Enter new quantity:', currentQuantity);
+            // Crea una instancia de FormData y agrega tus datos
+            const postData = new FormData();
+            postData.append('id', id);
+            postData.append('cantidad', cantidad);
+            postData.append('precio_total', precio_total);
 
-    // Validate if the user entered a valid number
-    if (newQuantity !== null && !isNaN(newQuantity) && newQuantity !== '') {
-        // Update the quantity in the table
-        $row.find('td:eq(3)').text(newQuantity);
-       var idelementosParte = $row.find('.idelementoP').val();
+            // Usa el método fetch para hacer la solicitud
+            fetch(url, {
+                    method: 'POST',
+                    body: postData, // Pasa la instancia de FormData como cuerpo de la solicitud
+                })
+                .then(response => response.json())
+                .then(data => {
+                    toastr.success(data['menssage'])
+                    //console.log('Respuesta del servidor:', data);
+                    //lisdataelements();
 
-    console.log('idelementosParte:', idelementosParte);
-        // Calculate the new total and update the total column
-        var pricePerUnit = parseFloat(currentTotal) / parseInt(currentQuantity);
-        var newTotal = pricePerUnit * parseInt(newQuantity);
-        $row.find('td:eq(4)').text(newTotal.toFixed(2) + ' €');
-         //console.log('iddel  clivk',newQuantity);
-      //console.log('newtotal',newTotal);
-     ajaxactulizar(newQuantity,idelementosParte,newTotal);
-}
-
-
-
-
-});
+                })
+                .catch(error => {
+                    console.error('Error al enviar la solicitud:', error);
+                });
+                lisdataelements();
+        }
 
 
- function  ajaxactulizar(cantidad,id,precio_total){
-
-const url = '/api/partes/updateElement';
-
-// Crea una instancia de FormData y agrega tus datos
-const postData = new FormData();
-postData.append('id', id);
-postData.append('cantidad', cantidad);
-postData.append('precio_total', precio_total);
-
-// Usa el método fetch para hacer la solicitud
-fetch(url, {
-  method: 'POST',
-  body: postData,  // Pasa la instancia de FormData como cuerpo de la solicitud
-})
-  .then(response => response.json())
-  .then(data => {
-    console.log('Respuesta del servidor:', data);
-  })
-  .catch(error => {
-    console.error('Error al enviar la solicitud:', error);
-  });
+        // Codigo para eliminar  ...
 
 
+        $(document).on('click', '.fa-trash', function() {
+            var $row = $(this).closest('tr');
+            var idelementosParte = $row.find('.idelementoP').val();
+            console.log('eliminar', idelementosParte)
+            const formData = new FormData;
+            formData.append("id", idelementosParte)
 
+            // Prompt the user for confirmation before deleting
+            if (confirm('¿Estas seguro de eliminar este elemento?')) {
+                // Perform AJAX request to delete the row from the database
 
- }
+                fetch('/api/partes/destroy/', {
+                        method: 'POST',
+                        body: formData, // Pasa la instancia de FormData como cuerpo de la solicitud
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        toastr.success(data['menssage'])
+                        //console.log('Respuesta del servidor:', data);
+                        //lisdataelements();
+                    })
+                    .catch(error => {
+                        console.error('Error al enviar la solicitud:', error);
+                    });
 
-
+            }
 
 
 
-// ...
-
-// In your Laravel routes or controller, you need to handle the DELETE request to delete the record
+        });
 
 
 
+        // ...
     </script>
+
+
     <section class="content container-fluid">
         <div class="">
             <div class="col-lg-12">
@@ -249,8 +295,6 @@ fetch(url, {
                             @csrf
 
                             @include('parte.formEdit')
-
-
 
                         </form>
 

@@ -12,8 +12,8 @@
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                            <span id="card_title">
-                                {{ __('User') }}
+                            <span id="card_title" style="padding: 1% 1% 1% 1%; font-weight: bold; color: black;">
+                                {{ __('Administración de Usuarios') }}
                             </span>
 
                              <div class="float-right">
@@ -30,29 +30,28 @@
                     @endif
 
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="padding: 1% 1% 1% 1%">
                             <table class="table table-striped table-hover"  >
                                 <thead class="thead">
                                     <tr style="text-align: center;">
 
-
 										<th>Nombres</th>
 										<th>Apellidos</th>
                                         <th>Usuario</th>
+                                        <!--<th>Contraseña</th>-->
 										<th>E-mail</th>
-									    <th>rol</th>
-
-                                        <th></th>
+									    <th>Perfil</th>
+                                        <!-- <th></th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($users as $user)
                                         <tr>
 
-
 											<td>{{ $user->nombres }}</td>
 											<td>{{ $user->apellidos }}</td>
                                             <td>{{ $user->username }}</td>
+                                            <!-- <td></td> -->
 											<td>{{ $user->email }}</td>
 
 

@@ -55,7 +55,9 @@ class User extends Authenticatable
      */
     public function partes()
     {
-        return $this->hasMany('App\Parte', 'creadopor', 'id');
+        //return $this->hasMany('App\Parte', 'creadopor', 'id');
+        return $this->hasMany(\App\Models\Parte::class, 'asignadoA', 'id');
+
     }
 
     /**

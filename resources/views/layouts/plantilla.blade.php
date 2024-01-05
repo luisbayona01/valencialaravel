@@ -104,33 +104,33 @@ $(".table").DataTable({
             </a>
 
 
-            <a href="javascript:void(0);" onclick="gestionPartes()" class="sidebar-link collapsed">
+            <a href="{{ url('/gestorParte') }}" onclick="gestionPartes()" class="sidebar-link collapsed">
                 <!-- Opening div for sidebar-link -->
-                <i class="fa fa-check-square"></i> <span class="align-middle">Gestión de partes</span>
+                <i class="fa fa-check-square"></i> <span class="align-middle" >Gestión de partes</span>
             </a>
 
 
 
-            <li >
+           <!-- <li > -->
                 <!-- Opening div for the second list item -->
 
-                <a data-target="#NOMINA" data-toggle="collapse" class="sidebar-link collapsed">
+           <!--     <a data-target="#NOMINA" data-toggle="collapse" class="sidebar-link collapsed"> -->
                     <!-- Opening div for sidebar-link -->
-                    <i class="fa fa-check-square"></i> <span class="align-middle">Gestion de partes </span>
-                </a>
+                  <!--  <i class="fa fa-check-square"></i> <span class="align-middle">Gestion de partes2 </span> -->
+              <!--  </a> -->
                 <!-- Closing div for sidebar-link -->
 
-                <ul id="NOMINA" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+            <!--    <ul id="NOMINA" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar"> -->
                     <!-- Opening div for sidebar-dropdown -->
 
-                    <li class="sidebar-item"><a class="sidebar-link" href="{{ url('/partes') }}">creacion y seguimiento </a></li>
-                    <li class="sidebar-item"><a class="sidebar-link" href="">certificado </a></li>
+              <!--      <li class="sidebar-item"><a class="sidebar-link" href="{{ url('/partes') }}">creacion y seguimiento </a></li>
+                    <li class="sidebar-item"><a class="sidebar-link" href="">certificado </a></li> -->
 
-                </ul>
+              <!--  </ul> -->
                 <!-- Closing div for sidebar-dropdown -->
                 <!-- onclick="gestionPartes()" style="cursor:pointer" -->
 
-            </li>
+        <!--    </li> -->
             <!-- Closing div for the second list item -->
 
 
