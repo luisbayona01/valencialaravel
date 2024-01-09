@@ -104,12 +104,11 @@ color: #ffFF ;
                     </div>
 
                     <div style="text-align: right; padding: 0px 10px 10px 10px">
-                        <button href="" type="button" onclick="goBack()" class="btn btn-secondary" style="text-align: right;">Volver</button>
+                        <button type="button" onclick="goToHome()" class="btn btn-secondary" style="text-align: right;">Volver</button>
                     </div>
                     <script>
-                        // JavaScript function to go back to the previous page
-                        function goBack() {
-                        window.history.back();
+                        function goToHome() {
+                            window.location.href = "{{ url('/gestorParte') }}";
                         }
                     </script>
                 </div>
