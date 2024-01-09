@@ -76,6 +76,58 @@
                 });
 
         }
+function listevidencias() {
+
+const hostname = window.location.hostname;
+
+// Obtener el puerto (si es diferente de 80, que es el puerto predeterminado para HTTP)
+const port = window.location.port !== '' ? ':' + window.location.port : '';
+
+// Crear la URL completa con el hostname y el puerto
+const urlCompleta =  hostname + port;
+
+//console.log(urlCompleta);
+            var idParte = {{ $parte->id }};
+            fetch(`/api/partes/listevidencias/${idParte}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Validar que data exista y no esté vacío
+                    if (data && Object.keys(data).length > 0) {
+                   //console.log(data);
+
+      const evidencias = data.evidencias;
+const imageListContainer = document.getElementById('imageListContainer');
+const imageList = document.getElementById('imageList');
+imageList.innerHTML=''
+evidencias.forEach(evidencia => {
+    const imgElement = document.createElement('img');
+    imgElement.src = '/storage/' + evidencia.file;  // Utiliza la URL proporcionada en evidencia.file
+    imgElement.alt = `Evidencia ${evidencia.idevidencia}`;
+    imgElement.style.width = '100%';
+
+    const listItem = document.createElement('div');
+    listItem.appendChild(imgElement);
+
+    imageList.appendChild(listItem);
+});
+
+
+                       }else {
+                        // No hay datos o los datos están vacíos
+                        // No hay datos o los datos están vacíos
+                        console.log('La respuesta de la API no contiene datos.');
+                     }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+        }
 
         function limpiarCampos() {
     // Limpiar los campos del container
@@ -86,13 +138,70 @@
     // Otros campos que desees limpiar
 }
 
+   //document.getElementById('formFileSm').addEventListener('change', handleFileSelect);
+   //document.getElementById('formFileSm').addEventListener('change', handleFileSelect);
 
+            function handleFileSelect(event) {
+                const files = event.files;
+                const imageListContainer = document.getElementById('imageListContainer');
+                //const imageList = document.getElementById('imageList');
+
+                if (files.length > 0 && files[0].type.startsWith('image/') && imageList.childNodes.length === 0) {
+                    imageListContainer.style.height = 'auto'; // Auto-expand height if it's the first image
+                }
+                  const formData = new FormData();
+                for (const file of files) {
+                    // Check file type and size
+                    if (file.type.startsWith('image/') && /\.(jpe?g|png)$/i.test(file.name) && file.size <= 2 * 1024 * 1024) {
+
+                        formData.append('file[]', file);
+
+
+                       /*const imgElement = document.createElement('img');
+                        imgElement.src = URL.createObjectURL(file);
+                        imgElement.alt = file.name;
+                        imgElement.style.width = '100%';
+
+                        const listItem = document.createElement('div');
+                        listItem.appendChild(imgElement);
+
+                        imageList.appendChild(listItem);*/
+                    } else {
+                        alert('Invalid file: ' + file.name);
+                    }
+                }
+                    let  parteid = document.getElementById('idparte');
+
+                    // Obtener el texto dentro del elemento
+                    let  idparte = parteid.innerText || parteid.textContent;
+                    formData.append('parteevidencia_id',idparte );
+                        // Realizar la solicitud usando fetch
+                fetch('/api/partes/evidencias', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.json()) // Suponiendo que el servidor responde con JSON
+                .then(data => {
+                    // Manejar la respuesta del servidor
+                    //console.log(data);
+     toastr.success(data["message"]);
+  listevidencias();
+    $("#formFileSm").val('');
+                })
+                .catch(error => {
+                    // Manejar errores
+                    console.error('Error:', error);
+                });
+
+
+            }
         // Espera a que el DOM esté listo
         $(document).ready(function() {
             $("#showE").click(function() {
                 $("#elementos").removeClass('d-none')
             })
-            lisdataelements();
+            lisdataelements()
+            listevidencias();
             $(document).on('click', '.fa-trash', function() {
                 // Find the closest <tr> element and remove it
                 $(this).closest('tr').remove();

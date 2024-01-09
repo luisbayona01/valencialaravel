@@ -285,7 +285,7 @@
 
         <div class="mb-3">
             <label for="formFileSm" class="form-label"><h5 style="bold; color: black;">Adjunte evidencias fotograficas</h5></label>
-            <input class="form-control form-control-sm multiple" id="formFileSm" type="file" multiple accept=".jpg, .jpeg, .png" style="background-color: #e6e6e6; color: #706c6c; ">
+            <input class="form-control form-control-sm multiple" id="formFileSm" type="file" multiple accept=".jpg, .jpeg, .png" style="background-color: #e6e6e6; color: #706c6c;" onchange="handleFileSelect(this)">
         </div>
 
         <div id="imageListContainer" style="max-height: 300px; overflow-y: auto;">
@@ -294,34 +294,7 @@
 
         <!-- SCRIPT PARA EL CARGE DE LAS IMAGENES -->
         <script>
-            document.getElementById('formFileSm').addEventListener('change', handleFileSelect);
 
-            function handleFileSelect(event) {
-                const files = event.target.files;
-                const imageListContainer = document.getElementById('imageListContainer');
-                const imageList = document.getElementById('imageList');
-
-                if (files.length > 0 && files[0].type.startsWith('image/') && imageList.childNodes.length === 0) {
-                    imageListContainer.style.height = 'auto'; // Auto-expand height if it's the first image
-                }
-
-                for (const file of files) {
-                    // Check file type and size
-                    if (file.type.startsWith('image/') && /\.(jpe?g|png)$/i.test(file.name) && file.size <= 2 * 1024 * 1024) {
-                        const imgElement = document.createElement('img');
-                        imgElement.src = URL.createObjectURL(file);
-                        imgElement.alt = file.name;
-                        imgElement.style.width = '100%';
-
-                        const listItem = document.createElement('div');
-                        listItem.appendChild(imgElement);
-
-                        imageList.appendChild(listItem);
-                    } else {
-                        alert('Invalid file: ' + file.name);
-                    }
-                }
-            }
         </script>
 
 

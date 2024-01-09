@@ -27,9 +27,18 @@ Route::post('/partes/updateElement',[App\Http\Controllers\ElementosController::c
 
 Route::post('/partes/destroy',[App\Http\Controllers\ElementosController::class,'deleteElementos']);
 
+ Route::post('/partes/evidencias',[App\Http\Controllers\EvidenciaController::class, 'store']);
+
+
+Route::get('/partes/listevidencias/{idpartes}',[App\Http\Controllers\EvidenciaController::class, 'list_evidencia']);
+
 Route::get('/another-page', function () {
     return view('another_page');
 })->name('another_page');
+
+
+
+
 
 
 //Route::resource('elementoParte', 'ElementosController');
