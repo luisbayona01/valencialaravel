@@ -131,17 +131,18 @@ $partes = $partes->get();
         $localizaciones = Localizacion::pluck(DB::raw("CONCAT(cod_localizacion, ', ', descripcion, ', ', zona) as ubicacion"), 'id');
         $tipoparte= Tipoparte::pluck('nombre', 'id');
         $no=$id;
-        $reportadopor = User::where('id', '!=',Auth::user()->id)->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
+        //$reportadopor = User::where('id', '!=',Auth::user()->id)->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
+        $reportadopor = User::where('id', '!=', '')->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
      $asignadoa = User::where(function($query) {
     switch (Auth::user()->idrol) {
         case 1:
-            $query->where('idrol', '=', '4');
+            $query->where('idrol', '=', '1');
             break;
 
         case 4:
 
 
-            $query->where('idrol', '=', '5');
+            $query->where('idrol', '=', '1');
             break;
 
         // Otros casos si es necesario
@@ -166,18 +167,25 @@ $partes = $partes->get();
         //request()->validate(Parte::$rules);
        //$rolUsuario = Auth::user()->idrol;
         $data=$request->all();
-//      dd($data);
+       //dd($data);
 
 
       switch (Auth::user()->idrol) {
         case 1:
-             //data['estadoparte_id']=
+            $data['estadoparte_id']=1;
             break;
-
+        case 2:
+            $data['estadoparte_id']=2;
+            break;
+        case 3:
+            $data['estadoparte_id']=5;
+            break;
         case 4:
-          $data['estadoparte_id']=5;
+          $data['estadoparte_id']=4;
             break;
-
+        case 5:
+            $data['estadoparte_id']=3;
+                break;
         // Otros casos si es necesario
 
         default:

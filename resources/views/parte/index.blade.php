@@ -7,21 +7,24 @@
 @section('content')
  <style>
 
-.Aceptado {
-    background-color: #FFD700;
-    }
-.Comprobado{
-background-color:#00FF00 !important;
+.Activo {
+background-color: #00FF00 !important;
+/* Estado 1 Activo */
 }
-
-.Verificado{
-background-color:#fdcae1 !important;
+.No_Comprobado{
+background-color:#FFDEAD !important;
+/* Estado 2 No_Comprobado */
+}
+.Aceptado{
+background-color:#FFD700 !important;
+/* Estado 3 Aceptado o Verificado */
 }
 .Certificado{
-background-color:#AFEEEE !important;
+background-color:#d7f1e7 !important;
  }
 .Rechazado{
-background-color:#F08080 !important;
+background-color:#FA8072 !important;
+/* Estado 3 Rechazado */
 color: #ffFF ;
  }
 </style>
