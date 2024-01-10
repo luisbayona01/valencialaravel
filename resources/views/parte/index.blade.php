@@ -62,15 +62,15 @@ color: #ffFF ;
                                 <thead class="thead">
                                     <tr style="text-align: center;">
                                         <th>No parte</th>
-										<th>Ubicacion novedad</th>
+										<th>Ubicación novedad</th>
 										<th>tipo parte</th>
 										<th>Creado por</th>
-										<th>Fecha creacion</th>
-										<th>Reportado por</th>
-										<th>Fecha reporte</th>
-										<th style="text-align: center;">Obsrvacion iniciales</th>
+										<th>Fecha creación</th>
+										<th>Comunicado por</th>
+										<th>Fecha Comunicación</th>
+										<th style="text-align: center;">Obsrvación inicial</th>
 										<th>Responsable</th>
-										<th style="text-align: center;">Fecha asignacion</th>
+										<th style="text-align: center;">Fecha asignación</th>
 								        <th>Estado</th>
                                         <th>Acción</th>
 

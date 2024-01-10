@@ -22,7 +22,7 @@ $("#contenpartes").removeClass('d-none');
                             <a href="{{ route('users.index') }}">
                             <img src="{{ asset(url('img/usuarios.png')) }}"  alt="logo" style="width:100%">
                             <h4>
-                               <a class="sidebar-link" href="{{ route('users.index') }}" style="text-align: center">Existen {{ \App\Models\User::count() }} Usuarios</a>
+                               <a class="sidebar-link" href="{{ route('users.index') }}" style="text-align: center">{{ \App\Models\User::count() }} Usuarios</a>
                             </h4>
 
 
@@ -39,7 +39,7 @@ $("#contenpartes").removeClass('d-none');
                             <a href="{{ url('/partes') }}">
                             <img src=" {{ asset(url('img/TransporteNotas.png')) }}" alt="logo" style="width:100%">
                             <h4>
-                                <a class="sidebar-link" href="{{ url('/partes') }}" style="text-align: center">Tienes {{ Auth::user()->partes->count() }} Partes Asignados</a>
+                                <a class="sidebar-link" href="{{ url('/partes') }}" style="text-align: center">{{ Auth::user()->partes->count() }} Partes Asignados</a>
                             </h4>
                             </a>
                         </div>
