@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evidencia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Models\Parte;
 /**
  * Class EvidenciumController
  * @package App\Http\Controllers
@@ -26,6 +27,22 @@ class EvidenciaController extends Controller
             'file.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             // Añade más reglas de validación según sea necesario
         ]);
+
+     $partes= Parte::where('id',$request->idparte)->first();
+   $idparte='';
+   if ($partes) {
+
+$idparte=$request->idparte;
+    //dd($partes);
+} else {
+
+$partes=Parte::create(['creadopor'=> $request->creadopor]);
+$idparte=$partes->id;
+ //dd($request->creadopor);
+
+}
+
+
         $data = $request->all();
         // Obtener las imágenes del formulario
         if ($request->hasFile('file')) {
