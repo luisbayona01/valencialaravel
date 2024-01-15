@@ -116,15 +116,17 @@
             </div>
             <div class="col">
                 <div class="form-group">
+
                     {{ Form::label('Creado por') }}
                     <input type="hidden" name="creadopor" id="creadopor" value={{ Auth::user()->id }}>
+
 
                     <p class="form-control">{{ Auth::user()->nombres }} {{ Auth::user()->apellidos }} </p>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
-                    {{ Form::label('Fecha de creación') }}
+                    {{ Form::label('Fecha de autorización') }}
                     {{ Form::datetime('fechacreacion', $currentDateTime, [
                         'class' => 'form-control' . ($errors->has('fechacreacion') ? ' is-invalid' : ''),
                         'placeholder' => 'Fechacreacion',
@@ -139,16 +141,20 @@
         <div class="row" bis_skin_checked="1">
             <div class="col-sm-6" bis_skin_checked="1">
                 <div class="form-group">
-                    {{ Form::label('Reportado Por') }}
+
+                   {{ Form::label('Comunicado por') }}
                     {{ Form::select('reportadopor',$reportadopor,$parte->reportadopor, ['class' => 'form-control' . ($errors->has('reportadoPor') ? ' is-invalid' : ''), 'placeholder' => 'selecione', 'required' => 'required' ]) }}
                    <div class="invalid-feedback">
                         porfavor seleccione una  opcion
                     </div>
+
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    {{ Form::label('Fecha de reporte') }}
+
+                    {{ Form::label('Fecha Comunicación') }}
+
                     <div class="input-group date">
 
                         {{ Form::text('fechareporte', $parte->fechareporte, ['class' => 'form-control', 'placeholder' => 'Fechareporte', 'id'=>'fechareporte', 'required' => 'required' ]) }}
@@ -168,17 +174,21 @@
         <div class="row" bis_skin_checked="1">
             <div class="col-sm-6" bis_skin_checked="1">
                 <div class="form-group">
-                    {{ Form::label('Asignado A') }}
+
+                   {{ Form::label('Reparado por') }}
                     {{ Form::select('asignadoa',$asignadoa,$parte->asignadoa, ['class' => 'form-control' . ($errors->has('asignadoa') ? ' is-invalid' : ''), 'placeholder' => 'seleccione', 'required' => 'required']) }}
                   <div class="invalid-feedback">
                         porfavor asigne un usuario
                     </div>
+
                 </div>
             </div>
 
           <div class="col-sm-6">
                 <div class="form-group">
-                    {{ Form::label('fecha de Asignación') }}
+
+                    {{ Form::label('Fecha de Reparación') }}
+
                     <div class="input-group date">
 
                         {{ Form::text('fechaAsignacion', $parte->fechaAsignacion, ['class' => 'form-control', 'placeholder' => 'fechaAsignacion', 'fecha', 'id'=>'fechaAsignacion','required' => 'required' ]) }}

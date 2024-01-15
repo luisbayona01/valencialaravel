@@ -7,21 +7,24 @@
 @section('content')
  <style>
 
-.Aceptado {
-    background-color: #FFD700;
-    }
-.Comprobado{
-background-color:#00FF00 !important;
+.Activo {
+background-color: #00FF00 !important;
+/* Estado 1 Activo */
 }
-
-.Verificado{
-background-color:#fdcae1 !important;
+.No_Comprobado{
+background-color:#FFDEAD !important;
+/* Estado 2 No_Comprobado */
+}
+.Aceptado{
+background-color:#FFD700 !important;
+/* Estado 3 Aceptado o Verificado */
 }
 .Certificado{
-background-color:#AFEEEE !important;
+background-color:#d7f1e7 !important;
  }
 .Rechazado{
-background-color:#F08080 !important;
+background-color:#FA8072 !important;
+/* Estado 3 Rechazado */
 color: #ffFF ;
  }
 </style>
@@ -59,15 +62,15 @@ color: #ffFF ;
                                 <thead class="thead">
                                     <tr style="text-align: center;">
                                         <th>No parte</th>
-										<th>Ubicacion novedad</th>
+										<th>Ubicación novedad</th>
 										<th>tipo parte</th>
 										<th>Creado por</th>
-										<th>Fecha creacion</th>
-										<th>Reportado por</th>
-										<th>Fecha reporte</th>
-										<th style="text-align: center;">Obsrvacion iniciales</th>
+										<th>Fecha creación</th>
+										<th>Comunicado por</th>
+										<th>Fecha Comunicación</th>
+										<th style="text-align: center;">Obsrvación inicial</th>
 										<th>Responsable</th>
-										<th style="text-align: center;">Fecha asignacion</th>
+										<th style="text-align: center;">Fecha asignación</th>
 								        <th>Estado</th>
                                         <th>Acción</th>
 
