@@ -12,7 +12,7 @@ $("#contenpartes").removeClass('d-none');
     <div class="container "id="container-principal">
         <div class="row justify-content-center">
 
-            <div class="col-md-4">
+            <div class="col-md-4" style="display: none">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <div class="inner" bis_skin_checked="1">
@@ -34,7 +34,7 @@ $("#contenpartes").removeClass('d-none');
                             <a href="{{ url('/partes') }}">
                             <img src=" {{ asset(url('img/Inventario.png')) }}" alt="logo" style="width:100%">
                             <h4>
-                                <a class="sidebar-link" href="{{ url('/partes') }}" style="text-align: center"> Seguimiento Parte</a>
+                                <h4 class="sidebar-link" style="text-align: center">Partes</h4>
                             </h4>
                             </a>
                         </div>
@@ -46,10 +46,10 @@ $("#contenpartes").removeClass('d-none');
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <div class="inner" bis_skin_checked="1">
-                            <a href="{{ url('/...') }}">
+                            <a href="{{ url('/generarparte') }}">
                             <img src=" {{ asset(url('img/Inventario.png')) }}" alt="logo" style="width:100%">
                             <br><br><h4 style="text-align: center;">
-                                Gestor de Inventario
+                                Generar Certificados Partes
                             </h4>
                             </a>
                         </div>

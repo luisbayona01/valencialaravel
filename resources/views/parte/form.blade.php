@@ -99,9 +99,6 @@
             </div>
 
 
-
-
-
           <div class="col-sm-6">
                 <div class="form-group">
                     {{ Form::label('Fecha de Reparación') }}
@@ -119,6 +116,8 @@
                 </div>
             </div>
         </div>
+
+
 
 
         <div class="form-group">
@@ -163,14 +162,15 @@
     <div class="box-footer mt-20" style="margin-top: 10px; padding: 5px 5px 5px 5px">
         <button type="submit" class="btn btn-primary">{{ __('Registrar') }}</button>
 
-        <button type="button" class="btn btn-danger" id="backButton">
+        <button type="button" onclick="goToHome()" class="btn btn-danger" id="backButton">
         Cancelar
         </button>
     </div>
         <script>
-        document.getElementById('backButton').addEventListener('click', function() {
-            window.history.back();
-        });
+        function goToHome()
+        {
+            window.location.href = "{{ url('/gestorParte') }}";
+        }
         </script>
 
 

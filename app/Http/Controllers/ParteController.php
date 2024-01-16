@@ -13,7 +13,14 @@ use App\Models\User;
 use App\Models\Descripcionelementos;
 use App\Models\ElementoParte;
 use App\Models\Elementosparte; // Import the Element model or replace it with the appropriate model namespace
+use Barryvdh\DomPDF\PDF\paginate;
+//use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Support\Jsonable;
+use Illuminate\Pagination\Paginator;
+use PDF;
+
 
 
 
@@ -44,10 +51,8 @@ $partes = DB::table('parte as P')
         'P.obscreadorparte',
         DB::raw("CONCAT(UA.nombres, '', UA.apellidos) as asignadoA"),
         'P.fechaAsignacion',
-        'P.obsOperador',
         'P.validado_por',
         'P.fecha_validacion',
-        'P.obscliente',
         'EST.estadoparte'
     )
     ->join('tipoparte as TP', 'P.idtipoparte', '=', 'TP.id')
@@ -73,6 +78,65 @@ $partes = $partes->get();
 
     }
 
+/* METODO - VARIABLES Y DIRECCIONAMIENTOS PARA LA GENERACION DEL CERTIFICADO */
+public function generarparte()
+{  //dd( Auth::user()->nombres);
+
+    $rolUsuario = Auth::user()->idrol;
+
+$partes = DB::table('parte as P')
+  ->select(
+      'P.id',
+      'LC.cod_localizacion',
+      'TP.nombre as tipoparte',
+      DB::raw("CONCAT(U.nombres, '', U.apellidos) as partecreadopor"),
+      'P.fechacreacion',
+      DB::raw("CONCAT(UR.nombres, '', UR.apellidos) as reportadoPor"),
+      'P.fechareporte',
+      'P.obscreadorparte',
+      DB::raw("CONCAT(UA.nombres, '', UA.apellidos) as asignadoA"),
+      'P.fechaAsignacion',
+      'P.validado_por',
+      'P.fecha_validacion',
+      'EST.estadoparte'
+  )
+  ->join('tipoparte as TP', 'P.idtipoparte', '=', 'TP.id')
+  ->join('localizacion as LC', 'LC.id', '=', 'P.id_localizacion')
+  ->join('estadoparte as EST', 'EST.id', '=', 'P.estadoparte_id')
+  ->join('users as U', 'U.id', '=', 'P.creadopor')
+  ->join('users as UR', 'UR.id', '=', 'P.reportadopor')
+  ->join('users as UA', 'UA.id', '=', 'P.asignadoa');
+
+// Aplicar condición según el rol del usuario
+if ($rolUsuario == 1) {
+  // No aplicar ninguna condición adicional
+} else {
+  // Filtrar por el usuario asignado si el rol es diferente de 1
+  $partes->where('P.asignadoa', '=',  Auth::user()->id);
+}
+
+$partes = $partes->get();
+//dd($partes);
+
+
+      return view('parte.generarparte', compact('partes'));
+
+}
+
+
+public function pdf()
+{
+    $pdfs = parte::paginate();
+
+    $pdf = PDF::loadView('parte.pdf',['pdfs'=>$pdfs]);
+    $pdf->loadHTML('<h1>Test1</h1>');
+    //return $pdf->stream();
+
+    //return view('parte.pdf', compact('pdfs'));
+
+}
+
+/* FIN METODO - VARIABLES Y DIRECCIONAMIENTOS PARA LA GENERACION DEL CERTIFICADO */
 
     public function create()
     {   $currentDateTime = Carbon::now()->toDateTimeLocalString();

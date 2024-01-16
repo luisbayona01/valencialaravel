@@ -1,3 +1,5 @@
+<!-- FORM DEL FRONT EDIT -->
+
 @extends('layouts.plantilla')
 
 @section('template_title')
@@ -386,7 +388,7 @@ evidencias.forEach(evidencia => {
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Seguimiento') }} Parte</span>
+                        <span style="font-size: 1.5em" class="card-title">{{ __('Seguimiento') }} Parte</span><br><br>
 
                         <div>
                             <img src="{{ asset('img/icono_representativo_caratula.png') }}" class="card-img-top"

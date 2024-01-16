@@ -96,7 +96,7 @@
             </div>
         </div>
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4" style="width: 100%">
             <div class="col">
                 <div class="form-group" style="text-align: center; width: 55%">
                     {{ Form::label('No') }}
@@ -115,7 +115,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="form-group">
+                <div class="form-group" style="width: 100%">
                     {{ Form::label('Autorizado por') }}
                     <input type="hidden" name="creadopor"value={{ Auth::user()->id }}>
 
@@ -123,7 +123,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="form-group">
+                <div class="form-group" style="width: 100%">
                     {{ Form::label('Fecha de Autorización') }}
                     {{ Form::datetime('fechacreacion', $parte->fechacreacion, [
                         'class' => 'form-control' . ($errors->has('fechacreacion') ? ' is-invalid' : ''),
@@ -135,8 +135,30 @@
             </div>
         </div>
 
+        <div class="row" bis_skin_checked="1">
+            <div class="col">
+                <div class="form-group">
+                    {{ Form::label('Creado por') }}
+                    <input type="hidden" name="creadopor"value={{ Auth::user()->id }}>
+
+                    <p class="form-control">{{ Auth::user()->nombres }} {{ Auth::user()->apellidos }} </p>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    {{ Form::label('Fecha de Creación') }}
+                    {{ Form::datetime('fechacreacion', $parte->fechacreacion, [
+                        'class' => 'form-control' . ($errors->has('fechacreacion') ? ' is-invalid' : ''),
+                        'placeholder' => 'Fechacreacion',
+                        'required' => 'required','readonly' => 'readonly',
+                    ]) }}
+                    {!! $errors->first('fechacreacion', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+        </div>
 
         <div class="row" bis_skin_checked="1">
+
             <div class="col-sm-6" bis_skin_checked="1">
                 <div class="form-group">
                     {{ Form::label('Comunicado Por') }}
@@ -328,8 +350,10 @@
 
     <div class="box-footer mt-20" style="margin-top: 10px; padding: 0px 15px 15px 15px">
         <button style="text-align: left; type="submit" class="btn btn-primary">{{ __('Registrar') }}</button>
-
+        &nbsp;
         <button type="button" onclick="goBack()" class="btn btn-secondary" style="text-align: right;">Volver</button>
+        &nbsp;
+        <button type="button" onclick="pdf()" class="btn btn-primary float-right" style="text-align: right;">Imprimir Certificado</button>
     </div>
 
     {{ Form::close() }}

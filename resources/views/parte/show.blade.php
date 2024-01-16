@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Id Localizacion:</strong>
                             {{ $parte->id_localizacion }}

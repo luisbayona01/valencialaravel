@@ -3,7 +3,7 @@
 @extends('layouts.plantilla')
 
 @section('template_title')
-    Parte
+    generarparte
 @endsection
 
 @section('content')
@@ -39,17 +39,7 @@ color: #ffFF ;
                           <div >
                             <img src="{{asset('img/icono_representativo_caratula.png')}}" class="card-img-top" style="width: 30rem;">
                         </div>
-                            <!--
-                            <span id="card_title">
-                                {{ __('Parte') }}
-                            </span>
-                            -->
 
-                             <div class="float-right">
-                                <a href="{{ route('partes.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Nuevo parte') }}
-                                </a>
-                              </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -80,6 +70,8 @@ color: #ffFF ;
                                 </thead>
                                 <tbody>
                                     @foreach ($partes as $parte)
+                                    @if ($parte->estadoparte == 'Certificado')
+
                                         <tr style="font-size:0.9em;">
                                             <td style="text-align: center;">{{  $parte->id }}</td> <!-- No. Parte -->
 											<td style="text-align: center;">{{ $parte->cod_localizacion }}</td> <!-- Ubicacion Novedad -->
@@ -92,23 +84,28 @@ color: #ffFF ;
                                             <td>{{ $parte->fechaAsignacion }}</td>
 											<td ><span class="{{ $parte->estadoparte }}" style="display: block; width: 100%; height: 100%; text-align: center;"> {{ $parte->estadoparte }}</span> </td> <!-- Estado -->
                                             <td style="text-align: center">
-                                                <a class="btn btn-sm btn-info" href="{{ route('partes.edit',$parte->id) }}" ><i "></i> {{ __('Ver') }}</a> <!-- Accion -->
+                                                <a class="btn btn-sm btn-success" href="{{ route('partes.edit',$parte->id) }}" ><i ></i> {{ __('Ver') }}</a> <!-- Accion -->
                                             </td>
                                         </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>
 
                         </div>
                     </div>
-
-                    <div style="text-align: right; padding: 0px 10px 10px 10px">
+                    <br>
+                    <div style="text-align: letf; padding: 0px 10px 10px 10px">
                         <button type="button" onclick="goToHome()" class="btn btn-secondary" style="text-align: right;">Volver</button>
+                        <button type="button" onclick="pdf()" class="btn btn-primary float-right" style="text-align: right;">Generar Certificado</button>
                     </div>
                     <script>
                         function goToHome() {
                             window.location.href = "{{ url('/gestorParte') }}";
                         }
+                    function pdf() {
+                        window.open("{{ url('/pdf') }}", "_blank");
+                    }
                     </script>
                 </div>
 

@@ -14,6 +14,7 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <link href="{{ asset('css/app.css')}}" rel="stylesheet">
     <link href="{{  asset('css/bootstrap.min.css')  }}"  rel="stylesheet" crossorigin="anonymous">
    <link href="{{asset('css/toastr.min.css')}}"  rel="stylesheet" crossorigin="anonymous">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha256-e7gv1iSRu9qTxaTsz4mi8JQudArI1FpK8/ghBsgaP7I=" crossorigin="anonymous" />
