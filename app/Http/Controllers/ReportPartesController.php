@@ -37,17 +37,4 @@ $pdf= Pdf::loadView('pdf.informeParte',compact('dataParte','Evidencia','elemento
 return $pdf->stream();
 
     }
-
-    public function pdf()
-    {
-        $pdfs = parte::paginate();
-
-        $pdf = PDF::loadView('parte.pdf',['pdfs'=>$pdfs]);
-        $pdf->loadHTML('<h1>Test1</h1>');
-        //return $pdf->stream();
-
-        //return view('parte.pdf', compact('pdfs'));
-
-    }
-
 }

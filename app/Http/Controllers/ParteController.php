@@ -152,7 +152,8 @@ public function pdf()
          $asignadoa = User::where('idrol', '=','4')->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
      //dd($reportadopor);
    //dd($reportadopor);
-      return view('parte.create', compact('parte','no','localizaciones','tipoparte','currentDateTime','reportadopor','asignadoa'));
+$Descripcionelementos = Descripcionelementos::pluck(DB::raw("CONCAT(descripcion,'-',elemento,'-',precio) as valor"), 'id');
+      return view('parte.create', compact('parte','no','localizaciones','tipoparte','currentDateTime','reportadopor','asignadoa','Descripcionelementos'));
     }
 
     public function mostrarPartes()
@@ -165,11 +166,37 @@ public function pdf()
 
     public function store(Request $request)
     {
-       $datos=$request->all();
-       $datos['estadoparte_id']=1;
-        //request()->validate(Parte::$rules);
 
-        $parte = Parte::create($datos);
+   $partes= Parte::where('id',$request->idparte)->first();
+   $idparte='';
+   if ($partes) {
+    $data=$request->all();
+    $id=$request->idparte;
+    $Parte = Parte::find($id);
+    $data['estadoparte_id']=1;
+    $Parte->fill($data);
+    $Parte->save();
+
+
+} else {
+
+//$partes=Parte::create(['creadopor'=> $request->creadopor]);
+//$idparte=$partes->id;
+ //dd($request->creadopor);
+
+ $datos=$request->all();
+ $datos['estadoparte_id']=1;
+        //request()->validate(Parte::$rules);
+$parte = Parte::create($datos);
+
+}
+
+
+
+
+      //dd($datos);
+
+
 
         return redirect()->route('partes.index')
         ->with('success', 'Parte creado Correctamente!');

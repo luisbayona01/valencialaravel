@@ -24,6 +24,9 @@ Route::get('/home', function () {
  return view('home');
 })->middleware('auth:web');
 
+//generarinforme
+Route::get('/report',[App\Http\Controllers\ReportPartesController::class,'generarinforme'])->name('report');
+
 Route::resource('partes',  App\Http\Controllers\parteController::class);
 
 Route::get('/report',[App\Http\Controllers\ReportPartesController::class,'generarinforme'])->name('report');

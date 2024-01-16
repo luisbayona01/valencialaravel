@@ -4,15 +4,29 @@ namespace App\Http\Controllers;
 use App\Models\Elementosparte;
 use DB;
 use Illuminate\Http\Request;
-
+use  App\Models\Parte;
 class ElementosController extends Controller
 {
     public function save_ajax_api_elementos(request $request)
     {
+      //dd($request->idparte);
+  $partes= Parte::where('id',$request->idparte)->first();
+   $idparte='';
+   if ($partes) {
+
+$idparte=$request->idparte;
+    //dd($partes);
+} else {
+
+$partes=Parte::create(['creadopor'=> $request->creadopor]);
+$idparte=$partes->id;
+ //dd($request->creadopor);
+
+}
 
         Elementosparte::create(['cantidad' => $request->input('cantidad'),
             'precio_total' => $request->input('total'),
-            'parteid' => $request->idparte,
+            'parteid' => $idparte,
             'elementosd_id' => $request->input('idelemento'),
         ]);
 
