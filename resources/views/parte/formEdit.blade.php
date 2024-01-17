@@ -21,25 +21,33 @@
     }
 
 
-    .color-#98FB98 {
-        color: #98FB98;
+    .color-#00FF0050 {
+        color: #00FF0005;
     } /* Estado 1 Activo */
 
-    .color-#FFDEAD {
-        color: #FFDEAD ;
-    } /* Estado 2 No_Comprobado */
+    .color-#ff000020 {
+        color: #ff000005 ;
+    } /* Estado 2 Revisar */
 
-    .color-#FFD700 {
-        color: #FFD700;
-    } /* Estado 3 Aceptado o Verificado */
+    .color-#FFD70060 {
+        color: #ffff0080;
+    } /* Estado 3 Finalizado */
 
-    .color-#d7f1e7 {
-        color: #d7f1e7;
-    } /* Estado 4 Certificado */
+    .color-#ED912109 {
+        color: #ED912109;
+    } /* Estado 4 Comprobado */
 
-    .color-#FA8072 {
-        color: #FA8072;
-    } /* Estado 5 Rechazado */
+    .color-#00a2d310 {
+        color: #00a2d310;
+    } /* Estado 5 Certificado */
+
+    .color-#ff000090 {
+        color: #ff000090;
+    } /* Estado 6 Rechazado */
+
+    .color-#84857d10 {
+        color: #84857d10;
+    } /* Estado 7 Anulado */
 
     label {
         font-weight: bold;
@@ -51,15 +59,19 @@
 <div class="box box-info padding-1" style="background-color:
     @php
         if ($parte->estadoparte_id == 1) {
-            echo '#98FB98'; // Set the background color to #98FB98 for estado 1
+            echo '#00FF0020'; // Set the background color to #00FF0020 for estado 1
         } elseif ($parte->estadoparte_id == 2) {
-            echo '#FFDEAD'; // Set the background color to #FFDEAD for estado 2
+            echo '#ff000005'; // Set the background color to #ff000020 for estado 2
         } elseif ($parte->estadoparte_id == 3) {
-            echo '#FFD700'; // Set the background color to #FFD700 for estado 3
+            echo '#ffff0020'; // Set the background color to #FFD70060 for estado 3
         } elseif ($parte->estadoparte_id == 4) {
-            echo '#d7f1e7'; // Set the background color to #d7f1e7 for estado 4
+            echo '#ED912109'; // Set the background color to #ED912170 for estado 4
         } elseif ($parte->estadoparte_id == 5) {
-            echo '#FA8072'; // Set the background color to #ff4d4d for estado 5
+            echo '#00a2d310'; // Set the background color to #00a2d360 for estado 5
+        } elseif ($parte->estadoparte_id == 6) {
+            echo '#ff000090'; // Set the background color to #ff000090 for estado 6
+        } elseif ($parte->estadoparte_id == 7) {
+            echo '#84857d10'; // Set the background color to #84857d for estado 7
         } else {
             echo 'initial'; // Set the default background color here
         }
@@ -306,19 +318,43 @@
         <!-- DIVISION PARA EL FRONT DE ADD IMAGENES -->
 
         <div class="mb-3">
-            <label for="formFileSm" class="form-label"><h5 style="bold; color: black;">Adjunte evidencias fotograficas</h5></label>
+            <label for="formFileSm" class="form-label"><h5 style="font-weight: bold; color: black;">Adjunte evidencias fotograficas</h5></label>
             <input class="form-control form-control-sm multiple" id="formFileSm" type="file" multiple accept=".jpg, .jpeg, .png" style="background-color: #e6e6e6; color: #706c6c;" onchange="handleFileSelect(this)">
 
         </div>
         <br><label for="formFileSm" class="form-label"><h5 style="bold; color: black;">Vista previa</h5></label>
 
         <div id="imageListContainer" style="max-height: 300px; overflow-y: auto;">
-            <div id="imageList"></div>
+            <div id="imageList" style="display: flex; flex-wrap: wrap;"></div>
         </div>
 
         <!-- SCRIPT PARA EL CARGE DE LAS IMAGENES -->
         <script>
+            function handleFileSelect(input) {
+        var fileList = input.files;
+        var imageListContainer = document.getElementById("imageList");
 
+        for (var i = 0; i < fileList.length; i++) {
+            var file = fileList[i];
+            var imageURL = URL.createObjectURL(file);
+
+            // Crear miniatura de la imagen
+            var thumbnail = document.createElement("div");
+            thumbnail.style.width = "100px"; // Ancho de la miniatura
+            thumbnail.style.height = "100px"; // Altura de la miniatura
+            thumbnail.style.backgroundImage = "url('" + imageURL + "')";
+            thumbnail.style.backgroundSize = "cover";
+            thumbnail.style.margin = "5px"; // Espaciado entre miniaturas
+            thumbnail.style.cursor = "pointer";
+            thumbnail.onclick = function () {
+                // Mostrar la imagen grande al hacer clic en la miniatura
+                window.open(imageURL, "_blank");
+            };
+
+            // Agregar la miniatura a la lista de imágenes
+            imageListContainer.appendChild(thumbnail);
+        }
+        }
         </script>
 
 
@@ -349,12 +385,13 @@
     </div>
 
     <div class="box-footer mt-20" style="margin-top: 10px; padding: 0px 15px 15px 15px">
-        <button style="text-align: left; type="submit" class="btn btn-primary">{{ __('Registrar') }}</button>
+
         &nbsp;
         <button type="button" onclick="goBack()" class="btn btn-secondary" style="text-align: right;">Volver</button>
         &nbsp;
-        <button type="button" onclick="pdf()" class="btn btn-primary float-right" style="text-align: right;">Imprimir Certificado</button>
+        <button style="text-align: left; type="submit" class="btn btn-primary float-right">{{ __('Registrar') }}</button>
     </div>
+
 
     {{ Form::close() }}
 

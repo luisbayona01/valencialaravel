@@ -10,23 +10,32 @@
  <style>
 
 .Activo {
-background-color: #00FF00 !important;
+background-color: #00FF0050 !important;
 /* Estado 1 Activo */
 }
-.No_Comprobado{
-background-color:#FFDEAD !important;
-/* Estado 2 No_Comprobado */
+.Revisar{
+background-color:#ff000020 !important;
+/* Estado 2 Revisar */
 }
-.Aceptado{
-background-color:#FFD700 !important;
-/* Estado 3 Aceptado o Verificado */
+.Finalizado{
+background-color:#FFD70060 !important;
+/* Estado 3 Finalizado */
 }
-.Certificado{
-background-color:#d7f1e7 !important;
+.Comprobado{
+background-color:#ED912170 !important;
+/* Estado 4 Comprobado */
  }
-.Rechazado{
-background-color:#FA8072 !important;
-/* Estado 3 Rechazado */
+ .Certificado{
+background-color:#00a2d360 !important;
+/* Estado 5 Certificado */
+ }
+ .Rechazado{
+background-color:#ff000090 !important;
+/* Estado 6 Rechazado */
+ }
+.Anulado{
+background-color:#84857d !important;
+/* Estado 7 Anulado */
 color: #ffFF ;
  }
 </style>
@@ -65,10 +74,10 @@ color: #ffFF ;
                                     <tr style="text-align: center;">
                                         <th>No parte</th>
 										<th>Ubicación novedad</th>
-										<th>tipo parte</th>
+										<th>Tipo parte</th>
 										<th>Comunicado por</th>
 										<th>Fecha Comunicación</th>
-										<th style="text-align: center;">Obsrvaciónes</th>
+										<th style="text-align: center;">Observaciones</th>
 										<th>Reparado por</th>
 										<th style="text-align: center;">Fecha Reparacion</th>
                                         <th>Total importe</th>

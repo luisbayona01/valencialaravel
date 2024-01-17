@@ -108,14 +108,31 @@ const imageList = document.getElementById('imageList');
 imageList.innerHTML=''
 evidencias.forEach(evidencia => {
     const imgElement = document.createElement('img');
-    imgElement.src = '/storage/' + evidencia.file;  // Utiliza la URL proporcionada en evidencia.file
-    imgElement.alt = `Evidencia ${evidencia.idevidencia}`;
-    imgElement.style.width = '100%';
+
 
     const listItem = document.createElement('div');
     listItem.appendChild(imgElement);
 
     imageList.appendChild(listItem);
+
+    var imageURL = '/storage/' + evidencia.file;  // Utiliza la URL proporcionada en evidencia.file
+    // Crear miniatura de la imagen
+    var thumbnail = document.createElement("div");
+            thumbnail.style.width = "100px"; // Ancho de la miniatura
+            thumbnail.style.height = "100px"; // Altura de la miniatura
+            thumbnail.style.backgroundImage = "url('" + imageURL + "')";
+            thumbnail.style.backgroundSize = "cover";
+            thumbnail.style.margin = "5px"; // Espaciado entre miniaturas
+            thumbnail.style.cursor = "pointer";
+            thumbnail.onclick = function () {
+                // Mostrar la imagen grande al hacer clic en la miniatura
+                window.open(imageURL, "_blank");
+            };
+
+            // Agregar la miniatura a la lista de imágenes
+            imageList.appendChild(thumbnail);
+
+
 });
 
 
@@ -146,7 +163,7 @@ evidencias.forEach(evidencia => {
             function handleFileSelect(event) {
                 const files = event.files;
                 const imageListContainer = document.getElementById('imageListContainer');
-                //const imageList = document.getElementById('imageList');
+                const imageList = document.getElementById('imageList');
 
                 if (files.length > 0 && files[0].type.startsWith('image/') && imageList.childNodes.length === 0) {
                     imageListContainer.style.height = 'auto'; // Auto-expand height if it's the first image

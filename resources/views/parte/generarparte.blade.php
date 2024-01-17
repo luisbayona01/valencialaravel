@@ -55,10 +55,10 @@ color: #ffFF ;
                                     <tr style="text-align: center;">
                                         <th>No parte</th>
 										<th>Ubicación novedad</th>
-										<th>tipo parte</th>
+										<th>Tipo parte</th>
 										<th>Comunicado por</th>
 										<th>Fecha Comunicación</th>
-										<th style="text-align: center;">Obsrvaciónes</th>
+										<th style="text-align: center;">Observaciones</th>
 										<th>Reparado por</th>
 										<th style="text-align: center;">Fecha Reparacion</th>
                                         <th>Total importe</th>
@@ -70,7 +70,7 @@ color: #ffFF ;
                                 </thead>
                                 <tbody>
                                     @foreach ($partes as $parte)
-                                    @if ($parte->estadoparte == 'Certificado')
+                                    @if ($parte->estadoparte == 'Comprobado')
 
                                         <tr style="font-size:0.9em;">
                                             <td style="text-align: center;">{{  $parte->id }}</td> <!-- No. Parte -->
@@ -97,7 +97,7 @@ color: #ffFF ;
                     <br>
                     <div style="text-align: letf; padding: 0px 10px 10px 10px">
                         <button type="button" onclick="goToHome()" class="btn btn-secondary" style="text-align: right;">Volver</button>
-                        <button type="button" onclick="pdf()" class="btn btn-primary float-right" style="text-align: right;">Generar Certificado</button>
+                        <button type="button" onclick="pdf()" class="btn btn-primary float-right" style="text-align: right;">Generar Certificación</button>
                     </div>
                     <script>
                         function goToHome() {

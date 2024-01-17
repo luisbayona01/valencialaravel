@@ -117,7 +117,7 @@
             <div class="col">
                 <div class="form-group">
 
-                    {{ Form::label('Creado por') }}
+                    {{ Form::label('Autorizado por') }}
                     <input type="hidden" name="creadopor" id="creadopor" value={{ Auth::user()->id }}>
 
 
@@ -125,6 +125,27 @@
                 </div>
             </div>
             <div class="col">
+                <div class="form-group">
+                    {{ Form::label('Fecha de autorización') }}
+                    {{ Form::datetime('fechacreacion', $currentDateTime, [
+                        'class' => 'form-control' . ($errors->has('fechacreacion') ? ' is-invalid' : ''),
+                        'placeholder' => 'Fechacreacion',
+                        'readonly' => 'readonly',
+                    ]) }}
+                    {!! $errors->first('fechacreacion', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+            <div class="col" style="display: none">
+                <div class="form-group">
+
+                    {{ Form::label('Creado por') }}
+                    <input type="hidden" name="creadopor" id="creadopor" value={{ Auth::user()->id }}>
+
+
+                    <p class="form-control">{{ Auth::user()->nombres }} {{ Auth::user()->apellidos }} </p>
+                </div>
+            </div>
+            <div class="col" style="display: none">
                 <div class="form-group">
                     {{ Form::label('Fecha de autorización') }}
                     {{ Form::datetime('fechacreacion', $currentDateTime, [
@@ -219,10 +240,10 @@
     </div>
 
 </div>
-<hr style="border-width: 2px;">
+<center><hr style="border-width: 2px; width:95%; text-align:center"></center>
 
 <div>
-    <h4 style="text-align: left;">Acciones Realizadas: </h4>
+    <h4 style="text-align: left;padding: 0px 5px 5px 15px ">Acciones Realizadas:1 </h4>
 </div><br>
 <div class="container" id="elementos" style="display: block; width: 100%;">
     <div class="row">
@@ -255,7 +276,7 @@
     </div>
 </div>
 
- <div class="contenido d-none" id="tabla-recibe">
+ <div class="contenido d-block" id="tabla-recibe">
    <table class="table table-bordered" style="width: 95%; ">
     <thead>
     <tr style="text-align: center; font-weight: bold; color: black;">
@@ -269,9 +290,20 @@
     </tr>
   </thead>
   <tbody class="contenidoElements">
-
+    <tr>
+        <td colspan="3"></td>
+        <td colspan="1" style="border: 1px solid black; text-align:right">
+            Total23
+        </td>
+        <td colspan="2" style="border: 1px solid black;" >
+            <label id="totalImportes">ff</label>
+        </td>
+    </tr>
   </tbody>
    </table>
+
+
+
 
  </div>
 
@@ -284,17 +316,43 @@
         <!-- DIVISION PARA EL FRONT DE ADD IMAGENES -->
 
         <div class="mb-3">
-            <label for="formFileSm" class="form-label"><h5 style="bold; color: black;">Adjunte evidencias fotograficas</h5></label>
+            <label for="formFileSm" class="form-label"><h5 style="font-weight: bold; color: black;">Adjunte evidencias fotograficas</h5></label>
             <input class="form-control form-control-sm multiple" id="formFileSm" type="file" multiple accept=".jpg, .jpeg, .png" style="background-color: #e6e6e6; color: #706c6c;" onchange="handleFileSelect(this)">
+
         </div>
+        <br><label for="formFileSm" class="form-label"><h5 style="bold; color: black;">Vista previa</h5></label>
 
         <div id="imageListContainer" style="max-height: 300px; overflow-y: auto;">
-            <div id="imageList"></div>
+            <div id="imageList" style="display: flex; flex-wrap: wrap;"></div>
         </div>
 
         <!-- SCRIPT PARA EL CARGE DE LAS IMAGENES -->
         <script>
+            function handleFileSelect(input) {
+        var fileList = input.files;
+        var imageListContainer = document.getElementById("imageList");
 
+        for (var i = 0; i < fileList.length; i++) {
+            var file = fileList[i];
+            var imageURL = URL.createObjectURL(file);
+
+            // Crear miniatura de la imagen
+            var thumbnail = document.createElement("div");
+            thumbnail.style.width = "100px"; // Ancho de la miniatura
+            thumbnail.style.height = "100px"; // Altura de la miniatura
+            thumbnail.style.backgroundImage = "url('" + imageURL + "')";
+            thumbnail.style.backgroundSize = "cover";
+            thumbnail.style.margin = "5px"; // Espaciado entre miniaturas
+            thumbnail.style.cursor = "pointer";
+            thumbnail.onclick = function () {
+                // Mostrar la imagen grande al hacer clic en la miniatura
+                window.open(imageURL, "_blank");
+            };
+
+            // Agregar la miniatura a la lista de imágenes
+            imageListContainer.appendChild(thumbnail);
+        }
+        }
         </script>
 
 
