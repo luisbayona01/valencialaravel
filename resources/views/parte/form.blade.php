@@ -184,10 +184,6 @@
                 </div>
             </div>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 939098aca4b5917a58aa8e678aab4044fe8d42c2
           <div class="col-sm-6">
                 <div class="form-group">
 
@@ -210,12 +206,6 @@
 
 
 
-<<<<<<< HEAD
-
-=======
- <div class="row">
-    <div class="col-lg-10">
->>>>>>> 939098aca4b5917a58aa8e678aab4044fe8d42c2
         <div class="form-group">
             {{ Form::label('observaciones') }}
             {{ Form::textarea('obscreadorparte', $parte->obscreadorparte, [
@@ -337,7 +327,6 @@
     <div class="box-footer mt-20" style="margin-top: 10px; padding: 0px 15px 15px 15px">
         <button style="text-align: left; type="submit" class="btn btn-primary">{{ __('Registrar') }}</button>
 
-<<<<<<< HEAD
         <button type="button" onclick="goToHome()" class="btn btn-danger" id="backButton">
         Cancelar
         </button>
@@ -348,19 +337,6 @@
             window.location.href = "{{ url('/gestorParte') }}";
         }
         </script>
-=======
-        <button type="button" onclick="goBack()" class="btn btn-secondary" style="text-align: right;">Volver</button>
-    </div>
-
-
-
-       <script>
-        // JavaScript function to go back to the previous page
-        function goBack() {
-        window.history.back();
-        }
-    </script>
->>>>>>> 939098aca4b5917a58aa8e678aab4044fe8d42c2
 
 
 </div>
