@@ -43,11 +43,11 @@
 
     .color-#ff000090 {
         color: #ff000090;
-    } /* Estado 5 Rechazado */
+    } /* Estado 6 Rechazado */
 
     .color-#84857d10 {
         color: #84857d10;
-    } /* Estado 5 Anulado */
+    } /* Estado 7 Anulado */
 
     label {
         font-weight: bold;
