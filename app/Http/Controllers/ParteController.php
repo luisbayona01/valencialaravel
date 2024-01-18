@@ -6,7 +6,7 @@ use App\Models\Parte;
 use App\Models\Localizacion;
 use App\Models\Tipoparte;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
  use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -313,6 +313,41 @@ public function deleteElement($id)
     return response()->json(['message' => 'Element deleted successfully']);
 }
 
+
+public function eliminarParteConRelaciones($parteId)
+{
+    // Iniciar una transacción
+    DB::beginTransaction();
+
+    try {
+        // Obtener la instancia de Parte
+        $parte = Parte::find($parteId);
+
+        if (!$parte) {
+            //throw new \Exception("No se encontró la parte con ID $parteId");
+ return redirect()->route('partes.index');
+        }
+
+        // Eliminar los elementos relacionados en ElementosParte
+        $parte->elemtosPartes()->delete();
+
+        // Eliminar las evidencias relacionadas en Evidencia
+        $parte->evidencias()->delete();
+
+        // Finalmente, eliminar la parte principal
+        $parte->delete();
+
+        // Confirmar la transacción
+        DB::commit();
+
+           return redirect()->route('partes.index');
+    } catch (\Exception $e) {
+        // Revertir la transacción en caso de error
+        DB::rollBack();
+
+        return redirect()->route('partes.index');
+    }
+}
 
 
 }

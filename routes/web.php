@@ -55,6 +55,7 @@ Route::get('pdf', [App\Http\Controllers\parteController::class, 'pdf'])->name('p
 
 
 Route::resource('elementoParte', 'ElementosController');
+Route::get('/cancelar/{parteId}', [App\Http\Controllers\parteController::class, 'eliminarParteConRelaciones']);
 
 //Auth::routes();
 

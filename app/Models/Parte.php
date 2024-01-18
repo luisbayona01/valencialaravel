@@ -86,6 +86,28 @@ class Parte extends Model
     }
 
 
+ public function elemtosPartes()
+    {
+        return $this->hasMany('App\Models\Elementosparte', 'parteid', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function evidencias()
+    {
+        return $this->hasMany('App\Models\Evidencia', 'parteevidencia_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+
 
 
 }

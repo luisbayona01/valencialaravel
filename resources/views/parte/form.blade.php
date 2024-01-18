@@ -415,16 +415,11 @@
     <div class="box-footer mt-20" style="margin-top: 10px; padding: 0px 15px 15px 15px">
         <button style="text-align: left;" type="submit" class="btn btn-primary">{{ __('Registrar') }}</button>
 
-        <button type="button" onclick="goToHome()" class="btn btn-danger" id="backButton">
+        <a href="{{url('cancelar/'.$no)}}" type="button"  class="btn btn-danger" id="backButton">
         Cancelar
-        </button>
+        </a>
     </div>
-        <script>
-        function goToHome()
-        {
-            window.location.href = "{{ url('/gestorParte') }}";
-        }
-        </script>
+
 
 
 </div>
