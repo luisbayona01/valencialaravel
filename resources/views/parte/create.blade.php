@@ -498,7 +498,7 @@ var thumbnail = document.createElement("div");
             <!-- Inicia el div con la clase "card-body" -->
             <div class="card-body">
                 <form method="POST"
-                    action="{{ str_replace('http://commonly-blessed-python.ngrok-free.app/', 'https://commonly-blessed-python.ngrok-free.app/', route('partes.store')) }}"
+                    action="{{route('partes.store') }}"
                     role="form" enctype="multipart/form-data" id="createParte" class="needs-validation" novalidate>
                     @csrf
 
