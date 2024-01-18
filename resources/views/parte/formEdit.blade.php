@@ -91,32 +91,48 @@
 
     <div class="box-body" style="padding: 5px 15px 5px 15px" >
 
-        <div class="row">
-            <div class="col-lg-10 offset-lg-1 text-center">
-                <div class="form-group">
-                    {{ Form::label('localización', 'Localización') }}
-                    {{ Form::select('id_localizacion', $localizaciones, $parte->id_localizacion, [
-                        'class' => 'form-control' . ($errors->has('id_localizacion') ? ' is-invalid' : ''),
-                        'placeholder' => 'Seleccione una ubicacion',
-                        'required' => 'required',
-                       'disabled' =>'disabled'
-                    ]) }}
-                    <div class="invalid-feedback">
-                        porfavor seleccione una ubicacion
-                    </div>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4" style="width: 100%">
+
+            <div class="col-md-6">
+                {{ Form::label('localización', 'Localización') }}
+                {{ Form::select('id_localizacion', $localizaciones, $parte->id_localizacion, [
+                    'class' => 'form-control' . ($errors->has('id_localizacion') ? ' is-invalid' : ''),
+                    'placeholder' => 'Seleccione una ubicacion',
+                    'required' => 'required',
+                   'disabled' =>'disabled'
+                ]) }}
+                <div class="invalid-feedback">
+                    porfavor seleccione una ubicacion
                 </div>
             </div>
-        </div>
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4" style="width: 100%">
-            <div class="col">
-                <div class="form-group" style="text-align: center; width: 55%">
+            <div class="col" style="display: none">
+                <div class="form-group" style="width: 100%">
+                    {{ Form::label('Creado por') }}
+                    <input type="hidden" name="creadopor"value={{ Auth::user()->id }}>
+
+                    <p class="form-control">{{ Auth::user()->nombres }} {{ Auth::user()->apellidos }} </p>
+                </div>
+            </div>
+            <div class="col" style="display: none">
+                <div class="form-group" style="width: 100%">
+                    {{ Form::label('Fecha de Creación') }}
+                    {{ Form::datetime('fechacreacion', $parte->fechacreacion, [
+                        'class' => 'form-control' . ($errors->has('fechacreacion') ? ' is-invalid' : ''),
+                        'placeholder' => 'Fechacreacion',
+                        'required' => 'required','readonly' => 'readonly',
+                    ]) }}
+                    {!! $errors->first('fechacreacion', '<div class="invalid-feedback">:message</div>') !!}
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="form-group" style="text-align: center; ">
                     {{ Form::label('No') }}
                     <p class="form-control" id="idparte">{{ $no}} </p>
-
                 </div>
             </div>
-            <div class="col">
+            <div class="col-md-4">
                 <div class="form-group" style="text-align: left; width: 100%" >
                     {{ Form::label('Tipo de parte') }}
                     {{ Form::select('idtipoparte', $tipoparte, $parte->idtipoparte, ['class' => 'form-control' . ($errors->has('idtipoparte') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione el tipo de parte', 'required' => 'required','disabled' =>'disabled' ,
@@ -126,8 +142,12 @@
                     </div>
                 </div>
             </div>
+
+        </div>
+
+        <div class="row" bis_skin_checked="1">
             <div class="col">
-                <div class="form-group" style="width: 100%">
+                <div class="form-group">
                     {{ Form::label('Autorizado por') }}
                     <input type="hidden" name="creadopor"value={{ Auth::user()->id }}>
 
@@ -135,30 +155,8 @@
                 </div>
             </div>
             <div class="col">
-                <div class="form-group" style="width: 100%">
+                <div class="form-group">
                     {{ Form::label('Fecha de Autorización') }}
-                    {{ Form::datetime('fechacreacion', $parte->fechacreacion, [
-                        'class' => 'form-control' . ($errors->has('fechacreacion') ? ' is-invalid' : ''),
-                        'placeholder' => 'Fechacreacion',
-                        'required' => 'required','readonly' => 'readonly',
-                    ]) }}
-                    {!! $errors->first('fechacreacion', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-            </div>
-        </div>
-
-        <div class="row" bis_skin_checked="1">
-            <div class="col">
-                <div class="form-group">
-                    {{ Form::label('Creado por') }}
-                    <input type="hidden" name="creadopor"value={{ Auth::user()->id }}>
-
-                    <p class="form-control">{{ Auth::user()->nombres }} {{ Auth::user()->apellidos }} </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    {{ Form::label('Fecha de Creación') }}
                     {{ Form::datetime('fechacreacion', $parte->fechacreacion, [
                         'class' => 'form-control' . ($errors->has('fechacreacion') ? ' is-invalid' : ''),
                         'placeholder' => 'Fechacreacion',
@@ -203,7 +201,7 @@
             <div class="col-sm-6" bis_skin_checked="1">
                 <div class="form-group">
                     {{ Form::label('Reparado por') }}
-                    {{ Form::select('asignadoa',$asignadoa,$parte->asignadoa, ['class' => 'form-control' . ($errors->has('asignadoa') ? ' is-invalid' : ''), 'placeholder' => 'seleccione', 'required' => 'required']) }}
+                    {{ Form::select('asignadoa',$asignadoa,$parte->asignadoa, ['class' => 'form-control' . ($errors->has('asignadoa') ? ' is-invalid' : ''), 'placeholder' => 'seleccione', 'required' => 'required', 'disabled' =>'disabled']) }}
                   <div class="invalid-feedback">
                         porfavor asigne un usuario
                     </div>
@@ -282,7 +280,7 @@
 </div>
 
  <div class="contenido d-none" id="tabla-recibe">
-   <table class="table table-bordered" style="width: 95%; ">
+   <table class="table table-bordered" style="width: 95%;" id="tabla-recibe2">
     <thead>
     <tr style="text-align: center; font-weight: bold; color: black;">
       <!-- <th style="width: 10%">id</th> -->
@@ -299,7 +297,49 @@
   </tbody>
    </table>
 
+   <table class="" style="width: 95%;  ">
+    <tr>
+        <td colspan="2" style="visibility: hidden; width: 60%"></td>
+        <td colspan="1" class="table-bordered" style="text-align:center; width: 15%">
+            <strong>Total</strong>
+        </td>
+        <td colspan="2" class="table-bordered" style="width:15%; text-align:right"  >
+            <label id="totalImportes"> </label>
+        </td>
+        <td colspan="1" style="visibility: hidden; width: 10%"></td>
+    </tr>
+   </table>
+
  </div>
+
+ <script>
+    // Espera a que el DOM esté completamente cargado
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obtiene la tabla
+        var tablaRecibe2 = document.getElementById("tabla-recibe2");
+
+        // Obtiene todas las filas de la tabla, excluyendo la primera (encabezados)
+        var filas = tablaRecibe2.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+        // Inicializa la variable para la suma total
+        var total = 0;
+
+        // Recorre todas las filas y suma los valores de la columna "Total"
+        for (var i = 0; i < filas.length; i++) {
+            var celdaTotal = filas[i].getElementsByTagName("td")[4]; // La columna "Total" es la quinta (índice 4)
+            var valorTotal = parseFloat(celdaTotal.textContent || celdaTotal.innerText);
+
+            // Asegúrate de que el valor sea un número válido antes de sumarlo
+            if (!isNaN(valorTotal)) {
+                total += valorTotal;
+            }
+        }
+
+        // Actualiza el contenido del label "totalImportes" con la suma total
+        document.getElementById("totalImportes").textContent = total.toFixed(2) + " €"; // Puedes ajustar el número de decimales según tus necesidades
+    });
+</script>
+
 
 
 

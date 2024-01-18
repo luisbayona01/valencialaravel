@@ -23,61 +23,83 @@
         }
 
         function lisdataelements() {
-            var idParte = {{ $parte->id }};
-            fetch(`/api/partes/elementos/${idParte}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Validar que data exista y no esté vacío
-                    if (data && Object.keys(data).length > 0) {
-                        $(".contenido").removeClass("d-none");
-                        $(".contenidoElements").html("");
-                        data.forEach(item => {
-                            console.log('iditem', item.idelementos_parte);
-                            let rows = `<tr>
-                    <td style="text-align: center;">${item.elemento}</td>
-                    <td>${item.descripcion}</td>
-                    <td style="text-align: right;">${item.precioU} € </td>
-                    <td style="text-align: right;">${item.cantidad} </td>
-                    <td style="text-align: right;">${item.precio_total} € </td>
-                    <td style="text-align: center;">
-                    <form action="{{ route('partes.destroy', $parte->id) }}" method="POST">
-                        <a style="text-align: center; margin-right: 10px; font-size: 1.3em; " type="button" class="b" id="selecione">
-                        <i class="fa fa-pencil-square-o" aria-hidden="true">
-                        <input type="hidden" class="idelementoP" value='${item.idelementos_parte}'>
-                        </i></a>
-                        @csrf
-                        <a style="text-align: center; margin-right: 10px; font-size: 1.3em; " type="button" class="b" id="selecione">
-                        <i class="fa fa-trash" aria-hidden="true">
-                        <input type="hidden" class="idelementoP" value='${item.idelementos_parte}'>
+    var idParte = {{ $parte->id }};
+    fetch(`/api/partes/elementos/${idParte}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Validar que data exista y no esté vacío
+            if (data && Object.keys(data).length > 0) {
+                $(".contenido").removeClass("d-none");
+                $(".contenidoElements").html("");
 
+                data.forEach(item => {
+                    console.log('iditem', item.idelementos_parte);
+                    let rows = `<tr>
+                        <td style="text-align: center;">${item.elemento}</td>
+                        <td>${item.descripcion}</td>
+                        <td style="text-align: right;">${item.precioU} € </td>
+                        <td style="text-align: right;">${item.cantidad} </td>
+                        <td style="text-align: right;">${item.precio_total} € </td>
+                        <td style="text-align: center;">
+                            <form action="{{ route('partes.destroy', $parte->id) }}" method="POST">
+                                <a style="text-align: center; margin-right: 10px; font-size: 1.3em; " type="button" class="b" id="selecione">
+                                    <i class="fa fa-pencil-square-o" aria-hidden="true">
+                                        <input type="hidden" class="idelementoP" value='${item.idelementos_parte}'>
+                                    </i>
+                                </a>
+                                @csrf
+                                <a style="text-align: center; margin-right: 10px; font-size: 1.3em; " type="button" class="b" id="selecione">
+                                    <i class="fa fa-trash" aria-hidden="true">
+                                        <input type="hidden" class="idelementoP" value='${item.idelementos_parte}'>
+                                    </i>
+                                </a>
+                            </form>
+                        </td>
+                    </tr>`;
 
-
-                        </i></a>
-
-                      </form>
-
-                    </td>
-                </tr>`;
-                            //<input type="hidden" class="idelementoP" value='${item.idelemento_parte}'> //
-                            $(".contenidoElements").append(rows)
-                        });
-                        // Hacer algo con los datos recibidos
-                        //console.log('Datos de la API:', data);
-                    } else {
-                        // No hay datos o los datos están vacíos
-                        console.log('La respuesta de la API no contiene datos.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
+                    // Agregar la fila a la tabla
+                    $(".contenidoElements").append(rows);
                 });
 
-        }
+                // Calcular la suma de la columna "Total" después de agregar todas las filas
+                var totalImportes = 0;
+                $('.contenidoElements tr').each(function () {
+                    var totalColumn = parseFloat($(this).find('td:eq(4)').text().replace('€', '').trim());
+                    if (!isNaN(totalColumn)) {
+                        totalImportes += totalColumn;
+                    }
+                });
+
+                // Mostrar el resultado en el label
+                $('#totalImportes').text(totalImportes.toFixed(2) + ' €');
+                // Asignar la suma total a una variable global
+                sumaTotalGlobal = sumaTotal;
+            } else {
+                // No hay datos o los datos están vacíos
+                console.log('La respuesta de la API no contiene datos.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+}
+
+// Llamar a la función después de cargar la página o en el momento apropiado
+lisdataelements();
+
+// Puedes utilizar la variable sumaTotalGlobal en otras partes de tu código
+// Por ejemplo, si tienes otra función que necesita este valor
+function otraFuncionQueUsaLaSumaTotal() {
+    console.log('La suma total es:', sumaTotalGlobal);
+}
+
+
 function listevidencias() {
 
 const hostname = window.location.hostname;
@@ -131,10 +153,7 @@ evidencias.forEach(evidencia => {
 
             // Agregar la miniatura a la lista de imágenes
             imageList.appendChild(thumbnail);
-
-
 });
-
 
                        }else {
                         // No hay datos o los datos están vacíos

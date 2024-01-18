@@ -98,7 +98,7 @@ color: #ffFF ;
 											<td>{{ $parte->obscreadorparte }}</td> <!-- Observaciones -->
 											<td>{{ $parte->asignadoA }}</td> <!-- Reparado por -->
 											<td>{{ $parte->fechaAsignacion }}</td> <!-- Fecha reparacion -->
-                                            <td>{{ $parte->fechaAsignacion }}</td>
+                                            <td id="resultado"></td>
 											<td ><span class="{{ $parte->estadoparte }}" style="display: block; width: 100%; height: 100%; text-align: center;"> {{ $parte->estadoparte }}</span> </td> <!-- Estado -->
                                             <td style="text-align: center">
                                                 <a class="btn btn-sm btn-info" href="{{ route('partes.edit',$parte->id) }}" ><i "></i> {{ __('Ver') }}</a> <!-- Accion -->
@@ -110,6 +110,19 @@ color: #ffFF ;
 
                         </div>
                     </div>
+
+                    <script>
+                        $(document).ready(function () {
+                            // Itera sobre cada fila de la tabla
+                            $("#table-parte tbody tr").each(function () {
+                                // Obtén el valor del elemento con el id "totalImportes" en la vista actual
+                                var totalImportesValue = $("#totalImportes").text().trim();
+
+                                // Asigna el valor al elemento con el id "totalimporte" en la misma fila
+                                $(this).find("#totalimporte").text(totalImportesValue);
+                            });
+                        });
+                    </script>
 
                     <div style="text-align: right; padding: 0px 10px 10px 10px">
                         <button type="button" onclick="goToHome()" class="btn btn-secondary" style="text-align: right;">Volver</button>

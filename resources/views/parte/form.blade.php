@@ -8,8 +8,6 @@
         padding: 15px 15px 15px 15px; /* Ajusta el espacio interno de las celdas según tus preferencias */
     }
 
-
-
     #elementos button {
         border: 1px solid #ddd; /* Ajusta el grosor y color del borde según tus preferencias */
         padding: 5px; /* Ajusta el espacio interno de las celdas según tus preferencias */
@@ -20,26 +18,33 @@
         margin-bottom: 24px;
     }
 
+    .color-#00FF0050 {
+        color: #00FF0005;
+    } /* Estado 1 Activo */
 
-    .color-lemonchiffon {
-        color: #fdfd96;
-    } /* Estado 1 Aceptado */
+    .color-#ff000020 {
+        color: #ff000005 ;
+    } /* Estado 2 Revisar */
 
-    .color-#98FB98 {
-        color: #98FB98 ;
-    } /* Estado 2 Comprobado */
+    .color-#FFD70060 {
+        color: #ffff0080;
+    } /* Estado 3 Finalizado */
 
-    .color-#fff3f5 {
-        color: #fff3f5;
-    } /* Estado 3 Verificado */
+    .color-#ED912109 {
+        color: #ED912109;
+    } /* Estado 4 Comprobado */
 
-    .color-#d7f1e7 {
-        color: #d7f1e7;
-    } /* Estado 4 Certificado */
+    .color-#00a2d310 {
+        color: #00a2d310;
+    } /* Estado 5 Certificado */
 
-    .color-#ff4d4d {
-        color: #ff4d4d;
-    } /* Estado 5 Rechazado */
+    .color-#ff000090 {
+        color: #ff000090;
+    } /* Estado 6 Rechazado */
+
+    .color-#84857d10 {
+        color: #84857d10;
+    } /* Estado 7 Anulado */
 
     label {
         font-weight: bold;
@@ -51,15 +56,19 @@
 <div class="box box-info padding-1" style="background-color:
     @php
         if ($parte->estadoparte_id == 1) {
-            echo 'lemonchiffon'; // Set the background color to lemonchiffon for estado 1
+            echo '#00FF0020'; // Set the background color to #00FF0020 for estado 1
         } elseif ($parte->estadoparte_id == 2) {
-            echo '#abe2cd'; // Set the background color to #abe2cd for estado 2
+            echo '#ff000005'; // Set the background color to #ff000020 for estado 2
         } elseif ($parte->estadoparte_id == 3) {
-            echo '#fff3f5'; // Set the background color to #fff3f5 for estado 3
+            echo '#ffff0020'; // Set the background color to #FFD70060 for estado 3
         } elseif ($parte->estadoparte_id == 4) {
-            echo '#98FB98'; // Set the background color to #98FB98 for estado 4
+            echo '#ED912109'; // Set the background color to #ED912170 for estado 4
         } elseif ($parte->estadoparte_id == 5) {
-            echo '#ff4d4d'; // Set the background color to #ff4d4d for estado 5
+            echo '#00a2d310'; // Set the background color to #00a2d360 for estado 5
+        } elseif ($parte->estadoparte_id == 6) {
+            echo '#ff000090'; // Set the background color to #ff000090 for estado 6
+        } elseif ($parte->estadoparte_id == 7) {
+            echo '#84857d10'; // Set the background color to #84857d for estado 7
         } else {
             echo 'initial'; // Set the default background color here
         }
@@ -79,32 +88,31 @@
 
     <div class="box-body" style="padding: 5px 15px 5px 15px" >
 
-        <div class="row">
-            <div class="col-lg-10 offset-lg-1 text-center">
-                <div class="form-group">
-                    {{ Form::label('localización', 'Localización') }}
-                    {{ Form::select('id_localizacion', $localizaciones, $parte->id_localizacion, [
-                        'class' => 'form-control' . ($errors->has('id_localizacion') ? ' is-invalid' : ''),
-                        'placeholder' => 'Seleccione una ubicacion',
-                        'required' => 'required'
 
-                    ]) }}
-                    <div class="invalid-feedback">
-                        porfavor seleccione una ubicacion
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
-            <div class="col">
-                <div class="form-group" style="text-align: center; width: 55%">
-                    {{ Form::label('No') }}
-                    <p class="form-control" id="idparte">{{ $no}} </p>
-                 <input type="hidden"name="idparte" value="{{$no}}">
+
+            <div class="col-md-6 form-group">
+                {{ Form::label('localización', 'Localización') }}
+                {{ Form::select('id_localizacion', $localizaciones, $parte->id_localizacion, [
+                    'class' => 'form-control' . ($errors->has('id_localizacion') ? ' is-invalid' : ''),
+                    'placeholder' => 'Seleccione una ubicacion',
+                    'required' => 'required'
+
+                ]) }}
+                <div class="invalid-feedback">
+                    porfavor seleccione una ubicacion
                 </div>
             </div>
-            <div class="col">
+
+            <div class="col-md-2">
+                <div class="form-group" style="text-align:center;">
+                    {{ Form::label('No') }}
+                    <p class="form-control" id="idparte">{{ $no}} </p>
+                 <input type="hidden"name="idparte"  class='idparte'value="{{$no}}">
+                </div>
+            </div>
+            <div class="col-md-4">
                 <div class="form-group" style="text-align: left; width: 100%" >
                     {{ Form::label('Tipo de parte') }}
                     {{ Form::select('idtipoparte', $tipoparte, $parte->idtipoparte, ['class' => 'form-control' . ($errors->has('idtipoparte') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione el tipo de parte', 'required' => 'required'
@@ -114,27 +122,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="form-group">
-
-                    {{ Form::label('Autorizado por') }}
-                    <input type="hidden" name="creadopor" id="creadopor" value={{ Auth::user()->id }}>
 
 
-                    <p class="form-control">{{ Auth::user()->nombres }} {{ Auth::user()->apellidos }} </p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    {{ Form::label('Fecha de autorización') }}
-                    {{ Form::datetime('fechacreacion', $currentDateTime, [
-                        'class' => 'form-control' . ($errors->has('fechacreacion') ? ' is-invalid' : ''),
-                        'placeholder' => 'Fechacreacion',
-                        'readonly' => 'readonly',
-                    ]) }}
-                    {!! $errors->first('fechacreacion', '<div class="invalid-feedback">:message</div>') !!}
-                </div>
-            </div>
+            <!-- INICIO Espacio Oculto de los campos Creador por y Fecha de Creación -->
             <div class="col" style="display: none">
                 <div class="form-group">
 
@@ -147,7 +137,7 @@
             </div>
             <div class="col" style="display: none">
                 <div class="form-group">
-                    {{ Form::label('Fecha de autorización') }}
+                    {{ Form::label('Fecha de creacion') }}
                     {{ Form::datetime('fechacreacion', $currentDateTime, [
                         'class' => 'form-control' . ($errors->has('fechacreacion') ? ' is-invalid' : ''),
                         'placeholder' => 'Fechacreacion',
@@ -156,17 +146,44 @@
                     {!! $errors->first('fechacreacion', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
             </div>
+            <!-- FIN Espacio Oculto de los campos Creador por y Fecha de Creación -->
         </div>
 
+        <div class="row" bis_skin_checked="1">
+            <div class="col">
+                <div class="form-group">
+
+                    {{ Form::label('Autorizado por') }}
+                    {{ Form::select('reportadopor',$reportadopor,$parte->reportadopor, ['class' => 'form-control' . ($errors->has('reportadoPor') ? ' is-invalid' : ''), 'placeholder' => 'seleccione', 'required' => 'required' ]) }}
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    {{ Form::label('Fecha de autorización') }}
+
+                    <div class="input-group date">
+                        <!--Modificar en base a nuevo campo -->
+                        {{ Form::text('fechaautorizacion', $parte->fechaautorizacion, ['class' => 'form-control', 'placeholder' => 'Fecha de Autorización', 'id'=>'fechaautorizacion', 'required' => 'required' ]) }}
+                        <div class="input-group-addon input-group-append" bis_skin_checked="1">
+                            <div class="input-group-text" bis_skin_checked="1">
+                                <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
         <div class="row" bis_skin_checked="1">
             <div class="col-sm-6" bis_skin_checked="1">
                 <div class="form-group">
 
                    {{ Form::label('Comunicado por') }}
-                    {{ Form::select('reportadopor',$reportadopor,$parte->reportadopor, ['class' => 'form-control' . ($errors->has('reportadoPor') ? ' is-invalid' : ''), 'placeholder' => 'selecione', 'required' => 'required' ]) }}
+                    {{ Form::select('reportadopor',$reportadopor,$parte->reportadopor, ['class' => 'form-control' . ($errors->has('reportadoPor') ? ' is-invalid' : ''), 'placeholder' => 'seleccione', 'required' => 'required' ]) }}
                    <div class="invalid-feedback">
-                        porfavor seleccione una  opcion
+                        por favor seleccione una  opción
                     </div>
 
                 </div>
@@ -178,7 +195,7 @@
 
                     <div class="input-group date">
 
-                        {{ Form::text('fechareporte', $parte->fechareporte, ['class' => 'form-control', 'placeholder' => 'Fechareporte', 'id'=>'fechareporte', 'required' => 'required' ]) }}
+                       {{ Form::text('fechareporte', $parte->fechareporte, ['class' => 'form-control', 'placeholder' => 'Fecha de Reporte', 'fecha', 'id'=>'fechareporte', 'required' => 'required' ]) }}
                         <div class="input-group-addon input-group-append" bis_skin_checked="1">
                             <div class="input-group-text" bis_skin_checked="1">
                                 <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
@@ -212,7 +229,7 @@
 
                     <div class="input-group date">
 
-                        {{ Form::text('fechaAsignacion', $parte->fechaAsignacion, ['class' => 'form-control', 'placeholder' => 'fechaAsignacion', 'fecha', 'id'=>'fechaAsignacion','required' => 'required' ]) }}
+                        {{ Form::text('fechaAsignacion', $parte->fechaAsignacion, ['class' => 'form-control', 'placeholder' => 'Fecha de Reparación', 'fecha', 'id'=>'fechaAsignacion','required' => 'required' ]) }}
                         <div class="input-group-addon input-group-append" bis_skin_checked="1">
                             <div class="input-group-text" bis_skin_checked="1">
                                 <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
@@ -243,7 +260,7 @@
 <center><hr style="border-width: 2px; width:95%; text-align:center"></center>
 
 <div>
-    <h4 style="text-align: left;padding: 0px 5px 5px 15px ">Acciones Realizadas:1 </h4>
+    <h4 style="text-align: left;padding: 0px 5px 5px 15px ">Acciones Realizadas </h4>
 </div><br>
 <div class="container" id="elementos" style="display: block; width: 100%;">
     <div class="row">
@@ -271,13 +288,13 @@
         <label style="text-align: center; color: transparent;" for="Select">Acción</label>
 
         <div class="form-group">
-            <a style="text-align: center; " type="button" class="b" id="selecione"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></a>
+            <a style="text-align: center; " type="button" class="b" id="selecione"><i class="fa fa-plus fa-2x" onclick="calcularTotal() aria-hidden="true"></i></a>
         </div>
     </div>
 </div>
 
- <div class="contenido d-block" id="tabla-recibe">
-   <table class="table table-bordered" style="width: 95%; ">
+ <div class="contenido d-none" id="tabla-recibe">
+   <table class="table table-bordered" style="width: 95%;" id="tabla-recibe2">
     <thead>
     <tr style="text-align: center; font-weight: bold; color: black;">
       <!-- <th style="width: 10%">id</th> -->
@@ -290,28 +307,54 @@
     </tr>
   </thead>
   <tbody class="contenidoElements">
-    <tr>
-        <td colspan="3"></td>
-        <td colspan="1" style="border: 1px solid black; text-align:right">
-            Total23
-        </td>
-        <td colspan="2" style="border: 1px solid black;" >
-            <label id="totalImportes">ff</label>
-        </td>
-    </tr>
+
   </tbody>
    </table>
 
-
-
-
+   <table class="" style="width: 95%;  ">
+    <tr>
+        <td colspan="2" style="visibility: hidden; width: 60%"></td>
+        <td colspan="1" class="table-bordered" style="text-align:center; width: 15%">
+            Total
+        </td>
+        <td colspan="2" class="table-bordered" style="width:15%; text-align:right"  >
+            <label id="totalImportes"> </label>
+        </td>
+        <td colspan="1" style="visibility: hidden; width: 10%"></td>
+    </tr>
+   </table>
  </div>
 
+ <script>
+    // Espera a que el DOM esté completamente cargado
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obtiene la tabla
+        var tablaRecibe2 = document.getElementById("tabla-recibe2");
+
+        // Obtiene todas las filas de la tabla, excluyendo la primera (encabezados)
+        var filas = tablaRecibe2.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+        // Inicializa la variable para la suma total
+        var total = 0;
+
+        // Recorre todas las filas y suma los valores de la columna "Total"
+        for (var i = 0; i < filas.length; i++) {
+            var celdaTotal = filas[i].getElementsByTagName("td")[4]; // La columna "Total" es la quinta (índice 4)
+            var valorTotal = parseFloat(celdaTotal.textContent || celdaTotal.innerText);
+
+            // Asegúrate de que el valor sea un número válido antes de sumarlo
+            if (!isNaN(valorTotal)) {
+                total += valorTotal;
+            }
+        }
+
+        // Actualiza el contenido del label "totalImportes" con la suma total
+        document.getElementById("totalImportes").textContent = total.toFixed(2)+ " €" ; // Puedes ajustar el número de decimales según tus necesidades
+    });
+</script>
 
 
  <br>
-
-
 
         <!-- DIVISION PARA EL FRONT DE ADD IMAGENES -->
 
@@ -326,9 +369,9 @@
             <div id="imageList" style="display: flex; flex-wrap: wrap;"></div>
         </div>
 
-        <!-- SCRIPT PARA EL CARGE DE LAS IMAGENES -->
-        <script>
-            function handleFileSelect(input) {
+        <!-- SCRIPT PARA EL CARGO DE LAS IMÁGENES -->
+<script>
+    /*function handleFileSelect(input) {
         var fileList = input.files;
         var imageListContainer = document.getElementById("imageList");
 
@@ -337,23 +380,10 @@
             var imageURL = URL.createObjectURL(file);
 
             // Crear miniatura de la imagen
-            var thumbnail = document.createElement("div");
-            thumbnail.style.width = "100px"; // Ancho de la miniatura
-            thumbnail.style.height = "100px"; // Altura de la miniatura
-            thumbnail.style.backgroundImage = "url('" + imageURL + "')";
-            thumbnail.style.backgroundSize = "cover";
-            thumbnail.style.margin = "5px"; // Espaciado entre miniaturas
-            thumbnail.style.cursor = "pointer";
-            thumbnail.onclick = function () {
-                // Mostrar la imagen grande al hacer clic en la miniatura
-                window.open(imageURL, "_blank");
-            };
 
-            // Agregar la miniatura a la lista de imágenes
-            imageListContainer.appendChild(thumbnail);
         }
-        }
-        </script>
+    }*/
+</script>
 
 
 
@@ -383,7 +413,7 @@
     </div>
 
     <div class="box-footer mt-20" style="margin-top: 10px; padding: 0px 15px 15px 15px">
-        <button style="text-align: left; type="submit" class="btn btn-primary">{{ __('Registrar') }}</button>
+        <button style="text-align: left;" type="submit" class="btn btn-primary">{{ __('Registrar') }}</button>
 
         <button type="button" onclick="goToHome()" class="btn btn-danger" id="backButton">
         Cancelar

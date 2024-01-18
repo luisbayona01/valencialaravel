@@ -5,9 +5,8 @@
 @endsection
 
 @section('content')
-  <script>
-
- function descEl(element) {
+    <script>
+        function descEl(element) {
             let textcadena = element.options[element.selectedIndex].text;
             let partes = textcadena.split('-');
             let descripcion = partes[0];
@@ -23,7 +22,11 @@
 
         function lisdataelements() {
             var idParte = $("#idparte").text();
-            fetch(`/api/partes/elementos/${idParte}`)
+            let url = '/api/partes/elementos/' + idParte;
+
+            console.log('urlhola', url);
+            fetch('/api/partes/elementos/' + idParte)
+
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`HTTP error! Status: ${response.status}`);
@@ -35,8 +38,10 @@
                     if (data && Object.keys(data).length > 0) {
                         $(".contenido").removeClass("d-none");
                         $(".contenidoElements").html("");
+                        var totalImportes = 0;  /*se inicializa el total de  los importes en 0*/
                         data.forEach(item => {
                             console.log('iditem', item.idelementos_parte);
+
                             let rows = `<tr>
                     <td style="text-align: center;">${item.elemento}</td>
                     <td>${item.descripcion}</td>
@@ -53,18 +58,30 @@
                         <a style="text-align: center; margin-right: 10px; font-size: 1.3em; " type="button" class="b" id="selecione">
                         <i class="fa fa-trash" aria-hidden="true">
                         <input type="hidden" class="idelementoP" value='${item.idelementos_parte}'>
-
-
-
                         </i></a>
-
-
-
                     </td>
                 </tr>`;
-                            //<input type="hidden" class="idelementoP" value='${item.idelemento_parte}'> //
+                 /*   aqui antes de  cualqueir  reneder el debe tomar la  sumatoria  */
+                 let  totalColumn = parseFloat(item.precio_total);
+                 totalImportes += totalColumn;
+                 //<input type="hidden" class="idelementoP" value='${item.idelemento_parte}'> //
                             $(".contenidoElements").append(rows)
                         });
+
+                        // Calcular la suma de la columna "Total" después de agregar todas las filas
+                          //aqui esta  haciendo  doble  proceso  por lo cual  no debe de  sera  haci debe  hacer arriba en el primer each
+
+                       /* $('.contenidoElements tr').each(function() {
+                            var totalColumn = parseFloat($(this).find('td:eq(4)').text().replace('€', '')
+                            .trim());
+                            if (!isNaN(totalColumn)) {
+                                totalImportes += totalColumn;
+                            }
+                        });*/
+
+                        // Mostrar el resultado en el label
+                        $('#totalImportes').text(totalImportes.toFixed(2) + ' €');
+                        // Asignar la suma total a una variable global
                         // Hacer algo con los datos recibidos
                         //console.log('Datos de la API:', data);
                     } else {
@@ -77,17 +94,24 @@
                 });
 
         }
-function listevidencias() {
+        // Llamar a la función después de cargar la página o en el momento apropiado
+        //lisdataelements();
 
-const hostname = window.location.hostname;
+        // Puedes utilizar la variable sumaTotalGlobal en otras partes de tu código
+        // Por ejemplo, si tienes otra función que necesita este valor
 
-// Obtener el puerto (si es diferente de 80, que es el puerto predeterminado para HTTP)
-const port = window.location.port !== '' ? ':' + window.location.port : '';
 
-// Crear la URL completa con el hostname y el puerto
-const urlCompleta =  hostname + port;
+        function listevidencias() {
 
-//console.log(urlCompleta);
+            const hostname = window.location.hostname;
+
+            // Obtener el puerto (si es diferente de 80, que es el puerto predeterminado para HTTP)
+            const port = window.location.port !== '' ? ':' + window.location.port : '';
+
+            // Crear la URL completa con el hostname y el puerto
+            const urlCompleta = hostname + port;
+
+            //console.log(urlCompleta);
             var idParte = $('#idparte').text();
             fetch(`/api/partes/listevidencias/${idParte}`)
                 .then(response => {
@@ -99,30 +123,76 @@ const urlCompleta =  hostname + port;
                 .then(data => {
                     // Validar que data exista y no esté vacío
                     if (data && Object.keys(data).length > 0) {
-                   //console.log(data);
+                        //console.log(data);
 
-      const evidencias = data.evidencias;
-const imageListContainer = document.getElementById('imageListContainer');
-const imageList = document.getElementById('imageList');
-imageList.innerHTML=''
-evidencias.forEach(evidencia => {
-    const imgElement = document.createElement('img');
-    imgElement.src = '/storage/' + evidencia.file;  // Utiliza la URL proporcionada en evidencia.file
-    imgElement.alt = `Evidencia ${evidencia.idevidencia}`;
-    imgElement.style.width = '100%';
-
-    const listItem = document.createElement('div');
-    listItem.appendChild(imgElement);
-
-    imageList.appendChild(listItem);
-});
+                        const evidencias = data.evidencias;
+                        const imageListContainer = document.getElementById('imageListContainer');
+                        const imageList = document.getElementById('imageList');
+                        //imageList.innerHTML = ''
+                        evidencias.forEach(evidencia => {
+                            const imgElement = document.createElement('img');
 
 
-                       }else {
+const listItem = document.createElement('div');
+listItem.appendChild(imgElement);
+
+imageList.appendChild(listItem);
+
+var imageURL = '/storage/' + evidencia.file;  // Utiliza la URL proporcionada en evidencia.file
+// Crear miniatura de la imagen
+var thumbnail = document.createElement("div");
+        thumbnail.style.width = "100px"; // Ancho de la miniatura
+        thumbnail.style.height = "100px"; // Altura de la miniatura
+        thumbnail.style.backgroundImage = "url('" + imageURL + "')";
+        thumbnail.style.backgroundSize = "cover";
+        thumbnail.style.margin = "5px"; // Espaciado entre miniaturas
+        thumbnail.style.cursor = "pointer";
+        thumbnail.onclick = function () {
+            // Mostrar la imagen grande al hacer clic en la miniatura
+            window.open(imageURL, "_blank");
+        };
+
+        // Agregar la miniatura a la lista de imágenes
+        imageList.appendChild(thumbnail);
+                            /*
+
+                             var fileList = input.files;
+        var imageListContainer = document.getElementById("imageList");
+
+        for (var i = 0; i < fileList.length; i++) {
+            var file = fileList[i];
+            var imageURL = URL.createObjectURL(file);
+
+            // Crear miniatura de la imagen
+
+                             var thumbnail = document.createElement("div");
+            thumbnail.style.width = "100px"; // Ancho de la miniatura
+            thumbnail.style.height = "100px"; // Altura de la miniatura
+            thumbnail.style.backgroundImage = "url('" + imageURL + "')";
+            thumbnail.style.backgroundSize = "cover";
+            thumbnail.style.margin = "5px"; // Espaciado entre miniaturas
+            thumbnail.style.cursor = "pointer";
+
+            // Usar una función anónima para mantener la URL en la iteración actual
+            thumbnail.onclick = (function(url) {
+                return function() {
+                    // Mostrar la imagen grande al hacer clic en la miniatura
+                    window.open(url, "_blank");
+                };
+            })(imageURL);
+
+            // Agregar la miniatura a la lista de imágenes
+            imageListContainer.appendChild(thumbnail);
+
+                            */
+                        });
+
+
+                    } else {
                         // No hay datos o los datos están vacíos
                         // No hay datos o los datos están vacíos
                         console.log('La respuesta de la API no contiene datos.');
-                     }
+                    }
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -131,63 +201,67 @@ evidencias.forEach(evidencia => {
         }
 
         function limpiarCampos() {
-    // Limpiar los campos del container
-    $("#codigo").val('');
-    $("#descripcionelementos").val('');
-    $("#precio").val('');
-    $("#cantidad").val('');
-    // Otros campos que desees limpiar
-}
+            // Limpiar los campos del container
+            $("#codigo").val('');
+            $("#descripcionelementos").val('');
+            $("#precio").val('');
+            $("#cantidad").val('');
+            // Otros campos que desees limpiar
+        }
 
-   //document.getElementById('formFileSm').addEventListener('change', handleFileSelect);
-   //document.getElementById('formFileSm').addEventListener('change', handleFileSelect);
+        //document.getElementById('formFileSm').addEventListener('change', handleFileSelect);
+        //document.getElementById('formFileSm').addEventListener('change', handleFileSelect);
 
-            function handleFileSelect(event) {
-                const files = event.files;
-                const imageListContainer = document.getElementById('imageListContainer');
-                //const imageList = document.getElementById('imageList');
+        function handleFileSelect(event) {
+              //console.log(event);
+              //imageListContainer.innerHTML=''
+            const files = event.files;
+            const imageListContainer = document.getElementById('imageListContainer');
+            //const imageList = document.getElementById('imageList');
 
-                if (files.length > 0 && files[0].type.startsWith('image/') && imageList.childNodes.length === 0) {
-                    imageListContainer.style.height = 'auto'; // Auto-expand height if it's the first image
+            if (files.length > 0 && files[0].type.startsWith('image/') && imageList.childNodes.length === 0) {
+                imageListContainer.style.height = 'auto'; // Auto-expand height if it's the first image
+            }
+            const formData = new FormData();
+            for (const file of files) {
+                // Check file type and size
+                if (file.type.startsWith('image/') && /\.(jpe?g|png)$/i.test(file.name) && file.size <= 2 * 1024 * 1024) {
+
+                    formData.append('file[]', file);
+
+
+                    /*const imgElement = document.createElement('img');
+                     imgElement.src = URL.createObjectURL(file);
+                     imgElement.alt = file.name;
+                     imgElement.style.width = '100%';
+
+                     const listItem = document.createElement('div');
+                     listItem.appendChild(imgElement);
+
+                     imageList.appendChild(listItem);*/
+                } else {
+                    alert('Invalid file: ' + file.name);
                 }
-                  const formData = new FormData();
-                for (const file of files) {
-                    // Check file type and size
-                    if (file.type.startsWith('image/') && /\.(jpe?g|png)$/i.test(file.name) && file.size <= 2 * 1024 * 1024) {
+            }
+            let parteid = document.getElementById('idparte');
 
-                        formData.append('file[]', file);
-
-
-                       /*const imgElement = document.createElement('img');
-                        imgElement.src = URL.createObjectURL(file);
-                        imgElement.alt = file.name;
-                        imgElement.style.width = '100%';
-
-                        const listItem = document.createElement('div');
-                        listItem.appendChild(imgElement);
-
-                        imageList.appendChild(listItem);*/
-                    } else {
-                        alert('Invalid file: ' + file.name);
-                    }
-                }
-                    let  parteid = document.getElementById('idparte');
-
-                    // Obtener el texto dentro del elemento
-                    let  idparte = parteid.innerText || parteid.textContent;
-                    formData.append('parteevidencia_id',idparte );
-                        // Realizar la solicitud usando fetch
-                fetch('/api/partes/evidencias', {
+            // Obtener el texto dentro del elemento
+            let idparte = parteid.innerText || parteid.textContent;
+            formData.append('parteevidencia_id', idparte);
+            // Realizar la solicitud usando fetch
+            fetch('/api/partes/evidencias', {
                     method: 'POST',
                     body: formData,
                 })
                 .then(response => response.json()) // Suponiendo que el servidor responde con JSON
                 .then(data => {
                     // Manejar la respuesta del servidor
-                    //console.log(data);
-     toastr.success(data["message"]);
-  listevidencias();
-    $("#formFileSm").val('');
+                    //console.log('data de  evidencias',data);
+
+
+                    toastr.success(data["message"]);
+                    listevidencias();
+                    $("#formFileSm").val('');
                 })
                 .catch(error => {
                     // Manejar errores
@@ -195,40 +269,40 @@ evidencias.forEach(evidencia => {
                 });
 
 
-            }
+        }
         // Espera a que el DOM esté listo
         $(document).ready(function() {
-$('#fechareporte').datetimepicker({
-            "allowInputToggle": true,
-            "showClose": true,
-            "showClear": true,
-            "showTodayButton": true,
-            "format": "YYYY/MM/DD HH:mm:ss",
+            $('#fechareporte').datetimepicker({
+                "allowInputToggle": true,
+                "showClose": true,
+                "showClear": true,
+                "showTodayButton": true,
+                "format": "YYYY/MM/DD HH:mm:ss",
 
-        });
+            });
 
-$("#fechaAsignacion").datetimepicker({
-            "allowInputToggle": true,
-            "showClose": true,
-            "showClear": true,
-            "showTodayButton": true,
-            "format": "YYYY/MM/DD HH:mm:ss",
+            $("#fechaAsignacion").datetimepicker({
+                "allowInputToggle": true,
+                "showClose": true,
+                "showClear": true,
+                "showTodayButton": true,
+                "format": "YYYY/MM/DD HH:mm:ss",
 
-        });
+            });
 
 
-        var forms = document.querySelectorAll('#createParte ');
+            var forms = document.querySelectorAll('#createParte ');
 
-        forms.forEach(function (form) {
-            form.addEventListener('submit', function (event) {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
+            forms.forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
 
-                form.classList.add('was-validated');
-            }, false);
-        });
+                    form.classList.add('was-validated');
+                }, false);
+            });
             $("#showE").click(function() {
                 $("#elementos").removeClass('d-none')
             })
@@ -275,7 +349,7 @@ $("#fechaAsignacion").datetimepicker({
                 formData.append('idparte', idparte);
                 formData.append('idelemento', idelemento);
                 formData.append('total', total);
-                formData.append('creadopor',$("#creadopor").val());
+                formData.append('creadopor', $("#creadopor").val());
                 fetch('/api/partes/addelement', {
                         method: 'POST',
                         body: formData
@@ -367,7 +441,7 @@ $("#fechaAsignacion").datetimepicker({
                 .catch(error => {
                     console.error('Error al enviar la solicitud:', error);
                 });
-                lisdataelements();
+            lisdataelements();
         }
 
 
@@ -404,45 +478,38 @@ $("#fechaAsignacion").datetimepicker({
 
 
         });
+    </script>
+    <section class="content container-fluid">
 
+        @includeif('partials.errors')
 
+        <!-- Inicia el div con la clase "card card-default" -->
+        <div class="card card-default">
 
+            <!-- Inicia el div con la clase "card-header" -->
+            <div class="card-header">
+                <span class="card-title">{{ __('Creacion') }} De Partes</span>
+                <div>
+                    <img src="{{ asset('img/icono_representativo_caratula.png') }}" class="card-img-top" style="width: 30rem;">
+                </div>
+            </div>
+            <!-- Termina el div con la clase "card-header" -->
 
+            <!-- Inicia el div con la clase "card-body" -->
+            <div class="card-body">
+                <form method="POST"
+                    action="{{ str_replace('http://commonly-blessed-python.ngrok-free.app/', 'https://commonly-blessed-python.ngrok-free.app/', route('partes.store')) }}"
+                    role="form" enctype="multipart/form-data" id="createParte" class="needs-validation" novalidate>
+                    @csrf
 
+                    @include('parte.form')
 
+                </form>
+            </div>
+            <!-- Termina el div con la clase "card-body" -->
 
-
-</script>
- <section class="content container-fluid">
-
-    @includeif('partials.errors')
-
-    <!-- Inicia el div con la clase "card card-default" -->
-    <div class="card card-default">
-
-        <!-- Inicia el div con la clase "card-header" -->
-        <div class="card-header">
-            <span class="card-title">{{ __('Creacion') }} De  Partes</span>
-                       <div>
-                            <img src="{{asset('img/icono_representativo_caratula.png')}}" class="card-img-top" style="width: 30rem;">
-                        </div>
         </div>
-        <!-- Termina el div con la clase "card-header" -->
+        <!-- Termina el div con la clase "card card-default" -->
 
-        <!-- Inicia el div con la clase "card-body" -->
-        <div class="card-body">
-            <form method="POST" action="{{str_replace('http://commonly-blessed-python.ngrok-free.app/','https://commonly-blessed-python.ngrok-free.app/', route('partes.store') )}}" role="form" enctype="multipart/form-data"  id="createParte" class="needs-validation" novalidate>
-                @csrf
-
-                @include('parte.form')
-
-            </form>
-        </div>
-        <!-- Termina el div con la clase "card-body" -->
-
-    </div>
-    <!-- Termina el div con la clase "card card-default" -->
-
-</section>
-
+    </section>
 @endsection
