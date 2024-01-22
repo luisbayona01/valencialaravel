@@ -71,7 +71,7 @@
             <table border="1" style="width: 100%">
                 <tr>
                     <td colspan="2">
-                        INICIO DE CONTRATO:<input style="width: 50%" type="text">
+                        INICIO DE CONTRATO: Miércoles, 02 de Agosto de 2023
 
                     </td>
                     <td style="font-size: 0.9em">
@@ -251,7 +251,7 @@
                 <td style="text-align: center;border: 1px solid black;"><label></label></td><!-- Unidades en conservación -->
                 <td style="text-align: center;border: 1px solid black;"><label></label></td><!-- Dias en Conservación -->
                 <td style="text-align: center;border: 1px solid black;"><label></label></td><!-- Precio (valor en Euro por dia) -->
-                <td style="text-align: right; border: 1px solid black;"><label id="totalTablaimporte">425.222,20</label> €</td> <!-- Total (valor por elemento) -->
+                <td style="text-align: right; border: 1px solid black;"><label id="totalTablaimporte">425.222,19</label> €</td> <!-- Total (valor por elemento) -->
             </tr>
         </tbody>
     </table>
@@ -427,7 +427,7 @@ document.getElementById('totalImporte').textContent = totalSum.toLocaleString('e
             <tbody>
                 <td style="width: 70%; border-bottom: 0px solid black;"></td>
                 <td style="width: 15%; text-align: right; padding: 0px 10px 0px 0px; ; border-top: 1px solid black"><strong>Total</strong></td>
-                <td style="width: 15%; text-align: right;  border-top: 1px solid black; padding: 5px 10px 5px 0px"><label id="totalGeneralRelacion"> Euros</label></td>
+                <td style="width: 15%; text-align: right;  border-top: 1px solid black; padding: 5px 10px 5px 0px"><label id="totalGeneralRelacion"></label></td>
             </tbody>
 
     </table>
@@ -550,7 +550,7 @@ document.getElementById('totalImporte').textContent = totalSum.toLocaleString('e
         <tr>
             <td>VALORACIÓN COLISIONES Y MODIFICACIONES</td>
             <td style="border-bottom: 1px dotted black; width:30%"></td>
-            <td style="border-bottom: 3px solid black;  text-align:right; padding: 5px 7px 5px 10px;"><label id="2"></label></td>
+            <td style="border-bottom: 3px solid black;  text-align:right; padding: 5px 7px 5px 10px;"><label id="2">135.641,71</label></td>
             <td style="padding: 5px 5px 5px 7px">Euros</td>
         </tr>
         <tr>

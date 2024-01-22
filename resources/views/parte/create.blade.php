@@ -47,7 +47,7 @@
                     <td>${item.descripcion}</td>
                     <td style="text-align: right;">${item.precioU} € </td>
                     <td style="text-align: right;">${item.cantidad} </td>
-                    <td style="text-align: right;">${item.precio_total} € </td>
+                    <td style="text-align: right;">${item.precio_total.toFixed(2)} € </td>
                     <td style="text-align: center;">
 
                         <a style="text-align: center; margin-right: 10px; font-size: 1.3em; " type="button" class="b" id="selecione">

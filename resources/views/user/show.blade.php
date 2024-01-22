@@ -32,7 +32,7 @@
                             <strong>Username:</strong>
                             {{ $user->username }}
                         </div>
-                        <div class="form-group">
+                        <div class="form-group d-none">
                             <strong>Contraseña:</strong>
                             {{ $user->password }}
                         </div>

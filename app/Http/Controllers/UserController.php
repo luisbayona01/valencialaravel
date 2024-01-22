@@ -38,7 +38,8 @@ class UserController extends Controller
     {
         $user = new User();
         $roles = Roles::pluck('name', 'id');
-        return view('user.create', compact('user','roles'));
+        $estado = '';
+        return view('user.create', compact('user','roles', 'estado'));
     }
 
     /**
@@ -80,7 +81,9 @@ class UserController extends Controller
     {
         $user = User::find($id);
        $roles = Roles::pluck('name', 'id');
-        return view('user.edit', compact('user','roles'));
+       $estado = 'readonly';
+       return view('user.edit', compact('user','roles','estado'));
+
     }
 
     /**

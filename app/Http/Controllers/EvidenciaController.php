@@ -28,7 +28,8 @@ class EvidenciaController extends Controller
             // Añade más reglas de validación según sea necesario
         ]);
 
-     $partes= Parte::where('id',$request->idparte)->first();
+        //dd($request->parteevidencia_id);
+     $partes= Parte::where('id',$request->parteevidencia_id)->first();
    $idparte='';
    if ($partes) {
 

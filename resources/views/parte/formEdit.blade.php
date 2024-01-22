@@ -37,17 +37,21 @@
         color: #ED912109;
     } /* Estado 4 Comprobado */
 
+    .color-#ED912109 {
+        color: #ED912109;
+    } /* Estado 5 Validado */
+
     .color-#00a2d310 {
         color: #00a2d310;
-    } /* Estado 5 Certificado */
+    } /* Estado 6 Certificado */
 
     .color-#ff000090 {
         color: #ff000090;
-    } /* Estado 6 Rechazado */
+    } /* Estado 7 Rechazado */
 
     .color-#84857d10 {
         color: #84857d10;
-    } /* Estado 7 Anulado */
+    } /* Estado 8 Anulado */
 
     label {
         font-weight: bold;
@@ -149,9 +153,10 @@
             <div class="col">
                 <div class="form-group">
                     {{ Form::label('Autorizado por') }}
-                    <input type="hidden" name="creadopor"value={{ Auth::user()->id }}>
-
-                    <p class="form-control">{{ Auth::user()->nombres }} {{ Auth::user()->apellidos }} </p>
+                    {{ Form::select('reportadopor',$reportadopor,$parte->reportadopor, ['class' => 'form-control' . ($errors->has('reportadoPor') ? ' is-invalid' : ''), 'placeholder' => 'selecione', 'required' => 'required', 'disabled' =>'disabled']) }}
+                    <div class="invalid-feedback">
+                         porfavor seleccione una  opcion
+                     </div>
                 </div>
             </div>
             <div class="col">
@@ -250,27 +255,27 @@
 </div><br>
 <div class="container" id="elementos" style="display: block; width: 100%;">
     <div class="row">
-        <div class="col">
+        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
             <label style="width: 80%; text-align: left;" for="codigo">Código</label>
             <input style="width: 80%; text-align: center;" type="text" class="form-control" id="codigo" readonly>
         </div> <br>
 
-    <div class="col" style="width: 2400px">
+    <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
         <label style="text-align: left;" for="descripcionelementos">Descripción</label>
         {{ Form::select('descripcionelementos', $Descripcionelementos, 'descripcionelementos', ['class' => 'form-control', 'placeholder' => 'seleccione', 'id' => 'descripcionelementos', 'onchange' => 'descEl(this)']) }}
     </div>
 
-    <div class="col">
+    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
         <label style="text-align: left; width: 100%" for="precio">Precio</label>
         <input style="text-align: right; width: 100%"  type="text" class="form-control" id="precio" readonly>
     </div>
 
-    <div class="col">
+    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">
         <label style="text-align: left; width: 100%" for="cantidad">Cantidad</label>
         <input style="text-align: center; width: 100%;" type="number" class="form-control" id="cantidad">
     </div>
 
-    <div class="col" style="text-align: center;">
+    <div class="col-lg-1 col-md-2 col-sm-3 col-xs-3" style="text-align: center;">
         <label style="text-align: center; color: transparent;" for="Select">Acción</label>
 
         <div class="form-group">
@@ -415,7 +420,7 @@
             {{ Form::text('obscliente', $parte->obscliente, ['class' => 'form-control' . ($errors->has('obscliente') ? ' is-invalid' : ''), 'placeholder' => 'Obscliente']) }}
             {!! $errors->first('obscliente', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-        <div class="form-group" style="display: none;">
+        <div class="form-group" style="display: block;">
             {{ Form::label('estadoparte_id') }}
             {{ Form::text('estadoparte_id', $parte->estadoparte_id, ['class' => 'form-control' . ($errors->has('estadoparte_id') ? ' is-invalid' : ''), 'placeholder' => 'Estadoparte Id', 'readonly' => 'readonly', 'id' => 'estadoparte_id']) }}
             {!! $errors->first('estadoparte_id', '<div class="invalid-feedback">:message</div>') !!}
@@ -429,7 +434,20 @@
         &nbsp;
         <button type="button" onclick="goBack()" class="btn btn-secondary" style="text-align: right;">Volver</button>
         &nbsp;
-        <button style="text-align: left; type="submit" class="btn btn-primary float-right">{{ __('Registrar') }}</button>
+        @if ($parte->estadoparte_id === 1)
+            <!-- Show the "Revisado" button -->
+            <button style="text-align: left;" type="submit" class="btn btn-primary float-right">{{ __('Procesado') }}</button>
+        @endif
+
+        @if ($parte->estadoparte_id === 2) <!-- Hide "Finalizado" and "Comprobado" buttons for estado 3 -->
+            <!-- Show the "Finalizado" button -->
+            <button style="text-align: left;" type="submit" class="btn btn-primary float-right">{{ __('Finalizado') }}</button>
+        @endif
+
+        @if ($parte->estadoparte_id === 3) <!-- Hide "Comprobado" button for estado 4 -->
+            <!-- Show the "Comprobado" button -->
+            <button style="text-align: left;" type="submit" class="btn btn-primary float-right">{{ __('Comprobado') }}</button>
+        @endif
     </div>
 
 
@@ -443,5 +461,6 @@
     </script>
 
 
-</div>
+    </div>
+
 </div>

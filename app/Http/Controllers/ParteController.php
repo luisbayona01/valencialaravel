@@ -46,6 +46,8 @@ $partes = DB::table('parte as P')
         'TP.nombre as tipoparte',
         DB::raw("CONCAT(U.nombres, '', U.apellidos) as partecreadopor"),
         'P.fechacreacion',
+        DB::raw("CONCAT(UL.nombres, '', UL.apellidos) as autorizadopor"),
+        'P.fechaautorizacion',
         DB::raw("CONCAT(UR.nombres, '', UR.apellidos) as reportadoPor"),
         'P.fechareporte',
         'P.obscreadorparte',
@@ -59,6 +61,7 @@ $partes = DB::table('parte as P')
     ->join('localizacion as LC', 'LC.id', '=', 'P.id_localizacion')
     ->join('estadoparte as EST', 'EST.id', '=', 'P.estadoparte_id')
     ->join('users as U', 'U.id', '=', 'P.creadopor')
+    ->join('users as UL', 'UL.id', '=', 'P.autorizado_por')
     ->join('users as UR', 'UR.id', '=', 'P.reportadopor')
     ->join('users as UA', 'UA.id', '=', 'P.asignadoa');
 
@@ -91,6 +94,8 @@ $partes = DB::table('parte as P')
       'TP.nombre as tipoparte',
       DB::raw("CONCAT(U.nombres, '', U.apellidos) as partecreadopor"),
       'P.fechacreacion',
+      DB::raw("CONCAT(UL.nombres, '', UL.apellidos) as autorizadopor"),
+      'P.fechaautorizacion',
       DB::raw("CONCAT(UR.nombres, '', UR.apellidos) as reportadoPor"),
       'P.fechareporte',
       'P.obscreadorparte',
@@ -104,6 +109,7 @@ $partes = DB::table('parte as P')
   ->join('localizacion as LC', 'LC.id', '=', 'P.id_localizacion')
   ->join('estadoparte as EST', 'EST.id', '=', 'P.estadoparte_id')
   ->join('users as U', 'U.id', '=', 'P.creadopor')
+  ->join('users as UL', 'UL.id', '=', 'P.autorizado_por')
   ->join('users as UR', 'UR.id', '=', 'P.reportadopor')
   ->join('users as UA', 'UA.id', '=', 'P.asignadoa');
 
@@ -128,11 +134,11 @@ public function pdf()
 {
     $pdfs = parte::paginate();
 
-    $pdf = PDF::loadView('parte.pdf',['pdfs'=>$pdfs]);
-    $pdf->loadHTML('<h1>Test1</h1>');
+    //$pdf = PDF::loadView('parte.pdf',['pdfs'=>$pdfs]);
+    //$pdf->loadHTML('<h1>Test1</h1>');
     //return $pdf->stream();
 
-    //return view('parte.pdf', compact('pdfs'));
+    return view('parte.pdf', compact('pdfs'));
 
 }
 
@@ -146,14 +152,16 @@ public function pdf()
         $estado='';
         $localizaciones = Localizacion::pluck(DB::raw("CONCAT(cod_localizacion, ', ', descripcion, ', ', zona) as ubicacion"), 'id');
         $tipoparte= Tipoparte::pluck('nombre', 'id');
-        $reportadopor = User::where('id', '!=',Auth::user()->id)->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
+        $reportadopor = User::whereIn('idrol', [3, 4])->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
+
+        $autorizadopor = User::where('idrol', '=','5')->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
 
 
-         $asignadoa = User::where('idrol', '=','4')->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
+         $asignadoa = User::where('idrol', '=','2')->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
      //dd($reportadopor);
    //dd($reportadopor);
 $Descripcionelementos = Descripcionelementos::pluck(DB::raw("CONCAT(descripcion,'-',elemento,'-',precio) as valor"), 'id');
-      return view('parte.create', compact('parte','no','localizaciones','tipoparte','currentDateTime','reportadopor','asignadoa','Descripcionelementos'));
+      return view('parte.create', compact('parte','no','localizaciones','tipoparte','currentDateTime','reportadopor','asignadoa','Descripcionelementos','autorizadopor'));
     }
 
     public function mostrarPartes()
@@ -191,14 +199,9 @@ $parte = Parte::create($datos);
 
 }
 
-
-
-
       //dd($datos);
 
-
-
-        return redirect()->route('partes.index')
+      return redirect()->route('partes.index')
         ->with('success', 'Parte creado Correctamente!');
 
         // Validate and store the uploaded image
@@ -224,17 +227,32 @@ $parte = Parte::create($datos);
         $no=$id;
         //$reportadopor = User::where('id', '!=',Auth::user()->id)->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
         $reportadopor = User::where('id', '!=', '')->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
-     $asignadoa = User::where(function($query) {
+        $autorizadopor = User::where('id', '!=', '')->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
+        $asignadoa = User::where(function($query) {
     switch (Auth::user()->idrol) {
+        /* Casos para determinar nivel de Perfil */
         case 1:
             $query->where('idrol', '=', '1');
             break;
-
-        case 4:
-
-
-            $query->where('idrol', '=', '1');
+        case 2:
+            $query->where('idrol', '=', '2');
             break;
+        case 3:
+            $query->where('idrol', '=', '2');
+            break;
+        case 4:
+            $query->where('idrol', '=', '5');
+            break;
+        case 5:
+            $query->where('idrol', '=', '5');
+            break;
+        /*case 5:
+            $query->where(function ($query) {
+                $query->where('idrol', '=', '1')
+                        ->orWhere('idrol', '=', '3'); // Agrega el segundo estado aquí
+            });
+            break;*/
+
 
         // Otros casos si es necesario
 
@@ -260,19 +278,32 @@ $parte = Parte::create($datos);
         $data=$request->all();
        //dd($data);
 
+        /* Casos para determinar nivel de Privilegios y Vistas */
 
       switch (Auth::user()->idrol) {
-        case 1:
-            $data['estadoparte_id']=1;
-            break;
-        case 2:
+        /* Creacion del parte en estado 1 Activo y pasar a estado Revisar */
+        case 1 : /* Basado en el Rol del Usuario "Administrador"*/
             $data['estadoparte_id']=2;
             break;
-        case 3:
+        case 2: /* Basado en el Rol del Usuario "Operario"  y pasar a estado Finalizado */
+            $data['estadoparte_id']=2;
+            break;
+
+        case 3: /* Basado en el Rol del Usuario "Jefe de Obra"*/
+                $data['estadoparte_id']=3;
+                break;
+
+        /* Revision del parte en estado 2 Revisar */
+        case 4 : /* Basado en el Rol del Usuario "Administrador"*/
+                $data['estadoparte_id']=4;
+                break;
+        case 5:
             $data['estadoparte_id']=5;
             break;
+
+
         case 4:
-          $data['estadoparte_id']=4;
+          $data['estadoparte_id']=5;
             break;
         case 5:
             $data['estadoparte_id']=3;

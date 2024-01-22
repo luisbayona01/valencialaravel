@@ -70,7 +70,7 @@ color: #ffFF ;
                                 </thead>
                                 <tbody>
                                     @foreach ($partes as $parte)
-                                    @if ($parte->estadoparte == 'Comprobado')
+                                    @if ($parte->estadoparte == 'Validado')
 
                                         <tr style="font-size:0.9em;">
                                             <td style="text-align: center;">{{  $parte->id }}</td> <!-- No. Parte -->

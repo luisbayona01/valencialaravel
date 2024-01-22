@@ -150,20 +150,18 @@
         </div>
 
         <div class="row" bis_skin_checked="1">
-            <div class="col">
+            <div class="col-sm-6" bis_skin_checked="1">
                 <div class="form-group">
-
                     {{ Form::label('Autorizado por') }}
-                    {{ Form::select('reportadopor',$reportadopor,$parte->reportadopor, ['class' => 'form-control' . ($errors->has('reportadoPor') ? ' is-invalid' : ''), 'placeholder' => 'seleccione', 'required' => 'required' ]) }}
+                    {{ Form::select('autorizado_por',$autorizadopor,$parte->autorizado_por, ['class' => 'form-control' . ($errors->has('autorizadopor') ? ' is-invalid' : ''), 'placeholder' => 'seleccione', 'required' => 'required' ]) }}
                 </div>
             </div>
-            <div class="col">
+            <div class="col-sm-6">
                 <div class="form-group">
                     {{ Form::label('Fecha de autorización') }}
-
                     <div class="input-group date">
                         <!--Modificar en base a nuevo campo -->
-                        {{ Form::text('fechaautorizacion', $parte->fechaautorizacion, ['class' => 'form-control', 'placeholder' => 'Fecha de Autorización', 'id'=>'fechaautorizacion', 'required' => 'required' ]) }}
+                        {{ Form::text('fechaautorizacion', $parte->fechaautorizacion, ['class' => 'form-control', 'placeholder' => 'Fecha de Autorización', 'fecha', 'id'=>'fechaautorizacion', 'required' => 'required' ]) }}
                         <div class="input-group-addon input-group-append" bis_skin_checked="1">
                             <div class="input-group-text" bis_skin_checked="1">
                                 <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
@@ -179,7 +177,6 @@
         <div class="row" bis_skin_checked="1">
             <div class="col-sm-6" bis_skin_checked="1">
                 <div class="form-group">
-
                    {{ Form::label('Comunicado por') }}
                     {{ Form::select('reportadopor',$reportadopor,$parte->reportadopor, ['class' => 'form-control' . ($errors->has('reportadoPor') ? ' is-invalid' : ''), 'placeholder' => 'seleccione', 'required' => 'required' ]) }}
                    <div class="invalid-feedback">
@@ -190,11 +187,8 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-
                     {{ Form::label('Fecha Comunicación') }}
-
                     <div class="input-group date">
-
                        {{ Form::text('fechareporte', $parte->fechareporte, ['class' => 'form-control', 'placeholder' => 'Fecha de Reporte', 'fecha', 'id'=>'fechareporte', 'required' => 'required' ]) }}
                         <div class="input-group-addon input-group-append" bis_skin_checked="1">
                             <div class="input-group-text" bis_skin_checked="1">
@@ -262,48 +256,50 @@
 <div>
     <h4 style="text-align: left;padding: 0px 5px 5px 15px ">Acciones Realizadas </h4>
 </div><br>
+
 <div class="container" id="elementos" style="display: block; width: 100%;">
-    <div class="row">
-        <div class="col">
-            <label style="width: 80%; text-align: left;" for="codigo">Código</label>
-            <input style="width: 80%; text-align: center;" type="text" class="form-control" id="codigo" readonly>
+    <div class="row " >
+
+        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3" >
+            <label style="text-align: left;" for="codigo">Código</label>
+            <input style=" text-align: center;" type="text" class="form-control" id="codigo" readonly>
         </div> <br>
 
-    <div class="col" style="width: 2400px">
-        <label style="text-align: left;" for="descripcionelementos">Descripción</label>
-        {{ Form::select('descripcionelementos', $Descripcionelementos, 'descripcionelementos', ['class' => 'form-control', 'placeholder' => 'seleccione', 'id' => 'descripcionelementos', 'onchange' => 'descEl(this)']) }}
-    </div>
+        <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12" >
+            <label style="text-align: left;" class="" for="descripcionelementos">Descripción</label>
+            {{ Form::select('descripcionelementos', $Descripcionelementos, 'descripcionelementos', ['class' => 'form-control', 'placeholder' => 'seleccione', 'id' => 'descripcionelementos', 'onchange' => 'descEl(this)']) }}
+        </div>
 
-    <div class="col">
-        <label style="text-align: left; width: 100%" for="precio">Precio</label>
-        <input style="text-align: right; width: 100%"  type="text" class="form-control" id="precio" readonly>
-    </div>
+        <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3" >
+            <label style="text-align: left; width: 100%" for="precio">Precio</label>
+            <input style="text-align: right; width: 100%"  type="text" class="form-control" id="precio" readonly>
+        </div>
 
-    <div class="col">
-        <label style="text-align: left; width: 100%" for="cantidad">Cantidad</label>
-        <input style="text-align: center; width: 100%;" type="number" class="form-control" id="cantidad">
-    </div>
+        <div class="col-xs-2 col-md-2 col-sm-3 col-xs-3" >
+            <label style="text-align: left; width: 100%" for="cantidad">Cantidad</label>
+            <input style="text-align: center; width: 100%;" type="number" class="form-control" id="cantidad">
+        </div>
 
-    <div class="col" style="text-align: center;">
-        <label style="text-align: center; color: transparent;" for="Select">Acción</label>
+        <div class="col-lg-1 col-md-2 col-sm-3 col-xs-3" style="text-align: center;">
+            <label style="text-align: center; color: transparent;" for="Select">Acción</label>
 
-        <div class="form-group">
-            <a style="text-align: center; " type="button" class="b" id="selecione"><i class="fa fa-plus fa-2x" onclick="calcularTotal() aria-hidden="true"></i></a>
+            <div class="form-group">
+                <a style="text-align: center; " type="button" class="b" id="selecione"><i class="fa fa-plus fa-2x" onclick="calcularTotal() aria-hidden=true"></i></a>
+            </div>
         </div>
     </div>
-</div>
 
  <div class="contenido d-none" id="tabla-recibe">
    <table class="table table-bordered" style="width: 95%;" id="tabla-recibe2">
     <thead>
     <tr style="text-align: center; font-weight: bold; color: black;">
       <!-- <th style="width: 10%">id</th> -->
-      <th style="width: 10%">Código</th>
-      <th style="width: 40%">Descripcion</th>
-      <th style="width: 10%">Precio</th>
-      <th style="width: 10%">Cantidad</th>
-      <th style="width: 10%">Total</th>
-      <th style="width: 10%">Acción</th>
+      <th>Código</th>
+      <th class="col lg-6">Descripcion</th>
+      <th>Precio</th>
+      <th>Cantidad</th>
+      <th>Total</th>
+      <th>Acción</th>
     </tr>
   </thead>
   <tbody class="contenidoElements">

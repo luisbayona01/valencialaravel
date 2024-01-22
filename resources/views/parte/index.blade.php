@@ -25,19 +25,29 @@ background-color:#FFD70060 !important;
 background-color:#ED912170 !important;
 /* Estado 4 Comprobado */
  }
+ .Validado{
+ background-color:#ED912170 !important;
+/* Estado 5 Comprobado */
+ }
  .Certificado{
 background-color:#00a2d360 !important;
-/* Estado 5 Certificado */
+/* Estado 6 Certificado */
  }
  .Rechazado{
 background-color:#ff000090 !important;
-/* Estado 6 Rechazado */
+/* Estado 7 Rechazado */
  }
 .Anulado{
 background-color:#84857d !important;
-/* Estado 7 Anulado */
+/* Estado 8 Anulado */
 color: #ffFF ;
  }
+
+ .common-button {
+    width: 90px; /* Ajusta el valor según tus necesidades */
+    height: 25px; /* Ajusta el valor según tus necesidades */
+}
+
 </style>
     <div class="container-fluid" >
         <div class="row">
@@ -99,17 +109,77 @@ color: #ffFF ;
 											<td>{{ $parte->asignadoA }}</td> <!-- Reparado por -->
 											<td>{{ $parte->fechaAsignacion }}</td> <!-- Fecha reparacion -->
                                             <td id="resultado"></td>
-											<td ><span class="{{ $parte->estadoparte }}" style="display: block; width: 100%; height: 100%; text-align: center;"> {{ $parte->estadoparte }}</span> </td> <!-- Estado -->
+											<td style="text-align: center;">
+                                                <span class="{{ $parte->estadoparte }}" style="display: block; width: 100%; height: 100%; text-align: center;">
+                                                    {{ $parte->estadoparte }}
+                                                </span>
+                                            </td> <!-- Estado -->
                                             <td style="text-align: center">
-                                                <a class="btn btn-sm btn-info" href="{{ route('partes.edit',$parte->id) }}" ><i "></i> {{ __('Ver') }}</a> <!-- Accion -->
+                                                <!-- Lógica para ocultar los botones -->
+                                                @if ($parte->estadoparte === 'Activo')
+                                                    <!-- Mostrar solo el botón Revisar -->
+                                                    <a class="btn btn-sm btn-info common-button" href="{{ route('partes.edit', $parte->id) }}">
+                                                        <i></i> {{ __('Gestionar') }}
+                                                    </a>
+                                                @elseif ($parte->estadoparte === 'Revisar')
+                                                    <!-- Mostrar solo el botón Finalizar -->
+                                                    <a class="btn btn-sm btn-info common-button" href="{{ route('partes.edit', $parte->id) }}">
+                                                        <i></i> {{ __('Revisar') }}
+                                                    </a>
+                                                @elseif ($parte->estadoparte === 'Revisar')
+                                                    <!-- Mostrar solo el botón Comprobar -->
+                                                    <a class="btn btn-sm btn-info common-button" href="{{ route('partes.edit', $parte->id) }}">
+                                                        <i></i> {{ __('Comprobar') }}
+                                                    </a>
+                                                @elseif ($parte->estadoparte === 'Finalizado')
+                                                    <!-- Mostrar solo el botón Comprobar -->
+                                                    <a class="btn btn-sm btn-info common-button" href="{{ route('partes.edit', $parte->id) }}">
+                                                        <i></i> {{ __('Validar') }}
+                                                    </a>
+                                                @else
+                                                    <!-- Mostrar ambos botones Finalizar y Comprobar -->
+                                                    <a class="btn btn-sm btn-info common-button" href="{{ route('partes.edit', $parte->id) }}">
+                                                        <i></i> {{ __('Comprobado') }}
+                                                    </a>
+                                                    <a class="btn btn-sm btn-info common-button" href="{{ route('partes.edit', $parte->id) }}">
+                                                        <i></i> {{ __('Finalizar / Comprobar') }}
+                                                    </a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
+                                    <!-- Script para Ordenar Lista por Numero de Parte -->
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", function () {
+                                            // Obtener la tabla
+                                            var table = document.getElementById("table-parte");
+
+                                            // Obtener las filas de la tabla excluyendo la primera (encabezado)
+                                            var rows = Array.from(table.getElementsByTagName("tr")).slice(1);
+
+                                            // Ordenar las filas según el valor en la primera celda (No. Parte)
+                                            rows.sort(function (a, b) {
+                                                var aValue = parseInt(a.cells[0].textContent);
+                                                var bValue = parseInt(b.cells[0].textContent);
+                                                return aValue - bValue;
+                                            });
+
+                                            // Eliminar las filas existentes de la tabla
+                                            rows.forEach(function (row) {
+                                                table.tBodies[0].appendChild(row);
+                                            });
+                                        });
+                                    </script>
+                                    <!-- Script para Ordenar Lista por Numero de Parte -->
+
                                 </tbody>
                             </table>
 
                         </div>
                     </div>
+
+
+
 
                     <script>
                         $(document).ready(function () {

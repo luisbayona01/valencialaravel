@@ -16,11 +16,17 @@
             {{ Form::text('email', $user->email, ['class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : ''), 'placeholder' => 'Email','required' => 'required']) }}
              <div class="invalid-feedback"> el   campo Email es obligatorio  </div>
         </div>
-     <div class="form-group">
+        <div class="form-group">
             {{ Form::label('Usuario') }}
-            {{ Form::text('username', $user->username, ['class' => 'form-control' . ($errors->has('username') ? ' is-invalid' : ''), 'placeholder' => 'Usuario','required' => 'required']) }}
-             <div class="invalid-feedback"> el   campo Usuario es obligatorio  </div>
+            {{ Form::text('username', $user->username, [
+                'class' => 'form-control' . ($errors->has('username') ? ' is-invalid' : ''),
+                'placeholder' => 'Usuario',
+                'required' => 'required',
+                'readonly' => $estado ? 'readonly' : null,
+            ]) }}
+            <div class="invalid-feedback">El campo Usuario es obligatorio</div>
         </div>
+
 
         <div class="form-group">
             {{ Form::label('Contraseña') }}
@@ -31,8 +37,8 @@
 
      <div class="form-group">
     {{ Form::label('role', 'Perfil') }}
-    {{ Form::select('idrol', $roles,$user->idrol, ['class' => 'form-control','placeholder' => 'Seleccione un rol', 'required' => 'required']) }}
-   <div class="invalid-feedback">el  campo  Rol es obligatorio  </div>
+    {{ Form::select('idrol', $roles,$user->idrol, ['class' => 'form-control','placeholder' => 'Seleccione un Perfil', 'required' => 'required']) }}
+   <div class="invalid-feedback">el  campo  Perfil es obligatorio  </div>
 </div>
 
 
