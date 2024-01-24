@@ -37,6 +37,7 @@
 
 										<th>Nombres</th>
 										<th>Apellidos</th>
+                                        <th>Codigo</th>
                                         <th>Usuario</th>
                                         <!--<th>Contraseña</th>-->
 										<th>E-mail</th>
@@ -50,6 +51,7 @@
 
 											<td>{{ $user->nombres }}</td>
 											<td>{{ $user->apellidos }}</td>
+                                            <td>{{$user->codigo}}</td>
                                             <td>{{ $user->username }}</td>
                                             <!-- <td></td> -->
 											<td>{{ $user->email }}</td>

@@ -20,6 +20,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Pagination\Paginator;
 use PDF;
+ use App\Models\Estadoparte;
 
 
 
@@ -44,14 +45,14 @@ $partes = DB::table('parte as P')
         'P.id',
         'LC.cod_localizacion',
         'TP.nombre as tipoparte',
-        DB::raw("CONCAT(U.nombres, '', U.apellidos) as partecreadopor"),
+        DB::raw("U.codigo as partecreadopor"),
         'P.fechacreacion',
-        DB::raw("CONCAT(UL.nombres, '', UL.apellidos) as autorizadopor"),
+        DB::raw("U.codigo as autorizadopor"),
         'P.fechaautorizacion',
-        DB::raw("CONCAT(UR.nombres, '', UR.apellidos) as reportadoPor"),
+        DB::raw("U.codigo as reportadoPor"),
         'P.fechareporte',
         'P.obscreadorparte',
-        DB::raw("CONCAT(UA.nombres, '', UA.apellidos) as asignadoA"),
+        DB::raw("U.codigo as asignadoA"),
         'P.fechaAsignacion',
         'P.validado_por',
         'P.fecha_validacion',
@@ -66,12 +67,41 @@ $partes = DB::table('parte as P')
     ->join('users as UA', 'UA.id', '=', 'P.asignadoa');
 
 // Aplicar condición según el rol del usuario
-if ($rolUsuario == 1) {
+
+switch ($rolUsuario) {
+
+    case 1:
+    //$partes->where('P.estadoparte_id', '=' );
+    break;
+
+    case 2:
+    $partes->where('P.estadoparte_id', '=', 1 );
+    break;
+
+    case 3:
+    $partes->where('P.estadoparte_id', '=', 2 );
+    break;
+
+    case 4:
+    $partes->where('P.estadoparte_id', '=', 3 );
+    break;
+
+    case 5:
+        $partes->where('P.estadoparte_id', '=', 4 );
+        break;
+
+    default:
+        # code...
+        break;
+}
+
+/*if ($rolUsuario == 3) {
+
     // No aplicar ninguna condición adicional
 } else {
     // Filtrar por el usuario asignado si el rol es diferente de 1
-    $partes->where('P.asignadoa', '=',  Auth::user()->id);
-}
+    $partes->where('P.estadoparte_id', '=', 2 );
+}*/
 
 $partes = $partes->get();
 
@@ -152,17 +182,17 @@ public function pdf()
         $estado='';
         $localizaciones = Localizacion::pluck(DB::raw("CONCAT(cod_localizacion, ', ', descripcion, ', ', zona) as ubicacion"), 'id');
         $tipoparte= Tipoparte::pluck('nombre', 'id');
-        $reportadopor = User::whereIn('idrol', [3, 4])->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
+        $reportadopor = User::whereIn('idrol', [3, 4])->pluck('codigo', 'id');
 
-        $autorizadopor = User::where('idrol', '=','5')->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
+        $autorizadopor = User::where('idrol', '=','5')->pluck('codigo', 'id');;
 
 
-         $asignadoa = User::where('idrol', '=','2')->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
-     //dd($reportadopor);
-   //dd($reportadopor);
-$Descripcionelementos = Descripcionelementos::pluck(DB::raw("CONCAT(descripcion,'-',elemento,'-',precio) as valor"), 'id');
-      return view('parte.create', compact('parte','no','localizaciones','tipoparte','currentDateTime','reportadopor','asignadoa','Descripcionelementos','autorizadopor'));
-    }
+         $asignadoa = User::where('idrol', '=','2')->pluck('codigo', 'id');
+        //dd($reportadopor);
+        //dd($reportadopor);
+        $Descripcionelementos = Descripcionelementos::pluck(DB::raw("CONCAT(descripcion,'-',elemento,'-',precio) as valor"), 'id');
+        return view('parte.create', compact('parte','no','localizaciones','tipoparte','currentDateTime','reportadopor','asignadoa','Descripcionelementos','autorizadopor'));
+        }
 
     public function mostrarPartes()
     {
@@ -193,7 +223,7 @@ $Descripcionelementos = Descripcionelementos::pluck(DB::raw("CONCAT(descripcion,
  //dd($request->creadopor);
 
  $datos=$request->all();
- $datos['estadoparte_id']=1;
+ $datos['estadoparte_id']=2;
         //request()->validate(Parte::$rules);
 $parte = Parte::create($datos);
 
@@ -208,6 +238,8 @@ $parte = Parte::create($datos);
 
         //dd($request->hasFile('imgParte') );
     }
+
+
 
 
     public function show($id)
@@ -226,47 +258,85 @@ $parte = Parte::create($datos);
         $tipoparte= Tipoparte::pluck('nombre', 'id');
         $no=$id;
         //$reportadopor = User::where('id', '!=',Auth::user()->id)->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
-        $reportadopor = User::where('id', '!=', '')->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
-        $autorizadopor = User::where('id', '!=', '')->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"),'id');
-        $asignadoa = User::where(function($query) {
-    switch (Auth::user()->idrol) {
+        $reportadopor = User::where('id', '!=', '')->pluck('codigo', 'id');
+        $autorizadopor = User::where('id', '!=', '')->pluck('codigo', 'id');
+        $asignadoa = User::where(function($query) {switch (Auth::user()->idrol) {
+
+
         /* Casos para determinar nivel de Perfil */
-        case 1:
+        /*case 1:
             $query->where('idrol', '=', '1');
             break;
         case 2:
             $query->where('idrol', '=', '2');
             break;
         case 3:
-            $query->where('idrol', '=', '2');
+            $query->where('idrol', '=', '3');
             break;
         case 4:
-            $query->where('idrol', '=', '5');
+            $query->where('idrol', '=', '4');
             break;
-        case 5:
-            $query->where('idrol', '=', '5');
-            break;
-        /*case 5:
-            $query->where(function ($query) {
-                $query->where('idrol', '=', '1')
-                        ->orWhere('idrol', '=', '3'); // Agrega el segundo estado aquí
-            });
-            break;*/
 
-
-        // Otros casos si es necesario
 
         default:
             // Lógica si no coincide con ninguno de los casos anteriores
-            break;
+            break;*/
     }
-        })->pluck(DB::raw("CONCAT(nombres, ', ', apellidos) as nombrecompleto"), 'id');
+        })->pluck('codigo', 'id');
+
+  /* dependinedo el estado el  debe mostrar los  estados para el selct  segun sea */
+
+ /*
+
+@if ($parte->estadoparte_id === 5) <!-- Hide "Comprobado" button for estado 5 Validado -->
+  <!-- Show the "Comprobado" button -->
+  <button style="text-align: left;" type="submit" class="btn btn-primary float-right">{{ __('Validado') }}</button>
+  <!-- Add some margin between the buttons -->
+  <td style="width: 10px;"></td>
+
+  <!-- Mostrar boton "Rechazado" -->
+  <button style="text-align: left; margin-right: 10px;" type="submit" name="rechazar_button" class="btn btn-danger float-right">{{ __('Rechazado') }}</button>
+  {{ Form::hidden('nuevo_estadoparte_id', 1) }}
+@endif*/
+
+
+if (Auth::user()->idrol==1){
+    $estadopPartes= Estadoparte::pluck('estadoparte', 'id');
+
+}else{
+
+
+    $estadopPartes = Estadoparte::where(function($query) use ($parte) {
+        switch ($parte->estadoparte_id) {
+            /* Casos para determinar  esatdo */
+            case 3:
+                $query->whereIn('id', [5, 7,3]);
+                break;
+            case 4:
+                $query->whereIn('id', [5, 7,4]);
+                break;
+            case 5:
+                $query->where('id', [4,7,5]);
+                break;
+
+            default:
+                // Lógica si no coincide con ninguno de los casos anteriores
+                break;
+        }
+    })->pluck('estadoparte', 'id');
+
+
+
+
+}
+
+
 
 
 
        /* elmentos*/
           $Descripcionelementos = Descripcionelementos::pluck(DB::raw("CONCAT(descripcion,'-',elemento,'-',precio) as valor"), 'id');
-    return view('parte.edit', compact('parte','no','localizaciones','tipoparte','currentDateTime','reportadopor','asignadoa','Descripcionelementos'));
+    return view('parte.edit', compact('parte','no','localizaciones','tipoparte','currentDateTime','reportadopor','asignadoa','Descripcionelementos','autorizadopor','estadopPartes'));
     }
 
 
@@ -276,37 +346,48 @@ $parte = Parte::create($datos);
         //request()->validate(Parte::$rules);
        //$rolUsuario = Auth::user()->idrol;
         $data=$request->all();
-       //dd($data);
+
+     /*  if (isset ($data['comprobado'])) {
+        dd($data['comprobado']);
+       }
+       else{
+        echo'hola mundo';
+        die;
+       }*/
+
 
         /* Casos para determinar nivel de Privilegios y Vistas */
 
       switch (Auth::user()->idrol) {
         /* Creacion del parte en estado 1 Activo y pasar a estado Revisar */
-        case 1 : /* Basado en el Rol del Usuario "Administrador"*/
-            $data['estadoparte_id']=2;
-            break;
+        /*case 1 : /* Basado en el Rol del Usuario "Administrador"*/
+            /* $data['estadoparte_id']=2;
+            break;*/
+
+
         case 2: /* Basado en el Rol del Usuario "Operario"  y pasar a estado Finalizado */
             $data['estadoparte_id']=2;
             break;
 
+        //$data=$request->input('nuevo_estadoparte_id');
         case 3: /* Basado en el Rol del Usuario "Jefe de Obra"*/
-                $data['estadoparte_id']=3;
+                $data['estadoparte_id']=$request->input('estadoparte_id');
                 break;
 
         /* Revision del parte en estado 2 Revisar */
         case 4 : /* Basado en el Rol del Usuario "Administrador"*/
-                $data['estadoparte_id']=4;
+                $data['estadoparte_id']=$request->input('estadoparte_id'); /* Basado en la accion que ejecuta el Usuario */
                 break;
         case 5:
-            $data['estadoparte_id']=5;
+            $data['estadoparte_id']=$request->input('estadoparte_id');
             break;
 
 
         case 4:
-          $data['estadoparte_id']=5;
+            $data['estadoparte_id']=$request->input('estadoparte_id');
             break;
         case 5:
-            $data['estadoparte_id']=3;
+            $data['estadoparte_id']=$request->input('estadoparte_id');
                 break;
         // Otros casos si es necesario
 

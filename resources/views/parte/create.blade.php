@@ -290,6 +290,15 @@ var thumbnail = document.createElement("div");
 
             });
 
+            $("#fechaautorizacion").datetimepicker({
+                "allowInputToggle": true,
+                "showClose": true,
+                "showClear": true,
+                "showTodayButton": true,
+                "format": "YYYY/MM/DD HH:mm:ss",
+
+            });
+
 
             var forms = document.querySelectorAll('#createParte ');
 

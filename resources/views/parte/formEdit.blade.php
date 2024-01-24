@@ -153,7 +153,7 @@
             <div class="col">
                 <div class="form-group">
                     {{ Form::label('Autorizado por') }}
-                    {{ Form::select('reportadopor',$reportadopor,$parte->reportadopor, ['class' => 'form-control' . ($errors->has('reportadoPor') ? ' is-invalid' : ''), 'placeholder' => 'selecione', 'required' => 'required', 'disabled' =>'disabled']) }}
+                    {{ Form::select('autorizado_por',$autorizadopor,$parte->autorizado_por, ['class' => 'form-control' . ($errors->has('autorizadopor') ? ' is-invalid' : ''), 'placeholder' => 'selecione', 'id'=>'fechaautorizacion', 'required' => 'required', 'disabled' =>'disabled']) }}
                     <div class="invalid-feedback">
                          porfavor seleccione una  opcion
                      </div>
@@ -162,9 +162,7 @@
             <div class="col">
                 <div class="form-group">
                     {{ Form::label('Fecha de Autorización') }}
-                    {{ Form::datetime('fechacreacion', $parte->fechacreacion, [
-                        'class' => 'form-control' . ($errors->has('fechacreacion') ? ' is-invalid' : ''),
-                        'placeholder' => 'Fechacreacion',
+                    {{ Form::datetime('fechacreacion', $parte->fechacreacion, ['class' => 'form-control' . ($errors->has('fechacreacion') ? ' is-invalid' : ''),'placeholder' => 'Fechacreacion',
                         'required' => 'required','readonly' => 'readonly',
                     ]) }}
                     {!! $errors->first('fechacreacion', '<div class="invalid-feedback">:message</div>') !!}
@@ -420,11 +418,20 @@
             {{ Form::text('obscliente', $parte->obscliente, ['class' => 'form-control' . ($errors->has('obscliente') ? ' is-invalid' : ''), 'placeholder' => 'Obscliente']) }}
             {!! $errors->first('obscliente', '<div class="invalid-feedback">:message</div>') !!}
         </div>
-        <div class="form-group" style="display: block;">
-            {{ Form::label('estadoparte_id') }}
-            {{ Form::text('estadoparte_id', $parte->estadoparte_id, ['class' => 'form-control' . ($errors->has('estadoparte_id') ? ' is-invalid' : ''), 'placeholder' => 'Estadoparte Id', 'readonly' => 'readonly', 'id' => 'estadoparte_id']) }}
-            {!! $errors->first('estadoparte_id', '<div class="invalid-feedback">:message</div>') !!}
+
+        <div class="form-group" >
+        {{ Form::label('estadoparte', 'estadoparte') }}
+        {{ Form::select('estadoparte_id', $estadopPartes, $parte->estadoparte_id, [
+            'class' => 'form-control' . ($errors->has('estadoparte_id') ? ' is-invalid' : ''),
+            'placeholder' => 'Seleccione una ubicacion',
+            'required' => 'required',
+
+        ]) }}
+        <div class="invalid-feedback">
+            porfavor seleccione un  estado
         </div>
+    </div>
+
 
 
     </div>
@@ -434,20 +441,14 @@
         &nbsp;
         <button type="button" onclick="goBack()" class="btn btn-secondary" style="text-align: right;">Volver</button>
         &nbsp;
+        <button style="text-align: left;" type="submit" class="btn btn-primary float-right">{{ __('Procesar') }}</button>
         @if ($parte->estadoparte_id === 1)
             <!-- Show the "Revisado" button -->
-            <button style="text-align: left;" type="submit" class="btn btn-primary float-right">{{ __('Procesado') }}</button>
+
+
         @endif
 
-        @if ($parte->estadoparte_id === 2) <!-- Hide "Finalizado" and "Comprobado" buttons for estado 3 -->
-            <!-- Show the "Finalizado" button -->
-            <button style="text-align: left;" type="submit" class="btn btn-primary float-right">{{ __('Finalizado') }}</button>
-        @endif
 
-        @if ($parte->estadoparte_id === 3) <!-- Hide "Comprobado" button for estado 4 -->
-            <!-- Show the "Comprobado" button -->
-            <button style="text-align: left;" type="submit" class="btn btn-primary float-right">{{ __('Comprobado') }}</button>
-        @endif
     </div>
 
 

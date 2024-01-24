@@ -12,6 +12,11 @@
              <div class="invalid-feedback"> El  campo Apellidos es obligatorio  </div>
         </div>
         <div class="form-group">
+            {{ Form::label('Codigo') }}
+            {{ Form::text('codigo', $user->codigo, ['class' => 'form-control' . ($errors->has('codigo') ? ' is-invalid' : ''), 'placeholder' => 'codigo','required' => 'required']) }}
+             <div class="invalid-feedback"> El  campo codigo es obligatorio  </div>
+        </div>
+        <div class="form-group">
             {{ Form::label('Email') }}
             {{ Form::text('email', $user->email, ['class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : ''), 'placeholder' => 'Email','required' => 'required']) }}
              <div class="invalid-feedback"> el   campo Email es obligatorio  </div>

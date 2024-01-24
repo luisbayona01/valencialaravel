@@ -31,6 +31,7 @@ class User extends Authenticatable
  * @property $created_at
  * @property $updated_at
  * @property $idrol
+ * @property $codigo
  *
  * @property Parte[] $partes
  * @property Role $role
@@ -47,7 +48,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['nombres','apellidos','email','idrol','password','username'];
+    protected $fillable = ['nombres','apellidos','email','idrol','password','username','codigo'];
 
 
     /**

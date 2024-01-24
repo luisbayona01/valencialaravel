@@ -103,10 +103,10 @@ color: #ffFF ;
                                             <td style="text-align: center;">{{  $parte->id }}</td> <!-- No. Parte -->
 											<td style="text-align: center;">{{ $parte->cod_localizacion }}</td> <!-- Ubicacion Novedad -->
 											<td>{{ $parte->tipoparte }}</td> <!-- Tipo Parte -->
-											<td>{{ $parte->reportadoPor }}</td> <!-- Comunicado por -->
+											<td style="text-align: center;">{{ $parte->reportadoPor }}</td> <!-- Comunicado por -->
 											<td style="text-align: center;">{{ $parte->fechareporte }}</td> <!-- Fecha de comunicacion -->
 											<td>{{ $parte->obscreadorparte }}</td> <!-- Observaciones -->
-											<td>{{ $parte->asignadoA }}</td> <!-- Reparado por -->
+											<td style="text-align: center;">{{ $parte->asignadoA }}</td> <!-- Reparado por -->
 											<td>{{ $parte->fechaAsignacion }}</td> <!-- Fecha reparacion -->
                                             <td id="resultado"></td>
 											<td style="text-align: center;">
@@ -124,26 +124,29 @@ color: #ffFF ;
                                                 @elseif ($parte->estadoparte === 'Revisar')
                                                     <!-- Mostrar solo el botón Finalizar -->
                                                     <a class="btn btn-sm btn-info common-button" href="{{ route('partes.edit', $parte->id) }}">
-                                                        <i></i> {{ __('Revisar') }}
+                                                        <i></i> {{ __('Ver') }}
                                                     </a>
                                                 @elseif ($parte->estadoparte === 'Revisar')
                                                     <!-- Mostrar solo el botón Comprobar -->
                                                     <a class="btn btn-sm btn-info common-button" href="{{ route('partes.edit', $parte->id) }}">
-                                                        <i></i> {{ __('Comprobar') }}
+                                                        <i></i> {{ __('Ver') }}
                                                     </a>
                                                 @elseif ($parte->estadoparte === 'Finalizado')
                                                     <!-- Mostrar solo el botón Comprobar -->
                                                     <a class="btn btn-sm btn-info common-button" href="{{ route('partes.edit', $parte->id) }}">
-                                                        <i></i> {{ __('Validar') }}
+                                                        <i></i> {{ __('Ver') }}
+                                                    </a>
+                                                @elseif ($parte->estadoparte === 'Comprobado')
+                                                    <!-- Mostrar solo el botón Comprobar -->
+                                                    <a class="btn btn-sm btn-info common-button" href="{{ route('partes.edit', $parte->id) }}">
+                                                        <i></i> {{ __('Ver1') }}
                                                     </a>
                                                 @else
                                                     <!-- Mostrar ambos botones Finalizar y Comprobar -->
                                                     <a class="btn btn-sm btn-info common-button" href="{{ route('partes.edit', $parte->id) }}">
-                                                        <i></i> {{ __('Comprobado') }}
+                                                        <i></i> {{ __('Ver') }}
                                                     </a>
-                                                    <a class="btn btn-sm btn-info common-button" href="{{ route('partes.edit', $parte->id) }}">
-                                                        <i></i> {{ __('Finalizar / Comprobar') }}
-                                                    </a>
+
                                                 @endif
                                             </td>
                                         </tr>
