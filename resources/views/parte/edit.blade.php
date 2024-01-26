@@ -78,7 +78,7 @@
                 // Mostrar el resultado en el label
                 $('#totalImportes').text(totalImportes.toFixed(2) + ' €');
                 // Asignar la suma total a una variable global
-                sumaTotalGlobal = sumaTotal;
+                //sumaTotalGlobal = sumaTotal;
             } else {
                 // No hay datos o los datos están vacíos
                 console.log('La respuesta de la API no contiene datos.');
@@ -235,14 +235,14 @@ evidencias.forEach(evidencia => {
             }
         // Espera a que el DOM esté listo
         $(document).ready(function() {
-            $("#fechaautorizacion").datetimepicker({
+            /*$("#fechaautorizacion").datetimepicker({
                 "allowInputToggle": true,
                 "showClose": true,
                 "showClear": true,
                 "showTodayButton": true,
                 "format": "YYYY/MM/DD HH:mm:ss",
 
-            });
+            });*/
             $("#showE").click(function() {
                 $("#elementos").removeClass('d-none')
             })
