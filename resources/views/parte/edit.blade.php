@@ -235,6 +235,14 @@ evidencias.forEach(evidencia => {
             }
         // Espera a que el DOM esté listo
         $(document).ready(function() {
+            $("#fechaautorizacion").datetimepicker({
+                "allowInputToggle": true,
+                "showClose": true,
+                "showClear": true,
+                "showTodayButton": true,
+                "format": "YYYY/MM/DD HH:mm:ss",
+
+            });
             $("#showE").click(function() {
                 $("#elementos").removeClass('d-none')
             })

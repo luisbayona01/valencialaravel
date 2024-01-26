@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         $users = DB::table('users as U')
                     ->join('roles as R', 'R.id', '=', 'U.idrol')
-                    ->select('U.id','U.nombres', 'U.apellidos', 'U.email','U.username', 'U.password', 'R.name as rollname')
+                    ->select('U.id','U.nombres', 'U.apellidos', 'U.codigo', 'U.email','U.username', 'U.password', 'R.name as rollname')
                     ->get();
         return view('user.index', compact('users'));
                     /* return view('user.index', compact('users'))
@@ -39,7 +39,8 @@ class UserController extends Controller
         $user = new User();
         $roles = Roles::pluck('name', 'id');
         $estado = '';
-        return view('user.create', compact('user','roles', 'estado'));
+        $codigo = '';
+        return view('user.create', compact('user','roles', 'estado', 'codigo'));
     }
 
     /**
@@ -59,7 +60,7 @@ class UserController extends Controller
     {
         $users = DB::table('users as U')
                             ->join('roles as R', 'R.id', '=', 'U.idrol')
-                            ->select('U.id','U.nombres', 'U.apellidos', 'U.email','U.username','U.password' ,'R.name as rollname')
+                            ->select('U.id','U.nombres', 'U.apellidos','U.codigo', 'U.email','U.username','U.password' ,'R.name as rollname')
                             ->where('U.id', '=', $id)
                             ->get();
 
@@ -80,9 +81,10 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-       $roles = Roles::pluck('name', 'id');
-       $estado = 'readonly';
-       return view('user.edit', compact('user','roles','estado'));
+        $roles = Roles::pluck('name', 'id');
+        $estado = 'readonly';
+        $codigo = 'readonly';
+        return view('user.edit', compact('user','roles','estado','codigo'));
 
     }
 
