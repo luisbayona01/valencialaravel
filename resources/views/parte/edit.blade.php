@@ -79,6 +79,7 @@
                 $('#totalImportes').text(totalImportes.toFixed(2) + ' €');
                 // Asignar la suma total a una variable global
                 //sumaTotalGlobal = sumaTotal;
+                //sumaTotalGlobal = sumaTotal;
             } else {
                 // No hay datos o los datos están vacíos
                 console.log('La respuesta de la API no contiene datos.');
