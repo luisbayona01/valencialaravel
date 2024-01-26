@@ -6,6 +6,8 @@
     Parte
 @endsection
 
+
+
 @section('content')
  <style>
 
@@ -48,6 +50,11 @@ color: #ffFF ;
     height: 25px; /* Ajusta el valor según tus necesidades */
 }
 
+@php
+    $totalPartes = count($partes);
+@endphp
+
+
 </style>
     <div class="container-fluid" >
         <div class="row">
@@ -64,11 +71,26 @@ color: #ffFF ;
                             </span>
                             -->
 
-                             <div class="float-right">
-                                <a href="{{ route('partes.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Nuevo parte') }}
+                            <div class="float-right">
+                            @php
+                                $mostrarNuevoParte = false;
+                                foreach ($partes as $parte) {
+                                    if ($parte->estadoparte === 'Activo' || $parte->estadoparte === 'Revisar') {
+                                        $mostrarNuevoParte = true;
+                                        break;
+                                    }
+                                }
+                            @endphp
+
+                            @if ($mostrarNuevoParte)
+                                <a href="{{ route('partes.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
+                                    {{ __('Nuevo parte') }}
                                 </a>
-                              </div>
+                            @endif
+                        </div>
+
+
+
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -103,12 +125,12 @@ color: #ffFF ;
                                             <td style="text-align: center;">{{  $parte->id }}</td> <!-- No. Parte -->
 											<td style="text-align: center;">{{ $parte->cod_localizacion }}</td> <!-- Ubicacion Novedad -->
 											<td>{{ $parte->tipoparte }}</td> <!-- Tipo Parte -->
-											<td style="text-align: center;">{{ $parte->reportadoPor }}</td> <!-- Comunicado por -->
+											<td style="text-align: center;">{{ $parte->reportadoPor}}</td> <!-- Comunicado por -->
 											<td style="text-align: center;">{{ $parte->fechareporte }}</td> <!-- Fecha de comunicacion -->
 											<td>{{ $parte->obscreadorparte }}</td> <!-- Observaciones -->
 											<td style="text-align: center;">{{ $parte->asignadoA }}</td> <!-- Reparado por -->
 											<td>{{ $parte->fechaAsignacion }}</td> <!-- Fecha reparacion -->
-                                            <td id="resultado"></td>
+                                            <td>{{round($parte->totalImp, 2);}} €</td>
 											<td style="text-align: center;">
                                                 <span class="{{ $parte->estadoparte }}" style="display: block; width: 100%; height: 100%; text-align: center;">
                                                     {{ $parte->estadoparte }}
@@ -139,7 +161,7 @@ color: #ffFF ;
                                                 @elseif ($parte->estadoparte === 'Comprobado')
                                                     <!-- Mostrar solo el botón Comprobar -->
                                                     <a class="btn btn-sm btn-info common-button" href="{{ route('partes.edit', $parte->id) }}">
-                                                        <i></i> {{ __('Ver1') }}
+                                                        <i></i> {{ __('Ver') }}
                                                     </a>
                                                 @else
                                                     <!-- Mostrar ambos botones Finalizar y Comprobar -->

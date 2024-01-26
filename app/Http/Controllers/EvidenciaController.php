@@ -37,7 +37,7 @@ $idparte=$request->idparte;
     //dd($partes);
 } else {
 
-$partes=Parte::create(['creadopor'=> $request->creadopor]);
+$partes=Parte::create(['id'=>$request->idparte,'creadopor'=> $request->creadopor]);
 $idparte=$partes->id;
  //dd($request->creadopor);
 
@@ -79,12 +79,6 @@ $idparte=$partes->id;
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $evidencium = Evidencium::find($id);
-
-        return view('evidencium.show', compact('evidencium'));
-    }
 
     /**
      * Update the specified resource in storage.
@@ -93,26 +87,26 @@ $idparte=$partes->id;
      * @param  Evidencium $evidencium
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Evidencia $evidencia)
+    /*public function update(Request $request, Evidencia $evidencia)
     {
-        request()->validate(Evidencium::$rules);
+        //request()->validate(Evidencium::$rules);
 
         $evidencia->update($request->all());
 
         return redirect()->route('evidencia.index')
             ->with('success', 'Evidencium updated successfully');
-    }
+    }*/
 
     /**
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function destroy($id)
+   /* public function destroy($id)
     {
         $evidencium = Evidencium::find($id)->delete();
 
         return redirect()->route('evidencia.index')
             ->with('success', 'Evidencium deleted successfully');
-    }
+    }*/
 }

@@ -18,7 +18,7 @@ $idparte=$request->idparte;
     //dd($partes);
 } else {
 
-$partes=Parte::create(['creadopor'=> $request->creadopor]);
+$partes=Parte::create(['id'=>$request->idparte, 'readopor'=> $request->creadopor]);
 $idparte=$partes->id;
  //dd($request->creadopor);
 

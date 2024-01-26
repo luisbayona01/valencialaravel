@@ -296,7 +296,7 @@
     <tr style="text-align: center; font-weight: bold; color: black;">
       <!-- <th style="width: 10%">id</th> -->
       <th>Código</th>
-      <th class="col lg-6">Descripcion</th>
+      <th class=”col-lg-2 col-md-2 col-sm-3 col-xs-3″>Descripcion</th>
       <th>Precio</th>
       <th>Cantidad</th>
       <th>Total</th>
@@ -381,8 +381,6 @@
         }
     }*/
 </script>
-
-
 
 
         <div class="form-group"style="display:none">

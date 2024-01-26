@@ -38,21 +38,22 @@ class ParteController extends Controller
     public function index()
     {  //dd( Auth::user()->nombres);
 
-      $rolUsuario = Auth::user()->idrol;
+    $rolUsuario = Auth::user()->idrol;
+    $subquery = DB::table('elemtos_parte as ELP')     ->select(DB::raw('SUM(ELP.precio_total)'))     ->whereColumn('ELP.parteid', 'P.id');
 
-$partes = DB::table('parte as P')
+    $partes = DB::table('parte as P')
     ->select(
         'P.id',
         'LC.cod_localizacion',
         'TP.nombre as tipoparte',
         DB::raw("U.codigo as partecreadopor"),
         'P.fechacreacion',
-        DB::raw("U.codigo as autorizadopor"),
+        DB::raw("UL.codigo as autorizadopor"),
         'P.fechaautorizacion',
-        DB::raw("U.codigo as reportadoPor"),
+        DB::raw("UR.codigo as reportadoPor"),
         'P.fechareporte',
         'P.obscreadorparte',
-        DB::raw("U.codigo as asignadoA"),
+        DB::raw("UA.codigo as asignadoA"),
         'P.fechaAsignacion',
         'P.validado_por',
         'P.fecha_validacion',
@@ -64,7 +65,8 @@ $partes = DB::table('parte as P')
     ->join('users as U', 'U.id', '=', 'P.creadopor')
     ->join('users as UL', 'UL.id', '=', 'P.autorizado_por')
     ->join('users as UR', 'UR.id', '=', 'P.reportadopor')
-    ->join('users as UA', 'UA.id', '=', 'P.asignadoa');
+    ->join('users as UA', 'UA.id', '=', 'P.asignadoa')
+    ->addSelect(['totalImp' => $subquery]);
 
 // Aplicar condición según el rol del usuario
 
@@ -104,6 +106,7 @@ switch ($rolUsuario) {
 }*/
 
 $partes = $partes->get();
+//dd($partes);
 
 
 
@@ -194,12 +197,12 @@ public function pdf()
         return view('parte.create', compact('parte','no','localizaciones','tipoparte','currentDateTime','reportadopor','asignadoa','Descripcionelementos','autorizadopor'));
         }
 
-    public function mostrarPartes()
-    {
-        $totalPartes = Parte::count();
+        public function mostrarPartes()
+        {
+            $totalPartes = Parte::count();
 
-        return view('/home.blade.php', ['totalPartes' => $totalPartes]);
-    }
+            return view('/home.blade.php', ['totalPartes' => $totalPartes]);
+        }
 
 
     public function store(Request $request)
@@ -223,9 +226,14 @@ public function pdf()
  //dd($request->creadopor);
 
  $datos=$request->all();
+ //dd($datos);
+ $datos['id']= $datos['idparte'];
+
  $datos['estadoparte_id']=2;
         //request()->validate(Parte::$rules);
-$parte = Parte::create($datos);
+//dd($datos);
+        $parte = Parte::create($datos);
+
 
 }
 

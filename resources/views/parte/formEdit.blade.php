@@ -57,6 +57,9 @@
         font-weight: bold;
         color: black;
     }
+    .small-text {
+    font-size: 12px; /* Puedes ajustar el tamaño según tus necesidades */
+}
 
 
 </style>
@@ -234,7 +237,7 @@
  <div class="row">
     <div class="col-lg-10">
         <div class="form-group">
-            {{ Form::label('observaciones') }}
+            {{ Form::label('observaciones Iniciales') }}
             {{ Form::textarea('obscreadorparte', $parte->obscreadorparte, [
                 'class' => 'form-control' . ($errors->has('obscreadorparte') ? ' is-invalid' : ''),
                 'placeholder' => 'Ingrese los detalles del parte',
@@ -349,10 +352,9 @@
  <br>
  {{ Form::open(['url' => 'your-route', 'method' => 'post', 'enctype' => 'multipart/form-data']) }}
         <div class="form-group">
-            {{ Form::label('Observaciones del operador') }}
+            {{ Form::label('Observaciones Generales') }}
             {{ Form::textarea('obsOperador', $parte->obsOperador, ['class' => 'form-control' . ($errors->has('obsOperador') ? ' is-invalid' : ''),
-           'placeholder' => 'Ingrese las novedades Halladas','rows' => 5,
-            'required' => Auth::user()->id_rol == 4 ? 'required' : ''
+           'placeholder' => 'Ingrese las novedades Halladas','rows' => 5
      ]) }}
             {!! $errors->first('obsOperador', '<div class="invalid-feedback">:message</div>') !!}
         </div>
@@ -400,7 +402,7 @@
         }
         </script>
 
-
+        <br><br>
 
 
         <div class="form-group"style="display:none">
@@ -419,37 +421,91 @@
             {!! $errors->first('obscliente', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
-        <div class="form-group" >
-        {{ Form::label('estadoparte', 'estadoparte') }}
-        {{ Form::select('estadoparte_id', $estadopPartes, $parte->estadoparte_id, [
-            'class' => 'form-control' . ($errors->has('estadoparte_id') ? ' is-invalid' : ''),
-            'placeholder' => 'Seleccione una ubicacion',
-            'required' => 'required',
+        <div>
+            <td>
+                {!! Form::label('estadoparte_id', 'Estado actual del parte es: ', ['style' => 'font-weight: normal;']) !!}
+                @if($parte->estadoparte_id == 1)
+                    <strong>Activo</strong>
+                @elseif($parte->estadoparte_id == 2)
+                    <strong>Revisar</strong>
+                @elseif($parte->estadoparte_id == 3)
+                    <strong>Finalizado</strong>
+                @elseif($parte->estadoparte_id == 4)
+                    <strong>Comprobado</strong>
+                @elseif($parte->estadoparte_id == 5)
+                    <strong>Validado</strong>
+                @elseif($parte->estadoparte_id == 6)
+                    <strong>Certificado</strong>
+                @elseif($parte->estadoparte_id == 7)
+                    <strong>Rechazado</strong>
+                @elseif($parte->estadoparte_id == 8)
+                    <strong>Anulado</strong>
+                @else
+                    <strong>{{ $parte->estadoparte_id }}</strong>
+                @endif
+            </td>
 
-        ]) }}
-        <div class="invalid-feedback">
-            porfavor seleccione un  estado
+            <td hidden>
+                {{ Form::text('estadoparte_id', $parte->estadoparte_id, [
+                'class' => 'form-control' . ($errors->has('estadoparte_id') ? ' is-invalid' : ''),
+                'placeholder' => 'Estadoparte Id',
+                'readonly' => 'readonly',
+                'id' => 'estadoparte_id',
+                'style' => 'display: none;'  // Agregar esta línea para hacerlo invisible
+                ]) }}
+            {!! $errors->first('estadoparte_id', '<div class="invalid-feedback">:message</div>') !!}
+
+        </td>
+
         </div>
-    </div>
 
 
-
-    </div>
-
-    <div class="box-footer mt-20" style="margin-top: 10px; padding: 0px 15px 15px 15px">
-
-        &nbsp;
-        <button type="button" onclick="goBack()" class="btn btn-secondary" style="text-align: right;">Volver</button>
-        &nbsp;
-        <button style="text-align: left;" type="submit" class="btn btn-primary float-right">{{ __('Procesar') }}</button>
-        @if ($parte->estadoparte_id === 1)
-            <!-- Show the "Revisado" button -->
-
-
+        <!-- Seccion indicacion Estado Perfil y Select cambio estado -->
+<div class="form-group">
+    <label for="formFileSm" class="form-label">
+        <h5 style="font-weight: normal; color: black;">
+            Seleccione el estado al que desea pasar el parte, para su proceso de verificación
+        </h5>
+    </label>
+    <td>
+        @if($parte->estadoparte_id != 5) <!-- Si el estado actual NO es "Validado" -->
+            {{ Form::select('estadoparte_id',
+                // Condicionalmente selecciona los estados permitidos
+                $parte->estadoparte_id == 2
+                    ? collect($estadopPartes)->only([1, 3, 7, 8])  // Si el estado actual es "Revisar"
+                    : ($parte->estadoparte_id == 3
+                        ? collect($estadopPartes)->only([4, 7])  // Si el estado actual es "Finalizado"
+                        : ($parte->estadoparte_id == 4
+                            ? collect($estadopPartes)->only([5, 7])  // Si el estado actual es "Comprobado"
+                            : collect($estadopPartes)->only([2]))),  // En otros casos
+                $parte->estadopPartes, [
+                    'class' => 'form-control' . ($errors->has('estadoparte_id') ? ' is-invalid' : ''),
+                    'placeholder' => 'Despliege para indicar siguiente estado',
+                    'required' => 'required',
+                ])
+            }}
+        @else
+            <!-- Si el estado actual es "Validado", muestra un mensaje o realiza la acción que desees -->
+            <p>El parte está Validado. No se pueden realizar cambios.</p>
         @endif
-
-
+    </td>
+    <div class="invalid-feedback">
+        Por favor, seleccione un estado
     </div>
+</div>
+
+<!-- Seccion indicacion Estado Perfil y Select cambio estado -->
+
+<!-- Sección de botones -->
+<div class="box-footer mt-20" style="margin-top: 10px; padding: 0px 15px 15px 15px">
+    &nbsp;
+    <button type="button" onclick="goBack()" class="btn btn-secondary" style="text-align: right;">Volver</button>
+    &nbsp;
+    @if ($parte->estadoparte_id != 5) <!-- Si el estado actual NO es "Validado" -->
+        <button style="text-align: left;" type="submit" class="btn btn-primary float-right">{{ __('Procesar') }}</button>
+    @endif
+</div>
+
 
 
     {{ Form::close() }}
