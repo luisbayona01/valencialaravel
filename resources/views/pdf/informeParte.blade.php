@@ -34,6 +34,15 @@
             text-align: left;
             padding: 8px;
         }
+  .ocultar-bordes {
+    border-collapse: collapse;
+    border: none;
+}
+
+/* Opcional: Estilo para ocultar los bordes de las celdas */
+.ocultar-bordes td, .ocultar-bordes th,.ocultar-bordes tr  {
+    border: none;
+}
     </style>
 
 
@@ -42,7 +51,27 @@
 </head>
 
 <body class="antialiased">
+@php
 
+               $Tbajaoppdf = $totalSum + $totalPartes->total;
+                $porcentaje = floatval('21.90');
+                $resultbaja = ($Tbajaoppdf * $porcentaje) / 100;
+                $restarbaja1 = $Tbajaoppdf - $resultbaja;
+
+           $porcentaje = 13.0;
+            $gastosgeneralesS2 = ($restarbaja1 * $porcentaje) / 100;
+          $porcentaje = 6.0;
+            $beneficioInd = ($gastosgeneralesS2 * $porcentaje) / 100;
+      $suma = $restarbaja1 + $gastosgeneralesS2 + $beneficioInd;
+
+         $porcentaje = 21;
+            $iva21s3 = ($suma * $porcentaje) / 100;
+            $totalizacion = $iva21s3 + $suma;
+
+
+
+            $totalletras = app('App\Http\Controllers\ReportPartesController')->numerosletras($totalizacion);
+@endphp
 
     <table class="table table-bordered" width="100%">
         <thead>
@@ -147,26 +176,30 @@ QUE FALTAN EJECUTAR
 
 </tr>
 <tr>
-<td>1</td>
-<td>2</td>
-<td>3</td>
-<td>4</td>
-<td>5</td>
+<td> </td>
+<td> </td>
+<td>{{number_format($totalizacion) .' '. 'Euros' }}</td>
+<td>0,00 Euros</td>
+<td></td>
 </tr>
 </table>
+<table  class='ocultar-bordes'>
+<tr>
+<td> <p style='font-size:12 px;'> Ejecución material de las obras ..........................................................................  {{number_format($Tbajaoppdf).' '.'Euros'}}</p>
+    <p  style='font-size:12 px;'> Valor por Revisión de Precios .......................................................                       0,00
+Euros</p>
+<p style='font-size:12 px;'> TOTAL REVISADO ...............................................................................................  {{number_format($Tbajaoppdf).' '.'Euros'}}  </p>
+<p style='font-size:12 px;'> Baja Optenida 21,90 %    ..............................................................................  ........... {{number_format($resultbaja).' '.'Euros'}}  </p>
+<p style='font-size:12 px;'> <strong>DIFERENCIA </strong>.................................................................................. {{number_format($restarbaja1).' '.'Euros'}} </p>
+<p style='font-size:12 px;'> Gastos Generales 13,00% .................................................................................. {{number_format($gastosgeneralesS2).' '.'Euros'}} </p>
+<p style='font-size:12 px;'> Beneficio Industrial  6,00% .................................................................................. {{number_format($beneficioInd)}} </p>
+<p style='font-size:12 px;'> SUMA .................................................................................. {{number_format($suma).' '.'Euros'}} </p>
+<p style='font-size:12 px;'> I.V.A 21,00 %..................................................................................  {{number_format($iva21s3).' '.'Euros'}} </p>
+<p style='font-size:12 px;'>  LIQUIDO A PERCIBIR EL CONTRATISTA .................................................................................. {{number_format($totalizacion).' '.'Euros'}} </p></td>
+<tr>
+</table>
 
- <p style='font-size:12px;'> Ejecución material de las obras .................................................................................. valor </p>
-    <p  style='font-size:12px;'> Ejecución material de las obras .................................................................................. valor </p>
-<p style='font-size:12px;'> Ejecución material de las obras .................................................................................. valor </p>
-<p style='font-size:12px;'> Ejecución material de las obras .................................................................................. valor </p>
-<p style='font-size:12px;'> Ejecución material de las obras .................................................................................. valor </p>
-<p style='font-size:12px;'> Ejecución material de las obras .................................................................................. valor </p>
-<p style='font-size:12px;'> Ejecución material de las obras .................................................................................. valor </p>
-<p style='font-size:12px;'> Ejecución material de las obras .................................................................................. valor </p>
-<p style='font-size:12px;'> Ejecución material de las obras .................................................................................. valor </p>
-<p style='font-size:12px;'>  Ejecución material de las obras .................................................................................. valor </p>
-Y para que conste y pueda servir de abono, expido la presente certificación de: SEISCIENTOS TREINTA MIL
-SETECIENTOS VEINTISEIS EUROS CON DIECISIETE CÉNTIMOS
+Y para que conste y pueda servir de abono, expido la presente certificación de: {{$totalletras}}
 <br><br>
 Documento firmado electrónicamente por el contratista, el Jefe de la Sección y el Concejal Coordinador del Área
 

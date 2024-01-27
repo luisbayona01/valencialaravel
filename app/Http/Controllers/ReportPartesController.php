@@ -7,7 +7,7 @@ use App\Models\Parte;
 use App\Models\Elementosparte;
 use Barryvdh\DomPDF\Facade\Pdf;
 use DB;
-
+use Luecano\NumeroALetras\NumeroALetras;
 class ReportPartesController extends Controller
 {
     public function generarinforme()
@@ -39,9 +39,16 @@ class ReportPartesController extends Controller
     ->join('users as UR', 'UR.id', '=', 'P.reportadopor')
 
     ->where('EST.id','5')->get();
+$parteIds = $partes->pluck('id')->toArray();
 
 
-//dd($partes);
+// Realiza la segunda consulta utilizando los IDs obtenidos
+$totalPartes = DB::table('elemtos_parte')
+    ->select(DB::raw('ROUND(SUM(precio_total), 2) as total'))
+    ->whereIn('parteid', $parteIds)
+    ->first();
+
+//dd($totalPartes->total);
 
 
 
@@ -68,10 +75,19 @@ class ReportPartesController extends Controller
         }
 
   //dd($totalSum);
-        $pdf = Pdf::loadView('pdf.informeParte', compact('partes', 'img', 'conjuntosDeInformes','totalSum'));
+        $pdf = Pdf::loadView('pdf.informeParte', compact('partes', 'img', 'conjuntosDeInformes','totalSum','totalPartes'));
         //$pdf->inline('informeParte.pdf');
-
+       $pdf->setPaper('legal');
         return $pdf->stream();
 
     }
+
+ public  function numerosletras($valor){
+
+$valor_formateado = number_format($valor / 100, 2, '.', '');
+$formatter = new NumeroALetras();
+$texto =$formatter->toMoney($valor_formateado, 2, 'EUROS', 'CENTAVOS');
+ return  $texto;
+}
+
 }
