@@ -29,7 +29,7 @@ Route::get('/report',[App\Http\Controllers\ReportPartesController::class,'genera
 
 Route::resource('partes',  App\Http\Controllers\parteController::class);
 
-Route::get('/report',[App\Http\Controllers\ReportPartesController::class,'generarinforme'])->name('report');
+//Route::get('/report',[App\Http\Controllers\ReportPartesController::class,'generarinforme'])->name('report');
 
 
 

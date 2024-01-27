@@ -391,12 +391,7 @@ if (Auth::user()->idrol==1){
             break;
 
 
-        case 4:
-            $data['estadoparte_id']=$request->input('estadoparte_id');
-            break;
-        case 5:
-            $data['estadoparte_id']=$request->input('estadoparte_id');
-                break;
+
         // Otros casos si es necesario
 
         default:
@@ -449,7 +444,7 @@ public function eliminarParteConRelaciones($parteId)
         }
 
         // Eliminar los elementos relacionados en ElementosParte
-        $parte->elemtosPartes()->delete();
+        $parte->elementosPartes()->delete();
 
         // Eliminar las evidencias relacionadas en Evidencia
         $parte->evidencias()->delete();

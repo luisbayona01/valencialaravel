@@ -124,13 +124,13 @@ color: #ffFF ;
                                         <tr style="font-size:0.9em;">
                                             <td style="text-align: center;">{{  $parte->id }}</td> <!-- No. Parte -->
 											<td style="text-align: center;">{{ $parte->cod_localizacion }}</td> <!-- Ubicacion Novedad -->
-											<td>{{ $parte->tipoparte }}</td> <!-- Tipo Parte -->
+											<td>{{ $parte->tipoparte }}</td>
 											<td style="text-align: center;">{{ $parte->reportadoPor}}</td> <!-- Comunicado por -->
 											<td style="text-align: center;">{{ $parte->fechareporte }}</td> <!-- Fecha de comunicacion -->
 											<td>{{ $parte->obscreadorparte }}</td> <!-- Observaciones -->
 											<td style="text-align: center;">{{ $parte->asignadoA }}</td> <!-- Reparado por -->
 											<td>{{ $parte->fechaAsignacion }}</td> <!-- Fecha reparacion -->
-                                            <td>{{round($parte->totalImp, 2);}} €</td>
+                                            <td>{{round($parte->totalImp, 2)}} €</td>
 											<td style="text-align: center;">
                                                 <span class="{{ $parte->estadoparte }}" style="display: block; width: 100%; height: 100%; text-align: center;">
                                                     {{ $parte->estadoparte }}
