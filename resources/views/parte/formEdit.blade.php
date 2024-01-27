@@ -30,7 +30,7 @@
     } /* Estado 2 Revisar */
 
     .color-#FFD70060 {
-        color: #ffff0080;
+        color: #ffff0060;
     } /* Estado 3 Finalizado */
 
     .color-#ED912109 {
@@ -46,7 +46,7 @@
     } /* Estado 6 Certificado */
 
     .color-#ff000090 {
-        color: #ff000090;
+        color: #ff000050;
     } /* Estado 7 Rechazado */
 
     .color-#84857d10 {
@@ -74,11 +74,13 @@
         } elseif ($parte->estadoparte_id == 4) {
             echo '#ED912109'; // Set the background color to #ED912170 for estado 4
         } elseif ($parte->estadoparte_id == 5) {
-            echo '#00a2d310'; // Set the background color to #00a2d360 for estado 5
+            echo '#ED912109'; // Set the background color to #ED912109 for estado 5
         } elseif ($parte->estadoparte_id == 6) {
-            echo '#ff000090'; // Set the background color to #ff000090 for estado 6
+            echo '#00a2d310'; // Set the background color to #00a2d310 for estado 6
         } elseif ($parte->estadoparte_id == 7) {
-            echo '#84857d10'; // Set the background color to #84857d for estado 7
+            echo '#ff000050'; // Set the background color to #ff000090 for estado 7
+        } elseif ($parte->estadoparte_id == 8) {
+            echo '#84857d10'; // Set the background color to #84857d for estado 8
         } else {
             echo 'initial'; // Set the default background color here
         }
@@ -421,6 +423,9 @@
             {!! $errors->first('obscliente', '<div class="invalid-feedback">:message</div>') !!}
         </div>
 
+
+
+
         <div>
             <td>
                 {!! Form::label('estadoparte_id', 'Estado actual del parte es: ', ['style' => 'font-weight: normal;']) !!}
@@ -461,38 +466,41 @@
 
 
         <!-- Seccion indicacion Estado Perfil y Select cambio estado -->
-<div class="form-group">
-    <label for="formFileSm" class="form-label">
-        <h5 style="font-weight: normal; color: black;">
-            Seleccione el estado al que desea pasar el parte, para su proceso de verificación
-        </h5>
-    </label>
-    <td>
-        @if($parte->estadoparte_id != 5) <!-- Si el estado actual NO es "Validado" -->
-            {{ Form::select('estadoparte_id',
-                // Condicionalmente selecciona los estados permitidos
-                $parte->estadoparte_id == 2
-                    ? collect($estadopPartes)->only([1, 3, 7, 8])  // Si el estado actual es "Revisar"
-                    : ($parte->estadoparte_id == 3
-                        ? collect($estadopPartes)->only([4, 7])  // Si el estado actual es "Finalizado"
-                        : ($parte->estadoparte_id == 4
-                            ? collect($estadopPartes)->only([5, 7])  // Si el estado actual es "Comprobado"
-                            : collect($estadopPartes)->only([2]))),  // En otros casos
-                $parte->estadopPartes, [
-                    'class' => 'form-control' . ($errors->has('estadoparte_id') ? ' is-invalid' : ''),
-                    'placeholder' => 'Despliege para indicar siguiente estado',
-                    'required' => 'required',
-                ])
-            }}
-        @else
-            <!-- Si el estado actual es "Validado", muestra un mensaje o realiza la acción que desees -->
-            <p>El parte está Validado. No se pueden realizar cambios.</p>
-        @endif
-    </td>
-    <div class="invalid-feedback">
-        Por favor, seleccione un estado
-    </div>
-</div>
+
+        <div class="form-group" id="seccion-estado-parte">
+            @if(!in_array($parte->estadoparte_id, [5, 6, 8])) <!-- Si el estado actual NO es "Validado" -->
+                <label for="formFileSm" class="form-label">
+                    <h5 style="font-weight: normal; color: black;">
+                        Seleccione el estado al que desea pasar el parte, para su proceso de verificación
+                    </h5>
+                </label>
+                <td>
+                    {{ Form::select('estadoparte_id',
+                        // Condicionalmente selecciona los estados permitidos
+                        $parte->estadoparte_id == 2
+                            ? collect($estadopPartes)->only([1, 3, 7, 8])  // Si el estado actual es "Revisar"
+                            : ($parte->estadoparte_id == 3
+                                ? collect($estadopPartes)->only([4, 7])  // Si el estado actual es "Finalizado"
+                                : ($parte->estadoparte_id == 4
+                                    ? collect($estadopPartes)->only([5, 7])  // Si el estado actual es "Comprobado"
+                                    : collect($estadopPartes)->only([2]))),  // En otros casos
+                        $parte->estadopPartes, [
+                            'class' => 'form-control' . ($errors->has('estadoparte_id') ? ' is-invalid' : ''),
+                            'placeholder' => 'Despliege para indicar siguiente estado',
+                            'required' => 'required',
+                        ])
+                    }}
+                    <div class="invalid-feedback">
+                        Por favor, seleccione un estado
+                    </div>
+                </td>
+            @else
+                <!-- Si el estado actual es "Validado", muestra un mensaje o realiza la acción que desees -->
+                <p>El parte está Validado. No se pueden realizar cambios.</p>
+            @endif
+        </div>
+
+
 
 <!-- Seccion indicacion Estado Perfil y Select cambio estado -->
 
@@ -501,7 +509,7 @@
     &nbsp;
     <button type="button" onclick="goBack()" class="btn btn-secondary" style="text-align: right;">Volver</button>
     &nbsp;
-    @if ($parte->estadoparte_id != 5) <!-- Si el estado actual NO es "Validado" -->
+    @if(in_array($parte->estadoparte_id, [5, 6, 8]) === false) <!-- Si el estado actual NO es "Validado" -->
         <button style="text-align: left;" type="submit" class="btn btn-primary float-right">{{ __('Procesar') }}</button>
     @endif
 </div>
@@ -516,6 +524,69 @@
         window.history.back();
         }
     </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obtén el valor del estado actual del parte
+        var estadoParte = <?php echo $parte->estadoparte_id; ?>;
+
+        // Obtiene el campo de carga de imágenes y el botón de submit
+        var fileInput = document.getElementById("formFileSm");
+        var submitButton = document.querySelector("[type='submit']");
+
+        // Desactiva el campo de carga y el botón de submit si el estado es uno de los especificados
+        if (estadoParte === 3 ||estadoParte === 5 || estadoParte === 6 || estadoParte === 8) {
+            fileInput.disabled = true;
+            submitButton.disabled = true;
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obtén el valor del estado actual del parte
+        var estadoParte = <?php echo $parte->estadoparte_id; ?>;
+
+        // Obtiene la tabla y el botón de selección
+        var tablaRecibe = document.getElementById("tabla-recibe");
+        var selecioneButton = document.getElementById("selecione");
+
+        // Desactiva la edición de la tabla y oculta el botón de selección si el estado es uno de los especificados
+        if (estadoParte === 3 || estadoParte === 4 || estadoParte === 5 || estadoParte === 6 || estadoParte === 8) {
+            tablaRecibe.classList.add("d-none"); // Agrega la clase d-none para ocultar la tabla
+            selecioneButton.style.display = "none"; // Oculta el botón de selección
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obtén el valor del estado actual del parte
+        var estadoParte = <?php echo $parte->estadoparte_id; ?>;
+
+        // Obtiene el campo de observaciones generales
+        var obsGeneralesInput = document.getElementsByName("obsOperador")[0];
+
+        // Desactiva el campo de observaciones generales si el estado es uno de los especificados
+        if (estadoParte === 3 || estadoParte === 4 || estadoParte === 5 || estadoParte === 6 || estadoParte === 8) {
+            obsGeneralesInput.disabled = true;
+        }
+    });
+
+    $(document).ready(function() {
+        // Manejar el cambio en el select
+        $('#estadoparte_id').change(function() {
+            var selectedValue = $(this).val();
+
+            // Si la opción seleccionada es "Rechazado" (asumiendo que el valor es 2)
+            if (selectedValue == 2) {
+                // Cambiar el valor del select al estado actual activo
+                $(this).val({{ $parte->estadoparte_id }});
+            }
+        });
+    });
+
+</script>
+
+
+
+
 
 
     </div>
