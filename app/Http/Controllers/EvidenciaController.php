@@ -33,11 +33,11 @@ class EvidenciaController extends Controller
    $idparte='';
    if ($partes) {
 
-$idparte=$request->idparte;
+$idparte=$request->parteevidencia_id;
     //dd($partes);
 } else {
 
-$partes=Parte::create(['id'=>$request->idparte,'creadopor'=> $request->creadopor]);
+$partes=Parte::create(['id'=>$request->parteevidencia_id]);
 $idparte=$partes->id;
  //dd($request->creadopor);
 

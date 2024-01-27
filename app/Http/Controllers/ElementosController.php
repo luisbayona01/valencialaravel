@@ -17,8 +17,8 @@ class ElementosController extends Controller
 $idparte=$request->idparte;
     //dd($partes);
 } else {
-
-$partes=Parte::create(['id'=>$request->idparte, 'readopor'=> $request->creadopor]);
+//dd($request->idparte);
+$partes=Parte::create(['id'=>$request->idparte, 'creadopor'=> $request->creadopor]);
 $idparte=$partes->id;
  //dd($request->creadopor);
 
@@ -26,7 +26,7 @@ $idparte=$partes->id;
 
         Elementosparte::create(['cantidad' => $request->input('cantidad'),
             'precio_total' => $request->input('total'),
-            'parteid' => $idparte,
+            'parteid' => $request->idparte,
             'elementosd_id' => $request->input('idelemento'),
         ]);
 
