@@ -88,10 +88,10 @@ class Parte extends Model
     }
 
 
- public function elemtosPartes()
-    {
-        return $this->hasMany('App\Models\Elementosparte', 'parteid', 'id');
-    }
+public function elementosPartes()
+{
+    return $this->hasMany('App\Models\Elementosparte', 'parteid', 'id');
+}
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

@@ -2,39 +2,76 @@
 
 namespace App\Http\Controllers;
 
- use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Http\Request;
 use App\Models\Evidencia;
-
+use App\Models\Parte;
+use App\Models\Elementosparte;
+use Barryvdh\DomPDF\Facade\Pdf;
 use DB;
-
 
 class ReportPartesController extends Controller
 {
-   public function  generarinforme(){
-
-$img= base_path('public/img/icono_representativo_caratulapdf.png');
+    public function generarinforme()
+    {
+       $totalSum = DB::table('informecorrectivo')->sum('Total');
+        $img = base_path('public/img/icono_representativo_caratulapdf.png');
 //die();
-    $parte = DB::table('parte as P')
-    ->select('T.nombre as tipopart', 'LC.descripcion', 'P.id as idparte', 'P.fechacreacion', 'P.fechareporte', 'P.obscreadorparte')
-    ->join('tipoparte as T', 'P.idtipoparte', '=', 'T.id')
+       $partes = DB::table('parte as P')
+    ->select(
+        'P.id',
+        'LC.cod_localizacion',
+        'TP.nombre as tipoparte',
+        DB::raw("U.codigo as partecreadopor"),
+        'P.fechacreacion',
+        DB::raw("UL.codigo as autorizadopor"),
+        'P.fechaautorizacion',
+        DB::raw("UR.codigo as reportadoPor"),
+        'P.fechareporte',
+        'P.obscreadorparte',
+        'P.fecha_validacion',
+        'EST.estadoparte'
+    )
+
+    ->join('tipoparte as TP', 'P.idtipoparte', '=', 'TP.id')
     ->join('localizacion as LC', 'LC.id', '=', 'P.id_localizacion')
-    ->where('P.id', '=', 1)
-    ->get();
+    ->join('estadoparte as EST', 'EST.id', '=', 'P.estadoparte_id')
+    ->join('users as U', 'U.id', '=', 'P.creadopor')
+    ->join('users as UL', 'UL.id', '=', 'P.autorizado_por')
+    ->join('users as UR', 'UR.id', '=', 'P.reportadopor')
 
-    $dataParte= $parte[0];
-    $elementosparte=$resultados = DB::table('elemtos_parte as Ep')
-            ->select('Ep.cantidad', 'Ep.precio_total', 'P.id as numeroparte', 'DSlP.elemento', 'DSlP.descripcion', 'DSlP.precio as precioU', 'Ep.idelementos_parte')
-            ->join('parte as P', 'P.id', '=', 'Ep.parteid')
-            ->join('descripcionelementos as DSlP', 'DSlP.id', '=', 'Ep.elementosd_id')
-            ->where('P.id', 1)
-            ->get();
-    $Evidencia=Evidencia::where('parteevidencia_id',1)->get();
+    ->where('EST.id','5')->get();
 
-$pdf= Pdf::loadView('pdf.informeParte',compact('dataParte','Evidencia','elementosparte','img'));
-     //$pdf->inline('informeParte.pdf');
 
-return $pdf->stream();
+//dd($partes);
+
+
+
+        $informeCorrectivo = DB::table('informecorrectivo')->get()->toArray();
+
+        $chunkSize = 30;
+        $totalItems = count($informeCorrectivo);
+
+// Calcular cuántos conjuntos completos se pueden formar
+        $numCompleteChunks = intdiv($totalItems, $chunkSize);
+
+// Calcular el tamaño del último conjunto
+        $lastChunkSize = $totalItems % $chunkSize;
+
+// Dividir el array en conjuntos
+        $conjuntosDeInformes = array_chunk($informeCorrectivo, $chunkSize);
+
+// Si el último conjunto es menor que $chunkSize, agrégale más elementos del inicio para completarlo
+        if ($lastChunkSize > 0) {
+            $conjuntosDeInformes[$numCompleteChunks] = array_merge(
+                $conjuntosDeInformes[$numCompleteChunks],
+                array_slice($informeCorrectivo, $numCompleteChunks * $chunkSize, $lastChunkSize)
+            );
+        }
+
+  //dd($totalSum);
+        $pdf = Pdf::loadView('pdf.informeParte', compact('partes', 'img', 'conjuntosDeInformes','totalSum'));
+        //$pdf->inline('informeParte.pdf');
+
+        return $pdf->stream();
 
     }
 }

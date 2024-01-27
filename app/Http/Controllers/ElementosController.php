@@ -85,4 +85,10 @@ $idparte=$partes->id;
 
     }
 
+ public function totalporparte($idparte){
+  $total = DB::table('elemtos_parte')->select(DB::raw('ROUND(SUM(precio_total), 2) as total'))->where('parteid',  $idparte)->first();
+   return $total;
+}
+
+
 }
