@@ -25,14 +25,14 @@ Route::get('/home', function () {
 })->middleware('auth:web');
 
 //generarinforme
-Route::get('/report',[App\Http\Controllers\ReportPartesController::class,'generarinforme'])->name('report');
+Route::post('/report',[App\Http\Controllers\ReportPartesController::class,'generarinforme'])->name('report');
 
 Route::resource('partes',  App\Http\Controllers\parteController::class);
 
 //Route::get('/report',[App\Http\Controllers\ReportPartesController::class,'generarinforme'])->name('report');
 
 
-
+Route::resource('informecorrectivos', App\Http\Controllers\informecorrectivoController::class);
 
 Route::resource('users',  App\Http\Controllers\UserController::class)->middleware('auth:web');
 Route::resource('roles',  App\Http\Controllers\RolesController::class)->middleware('auth:web');

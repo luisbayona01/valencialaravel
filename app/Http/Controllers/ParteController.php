@@ -115,10 +115,14 @@ $partes = $partes->get();
     }
 
 /* METODO - VARIABLES Y DIRECCIONAMIENTOS PARA LA GENERACION DEL CERTIFICADO */
-public function generarparte()
+public function generarparte(Request $request)
 {  //dd( Auth::user()->nombres);
-
+  //dd('')
     $rolUsuario = Auth::user()->idrol;
+$subquery = DB::table('elemtos_parte as ELP')
+    ->select(DB::raw('SUM(ELP.precio_total)'))
+    ->whereColumn('ELP.parteid', 'P.id')
+    ->where('P.estadoparte_id', 5);
 
 $partes = DB::table('parte as P')
   ->select(
@@ -144,15 +148,28 @@ $partes = DB::table('parte as P')
   ->join('users as U', 'U.id', '=', 'P.creadopor')
   ->join('users as UL', 'UL.id', '=', 'P.autorizado_por')
   ->join('users as UR', 'UR.id', '=', 'P.reportadopor')
-  ->join('users as UA', 'UA.id', '=', 'P.asignadoa');
-
+  ->join('users as UA', 'UA.id', '=', 'P.asignadoa')
+  ->addSelect(['totalImp' => $subquery]);
 // Aplicar condición según el rol del usuario
 if ($rolUsuario == 1) {
   // No aplicar ninguna condición adicional
 } else {
   // Filtrar por el usuario asignado si el rol es diferente de 1
-  $partes->where('P.asignadoa', '=',  Auth::user()->id);
+  $partes->where('P.asignadoa', '=',  Auth::user()->id)
+          ->where('P.estadoparte_id','=','5');   /*   solo se mostraran los que estan en estado validado*/
 }
+
+if ($request->filled('fechaautorizacionInicio')  && $request->filled('fechaautorizacionFin')) {
+
+$fechaInicio=$request->fechaautorizacionInicio;
+$fechaFin=$request->fechaautorizacionFin;
+
+//dd($fechaInicio,
+//$fechaFin);
+ $partes->whereBetween('fechaautorizacion', [$fechaInicio, $fechaFin]);
+        }
+
+
 
 $partes = $partes->get();
 //dd($partes);

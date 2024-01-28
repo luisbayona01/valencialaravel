@@ -34,6 +34,7 @@ color: #ffFF ;
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
+
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                           <div >
@@ -47,6 +48,38 @@ color: #ffFF ;
                             <p>{{ $message }}</p>
                         </div>
                     @endif
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+
+            <form action="{{ route('generarparte') }}" method="GET">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>Fecha inicio</label>
+                            <input type="date" name="fechaautorizacionInicio" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>Fecha fin</label>
+                            <input type="date" name="fechaautorizacionFin" class="form-control">
+                        </div>
+             <div class="form-group">
+                                        <button type="submit" class="btn btn-info">Buscar</button>
+                                    </div>
+                    </div>
+
+                <div class="col-sm-4">
+
+                                </div>
+                </div>
+
+            </form>
+
+    </div>
+</div>
+
 
                     <div class="card-body">
                         <div class="table-responsive">
@@ -69,10 +102,14 @@ color: #ffFF ;
                                     </tr>
                                 </thead>
                                 <tbody>
+<form  id="pdfForm" action="{{ route('report') }}" method="POST" target="_blank">
+ <input type="hidden" id="fechaautorizacionInicioHidden" name="fechaautorizacionInicio">
+    <input type="hidden" id="fechaautorizacionFinHidden" name="fechaautorizacionFin">
                                     @foreach ($partes as $parte)
-                                    @if ($parte->estadoparte == 'Validado')
+
 
                                         <tr style="font-size:0.9em;">
+
                                             <td style="text-align: center;">{{  $parte->id }}</td> <!-- No. Parte -->
 											<td style="text-align: center;">{{ $parte->cod_localizacion }}</td> <!-- Ubicacion Novedad -->
 											<td>{{ $parte->tipoparte }}</td> <!-- Tipo Parte -->
@@ -81,14 +118,21 @@ color: #ffFF ;
 											<td>{{ $parte->obscreadorparte }}</td> <!-- Observaciones -->
 											<td>{{ $parte->asignadoA }}</td> <!-- Reparado por -->
 											<td>{{ $parte->fechaAsignacion }}</td> <!-- Fecha reparacion -->
-                                            <td>{{ $parte->fechaAsignacion }}</td><!-- Total Importes -->
+                                            <td>{{round($parte->totalImp, 2) }}</td><!-- Total Importes -->
 											<td ><span class="{{ $parte->estadoparte }}" style="display: block; width: 100%; height: 100%; text-align: center;"> {{ $parte->estadoparte }}</span> </td> <!-- Estado -->
                                             <td style="text-align: center">
                                                 <a class="btn btn-sm btn-success" href="{{ route('partes.edit',$parte->id) }}" ><i ></i> {{ __('Ver') }}</a> <!-- Accion -->
                                             </td>
+                        <td>
+
+@csrf
+               <input type="checkbox" name="parte_ids[]" value="{{ $parte->id }}">
+
+                        </td>
                                         </tr>
-                                        @endif
+
                                     @endforeach
+</form>
                                 </tbody>
                             </table>
 
@@ -99,12 +143,35 @@ color: #ffFF ;
                         <button type="button" onclick="goToHome()" class="btn btn-secondary" style="text-align: right;">Volver</button>
                         <button type="button" onclick="pdf()" class="btn btn-primary float-right" style="text-align: right;">Generar Certificación</button>
                     </div>
+
                     <script>
                         function goToHome() {
                             window.location.href = "{{ url('/gestorParte') }}";
                         }
                     function pdf() {
-                        window.open("{{ url('/pdf') }}", "_blank");
+
+ //window.open("{{ url('/pdf') }}", "_blank");
+
+ var searchParams = new URLSearchParams(window.location.search);
+        var fechaInicio = searchParams.get('fechaautorizacionInicio') || '';
+        var fechaFin = searchParams.get('fechaautorizacionFin') || '';
+
+        // Coloca los valores en los campos de tipo hidden
+        document.getElementById('fechaautorizacionInicioHidden').value = fechaInicio;
+        document.getElementById('fechaautorizacionFinHidden').value = fechaFin;
+  var checkboxes = document.getElementsByName('parte_ids[]');
+
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+
+
+                document.getElementById('pdfForm').submit();
+                return true;
+            }
+        }
+
+        alert('Por favor, selecciona al menos un checkbox antes de realizar la acción.');
+        return false;
                     }
                     </script>
                 </div>
