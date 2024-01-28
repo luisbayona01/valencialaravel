@@ -19,10 +19,10 @@ class InformecorrectivoController extends Controller
      */
     public function index()
     {
-        $informecorrectivos = Informecorrectivo::paginate();
+        $informecorrectivos = Informecorrectivo::all();
 
-        return view('informecorrectivo.index', compact('informecorrectivos'))
-            ->with('i', (request()->input('page', 1) - 1) * $informecorrectivos->perPage());
+        return view('informecorrectivo.index', compact('informecorrectivos'));
+
     }
 
     /**
@@ -61,11 +61,13 @@ class InformecorrectivoController extends Controller
 
  //dd($row);
 
+//Codigo Concepto ,Uds_en_garantia Uds_en_conservacion Dias_en_conservacion Euros_por_dia Total Fecha_de_carga
+
 
       informecorrectivo::create([
                 'Codigo' => $row['A'], // Ajusta esto según tus columnas
-                'Uds_en_garantia' => $row['B'],
-                'Concepto'=>$row['C'],
+                 'Concepto'=>$row['B'],
+                'Uds_en_garantia' => $row['C'],
                 'Uds_en_conservacion'=>$row['D'],
                 'Dias_en_conservacion'=>$row['E'],
                 'Euros_por_dia'=>$row['F'],

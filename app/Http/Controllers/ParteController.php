@@ -153,10 +153,11 @@ $partes = DB::table('parte as P')
 // Aplicar condición según el rol del usuario
 if ($rolUsuario == 1) {
   // No aplicar ninguna condición adicional
+$partes->where('P.estadoparte_id','=','5');
 } else {
   // Filtrar por el usuario asignado si el rol es diferente de 1
   $partes->where('P.asignadoa', '=',  Auth::user()->id)
-          ->where('P.estadoparte_id','=','5');   /*   solo se mostraran los que estan en estado validado*/
+        ->where('P.estadoparte_id','=','5');   /*   solo se mostraran los que estan en estado validado*/
 }
 
 if ($request->filled('fechaautorizacionInicio')  && $request->filled('fechaautorizacionFin')) {

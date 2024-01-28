@@ -5,9 +5,19 @@
 @endsection
 
 @section('content')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+<script>
+$(document).ready( function () {
+    $('#Informecorrectivo').DataTable();
+} );
+</script>
+
+
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="container">
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -31,7 +41,7 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-hover" id="Informecorrectivo">
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
@@ -45,13 +55,13 @@
 										<th>Total</th>
 										<th>Fecha De Carga</th>
 
-                                        <th></th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($informecorrectivos as $informecorrectivo)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
+                                            <td>{{ $informecorrectivo->id }}</td>
 
 											<td>{{ $informecorrectivo->Codigo }}</td>
 											<td>{{ $informecorrectivo->Concepto }}</td>

@@ -111,7 +111,7 @@ $(".table").DataTable({
 
  <a href="{{ url('/informecorrectivos') }}" class="sidebar-link collapsed">
                 <!-- Opening div for sidebar-link -->
-                <i class="fa fa-file-text-o"></i> <span class="align-middle" >  Informe Correctivo</span>
+                <i class="fa fa-file-text-o"></i> <span class="align-middle" > Cargar lista de Conservacion</span>
             </a>
 
 
