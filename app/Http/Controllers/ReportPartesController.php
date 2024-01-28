@@ -107,6 +107,7 @@ $informeCorrectivo = DB::table('informecorrectivo')
         $pdf = Pdf::loadView('pdf.informeParte', compact('partes', 'img', 'conjuntosDeInformes','totalSum','totalPartes'));
         //$pdf->inline('informeParte.pdf');
        $pdf->setPaper('legal');
+Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
         return $pdf->stream();
 
     }
