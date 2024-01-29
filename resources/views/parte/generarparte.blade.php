@@ -104,7 +104,7 @@ color: #ffFF ;
                             window.location.href = "{{ url('/gestorParte') }}";
                         }
                     function pdf() {
-                        window.open("{{ url('/pdf') }}", "_blank");
+                        window.open("{{ url('/report') }}", "_blank");
                     }
                     </script>
                 </div>

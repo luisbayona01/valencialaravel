@@ -12,7 +12,8 @@
             color: #212529;
             border-style: solid;
             border-color: #dee2e6;
-            font-size: 12;
+            /*font-size: 2em;*/
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         tr,
@@ -73,24 +74,24 @@
             $totalletras = app('App\Http\Controllers\ReportPartesController')->numerosletras($totalizacion);
 @endphp
 
-    <table class="table table-bordered" width="100%">
-        <thead>
+    <table class="border table-bordered" width="100%">
+        <thead >
             <tr>
-                <td rowspan="2"> <img src="{{ $img }}" width="300" height="50"></td>
-                <td width='100%' colspan="3" style="text-align:center ">1/23</td>
+                <td rowspan="2" style="width: 60%"> <img src="{{ $img }}" width="80%" height="50"></td>
+                <td width='40%' colspan="3" style="text-align:center ">1/23</td>
             </tr>
             <tr>
-                <td width='100%' colspan="3" style="text-align:center ">Mes de Agosto de 2023</td>
+                <td width='40%' colspan="3" style="text-align:center ">Mes de Agosto de 2023</td>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td rowspan="2" style="text-align:center;font-size: 12px;"> OBRA: CONTRATO DE GESTIÓN DEL TRÁFICO EN
+                <td rowspan="2" style="text-align:justify;font-size: 12px;"> <strong>OBRA:</strong> CONTRATO DE GESTIÓN DEL TRÁFICO EN
                     LA CIUDAD DE VALENCIA</td>
-                <td width='100%' rowspan="2" colspan="3" style="text-align:center; font-size: 12px;">CONTRATISTA: ELECTRONIC
+                <td width='50%' rowspan="2" colspan="3" style="text-align:left; font-size: 12px;">CONTRATISTA: ELECTRONIC
                     TRAFIC, S.A.
-                    A/ 46138921
-                    C/ Tres Forques, nº 147 VALENCIA</td>
+                    <br>A/ 46138921
+                    <br>C/ Tres Forques, nº 147 VALENCIA</td>
             </tr>
 
 
@@ -104,15 +105,15 @@
 
         </tr>
         <tr width='100%'>
-            <td style="text-align:center" colspan="2">Inicio contrato: Miércoles, 02 de Agosto de 2023</td>
-            <td width='100%' style="text-align:center ">Plazo de ejecución: 5 años
-                Fecha de la escritura de contrata</td>
+            <td style="text-align:left; font-size: 0.7em" colspan="2">Inicio contrato: Miércoles, 02 de Agosto de 2023</td>
+            <td width='100%' style="text-align:justify; font-size: 0.7em ">Plazo de ejecución: 5 años
+                <br>Fecha de la escritura de contrata</td>
 
         </tr>
         <tr>
-            <td width='100%' style="text-align:center;font-size: 15px;">PRESUPUESTOS APROBADOS</td>
-            <td width='100%' style="text-align:center; font-size: 15px;">IMPORTE</td>
-            <td width='100%' style="text-align:center;font-size: 15px;">
+            <td width='100%' style="text-align:center;font-size: 0.8em;">PRESUPUESTOS APROBADOS</td>
+            <td width='100%' style="text-align:center; font-size: 0.8em;">IMPORTE</td>
+            <td width='100%' style="text-align:center;font-size: 0.8em;">
                 FECHA DE APROBACIÓN</td>
 
         </tr>
@@ -124,86 +125,102 @@
 
         </tr>
     </table>
-    <table class='tables' style="width: 100%">
+    <table class='table table-bordered' style="width: 100%">
         <tr>
             <td style="text-align: center; width:50% ">
-                <p>Baja obtenida en la subasta o concurso: 21,90% </p>
+                <p style="text-align: left; font-size: 0.8em ">Baja obtenida en la subasta o concurso:</p>
+                <p style="text-align: center ; font-size: 0.9em ">21,90% </p>
             </td>
-            <td style="text-align: left; width:50%;; ">
+            <td style="text-align: left; width:50%; font-size: 0.8em ; ">
                 <p> Plazo de ejecución: Jueves, 6 de Abril de 2023</p>
                 <p>Fecha de la escritura de contrata:</p>
             </td>
         </tr>
 
     </table>
-    <table class='tables' border="1" style="width:100%">
+    <table class='table table-bordered' border="1" style="width:100%">
         <tr>
-            <td colspan="3" style="  width=100%; text-align: justify; ">
-                <p style="font-size: 12px;">CERTIFICO: Que las obras ejecutadas en el expresado mes por el Contratista,
+            <td colspan="3" style="  width=100%; height-max: 10px ;text-align: justify; ">
+                <p style="font-size: 0.7em;">CERTIFICO: Que las obras ejecutadas en el expresado mes por el Contratista,
                     a los precios del presupuesto, importan lo siguiente:</p>
             </td>
         </tr>
     </table>
 
-   <table class='tables' border="1" style="width:100%">
+   <table class='table table-bordered'  style="width:100%">
         <tr>
-            <td style=" width=100%; text-align: center;font-size: 14px; "rowspan="2">
+            <td style="width: 20%; text-align: center;font-size: 0.7em; "rowspan="2">
                 PRESUPUESTO
             </td>
-<td style="  width=100%; text-align: center;font-size: 14px; "rowspan="2">
-CANTIDAD LÍQUIDA DEL
-REMATE
+            <td style="width: 20%; text-align: center;font-size: 0.7em; "rowspan="2">
+                CANTIDAD LÍQUIDA DEL REMATE
             </td>
-<td style=" width=100%; text-align: center;font-size: 14px;" colspan="2">
-IMPORTE DE LAS OBRAS
+            <td style="text-align: center;font-size: 0.8em;" colspan="3">
+                IMPORTE DE LAS OBRAS
             </td>
-
         </tr>
-<tr>
-           <td style=" width=100%; text-align:center; font-size: 12px;">
-                EJECUTADAS Y
-CORRESPONDIENTES A ESTA
-CERTIFICACIÓN
+        <tr>
+           <td style="width:20%; text-align:center; font-size: 0.6em;">
+                EJECUTADAS Y CORRESPONDIENTES A ESTA CERTIFICACIÓN
             </td>
-<td style="  width=100%; text-align: center;font-size: 12px; ">
-EJECUTADAS Y
-CORRESPONDIENTES A
-CERT. ANTERIORES
+            <td style="width:20%; text-align: center;font-size: 0.6em; ">
+                EJECUTADAS Y CORRESPONDIENTES A CERT. ANTERIORES
             </td>
-<td style=" width=100%; text-align: center;font-size: 12px;">
-QUE FALTAN EJECUTAR
+            <td style="width:20%; text-align: center;font-size: 0.6em;">
+                QUE FALTAN EJECUTAR
             </td>
-
-</tr>
-<tr>
-<td> </td>
-<td> </td>
-<td>{{number_format($totalizacion) .' '. 'Euros' }}</td>
-<td>0,00 Euros</td>
-<td></td>
-</tr>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
+            <td style="width:20%; text-align: right; font-size: 0.7em;">{{number_format($totalizacion) .' '. 'Euros' }}</td>
+            <td style="width:20%; text-align: right; font-size: 0.7em;">0,00 Euros</td>
+            <td></td>
+        </tr>
 </table>
-<table  class='ocultar-bordes'>
-<tr>
-<td> <p style='font-size:12 px;'> Ejecución material de las obras ..........................................................................  {{number_format($Tbajaoppdf).' '.'Euros'}}</p>
-    <p  style='font-size:12 px;'> Valor por Revisión de Precios .......................................................                       0,00
-Euros</p>
-<p style='font-size:12 px;'> TOTAL REVISADO ...............................................................................................  {{number_format($Tbajaoppdf).' '.'Euros'}}  </p>
-<p style='font-size:12 px;'> Baja Optenida 21,90 %    ..............................................................................  ........... {{number_format($resultbaja).' '.'Euros'}}  </p>
-<p style='font-size:12 px;'> <strong>DIFERENCIA </strong>.................................................................................. {{number_format($restarbaja1).' '.'Euros'}} </p>
-<p style='font-size:12 px;'> Gastos Generales 13,00% .................................................................................. {{number_format($gastosgeneralesS2).' '.'Euros'}} </p>
-<p style='font-size:12 px;'> Beneficio Industrial  6,00% .................................................................................. {{number_format($beneficioInd)}} </p>
-<p style='font-size:12 px;'> SUMA .................................................................................. {{number_format($suma).' '.'Euros'}} </p>
-<p style='font-size:12 px;'> I.V.A 21,00 %..................................................................................  {{number_format($iva21s3).' '.'Euros'}} </p>
-<p style='font-size:12 px;'>  LIQUIDO A PERCIBIR EL CONTRATISTA .................................................................................. {{number_format($totalizacion).' '.'Euros'}} </p></td>
-<tr>
+<!-- class='ocultar-bordes' -->
+<table style='font-size:0.7em; width: 100%' border="1">
+    <tr>
+        <td style="width: 80%; border:none">Ejecución material de las obras ...............................................................................................................................</td> <td style='text-align: right; border:none'>{{number_format($Tbajaoppdf).' '.'Euros'}}</td>
+    </tr>
+    <tr>
+        <td style="border:none">Valor por Revisión de Precios ..................................................................................................................................</td> <td style="text-align: right ; border:none">0,00 Euros</td>
+    </tr>
+    <tr>
+        <td style="border:none">TOTAL REVISADO ..................................................................................................................................................</td> <td style="text-align: right; border:none">{{number_format($Tbajaoppdf).' '.'Euros'}} </td>
+    </tr>
+    <tr>
+        <td style="border:none">Baja Optenida 21,90% .............................................................................................................................................</td> <td style="text-align: right; border:none"> {{number_format($resultbaja).' '.'Euros'}}</td>
+    </tr>
+    <tr>
+        <td style="border:none"><strong>DIFERENCIA ...........................................................................................................................................................</strong></td> <td style="text-align: right; border:none"> {{number_format($restarbaja1).' '.'Euros'}}</td>
+    </tr>
+    <tr>
+        <td style="border:none">Gastos Generales 13,00% .......................................................................................................................................</td><td style="text-align: right; border:none"> {{number_format($gastosgeneralesS2).' '.'Euros'}} </td>
+    </tr>
+    <tr>
+        <td style="border:none">Beneficio Industrial 6,00% ........................................................................................................................................</td> <td style="text-align: right; border:none"> {{number_format($beneficioInd).' '.'Euros'}} </td>
+    </tr>
+    <tr>
+        <td style="border:none">SUMA .......................................................................................................................................................................</td> <td style="text-align: right; border:none">{{number_format($suma).' '.'Euros'}} </td>
+    </tr>
+    <tr>
+        <td style="border:none">I.V.A 21,00% ............................................................................................................................................................</td> <td style="text-align: right; border:none"> {{number_format($iva21s3).' '.'Euros'}}</td>
+    </tr>
+    <tr>
+        <td style="border:none">LIQUIDO A PERCIBIR EL CONTRATISTA .............................................................................................................</td> <td style="text-align: right; border:none"> {{number_format($totalizacion).' '.'Euros'}}</td>
+    </tr>
 </table>
+<br>
+<p style="text-align: justify; font-size: 0.9em">Y para que conste y pueda servir de abono, expido la presente certificación de: {{$totalletras}}</p>
 
-Y para que conste y pueda servir de abono, expido la presente certificación de: {{$totalletras}}
 <br><br>
-Documento firmado electrónicamente por el contratista, el Jefe de la Sección y el Concejal Coordinador del Área
 
-    <div style="page-break-before: always;"></div>
+
+<p style="text-align: center; font-size: 0.7em">Documento firmado electrónicamente por el contratista, el Jefe de la Sección y el Concejal Coordinador del Área</p>
+
+ <!-- SEGUNDA Area del Formulario principal -->
+<div style="page-break-before: always;"></div>
 
     @php
 
@@ -211,28 +228,28 @@ Documento firmado electrónicamente por el contratista, el Jefe de la Sección y
         $totaltotalesEPartes = 0;
     @endphp
     @foreach ($conjuntosDeInformes as $index => $conjunto)
-        <table class='tables'>
-            <thead>
-                <tr>
-                    <th>Codigo</th>
-                    <th>Concepto</th>
-                    <th>Uds en garantía</th>
-                    <th>Uds en conservación</th>
-                    <th>Días en conservación</th>
-                    <th>Euros por día</th>
-                    <th>Total</th>
+        <table class="tables" style="width: 100%" >
+            <thead >
+                <tr >
+                    <th style="text-align: center; font-size: 0.7em; width: 10%">Codigo</th>
+                    <th style="text-align: center; font-size: 0.7em; width:31%;">Concepto</th>
+                    <th style="text-align: center; font-size: 0.7em; width: 11%">Uds en garantía</th>
+                    <th style="text-align: center; font-size: 0.7em; width: 11%">Uds en conservación</th>
+                    <th style="text-align: center; font-size: 0.7em; width: 11%">Días en conservación</th>
+                    <th style="text-align: center; font-size: 0.7em; width: 11%">Precio (€ por día)</th>
+                    <th style="text-align: center; font-size: 0.7em; width: 13%">Total</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($conjunto as $item)
                     <tr>
-                        <td style="text-align:center ">{{ $item->Codigo }}</td>
-                        <td style="text-align:center ">{{ $item->Concepto }}</td>
-                        <td style="text-align:center ">{{ $item->Uds_en_garantia }}</td>
-                        <td style="text-align:center ">{{ $item->Uds_en_conservacion }}</td>
-                        <td style="text-align:center ">{{ $item->Dias_en_conservacion }}</td>
-                        <td style="text-align:center ">{{ $item->Euros_por_dia }}</td>
-                        <td style="text-align:center ">{{ number_format($item->Total) }}</td>
+                        <td style="text-align:center; font-size: 0.7em; ">{{ $item->Codigo }}</td>
+                        <td style="text-align:left; font-size: 0.7em; ">{{ $item->Concepto }}</td>
+                        <td style="text-align:center; font-size: 0.7em; ">{{ $item->Uds_en_garantia }}</td>
+                        <td style="text-align:center; font-size: 0.7em; ">{{ $item->Uds_en_conservacion }}</td>
+                        <td style="text-align:center; font-size: 0.7em; ">{{ $item->Dias_en_conservacion }}</td>
+                        <td style="text-align:right; font-size: 0.7em; ">{{ $item->Euros_por_dia }} €</td>
+                        <td style="text-align:right; font-size: 0.7em; ">{{ number_format($item->Total) }} €</td>
 
                     </tr>
                 @endforeach
@@ -254,62 +271,61 @@ Documento firmado electrónicamente por el contratista, el Jefe de la Sección y
 
     </table>
     @foreach ($partes as $index => $parte)
-        <table style="width: 100%; page-break-before: always;" class="tables">
+        <table style="width: 100%; page-break-before: always; border:none" class="table table-bordered">
 
 
             <thead>
                 <tr style="text-align: center;">
-                    <td colspan="3">
-                        <img src="{{ base_path('public/img/imagen_Relacion_valorada.png') }}" width="500"
-                            height="50">
+                    <td colspan="3" style="border: none; width: 100%">
+                        <center><img src="{{ base_path('public/img/imagen_Relacion_valorada.png') }}" width="100%"
+                            height="50"></center>
                     </td>
                 </tr>
 
                 <tr>
-                    <td colspan="2" style="padding: 0px 0px 0px 25px">
-                        <h2> Relacion valorada de...</h2>
+                    <td colspan="2" style="padding: 0px 0px 0px 25px; width:60%; border:none">
+                        <h4> Relacion valorada de...</h4>
                     </td>
-                    <td colspan="1" style="padding: 0px 0px 0px 25px">
-                        <h2>Lote No.</h2>
+                    <td colspan="1" style="padding: 0px 0px 0px 25px; width:30%; border:none">
+                        <h4>Lote No.</h4>
                     </td>
                 </tr>
             </thead>
 
             <tbody>
                 <tr>
-                    <td style="text-align: left; padding: 10px 0px 10px 20px">
+                    <td colspan="2" style="text-align: left; padding: 10px 0px 10px 20px; font-size:0.8em; border:none">
                         <strong>No. Orden:</strong> <label>1</label>
                     </td>
-                    <td style="text-align: right; padding: 0px 20px 0px 0px"></td>
-                    <td style="text-align: right; padding: 0px 20px 0px 0px"><strong>Parte de..</strong> <label>
-                            {{ $parte->tipoparte }}</label><strong>No.:</strong> <label>{{ $parte->id }}</label>
+                    <td colspan="1" style="text-align: right; padding: 0px 20px 0px 0px; font-size:0.8em; border:none">Parte de <label>
+                            <strong>{{ $parte->tipoparte }}</strong> </label><strong>No.: </strong> <label><strong>{{ $parte->id }}</strong></label>
                     </td>
                 </tr>
                 <tr>
-                    <td style="text-align: left; padding: 10px 0px 10px 20px">
+                    <td style="text-align: left; padding: 10px 0px 10px 20px; font-size:0.8em; border:none" colspan="1">
                         <strong>Código Localización:</strong> <label>{{ $parte->cod_localizacion }}</label>
                     </td>
-                    <td style="text-align: right; padding: 0px 0px 0px 0px; font-size:0.8em" colspan="3"><label>JUAN
+                    <td style="text-align: right; padding: 0px 0px 0px 0px; font-size:0.8em; border:none" colspan="2"><label>JUAN
                             XXIII - HERMANOS MACHADO ESTE</label></td>
                 </tr>
 
                 <tr>
 
-                    <td style="text-align: left; padding: 10px 0px 10px 20px"><strong>Autorizado por:
+                    <td style="text-align: left; padding: 10px 0px 10px 20px; font-size:0.7em; width:30%; border:none"><strong>Autorizado por:
                         </strong><label>{{ $parte->autorizadopor }}</label></td>
-                    <td style="text-align: left; padding: 10px 0px 10px 20px"><strong>Reparado por:</strong>
+                    <td style="text-align: left; padding: 10px 0px 10px 20px; font-size:0.7em; width:30%; border:none"><strong>Reparado por:</strong>
                         <label>{{ $parte->reportadoPor }}</label></td>
-                    <td style="text-align: left; padding: 10px 0px 10px 20px"><strong>Fecha conforme:</strong>
+                    <td style="text-align: left; padding: 10px 0px 10px 20px; font-size:0.7em; width:40%; border:none"><strong>Fecha conforme:</strong>
                         <label>Fecha Reparacion</label></td>
                 </tr>
                 <tr>
-                    <td style="text-align: justify; padding: 10px 0px 10px 20px" colspan="3" with="100%">
+                    <td style="text-align: justify; padding: 10px 0px 10px 20px; font-size:0.8em; border:none" colspan="3" with="100%">
                         <p> <strong>Observaciones: </strong> {{ $parte->obscreadorparte }}</p>
                     </td>
                 </tr>
 
                 <tr>
-                    <td style="text-align: justify; padding: 10px 0px 10px 20px"><strong>N° C.</strong></td>
+                    <td style="text-align: justify; padding: 10px 0px 10px 20px; border:none"><strong>N° C.</strong></td>
                 </tr>
             </tbody>
             <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
@@ -385,144 +401,134 @@ Documento firmado electrónicamente por el contratista, el Jefe de la Sección y
 
     </table>
 
-    <table style="width: 95%; page-break-before: always;">
+    <table border="0" style="width: 95%; page-break-before: always;">
         <tr>
-            <td colspan="4" style="text-align: center">
+            <td colspan="3" style="text-align: center; border:none">
                 <img src="{{ base_path('public/img/icono_representativo_caratula.png') }}" class="card-img-top"
                     style="width: 60%;text-align:center">
             </td>
         </tr>
 
         <tr>
-            <td colspan="4" style="border-bottom: 3px solid black">
-                <h1>RESUMEN GENERAL DE CERTIFICACION N°: <Label>1</Label></h1>
+            <td colspan="3" style="border-bottom: 3px solid black; border-top: none; border-left: none; border-right: none;">
+                <h3>RESUMEN GENERAL DE CERTIFICACION N°: <Label>1</Label></h3>
             </td>
         </tr>
 
-        <tr>
-            <td style="width: 45%;">RELACIÓN VALORADA CONSERVACIÓN SISTEMAS CONTROL TRÁFICO</td>
-            <td style="border-bottom: 1px dotted black; width:30%"></td>
-            <td style="width: 15%; text-align:right; padding: 5px 5px 5px 10px">{{ number_format($totalSum) }}</td>
-            <td style="width: 10%; padding: 5px 5px 5px 7px">Euros</td>
+        <tr style="font-size:0.7em; ">
+            <td style="width: 45%; border: none;">RELACIÓN VALORADA CONSERVACIÓN SISTEMAS CONTROL TRÁFICO .........</td>
+            <td style="width: 15%; border: none; text-align:right; padding: 5px 5px 5px 10px">{{ number_format($totalSum) }}</td>
+            <td style="width: 10%; border: none; padding: 5px 5px 5px 7px">Euros</td>
         </tr>
-        <tr>
-            <td>VALORACIÓN COLISIONES Y MODIFICACIONES</td>
-            <td style="border-bottom: 1px dotted black; width:30%"></td>
-            <td style="border-bottom: 3px solid black;  text-align:right; padding: 5px 7px 5px 10px;">
+        <tr style="font-size:0.7em">
+            <td style="border: none;">VALORACIÓN COLISIONES Y MODIFICACIONES ...................................................</td>
+            <td style="border-bottom: 3px solid black; border-top: none; border-left: none; border-right: none;  text-align:right; padding: 5px 7px 5px 10px;">
                 {{ $totaltotalesEPartes }} </td>
-            <td style="padding: 5px 5px 5px 7px">Euros</td>
+            <td style="padding: 5px 5px 5px 7px; border: none;">Euros</td>
         </tr>
-        <tr>
-            <td>SUMA</td>
-            <td style="border-bottom: 1px dotted black; width:30%"></td>
-            <td style="text-align:right; padding: 5px 7px 5px 10px">
+        <tr style="font-size:0.7em">
+            <td style="border: none">SUMA ...........................................................................................................................</td>
+            <td style="text-align:right; padding: 5px 7px 5px 10px; border:none">
                 {{ number_format($totalSum + $totaltotalesEPartes) }} </td>
-            <td style="padding: 5px 5px 5px 7px">Euros</td>
+            <td style="padding: 5px 5px 5px 7px; border:none">Euros</td>
         </tr>
-        <tr>
-            <td>VALOR POR REVISIÓN DE PRECIOS</td>
-            <td style="border-bottom: 1px dotted black; width:30%"></td>
-            <td style="border-bottom: 3px solid black; text-align:right; padding: 5px 7px 5px 10px"><label
+        <tr style="font-size:0.7em">
+            <td style="border: none">VALOR POR REVISIÓN DE PRECIOS .......................................................................</td>
+            <td style="border-bottom: 3px solid black; border-top: none; border-left: none; border-right: none; text-align:right; padding: 5px 7px 5px 10px"><label
                     id="3">0.00</label></td>
-            <td style="padding: 5px 5px 5px 7px">Euros</td>
+            <td style="padding: 5px 5px 5px 7px; border:none">Euros</td>
         </tr>
-        <tr>
-            <td>TOTAL REVISADO</td>
-            <td style="border-bottom: 1px dotted black; width:30%"></td>
-            <td style="text-align:right; padding: 5px 7px 5px 10px"><label
+        <tr style="font-size:0.7em">
+            <td style="border: none">TOTAL REVISADO ......................................................................................................</td>
+            <td style="text-align:right; padding: 5px 7px 5px 10px; border:none"><label
                     id="suma2">{{ number_format($totalSum + $totaltotalesEPartes) }}</label></td>
-            <td style="padding: 5px 5px 5px 7px">Euros</td>
+            <td style="padding: 5px 5px 5px 7px; border:none">Euros </td>
         </tr>
-        <tr>
+        <tr style="font-size:0.7em">
             @php
                 $Tbajaoppdf = $totalSum + $totaltotalesEPartes;
                 $porcentaje = floatval('21.90');
                 $resultbaja = ($Tbajaoppdf * $porcentaje) / 100;
             @endphp
-            <td>BAJA OBTENIDA 21,90% s/(1)</td>
-            <td style="border-bottom: 1px dotted black; width:30%"></td>
-            <td style="border-bottom: 3px solid black; text-align:right; padding: 5px 7px 5px 10px"><label
+            <td style="border: none">BAJA OBTENIDA 21,90% s/(1) ...................................................................................</td>
+            <td style="border-bottom: 3px solid black; border-top: none; border-left: none; border-right: none; text-align:right; padding: 5px 7px 5px 10px"><label
                     id="multiplicar1"></label>{{ number_format($resultbaja) }} </td>
-            <td style="padding: 5px 5px 5px 7px">Euros</td>
+            <td style="padding: 5px 5px 5px 7px; border:none">Euros</td>
         </tr>
         @php
             $restarbaja1 = $Tbajaoppdf - $resultbaja;
         @endphp
 
-        <tr>
-            <td>EJECUCIÓN MATERIAL</td>
-            <td style="border-bottom: 1px dotted black; width:30%"></td>
-            <td style="text-align:right; padding: 5px 7px 5px 10px"><label id="resta1">
+        <tr style="font-size:0.7em">
+            <td style="border: none">EJECUCIÓN MATERIAL .............................................................................................</td>
+            <td style="text-align:right; padding: 5px 7px 5px 10px; border:none"><label id="resta1">
                     {{ number_format($restarbaja1) }}</label></td>
-            <td style="padding: 5px 5px 5px 7px">Euros</td>
+            <td style="padding: 5px 5px 5px 7px; border:none">Euros</td>
         </tr>
         @php
             $porcentaje = 13.0;
             $gastosgeneralesS2 = ($restarbaja1 * $porcentaje) / 100;
         @endphp
-        <tr>
-            <td>GASTOS GENERALES 13,00% S/(2)</td>
-            <td style="border-bottom: 1px dotted black; width:30%"></td>
-            <td style="text-align:right; padding: 5px 7px 5px 10px"><label
+        <tr style="font-size:0.7em">
+            <td style="border: none">GASTOS GENERALES 13,00% S/(2) .........................................................................</td>
+            <td style="text-align:right; padding: 5px 7px 5px 10px; border: none"><label
                     id="multiplicar2">{{ number_format($gastosgeneralesS2) }}</label></td>
-            <td style="padding: 5px 5px 5px 7px">Euros</td>
+            <td style="padding: 5px 5px 5px 7px; border:none">Euros</td>
         </tr>
         @php
             $porcentaje = 6.0;
             $beneficioInd = ($gastosgeneralesS2 * $porcentaje) / 100;
         @endphp
-        <tr>
-            <td>BENEFICIO INDUSTRIAL 6,00% S/(2)</td>
-            <td style="border-bottom: 1px dotted black; width:30%"></td>
-            <td style="border-bottom: 3px solid black; text-align:right; padding: 5px 7px 5px 10px"><label
+        <tr style="font-size:0.7em">
+            <td style="border: none">BENEFICIO INDUSTRIAL 6,00% S/(2) .......................................................................</td>
+            <td style="border-bottom: 3px solid black; border-top: none; border-left: none; border-right: none; text-align:right; padding: 5px 7px 5px 10px"><label
                     id="multiplicar3">{{ number_format($beneficioInd) }}</label></td>
-            <td style="padding: 5px 5px 5px 7px">Euros</td>
+            <td style="padding: 5px 5px 5px 7px; border:none">Euros</td>
         </tr>
 
         @php
             $suma = $restarbaja1 + $gastosgeneralesS2 + $beneficioInd;
         @endphp
-        <tr>
-            <td>SUMA</td>
-            <td style="border-bottom: 1px dotted black; width:30%"></td>
-            <td style="text-align:right; padding: 5px 7px 5px 10px"><label
+        <tr style="font-size:0.7em">
+            <td style="border: none">SUMA ...........................................................................................................................</td>
+            <td style="text-align:right; padding: 5px 7px 5px 10px; border:none"><label
                     id="suma3">{{ number_format($suma) }}</label></td>
-            <td style="padding: 5px 5px 5px 7px">Euros</td>
+            <td style="padding: 5px 5px 5px 7px; border:none">Euros</td>
         </tr>
         @php
             $porcentaje = 21;
             $iva21s3 = ($suma * $porcentaje) / 100;
             $totalizacion = $iva21s3 + $suma;
         @endphp
-        <tr>
-            <td>I.V.A (21 %) S/(3)</td>
-            <td style="border-bottom: 1px dotted black; width:30%"></td>
-            <td style="border-bottom: 3px solid black; text-align:right; padding: 5px 7px 5px 10px"><label
+        <tr style="font-size:0.7em">
+            <td style="border: none">I.V.A (21 %) S/(3) .........................................................................................................</td>
+            <td style="border-bottom: 3px solid black; border-top: none; border-left: none; border-right: none; text-align:right; padding: 5px 7px 5px 10px"><label
                     id="multiplicar4"> {{ number_format($iva21s3) }}</label></td>
-            <td style="padding: 5px 5px 5px 7px">Euros</td>
+            <td style="padding: 5px 5px 5px 7px; border: none">Euros</td>
         </tr>
     </table>
+
+
     <br>
-    <table style="width:95%">
+    <table style="width:95%; border-collapse: collapse; " border="0">
         </thead>
-        <tbody>
-            <td style="width: 45%;"><STRong>TOTAL CERTIFICACIÓN</STRong></td>
-            <td style="border-bottom: 1px dotted black; width:30%"></td>
-            <td style="width: 15%; text-align:right; padding: 5px 5px 5px 10px"><label
-                    id="totalResumen">{{ number_format($totalizacion) }}</label></td>
-            <td style="width: 10%; padding: 5px 5px 5px 7px">Euros</td>
+        <tbody style="font-size:0.9em">
+            <td style="width: 45%; font-size:0.9em; border: none"><STRong>TOTAL CERTIFICACIÓN ..........................................................................</STRong></td>
+            <td style="width: 15%; text-align:right; border:none"><label
+                    id="totalResumen">{{ number_format($totalizacion) }} </label></td>
+            <td style="width: 10%; padding: 5px 5px 5px 7px; border:none"> Euros.</td>
         </tbody>
     </table>
 
     <br><br>
-    <table>
+    <table border="0">
         <tr>
-            <td colspan="5" style="text-align: center; padding: 5px 5px 5px 15px">
+            <td colspan="3" style="text-align: center; padding: 5px 5px 5px 15px; border: none; font-size:0.9em">
                 VALENCIA, <LAbel id="fechaActual2"></LAbel>
             </td>
         </tr>
         <tr>
-            <td colspan="5" style="text-align: center; padding: 5px 5px 5px 15px">
+            <td colspan="3" style="text-align: center; padding: 5px 5px 5px 15px; border: none; font-size:0.9em">
                 Documento firmado electrónicamente por el contratista, el Jefe de la Sección y el Concejal Coordinador
                 del Área
             </td>
