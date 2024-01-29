@@ -167,7 +167,7 @@ color: #ffFF ;
 
                 document.getElementById('pdfForm').submit();
               //reload();
-      window.location.href;
+      location.reload();
                 return true;
             }
         }
