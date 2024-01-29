@@ -334,7 +334,7 @@ Documento firmado electrónicamente por el contratista, el Jefe de la Sección y
                 <tbody>
                     @foreach ($elementos as $elemento)
                         <tr>
-                            <td style="text-align: center; padding: 5px 0px 5px 0px">{{ $elemento->precioU }}</td>
+                            <td style="text-align: center; padding: 5px 0px 5px 0px">{{ $elemento->elemento }}</td>
                             <td style="text-align: justify; padding: 5px 0px 5px 10px">{{ $elemento->descripcion }}
                             </td>
                             <td style="text-align: right; padding: 5px 10px 5px 0px">{{ $elemento->cantidad }}</td>
