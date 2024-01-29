@@ -284,7 +284,7 @@
 
                 <tr>
                     <td colspan="2" style="padding: 0px 0px 0px 25px; width:60%; border:none">
-                        <h4> Relacion valorada de...</h4>
+                        <h4> Relacion valorada de Partes</h4>
                     </td>
                     <td colspan="1" style="padding: 0px 0px 0px 25px; width:30%; border:none">
                         <h4>Lote No.</h4>
@@ -325,7 +325,7 @@
                 </tr>
 
                 <tr>
-                    <td style="text-align: justify; padding: 10px 0px 10px 20px; border:none"><strong>N° C.</strong></td>
+                    <!--<td style="text-align: justify; padding: 10px 0px 10px 20px; border:none"><strong>N° C.</strong></td>-->
                 </tr>
             </tbody>
             <!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
@@ -337,10 +337,10 @@
             //dd();
         @endphp
         @if (count($elementos) > 0)
-            <table style="width: 95%" id="table-relacion">
+            <table style="width: 100%" id="table-relacion">
                 <thead>
                     <tr>
-                        <th style="width: 15%">Precios</th>
+                        <th style="width: 15%">Código</th>
                         <th style="width: 40%">Descripción</th>
                         <th style="width: 15%">Cantidad</th>
                         <th style="width: 15%">Precio</th>
