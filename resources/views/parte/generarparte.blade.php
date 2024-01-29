@@ -171,7 +171,7 @@ color: #ffFF ;
                 return true;
             }
         }
-
+///algo
         alert('Por favor, selecciona al menos un checkbox antes de realizar la acción.');
         return false;
                     }
