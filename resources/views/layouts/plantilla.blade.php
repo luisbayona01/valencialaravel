@@ -109,6 +109,10 @@ $(".table").DataTable({
                 <i class="fa fa-check-square"></i> <span class="align-middle" >Gestión de partes</span>
             </a>
 
+ <a href="{{ url('/informecorrectivos') }}" class="sidebar-link collapsed">
+                <!-- Opening div for sidebar-link -->
+                <i class="fa fa-file-text-o"></i> <span class="align-middle" > Cargar lista de Conservacion</span>
+            </a>
 
 
            <!-- <li > -->

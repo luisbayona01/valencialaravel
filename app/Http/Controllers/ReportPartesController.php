@@ -8,11 +8,24 @@ use App\Models\Elementosparte;
 use Barryvdh\DomPDF\Facade\Pdf;
 use DB;
 use Luecano\NumeroALetras\NumeroALetras;
+use Illuminate\Http\Request;
 class ReportPartesController extends Controller
 {
-    public function generarinforme()
+    public function generarinforme(Request $request)
     {
-       $totalSum = DB::table('informecorrectivo')->sum('Total');
+
+
+
+/*   "fechaautorizacionInicio" => "2024-01-01"
+      "fechaautorizacionFin" => "2024-02-28*/
+//dd($request);
+$partesid=$request->input('parte_ids');
+
+ //dd($partesid);
+//die();
+
+
+
         $img = base_path('public/img/icono_representativo_caratulapdf.png');
 //die();
        $partes = DB::table('parte as P')
@@ -38,7 +51,9 @@ class ReportPartesController extends Controller
     ->join('users as UL', 'UL.id', '=', 'P.autorizado_por')
     ->join('users as UR', 'UR.id', '=', 'P.reportadopor')
 
-    ->where('EST.id','5')->get();
+    ->where('EST.id','5')->wherein('P.id',$partesid)->get();
+
+//dd($partes);
 $parteIds = $partes->pluck('id')->toArray();
 
 
@@ -48,11 +63,25 @@ $totalPartes = DB::table('elemtos_parte')
     ->whereIn('parteid', $parteIds)
     ->first();
 
-//dd($totalPartes->total);
 
 
+       $fechaInicio = $request->input('fechaautorizacionInicio');
+$fechaFin = $request->input('fechaautorizacionFin');
 
-        $informeCorrectivo = DB::table('informecorrectivo')->get()->toArray();
+// Consulta para obtener la suma de 'Total' entre las fechas indicadas
+$totalSum = DB::table('informecorrectivo')
+    ->whereBetween('Fecha_de_carga', [$fechaInicio, $fechaFin])
+    ->sum('Total');
+
+
+//dd($totalSum);
+
+// Consulta para obtener los informes correctivos entre las fechas indicadas
+$informeCorrectivo = DB::table('informecorrectivo')
+    ->whereBetween('Fecha_de_carga', [$fechaInicio, $fechaFin])
+    ->get()
+    ->toArray();
+//dd($informeCorrectivo);
 
         $chunkSize = 30;
         $totalItems = count($informeCorrectivo);
@@ -78,6 +107,7 @@ $totalPartes = DB::table('elemtos_parte')
         $pdf = Pdf::loadView('pdf.informeParte', compact('partes', 'img', 'conjuntosDeInformes','totalSum','totalPartes'));
         //$pdf->inline('informeParte.pdf');
        $pdf->setPaper('legal');
+Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
         return $pdf->stream();
 
     }
