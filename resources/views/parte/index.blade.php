@@ -72,15 +72,17 @@ color: #ffFF ;
                             -->
 
                             <div class="float-right">
-                            @php
-                                $mostrarNuevoParte = false;
-                                foreach ($partes as $parte) {
-                                    if ($parte->estadoparte === 'Activo' || $parte->estadoparte === 'Revisar') {
-                                        $mostrarNuevoParte = true;
-                                        break;
+                                @php
+                                    $mostrarNuevoParte = false;
+                                    foreach ($partes as $parte) {
+                                        if (in_array(Auth::user()->idrol, ['1', '2', '3'])) {
+                                            $mostrarNuevoParte = true;
+                                            break;
+                                        }
                                     }
-                                }
-                            @endphp
+                                @endphp
+
+
 
                             @if ($mostrarNuevoParte)
                                 <a href="{{ route('partes.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
