@@ -51,6 +51,7 @@ Route::get('pdf', [App\Http\Controllers\parteController::class, 'pdf'])->name('p
 //    return view('parte.generarparte');
 //})->name('generarparte');
 
+//Route::post('/ReportPartesController')->name('informeParte');
 
 
 

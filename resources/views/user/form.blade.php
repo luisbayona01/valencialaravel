@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
             {{ Form::label('Codigo') }}
-            {{ Form::text('codigo', $user->codigo, ['class' => 'form-control' . ($errors->has('codigo') ? ' is-invalid' : ''), 'placeholder' => 'codigo','required' => 'required']) }}
+            {{ Form::text('codigo', $user->codigo, ['class' => 'form-control' . ($errors->has('codigo') ? ' is-invalid' : ''), 'placeholder' => 'codigo','required' => 'required', 'readonly' => $estado ? 'readonly' : null,]) }}
              <div class="invalid-feedback"> El  campo codigo es obligatorio  </div>
         </div>
         <div class="form-group">
