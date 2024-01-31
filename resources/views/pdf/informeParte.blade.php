@@ -67,8 +67,9 @@
 
          $porcentaje = 21;
             $iva21s3 = ($suma * $porcentaje) / 100;
-            $totalizacion = $iva21s3 + $suma;
 
+            $suma2 = $suma - $penalidad;
+            $totalizacion = $iva21s3 + $suma2;
 
 
             $totalletras = app('App\Http\Controllers\ReportPartesController')->numerosletras($totalizacion);
@@ -498,8 +499,32 @@
         @php
             $porcentaje = 21;
             $iva21s3 = ($suma * $porcentaje) / 100;
-            $totalizacion = $iva21s3 + $suma;
+            $totalizacion = $iva21s3 + $suma2;
         @endphp
+
+        <!-- Penalidades Resumen General -->
+        <tr style="font-size:0.7em">
+            <td style="border: none">ABONO POR PENALIDAD REFERENTE AL ART. 27.2 .............................................</td>
+            <td style="text-align:right; padding: 5px 7px 5px 10px; border-bottom: 3px solid black; border-top: none; border-left: none; border-right: none;">
+                <label id="penalidad">- {{ number_format($penalidad) }}</label>
+            </td>
+            <td style="padding: 5px 5px 5px 7px; border:none">Euros</td>
+        </tr>
+
+        @php
+
+
+
+        @endphp
+
+        <!-- Resta de las Penalidades Resumen General -->
+        <tr style="font-size:0.7em">
+            <td style="border: none">SUMA ...........................................................................................................................</td>
+            <td style="text-align:right; padding: 5px 7px 5px 10px; border:none"><label
+                    id="suma3">{{ number_format($suma2) }}</label></td>
+            <td style="padding: 5px 5px 5px 7px; border:none">Euros</td>
+        </tr>
+
         <tr style="font-size:0.7em">
             <td style="border: none">I.V.A (21 %) S/(3) .........................................................................................................</td>
             <td style="border-bottom: 3px solid black; border-top: none; border-left: none; border-right: none; text-align:right; padding: 5px 7px 5px 10px"><label

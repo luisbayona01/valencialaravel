@@ -29,7 +29,17 @@ background-color:#FA8072 !important;
 /* Estado 3 Rechazado */
 color: #ffFF ;
  }
-</style>
+
+
+        /* Estilo opcional para ocultar el input inicialmente */
+        input[type="text"] {
+            display: none;
+        }
+        input[type="text"], #penalidadEuro {
+            display: none;
+        }
+    </style>
+
     <div class="container-fluid" >
         <div class="row">
             <div class="col-lg-12">
@@ -65,20 +75,17 @@ color: #ffFF ;
                             <label>Fecha fin</label>
                             <input type="date" name="fechaautorizacionFin" class="form-control">
                         </div>
-             <div class="form-group">
-                                        <button type="submit" class="btn btn-info">Buscar</button>
-                                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info">Buscar</button>
                     </div>
+                    </div>
+                       <div class="col-sm-4">
 
-                <div class="col-sm-4">
-
-                                </div>
-                </div>
-
-            </form>
-
-    </div>
-</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
 
                     <div class="card-body">
@@ -102,9 +109,13 @@ color: #ffFF ;
                                     </tr>
                                 </thead>
                                 <tbody>
-<form  id="pdfForm" action="{{ route('report') }}" method="POST" target="_blank">
- <input type="hidden" id="fechaautorizacionInicioHidden" name="fechaautorizacionInicio">
-    <input type="hidden" id="fechaautorizacionFinHidden" name="fechaautorizacionFin">
+                                <form  id="pdfForm" action="{{ route('report') }}" method="POST" target="_blank">
+                                <input type="hidden" id="fechaautorizacionInicioHidden" name="fechaautorizacionInicio">
+                                <input type="hidden" id="fechaautorizacionFinHidden" name="fechaautorizacionFin">
+                                <input type="hidden" id="penalidadtxt" name="penalidad">
+
+
+
                                     @foreach ($partes as $parte)
 
 
@@ -123,59 +134,93 @@ color: #ffFF ;
                                             <td style="text-align: center">
                                                 <a class="btn btn-sm btn-success" href="{{ route('partes.edit',$parte->id) }}" ><i ></i> {{ __('Ver') }}</a> <!-- Accion -->
                                             </td>
-                        <td>
-
-@csrf
-               <input type="checkbox" name="parte_ids[]" value="{{ $parte->id }}">
-
-                        </td>
-                                        </tr>
-
+                                        <td>
+                                            @csrf
+                                            <input type="checkbox" name="parte_ids[]" value="{{ $parte->id }}">
+                                        </td>
+                                       </tr>
                                     @endforeach
-</form>
+                                    </form>
                                 </tbody>
                             </table>
 
                         </div>
                     </div>
+
+                    <div>
+                        <table style="width: 100%">
+                            <tr class="float-center">
+                                <td style="text-align:right; width:80%">
+                                    <label style="text-align:center;" >Aplicar Penalización</label>
+                                </td>
+                                <td style="text-align:center; width:5%">
+                                    <input type="checkbox" style="text-align:right; " name="penalidadchek" value="" onchange="toggleInputVisibility()">
+                                </td>
+                                <td style="text-align:center;width:7%">
+                                    <input style="text-align: right; width:100%" type="text" id="penalidad" value="0">
+                                </td>
+                                <td id="penalidadEuro" style="text-align:left; width:5%"><h4>€</h4></td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+
                     <br>
                     <div style="text-align: letf; padding: 0px 10px 10px 10px">
                         <button type="button" onclick="goToHome()" class="btn btn-secondary" style="text-align: right;">Volver</button>
                         <button type="button" onclick="pdf()" class="btn btn-primary float-right" style="text-align: right;">Generar Certificación</button>
                     </div>
 
-                    <script>
-                        function goToHome() {
-                            window.location.href = "{{ url('/gestorParte') }}";
+                <script>
+                    function goToHome() {
+                        window.location.href = "{{ url('/gestorParte') }}";
+                    }
+
+                    function toggleInputVisibility() {
+                        var checkbox = document.querySelector('input[name="penalidadchek"]');
+                        var inputText = document.getElementById('penalidad');
+                        var penalidadEuro = document.getElementById('penalidadEuro');
+
+                        // Si el checkbox está marcado, muestra el input y el elemento con id="penalidadEuro"; de lo contrario, ocúltalos
+                        if (checkbox.checked) {
+                            inputText.style.display = 'block';
+                            penalidadEuro.style.display = 'block';
+                        } else {
+                            inputText.style.display = 'none';
+                            penalidadEuro.style.display = 'none';
                         }
+                    }
+
                     function pdf() {
 
- //window.open("{{ url('/pdf') }}", "_blank");
+                        //window.open("{{ url('/pdf') }}", "_blank");
 
- var searchParams = new URLSearchParams(window.location.search);
-        var fechaInicio = searchParams.get('fechaautorizacionInicio') || '';
-        var fechaFin = searchParams.get('fechaautorizacionFin') || '';
+                        var searchParams = new URLSearchParams(window.location.search);
+                        var fechaInicio = searchParams.get('fechaautorizacionInicio') || '';
+                        var fechaFin = searchParams.get('fechaautorizacionFin') || '';
 
-        // Coloca los valores en los campos de tipo hidden
-        document.getElementById('fechaautorizacionInicioHidden').value = fechaInicio;
-        document.getElementById('fechaautorizacionFinHidden').value = fechaFin;
-  var checkboxes = document.getElementsByName('parte_ids[]');
+                        // Coloca los valores en los campos de tipo hidden
+                        document.getElementById('fechaautorizacionInicioHidden').value = fechaInicio;
+                        document.getElementById('fechaautorizacionFinHidden').value = fechaFin;
+                        var checkboxes = document.getElementsByName('parte_ids[]');
+                        let penalidad=$("#penalidad").val();
+                        $("#penalidadtxt").val(penalidad)
+                        for (var i = 0; i < checkboxes.length; i++) {
+                        if (checkboxes[i].checked) {
 
-        for (var i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i].checked) {
 
-
-                document.getElementById('pdfForm').submit();
-              //reload();
-      location.reload();
-                return true;
-            }
-        }
-
-        alert('Por favor, selecciona al menos un checkbox antes de realizar la acción.');
-        return false;
+                        document.getElementById('pdfForm').submit();
+                        //reload();
+                        location.reload();
+                        return true;
+                        }
                     }
-                    </script>
+
+                        alert('Por favor, selecciona al menos un checkbox antes de realizar la acción.');
+                        return false;
+                    }
+                </script>
                 </div>
 
             </div>

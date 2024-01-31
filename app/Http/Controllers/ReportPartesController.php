@@ -21,6 +21,7 @@ class ReportPartesController extends Controller
 //dd($request);
 $partesid=$request->input('parte_ids');
 
+$penalidad= $request->input('penalidad');
  //dd($partesid);
 //die();
 
@@ -104,7 +105,7 @@ $informeCorrectivo = DB::table('informecorrectivo')
         }
 
   //dd($totalSum);
-        $pdf = Pdf::loadView('pdf.informeParte', compact('partes', 'img', 'conjuntosDeInformes','totalSum','totalPartes'));
+        $pdf = Pdf::loadView('pdf.informeParte', compact('penalidad', 'partes', 'img', 'conjuntosDeInformes','totalSum','totalPartes'));
         //$pdf->inline('informeParte.pdf');
        $pdf->setPaper('legal');
 Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
@@ -112,12 +113,21 @@ Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
 
     }
 
- public  function numerosletras($valor){
+   /* public function procesarFormulario(Request $request)
+    {
+        // Obtener el valor del input "penalidad" del formulario
+        $penalidad = $request->input('penalidad');
 
-$valor_formateado = number_format($valor / 100, 2, '.', '');
-$formatter = new NumeroALetras();
-$texto =$formatter->toMoney($valor_formateado, 2, 'EUROS', 'CENTAVOS');
- return  $texto;
-}
+        // Pasar la variable $penalidad a la vista
+        return view('informeParte', ['penalidad' => $penalidad]);
+    }
+*/
+    public  function numerosletras($valor){
+
+    $valor_formateado = number_format($valor / 100, 2, '.', '');
+    $formatter = new NumeroALetras();
+    $texto =$formatter->toMoney($valor_formateado, 2, 'EUROS', 'CENTAVOS');
+    return  $texto;
+    }
 
 }
