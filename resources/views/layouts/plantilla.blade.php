@@ -180,6 +180,8 @@ $(".table").DataTable({
 
 
 
+
+
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{url('/logout')}}">Salir</a>
                             </div>
