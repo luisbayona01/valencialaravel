@@ -86,67 +86,54 @@
         }
     </style>
     <script>
-        $(document).ready(function() {
-            $("#logear").click(function() {
+        $(document).ready(function () {
+            // Agregar controlador de eventos para la tecla Enter en los campos del formulario
+            $('#login input').keypress(function (e) {
+                if (e.which === 13) {
+                    // Si se presiona Enter, activar el clic en el botón de inicio de sesión
+                    $('#logear').click();
+                }
+            });
 
-                console.log('aaa')
+            $("#logear").click(function () {
+                console.log('aaa');
                 $("#loading2").show();
 
-
-
-                //document.querySelector('#formupdateiax')
-                //selector =
                 let isValid = document.querySelector('#login').reportValidity();
 
                 if (isValid == false) {
-                    $('#login').addClass('was-validated')
+                    $('#login').addClass('was-validated');
                     $("#loading2").hide();
-                    //return false;
                 } else {
-
-
-
                     var datosFormulario = new FormData($("#login")[0]);
 
                     fetch("{{str_replace('http://commonly-blessed-python.ngrok-free.app/','https://commonly-blessed-python.ngrok-free.app/', url('/auth/logear')) }}", {
-                            method: 'POST',
-                            body: datosFormulario
-                        })
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok');
-                            }
-                            return response
-                        .json();
-                        })
-                        .then(data => {
-                            // Manejar la respuesta exitosa
-                            if(data['ok']==false){
-                              toastr.error(data['user'])
-                             } else{
-                              //var token = data.token;
-                  window.location.href = "{{ url('/home') }}";
-
-                             }
-
-                            //alert("success");
+                        method: 'POST',
+                        body: datosFormulario
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data['ok'] == false) {
+                            toastr.error(data['user']);
+                        } else {
+                            window.location.href = "{{ url('/home') }}";
+                        }
                         $("#loading2").hide();
-                        })
-                        .catch(error => {
-                            // Manejar errores
-                            console.error('There was a problem with the fetch operation:', error);
-                            console.log("error");
-                              $("#loading2").hide();
-                        })
-
+                    })
+                    .catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                        $("#loading2").hide();
+                    });
                 }
-
-
-            })
-
-
-        })
+            });
+        });
     </script>
+
 
 
     <div class="container">
@@ -185,25 +172,22 @@
 
 
 
-                    <div class="form-group mx-sm-4 pb-2">
-                        <button type="button" class="btn btn-primary" id="logear">
-                            <span class="spinner-border spinner-border-sm mr-2" style="display:none;" id="loading2"></span>
-                            Inciar session
+                    <div class="form-group mx-sm-4 pb-2 text-center">
+                        <button type="button" style="" class="btn btn-primary" id="logear">
+                            <span class="spinner-border spinner-border-sm mr-2" style="display:none;text-align:center" id="loading2"></span>
+                            Iniciar session
                         </button>
-                        <a class="btn btn-link" href="">
-                            {{ __('olvido su  contraseña?') }}
-                        </a>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-6 offset-md-4">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="remember" id="remember"
+                                <!--<input class="form-check-input" type="checkbox" name="remember" id="remember"
                                     {{ old('remember') ? 'checked' : '' }}>
 
                                 <label class="form-check-label" for="remember"style="color: #178fd9;">
                                     {{ __('recordarme') }}
-                                </label>
+                                </label>-->
                             </div>
                         </div>
                     </div>

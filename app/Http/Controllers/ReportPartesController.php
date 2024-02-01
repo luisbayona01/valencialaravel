@@ -18,8 +18,11 @@ class ReportPartesController extends Controller
 //dd($request);
         $partesid = $request->input('parte_ids');
 
-        $penalidad = $request->input('penalidad');
-        //dd($partesid);
+        $penalidad_raw = $request->input('penalidad');
+
+        // Reemplazar comas por puntos (si las comas son el separador decimal)
+        $penalidad = str_replace(',', '.', $penalidad_raw);
+                //dd($partesid);
 //die();
 
 if (empty($fechaInicio) || empty($fechaFin)) {
@@ -110,7 +113,7 @@ $informeCorrectivo = DB::table('informecorrectivo')
         $pdf = Pdf::loadView('pdf.informeParte', compact('penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes'));
         //$pdf->inline('informeParte.pdf');
        $pdf->setPaper('legal');
-//Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
+        Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
         return $pdf->stream();
 
     }
@@ -124,13 +127,21 @@ $informeCorrectivo = DB::table('informecorrectivo')
     return view('informeParte', ['penalidad' => $penalidad]);
     }
      */
-    public function numerosletras($valor)
+    /*public function numerosletras($valor)
     {
 
     $valor_formateado = number_format($valor / 100, 2, '.', '');
     $formatter = new NumeroALetras();
     $texto =$formatter->toMoney($valor_formateado, 2, 'EUROS', 'CÉNTIMOS');
     return  $texto;
+    }*/
+
+    public function numerosletras($valor)
+    {
+        $formatter = new NumeroALetras();
+        $texto = $formatter->toMoney($valor, 2, 'EUROS', 'CÉNTIMOS');
+        return $texto;
     }
+
 
 }

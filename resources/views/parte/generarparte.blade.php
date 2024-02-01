@@ -157,7 +157,7 @@ color: #ffFF ;
                                     <input type="checkbox" style="text-align:right; " name="penalidadchek" value="" onchange="toggleInputVisibility()">
                                 </td>
                                 <td style="text-align:center;width:7%">
-                                    <input style="text-align: right; width:100%" type="text" id="penalidad" value="0">
+                                    <input style="text-align: right; width:100%" type="text" id="penalidad" placeholder="0" oninput="validateInput(this)">
                                 </td>
                                 <td id="penalidadEuro" style="text-align:left; width:5%"><h4>€</h4></td>
                             </tr>
@@ -190,6 +190,11 @@ color: #ffFF ;
                             inputText.style.display = 'none';
                             penalidadEuro.style.display = 'none';
                         }
+                    }
+
+                    function validateInput(input) {
+                        // Permite solo números, comas y puntos en el input
+                        input.value = input.value.replace(/[^0-9,.]/g, '');
                     }
 
                     function pdf() {

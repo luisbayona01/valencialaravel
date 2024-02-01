@@ -39,7 +39,7 @@ $("#contenpartes").removeClass('d-none');
                             <a href="{{ url('/partes') }}">
                             <img src=" {{ asset(url('img/TransporteNotas.png')) }}" alt="logo" style="width:100%">
                             <h4>
-                                <a class="sidebar-link" href="{{ url('/partes') }}" style="text-align: center">{{ Auth::user()->partes->count() }} Partes Asignados</a>
+                                <a class="sidebar-link" href="{{ url('/partes') }}" style="text-align: center">Partes Asignados</a>
                             </h4>
                             </a>
                         </div>
