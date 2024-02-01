@@ -21,8 +21,10 @@ class ReportPartesController extends Controller
         $penalidad = $request->input('penalidad');
         //dd($partesid);
 //die();
+
   $fechaInicio = $request->input('fechaautorizacionInicio');
         $fechaFin = $request->input('fechaautorizacionFin');
+
 if (empty($fechaInicio) || empty($fechaFin)) {
     // Si fecha de inicio no está presente, establece el primer día del mes actual
     $fechaInicio = date('Y-m-01');
@@ -69,8 +71,7 @@ $totalPartes = DB::table('elemtos_parte')
 
 //dd($totalPartes);
 
-       $fechaInicio = $request->input('fechaautorizacionInicio');
-$fechaFin = $request->input('fechaautorizacionFin');
+
 
 // Consulta para obtener la suma de 'Total' entre las fechas indicadas
 $totalSum = DB::table('informecorrectivo')
