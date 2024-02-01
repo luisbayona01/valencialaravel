@@ -22,19 +22,19 @@ class ReportPartesController extends Controller
 
         // Reemplazar comas por puntos (si las comas son el separador decimal)
         $penalidad = str_replace(',', '.', $penalidad_raw);
-                //dd($partesid);
+        //dd($partesid);
 //die();
 
-  $fechaInicio = $request->input('fechaautorizacionInicio');
+        $fechaInicio = $request->input('fechaautorizacionInicio');
         $fechaFin = $request->input('fechaautorizacionFin');
 
-if (empty($fechaInicio) || empty($fechaFin)) {
-    // Si fecha de inicio no está presente, establece el primer día del mes actual
-    $fechaInicio = date('Y-m-01');
+        if (empty($fechaInicio) || empty($fechaFin)) {
+            // Si fecha de inicio no está presente, establece el primer día del mes actual
+            $fechaInicio = date('Y-m-01');
 
-    // Si fecha de fin no está presente, establece el último día del mes actual
-    $fechaFin = date('Y-m-t');
-}
+            // Si fecha de fin no está presente, establece el último día del mes actual
+            $fechaFin = date('Y-m-t');
+        }
 
         $img = base_path('public/img/icono_representativo_caratulapdf.png');
 //die();
@@ -68,28 +68,25 @@ if (empty($fechaInicio) || empty($fechaFin)) {
         $parteIds = $partes->pluck('id')->toArray();
 
 // Realiza la segunda consulta utilizando los IDs obtenidos
-$totalPartes = DB::table('elemtos_parte')
-    ->select(DB::raw('SUM(precio_total) as total'))
-    ->whereIn('parteid', $parteIds)
-    ->first();
+        $totalPartes = DB::table('elemtos_parte')
+            ->select(DB::raw('SUM(precio_total) as total'))
+            ->whereIn('parteid', $parteIds)
+            ->first();
 
 //dd($totalPartes);
 
-
-
 // Consulta para obtener la suma de 'Total' entre las fechas indicadas
-$totalSum = DB::table('informecorrectivo')
-    ->whereBetween(DB::raw('DATE(Fecha_de_carga)'), [$fechaInicio, $fechaFin])
-    ->sum('Total');
-
+        $totalSum = DB::table('informecorrectivo')
+            ->whereBetween(DB::raw('DATE(Fecha_de_carga)'), [$fechaInicio, $fechaFin])
+            ->sum('Total');
 
 //dd($fechaInicio, $fechaFin);
 
 // Consulta para obtener los informes correctivos entre las fechas indicadas
-$informeCorrectivo = DB::table('informecorrectivo')
-    ->whereBetween(DB::raw('DATE(Fecha_de_carga)'), [$fechaInicio, $fechaFin])
-    ->get()
-    ->toArray();
+        $informeCorrectivo = DB::table('informecorrectivo')
+            ->whereBetween(DB::raw('DATE(Fecha_de_carga)'), [$fechaInicio, $fechaFin])
+            ->get()
+            ->toArray();
 //dd($informeCorrectivo);
 
         $chunkSize = 30;
@@ -115,7 +112,7 @@ $informeCorrectivo = DB::table('informecorrectivo')
         //dd($totalSum);
         $pdf = Pdf::loadView('pdf.informeParte', compact('penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes'));
         //$pdf->inline('informeParte.pdf');
-       $pdf->setPaper('legal');
+        $pdf->setPaper('legal');
         Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
         return $pdf->stream();
 
@@ -146,5 +143,19 @@ $informeCorrectivo = DB::table('informecorrectivo')
         return $texto;
     }
 
+  public  function validarchecks( Request $request){
+
+$partesid=$request->parte_ids;
+  $totalPartes = DB::table('elemtos_parte')
+            ->select(DB::raw('SUM(precio_total) as total'))
+            ->whereIn('parteid', $partesid)
+            ->first();
+
+ return response()->json([
+            'ok' => true,
+            'totalPartes' => $totalPartes,
+        ]);
+
+}
 
 }
