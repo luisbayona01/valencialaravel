@@ -336,7 +336,7 @@ if (Auth::user()->idrol==1){
         switch ($parte->estadoparte_id) {
             /* Casos para determinar  esatdo */
             case 3:
-                $query->whereIn('id', [5, 7,3]);
+                $query->whereIn('id', [5, 4, 7, 3]);
                 break;
             case 4:
                 $query->whereIn('id', [5, 7,4]);

@@ -11,7 +11,7 @@
 
             color: #212529;
             border-style: solid;
-            border-color: #dee2e6;
+            border-color: #000000;
             /*font-size: 2em;*/
             font-family: Arial, Helvetica, sans-serif;
         }
@@ -191,7 +191,7 @@
         <td style="border:none">TOTAL REVISADO ..................................................................................................................................................</td> <td style="text-align: right; border:none">{{number_format($Tbajaoppdf).' '.'Euros'}} </td>
     </tr>
     <tr>
-        <td style="border:none">Baja Optenida 21,90% .............................................................................................................................................</td> <td style="text-align: right; border:none"> {{number_format($resultbaja).' '.'Euros'}}</td>
+        <td style="border:none">Baja Obtenida 21,90% .............................................................................................................................................</td> <td style="text-align: right; border:none"> {{number_format($resultbaja).' '.'Euros'}}</td>
     </tr>
     <tr>
         <td style="border:none"><strong>DIFERENCIA ...........................................................................................................................................................</strong></td> <td style="text-align: right; border:none"> {{number_format($restarbaja1).' '.'Euros'}}</td>
@@ -250,7 +250,7 @@
                         <td style="text-align:center; font-size: 0.7em; ">{{ $item->Uds_en_conservacion }}</td>
                         <td style="text-align:center; font-size: 0.7em; ">{{ $item->Dias_en_conservacion }}</td>
                         <td style="text-align:right; font-size: 0.7em; ">{{ $item->Euros_por_dia }} €</td>
-                        <td style="text-align:right; font-size: 0.7em; ">{{ number_format($item->Total) }} €</td>
+                        <td style="text-align:right; font-size: 0.7em; ">{{ number_format($item->Total, 2, ',', '.') }} €</td>
 
                     </tr>
                 @endforeach
@@ -258,7 +258,7 @@
             </tbody>
         </table>
         @if ($index < count($conjuntosDeInformes) - 1)
-            <div style="page-break-before: always;"></div> {{-- Añade un salto de página para cada conjunto, excepto el último --}}
+            <div style=""></div> {{-- Añade un salto de página para cada conjunto, excepto el último --}}
         @endif
     @endforeach
 
@@ -267,10 +267,12 @@
         <tr>
             <td width='100%' colspan="2" style="text-align:center ">Total:</td>
 
-            <td width='100%' colspan="3" style="text-align:center ">{{ number_format($totalSum) }}</td>
+            <td width='100%' colspan="3" style="text-align:center ">{{ number_format($totalSum, 2, ',', '.') }} Euros</td>
         </tr>
 
     </table>
+
+
     @foreach ($partes as $index => $parte)
         <table style="width: 100%; page-break-before: always; border:none" class="table table-bordered">
 
@@ -351,13 +353,13 @@
                 <tbody>
                     @foreach ($elementos as $elemento)
                         <tr>
-                            <td style="text-align: center; padding: 5px 0px 5px 0px">{{ $elemento->elemento }}</td>
-                            <td style="text-align: justify; padding: 5px 0px 5px 10px">{{ $elemento->descripcion }}
+                            <td style="text-align: center; padding: 5px 0px 5px 0px; font-size:0.7em">{{ $elemento->elemento }}</td>
+                            <td style="text-align: justify; padding: 5px 0px 5px 10px; font-size:0.7em">{{ $elemento->descripcion }}
                             </td>
-                            <td style="text-align: right; padding: 5px 10px 5px 0px">{{ $elemento->cantidad }}</td>
-                            <td style="text-align: right; padding: 5px 10px 5px 0px">{{ $elemento->precioU }} </td>
-                            <td style="text-align: right; padding: 5px 10px 5px 0px">
-                                </label>{{ $elemento->precio_total }} €</td>
+                            <td style="text-align: right; padding: 5px 10px 5px 0px; font-size:0.7em">{{ $elemento->cantidad }}</td>
+                            <td style="text-align: right; padding: 5px 10px 5px 0px; font-size:0.7em">{{ $elemento->precioU }} </td>
+                            <td style="text-align: right; padding: 5px 10px 5px 0px; font-size:0.7em">
+                                {{ number_format($elemento->precio_total, 2, ',', '.') }} €</td>
                         </tr>
                     @endforeach
 
@@ -376,10 +378,10 @@
                         style="width: 15%; text-align: right; padding: 0px 10px 0px 0px; ; border-top: 1px solid black">
                         <strong>Total</strong></td>
                     @php
-                        $totalParte = number_format($totalporparte->total);
+                        $totalParte = number_format($totalporparte->total, 2, ',', '.' );
                     @endphp
                     <td style="width: 15%; text-align: right;  border-top: 1px solid black; padding: 5px 10px 5px 0px">
-                        {{ $totalporparte->total }}</td>
+                        {{ number_format($totalporparte->total, 2, ',', '.') }} eur</td>
                 </tbody>
 
             </table>
@@ -397,7 +399,7 @@
             <td style="width: 15%; text-align: right; padding: 0px 10px 0px 0px; ; border-top: 1px solid black">
                 <strong>Total</strong></td>
             <td style="width: 15%; text-align: right;  border-top: 1px solid black; padding: 5px 10px 5px 0px"><label
-                    id="totalGeneralRelacion">{{ $totaltotalesEPartes }} Euros </label></td>
+                    id="totalGeneralRelacion">{{number_format($totaltotalesEPartes, 2, ',', '.') }} Euros </label></td>
         </tbody>
 
     </table>
@@ -418,19 +420,19 @@
 
         <tr style="font-size:0.7em; ">
             <td style="width: 45%; border: none;">RELACIÓN VALORADA CONSERVACIÓN SISTEMAS CONTROL TRÁFICO .........</td>
-            <td style="width: 15%; border: none; text-align:right; padding: 5px 5px 5px 10px">{{ number_format($totalSum) }}</td>
+            <td style="width: 15%; border: none; text-align:right; padding: 5px 5px 5px 10px">{{ number_format($totalSum, 2, ',', '.' ) }}</td>
             <td style="width: 10%; border: none; padding: 5px 5px 5px 7px">Euros</td>
         </tr>
         <tr style="font-size:0.7em">
             <td style="border: none;">VALORACIÓN COLISIONES Y MODIFICACIONES ...................................................</td>
             <td style="border-bottom: 3px solid black; border-top: none; border-left: none; border-right: none;  text-align:right; padding: 5px 7px 5px 10px;">
-                {{ $totaltotalesEPartes }} </td>
+                {{number_format($totaltotalesEPartes, 2, ',', '.' ) }} </td>
             <td style="padding: 5px 5px 5px 7px; border: none;">Euros</td>
         </tr>
         <tr style="font-size:0.7em">
             <td style="border: none">SUMA ...........................................................................................................................</td>
             <td style="text-align:right; padding: 5px 7px 5px 10px; border:none">
-                {{ number_format($totalSum + $totaltotalesEPartes) }} </td>
+                {{ number_format($totalSum + $totaltotalesEPartes, 2, ',', '.') }} </td>
             <td style="padding: 5px 5px 5px 7px; border:none">Euros</td>
         </tr>
         <tr style="font-size:0.7em">
@@ -442,7 +444,7 @@
         <tr style="font-size:0.7em">
             <td style="border: none">TOTAL REVISADO ......................................................................................................</td>
             <td style="text-align:right; padding: 5px 7px 5px 10px; border:none"><label
-                    id="suma2">{{ number_format($totalSum + $totaltotalesEPartes) }}</label></td>
+                    id="suma2">{{ number_format($totalSum + $totaltotalesEPartes, 2, ',', '.') }}</label></td>
             <td style="padding: 5px 5px 5px 7px; border:none">Euros </td>
         </tr>
         <tr style="font-size:0.7em">
@@ -453,7 +455,7 @@
             @endphp
             <td style="border: none">BAJA OBTENIDA 21,90% s/(1) ...................................................................................</td>
             <td style="border-bottom: 3px solid black; border-top: none; border-left: none; border-right: none; text-align:right; padding: 5px 7px 5px 10px"><label
-                    id="multiplicar1"></label>{{ number_format($resultbaja) }} </td>
+                    id="multiplicar1"></label>{{ number_format($resultbaja, 2, ',', '.' ) }} </td>
             <td style="padding: 5px 5px 5px 7px; border:none">Euros</td>
         </tr>
         @php
@@ -463,7 +465,7 @@
         <tr style="font-size:0.7em">
             <td style="border: none">EJECUCIÓN MATERIAL .............................................................................................</td>
             <td style="text-align:right; padding: 5px 7px 5px 10px; border:none"><label id="resta1">
-                    {{ number_format($restarbaja1) }}</label></td>
+                    {{ number_format($restarbaja1, 2, ',', '.' ) }}</label></td>
             <td style="padding: 5px 5px 5px 7px; border:none">Euros</td>
         </tr>
         @php
@@ -473,7 +475,7 @@
         <tr style="font-size:0.7em">
             <td style="border: none">GASTOS GENERALES 13,00% S/(2) .........................................................................</td>
             <td style="text-align:right; padding: 5px 7px 5px 10px; border: none"><label
-                    id="multiplicar2">{{ number_format($gastosgeneralesS2) }}</label></td>
+                    id="multiplicar2">{{ number_format($gastosgeneralesS2, 2, ',', '.' ) }}</label></td>
             <td style="padding: 5px 5px 5px 7px; border:none">Euros</td>
         </tr>
         @php
@@ -483,7 +485,7 @@
         <tr style="font-size:0.7em">
             <td style="border: none">BENEFICIO INDUSTRIAL 6,00% S/(2) .......................................................................</td>
             <td style="border-bottom: 3px solid black; border-top: none; border-left: none; border-right: none; text-align:right; padding: 5px 7px 5px 10px"><label
-                    id="multiplicar3">{{ number_format($beneficioInd) }}</label></td>
+                    id="multiplicar3">{{ number_format($beneficioInd, 2, ',', '.' ) }}</label></td>
             <td style="padding: 5px 5px 5px 7px; border:none">Euros</td>
         </tr>
 
@@ -493,7 +495,7 @@
         <tr style="font-size:0.7em">
             <td style="border: none">SUMA ...........................................................................................................................</td>
             <td style="text-align:right; padding: 5px 7px 5px 10px; border:none"><label
-                    id="suma3">{{ number_format($suma) }}</label></td>
+                    id="suma3">{{ number_format($suma, 2, ',', '.' ) }}</label></td>
             <td style="padding: 5px 5px 5px 7px; border:none">Euros</td>
         </tr>
         @php
@@ -506,7 +508,7 @@
         <tr style="font-size:0.7em">
             <td style="border: none">ABONO POR PENALIDAD REFERENTE AL ART. 27.2 .............................................</td>
             <td style="text-align:right; padding: 5px 7px 5px 10px; border-bottom: 3px solid black; border-top: none; border-left: none; border-right: none;">
-                <label id="penalidad">- {{ number_format($penalidad) }}</label>
+                <label id="penalidad">- {{ number_format($penalidad, 2, ',', '.' ) }}</label>
             </td>
             <td style="padding: 5px 5px 5px 7px; border:none">Euros</td>
         </tr>
@@ -521,14 +523,14 @@
         <tr style="font-size:0.7em">
             <td style="border: none">SUMA ...........................................................................................................................</td>
             <td style="text-align:right; padding: 5px 7px 5px 10px; border:none"><label
-                    id="suma3">{{ number_format($suma2) }}</label></td>
+                    id="suma3">{{ number_format($suma2, 2, ',', '.' ) }}</label></td>
             <td style="padding: 5px 5px 5px 7px; border:none">Euros</td>
         </tr>
 
         <tr style="font-size:0.7em">
             <td style="border: none">I.V.A (21 %) S/(3) .........................................................................................................</td>
             <td style="border-bottom: 3px solid black; border-top: none; border-left: none; border-right: none; text-align:right; padding: 5px 7px 5px 10px"><label
-                    id="multiplicar4"> {{ number_format($iva21s3) }}</label></td>
+                    id="multiplicar4"> {{ number_format($iva21s3, 2, ',', '.' ) }}</label></td>
             <td style="padding: 5px 5px 5px 7px; border: none">Euros</td>
         </tr>
     </table>
@@ -540,7 +542,7 @@
         <tbody style="font-size:0.9em">
             <td style="width: 45%; font-size:0.9em; border: none"><STRong>TOTAL CERTIFICACIÓN ..........................................................................</STRong></td>
             <td style="width: 15%; text-align:right; border:none"><label
-                    id="totalResumen">{{ number_format($totalizacion) }} </label></td>
+                    id="totalResumen">{{ number_format($totalizacion, 2, ',', '.' ) }} </label></td>
             <td style="width: 10%; padding: 5px 5px 5px 7px; border:none"> Euros.</td>
         </tbody>
     </table>

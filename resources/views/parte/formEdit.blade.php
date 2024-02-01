@@ -325,7 +325,7 @@
 
  <script>
     // Espera a que el DOM esté completamente cargado
-    document.addEventListener("DOMContentLoaded", function() {
+    /*document.addEventListener("DOMContentLoaded", function() {
         // Obtiene la tabla
         var tablaRecibe2 = document.getElementById("tabla-recibe2");
 
@@ -346,9 +346,11 @@
             }
         }
 
+        let total = total.toFixed(2)
+   let   totalstring= total.replace(".", ",");
         // Actualiza el contenido del label "totalImportes" con la suma total
-        document.getElementById("totalImportes").textContent = total.toFixed(2) + " €"; // Puedes ajustar el número de decimales según tus necesidades
-    });
+        document.getElementById("totalImportes").textContent =totalstring + " €1"; // Puedes ajustar el número de decimales según tus necesidades
+    });*/
 </script>
 
 
@@ -538,9 +540,9 @@
         var submitButton = document.querySelector("[type='submit']");
 
         // Desactiva el campo de carga y el botón de submit si el estado es uno de los especificados
-        if (estadoParte === 3 ||estadoParte === 5 || estadoParte === 6 || estadoParte === 8) {
+        if (estadoParte === 3 ||estadoParte === 4 ||estadoParte === 5 || estadoParte === 6 || estadoParte === 8) {
             fileInput.disabled = true;
-            submitButton.disabled = true;
+            //submitButton.disabled = true;
         }
     });
 

@@ -72,24 +72,17 @@ color: #ffFF ;
                             -->
 
                             <div class="float-right">
-                                @php
-                                    $mostrarNuevoParte = false;
-                                    foreach ($partes as $parte) {
-                                        if (in_array(Auth::user()->idrol, ['1', '2', '3'])) {
-                                            $mostrarNuevoParte = true;
-                                            break;
-                                        }
-                                    }
-                                @endphp
+                            @php
+                                $idrol = Auth::user()->idrol;
+                            @endphp
 
-
-
-                            @if ($mostrarNuevoParte)
+                            @if ($idrol == 1 || $idrol == 2 || $idrol == 3)
                                 <a href="{{ route('partes.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
                                     {{ __('Nuevo parte') }}
                                 </a>
                             @endif
                         </div>
+
 
 
 
@@ -132,7 +125,8 @@ color: #ffFF ;
 											<td>{{ $parte->obscreadorparte }}</td> <!-- Observaciones -->
 											<td style="text-align: center;">{{ $parte->asignadoA }}</td> <!-- Reparado por -->
 											<td>{{ $parte->fechaAsignacion }}</td> <!-- Fecha reparacion -->
-                                            <td>{{round($parte->totalImp, 2)}} €</td>
+                                            <td>{{ number_format($parte->totalImp, 2, ',', '.') }} €</td>
+
 											<td style="text-align: center;">
                                                 <span class="{{ $parte->estadoparte }}" style="display: block; width: 100%; height: 100%; text-align: center;">
                                                     {{ $parte->estadoparte }}

@@ -23,12 +23,12 @@ $(document).ready( function () {
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Informecorrectivo') }}
+                                {{ __('Tabla de Conservación') }}
                             </span>
 
                              <div class="float-right">
                                 <a href="{{ route('informecorrectivos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                  {{ __('Subir tabla') }}
                                 </a>
                               </div>
                         </div>
@@ -69,7 +69,7 @@ $(document).ready( function () {
 											<td>{{ $informecorrectivo->Uds_en_conservacion }}</td>
 											<td>{{ $informecorrectivo->Dias_en_conservacion }}</td>
 											<td>{{ $informecorrectivo->Euros_por_dia }}</td>
-											<td>{{ $informecorrectivo->Total }}</td>
+											<td>{{ $informecorrectivo->Total, 2, ',', '.'  }}</td>
 											<td>{{ $informecorrectivo->Fecha_de_carga }}</td>
 
 

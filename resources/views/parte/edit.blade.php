@@ -43,15 +43,18 @@
             if (data && Object.keys(data).length > 0) {
                 $(".contenido").removeClass("d-none");
                 $(".contenidoElements").html("");
-
+        let  totales=0;
                 data.forEach(item => {
+                     totales = item.precio_total +  totales;
+                     let  totale= item.precio_total.toFixed(2);
+                      let totalstring=  totale.replace('.',',')
                     console.log('iditem', item.idelementos_parte);
                     let rows = `<tr>
                         <td style="text-align: center;">${item.elemento}</td>
                         <td>${item.descripcion}</td>
                         <td style="text-align: right;">${item.precioU} € </td>
                         <td style="text-align: right;">${item.cantidad} </td>
-                        <td style="text-align: right;">${item.precio_total.toFixed(2)} € </td>
+                        <td style="text-align: right;">${totalstring} € </td>
                         <td style="text-align: center;">
                             <form action="{{ route('partes.destroy', $parte->id) }}" method="POST">
                                 <a style="text-align: center; margin-right: 10px; font-size: 1.3em; " type="button" class="b" id="selecione">
@@ -74,16 +77,19 @@
                 });
 
                 // Calcular la suma de la columna "Total" después de agregar todas las filas
-                var totalImportes = 0;
+                /*var totalImportes = 0;
                 $('.contenidoElements tr').each(function () {
                     var totalColumn = parseFloat($(this).find('td:eq(4)').text().replace('€', '').trim());
                     if (!isNaN(totalColumn)) {
                         totalImportes += totalColumn;
                     }
-                });
+                });*/
+
+                let total = totales.toFixed(2)
+   let   totalstring= total.replace(".", ",");
 
                 // Mostrar el resultado en el label
-                $('#totalImportes').text(totalImportes.toFixed(2) + ' €');
+                $('#totalImportes').text(totalstring + ' €');
                 // Asignar la suma total a una variable global
                 //sumaTotalGlobal = sumaTotal;
                 //sumaTotalGlobal = sumaTotal;

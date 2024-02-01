@@ -22,6 +22,14 @@ class ReportPartesController extends Controller
         //dd($partesid);
 //die();
 
+if (empty($fechaInicio) || empty($fechaFin)) {
+    // Si fecha de inicio no está presente, establece el primer día del mes actual
+    $fechaInicio = date('Y-m-01');
+
+    // Si fecha de fin no está presente, establece el último día del mes actual
+    $fechaFin = date('Y-m-t');
+}
+
         $img = base_path('public/img/icono_representativo_caratulapdf.png');
 //die();
         $partes = DB::table('parte as P')
@@ -53,33 +61,29 @@ class ReportPartesController extends Controller
         $parteIds = $partes->pluck('id')->toArray();
 
 // Realiza la segunda consulta utilizando los IDs obtenidos
-        $totalPartes = DB::table('elemtos_parte')
-            ->select(DB::raw('ROUND(SUM(precio_total), 2) as total'))
-            ->whereIn('parteid', $parteIds)
-            ->first();
+$totalPartes = DB::table('elemtos_parte')
+    ->select(DB::raw('SUM(precio_total) as total'))
+    ->whereIn('parteid', $parteIds)
+    ->first();
 
-        $fechaInicio = $request->input('fechaautorizacionInicio');
-        $fechaFin = $request->input('fechaautorizacionFin');
-        if (empty($fechaInicio) || empty($fechaFin)) {
-            // Si fecha de inicio no está presente, establece el primer día del mes actual
-            $fechaInicio = date('Y-m-01');
+//dd($totalPartes);
 
-            // Si fecha de fin no está presente, establece el último día del mes actual
-            $fechaFin = date('Y-m-t');
-        }
+       $fechaInicio = $request->input('fechaautorizacionInicio');
+$fechaFin = $request->input('fechaautorizacionFin');
 
 // Consulta para obtener la suma de 'Total' entre las fechas indicadas
-        $totalSum = DB::table('informecorrectivo')
-            ->whereBetween('Fecha_de_carga', [$fechaInicio, $fechaFin])
-            ->sum('Total');
+$totalSum = DB::table('informecorrectivo')
+    ->whereBetween(DB::raw('DATE(Fecha_de_carga)'), [$fechaInicio, $fechaFin])
+    ->sum('Total');
 
-//dd($totalSum);
+
+//dd($fechaInicio, $fechaFin);
 
 // Consulta para obtener los informes correctivos entre las fechas indicadas
-        $informeCorrectivo = DB::table('informecorrectivo')
-            ->whereBetween('Fecha_de_carga', [$fechaInicio, $fechaFin])
-            ->get()
-            ->toArray();
+$informeCorrectivo = DB::table('informecorrectivo')
+    ->whereBetween(DB::raw('DATE(Fecha_de_carga)'), [$fechaInicio, $fechaFin])
+    ->get()
+    ->toArray();
 //dd($informeCorrectivo);
 
         $chunkSize = 30;
@@ -105,8 +109,8 @@ class ReportPartesController extends Controller
         //dd($totalSum);
         $pdf = Pdf::loadView('pdf.informeParte', compact('penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes'));
         //$pdf->inline('informeParte.pdf');
-        $pdf->setPaper('legal');
-        Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
+       $pdf->setPaper('legal');
+//Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
         return $pdf->stream();
 
     }
@@ -123,10 +127,10 @@ class ReportPartesController extends Controller
     public function numerosletras($valor)
     {
 
-        $valor_formateado = number_format($valor / 100, 2, '.', '');
-        $formatter = new NumeroALetras();
-        $texto = $formatter->toMoney($valor_formateado, 2, 'EUROS', 'CENTAVOS');
-        return $texto;
+    $valor_formateado = number_format($valor / 100, 2, '.', '');
+    $formatter = new NumeroALetras();
+    $texto =$formatter->toMoney($valor_formateado, 2, 'EUROS', 'CÉNTIMOS');
+    return  $texto;
     }
 
 }
