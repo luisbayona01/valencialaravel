@@ -8,7 +8,7 @@
 
     <style>
         @page {
-            size: legal;
+            size: folio;
             margin: 1cm;
         }
 
@@ -323,8 +323,7 @@
                     <td style="text-align: left; padding: 10px 0px 10px 20px; font-size:0.8em; border:none" colspan="1">
                         <strong>Código Localización:</strong> <label>{{ $parte->cod_localizacion }}</label>
                     </td>
-                    <td style="text-align: right; padding: 0px 0px 0px 0px; font-size:0.8em; border:none" colspan="2"><label>JUAN
-                            XXIII - HERMANOS MACHADO ESTE</label></td>
+                    <td style="text-align: right; padding: 0px 0px 0px 0px; font-size:0.8em; border:none" colspan="2"><label>{{ $parte->descripcion}}</label></td>
                 </tr>
 
                 <tr>
@@ -374,7 +373,7 @@
                             <td style="text-align: right; padding: 5px 10px 5px 0px; font-size:0.7em">{{ $elemento->cantidad }}</td>
                             <td style="text-align: right; padding: 5px 10px 5px 0px; font-size:0.7em">{{ $elemento->precioU }} </td>
                             <td style="text-align: right; padding: 5px 10px 5px 0px; font-size:0.7em">
-                                {{ number_format($elemento->precio_total, 2, ',', '.') }} €</td>
+                                {{ number_format($elemento->precio_total, 2, ',', '.') }} eur</td>
                         </tr>
                     @endforeach
 

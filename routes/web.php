@@ -44,8 +44,13 @@ Route::get('/gestorParte', function () {
     return view('gestorParte');
 })->name('gestorParte');
 
+Route::get('/gestorInventario', function () {
+    return view('gestorInventario');
+})->name('gestorInventario');
+
 Route::get('generarparte', [App\Http\Controllers\parteController::class, 'generarparte'])->name('generarparte')->middleware('auth');
 Route::get('pdf', [App\Http\Controllers\parteController::class, 'pdf'])->name('pdf')->middleware('auth');
+
 
 //Route::get('/generarparte', function (){
 //    return view('parte.generarparte');

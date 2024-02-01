@@ -22,7 +22,7 @@ $("#contenpartes").removeClass('d-none');
                             <a href="{{ route('users.index') }}">
                             <img src="{{ asset(url('img/usuarios.png')) }}"  alt="logo" style="width:100%">
                             <h4>
-                               <a class="sidebar-link" href="{{ route('users.index') }}" style="text-align: center">{{ \App\Models\User::count() }} Usuarios</a>
+                               <a class="sidebar-link" href="{{ route('users.index') }}" style="text-align: center">Usuarios Registrados</a>
                             </h4>
 
 
@@ -51,17 +51,16 @@ $("#contenpartes").removeClass('d-none');
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <div class="inner" bis_skin_checked="1" style="padding: 5% 0% 0% 0%">
-                            <a href="{{ url('/...') }}">
+                            <a href="{{ url('/gestorInventario') }}">
                             <img src=" {{ asset(url('img/Inventario.png')) }}" alt="logo" style="width:100%">
-                            <br><br><h4 style="text-align: center;">
-                                Gestor de Inventario
+                            <h4>
+                                <a class="sidebar-link" href="{{ url('/gestorInventario') }}" style="text-align: center">Gestor de Inventario</a>
                             </h4>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-
 
         </div>
 
