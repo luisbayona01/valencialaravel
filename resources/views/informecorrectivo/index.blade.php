@@ -69,7 +69,7 @@ $(document).ready( function () {
 											<td>{{ $informecorrectivo->Uds_en_conservacion }}</td>
 											<td>{{ $informecorrectivo->Dias_en_conservacion }}</td>
 											<td>{{ $informecorrectivo->Euros_por_dia }}</td>
-											<td>{{ $informecorrectivo->Total, 2, ',', '.'  }}</td>
+											<td>{{ number_format($informecorrectivo->Total,2, ',', '.')  }}</td>
 											<td>{{ $informecorrectivo->Fecha_de_carga }}</td>
 
 
