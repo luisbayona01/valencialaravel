@@ -42,6 +42,7 @@ if (empty($fechaInicio) || empty($fechaFin)) {
             ->select(
                 'P.id',
                 'LC.cod_localizacion',
+                'LC.descripcion',
                 'TP.nombre as tipoparte',
                 DB::raw("U.codigo as partecreadopor"),
                 'P.fechacreacion',

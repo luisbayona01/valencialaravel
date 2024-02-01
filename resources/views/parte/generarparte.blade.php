@@ -222,7 +222,7 @@ color: #ffFF ;
                         }
                     }
 
-                        alert('Por favor, selecciona al menos un checkbox antes de realizar la acción.');
+                        alert('Por favor, selecciona al menos un parte antes de realizar la acción.');
                         return false;
                     }
                 </script>
