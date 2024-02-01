@@ -1,7 +1,7 @@
 @extends('layouts.plantilla')
 
 @section('template_title')
-    {{ __('Create') }} Informecorrectivo
+    {{ __('Create') }} Informe correctivo
 @endsection
 
 @section('content')
@@ -105,7 +105,7 @@ window.location.href='/informecorrectivos/'
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Create') }} Informecorrectivo</span>
+                        <span class="card-title">{{ __('Cargar') }} Informe correctivo</span>
                     </div>
                     <div class="card-body">
                         <form method="POST"  role="form" enctype="multipart/form-data">

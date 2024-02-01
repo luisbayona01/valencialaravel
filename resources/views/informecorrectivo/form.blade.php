@@ -6,7 +6,7 @@
 		<div class="input-group">
 			<span class="input-group-btn">
 				<span class="btn btn-primary btn-file">
-					Navegar&hellip;
+					Buscar&hellip;
 					<input type="file" id="localizaciones" class="localizaciones" accept=".xlt,xls, .xlsx" onchange="validarArchivo(this)">
 				</span>
 			</span>
@@ -15,7 +15,7 @@
 	</div>
 
     </div>
-   <button type="button" class="btn btn-success envio-masivo">Enviar
+   <button type="button" class="btn btn-success envio-masivo">Cargar
 
 		<div class="align-items-center d-none" id="loadingM">
 			<strong>Cargando...</strong>

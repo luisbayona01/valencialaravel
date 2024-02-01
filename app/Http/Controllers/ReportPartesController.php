@@ -60,26 +60,26 @@ $parteIds = $partes->pluck('id')->toArray();
 
 // Realiza la segunda consulta utilizando los IDs obtenidos
 $totalPartes = DB::table('elemtos_parte')
-    ->select(DB::raw('ROUND(SUM(precio_total), 2) as total'))
+    ->select(DB::raw('SUM(precio_total) as total'))
     ->whereIn('parteid', $parteIds)
     ->first();
 
-
+//dd($totalPartes);
 
        $fechaInicio = $request->input('fechaautorizacionInicio');
 $fechaFin = $request->input('fechaautorizacionFin');
 
 // Consulta para obtener la suma de 'Total' entre las fechas indicadas
 $totalSum = DB::table('informecorrectivo')
-    ->whereBetween('Fecha_de_carga', [$fechaInicio, $fechaFin])
+    ->whereBetween(DB::raw('DATE(Fecha_de_carga)'), [$fechaInicio, $fechaFin])
     ->sum('Total');
 
 
-//dd($totalSum);
+//dd($fechaInicio, $fechaFin);
 
 // Consulta para obtener los informes correctivos entre las fechas indicadas
 $informeCorrectivo = DB::table('informecorrectivo')
-    ->whereBetween('Fecha_de_carga', [$fechaInicio, $fechaFin])
+    ->whereBetween(DB::raw('DATE(Fecha_de_carga)'), [$fechaInicio, $fechaFin])
     ->get()
     ->toArray();
 //dd($informeCorrectivo);
@@ -108,7 +108,7 @@ $informeCorrectivo = DB::table('informecorrectivo')
         $pdf = Pdf::loadView('pdf.informeParte', compact('penalidad', 'partes', 'img', 'conjuntosDeInformes','totalSum','totalPartes'));
         //$pdf->inline('informeParte.pdf');
        $pdf->setPaper('legal');
-Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
+//Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
         return $pdf->stream();
 
     }
@@ -126,7 +126,7 @@ Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
 
     $valor_formateado = number_format($valor / 100, 2, '.', '');
     $formatter = new NumeroALetras();
-    $texto =$formatter->toMoney($valor_formateado, 2, 'EUROS', 'CENTAVOS');
+    $texto =$formatter->toMoney($valor_formateado, 2, 'EUROS', 'CÉNTIMOS');
     return  $texto;
     }
 

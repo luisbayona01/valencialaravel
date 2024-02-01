@@ -129,7 +129,7 @@ color: #ffFF ;
 											<td>{{ $parte->obscreadorparte }}</td> <!-- Observaciones -->
 											<td>{{ $parte->asignadoA }}</td> <!-- Reparado por -->
 											<td>{{ $parte->fechaAsignacion }}</td> <!-- Fecha reparacion -->
-                                            <td>{{round($parte->totalImp, 2) }}</td><!-- Total Importes -->
+                                            <td>{{number_format($parte->totalImp, 2, ',', '.')}} €</td><!-- Total Importes -->
 											<td ><span class="{{ $parte->estadoparte }}" style="display: block; width: 100%; height: 100%; text-align: center;"> {{ $parte->estadoparte }}</span> </td> <!-- Estado -->
                                             <td style="text-align: center">
                                                 <a class="btn btn-sm btn-success" href="{{ route('partes.edit',$parte->id) }}" ><i ></i> {{ __('Ver') }}</a> <!-- Accion -->
