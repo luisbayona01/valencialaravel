@@ -96,8 +96,9 @@
             <div class="col-md-6 form-group">
                 {{ Form::label('localización', 'Localización112') }}
                 {{ Form::select('id_localizacion', $localizaciones, $parte->id_localizacion, [
-                    'class' => 'form-control' . ($errors->has('id_localizacion') ? ' is-invalid' : ''),
+                    'class' => 'form-control select' . ($errors->has('id_localizacion') ? ' is-invalid' : ''),
                     'placeholder' => 'Seleccione una ubicacion',
+                    'data-live-search' => 'true',
                     'required' => 'required'
 
                 ]) }}
@@ -116,7 +117,7 @@
             <div class="col-md-4">
                 <div class="form-group" style="text-align: left; width: 100%" >
                     {{ Form::label('Tipo de parte') }}
-                    {{ Form::select('idtipoparte', $tipoparte, $parte->idtipoparte, ['class' => 'form-control' . ($errors->has('idtipoparte') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione el tipo de parte', 'required' => 'required'
+                    {{ Form::select('idtipoparte', $tipoparte, $parte->idtipoparte, ['class' => 'form-control select' . ($errors->has('idtipoparte') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione el tipo de parte', 'data-live-search' => 'true','required' => 'required'
                     ]) }}
                     <div class="invalid-feedback">
                         porfavor seleccione el tipo de parte
@@ -154,7 +155,7 @@
             <div class="col-sm-6" bis_skin_checked="1">
                 <div class="form-group">
                     {{ Form::label('Autorizado por') }}
-                    {{ Form::select('autorizado_por',$autorizadopor,$parte->autorizado_por, ['class' => 'form-control' . ($errors->has('autorizadopor') ? ' is-invalid' : ''), 'placeholder' => 'seleccione', 'required' => 'required' ]) }}
+                    {{ Form::select('autorizado_por',$autorizadopor,$parte->autorizado_por, ['class' => 'form-control select' . ($errors->has('autorizadopor') ? ' is-invalid' : ''), 'placeholder' => 'seleccione','data-live-search' => 'true',  'required' => 'required' ]) }}
                 </div>
             </div>
             <div class="col-sm-6">
@@ -162,7 +163,7 @@
                     {{ Form::label('Fecha de autorización') }}
                     <div class="input-group date">
                         <!--Modificar en base a nuevo campo -->
-                        {{ Form::text('fechaautorizacion', $parte->fechaautorizacion, ['class' => 'form-control', 'placeholder' => 'Fecha de Autorización', 'fecha', 'id'=>'fechaautorizacion', 'required' => 'required' ]) }}
+                        {{ Form::text('fechaautorizacion', $parte->fechaautorizacion, ['class' => 'form-control ', 'placeholder' => 'Fecha de Autorización', 'fecha', 'id'=>'fechaautorizacion', 'required' => 'required' ]) }}
                         <div class="input-group-addon input-group-append" bis_skin_checked="1">
                             <div class="input-group-text" bis_skin_checked="1">
                                 <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
@@ -179,7 +180,7 @@
             <div class="col-sm-6" bis_skin_checked="1">
                 <div class="form-group">
                    {{ Form::label('Comunicado por') }}
-                    {{ Form::select('reportadopor',$reportadopor,$parte->reportadopor, ['class' => 'form-control' . ($errors->has('reportadoPor') ? ' is-invalid' : ''), 'placeholder' => 'seleccione', 'required' => 'required' ]) }}
+                    {{ Form::select('reportadopor',$reportadopor,$parte->reportadopor, ['class' => 'form-control select' . ($errors->has('reportadoPor') ? ' is-invalid' : ''), 'placeholder' => 'seleccione','data-live-search' => 'true', 'required' => 'required' ]) }}
                    <div class="invalid-feedback">
                         por favor seleccione una  opción
                     </div>
@@ -209,7 +210,7 @@
                 <div class="form-group">
 
                    {{ Form::label('Reparado por') }}
-                    {{ Form::select('asignadoa',$asignadoa,$parte->asignadoa, ['class' => 'form-control' . ($errors->has('asignadoa') ? ' is-invalid' : ''), 'placeholder' => 'seleccione', 'required' => 'required']) }}
+                    {{ Form::select('asignadoa',$asignadoa,$parte->asignadoa, ['class' => 'form-control select' . ($errors->has('asignadoa') ? ' is-invalid' : ''), 'placeholder' => 'seleccione','data-live-search' => 'true', 'required' => 'required']) }}
                   <div class="invalid-feedback">
                         porfavor asigne un usuario
                     </div>
@@ -268,7 +269,7 @@
 
         <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12" >
             <label style="text-align: left;" class="" for="descripcionelementos">Descripción</label>
-            {{ Form::select('descripcionelementos', $Descripcionelementos, 'descripcionelementos', ['class' => 'form-control', 'placeholder' => 'seleccione', 'id' => 'descripcionelementos', 'onchange' => 'descEl(this)']) }}
+            {{ Form::select('descripcionelementos', $Descripcionelementos, 'descripcionelementos', ['class' => 'form-control select', 'placeholder' => 'seleccione', 'id' => 'descripcionelementos','data-live-search' => 'true', 'onchange' => 'descEl(this)']) }}
         </div>
 
         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3" >
