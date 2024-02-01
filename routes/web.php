@@ -30,8 +30,7 @@ Route::post('/report',[App\Http\Controllers\ReportPartesController::class,'gener
 Route::resource('partes',  App\Http\Controllers\parteController::class);
 
 //Route::get('/report',[App\Http\Controllers\ReportPartesController::class,'generarinforme'])->name('report');
-
-
+Route::post('/totalchecks',[App\Http\Controllers\ReportPartesController::class,'validarchecks'])->name('totalchecks');
 Route::resource('informecorrectivos', App\Http\Controllers\informecorrectivoController::class);
 
 Route::resource('users',  App\Http\Controllers\UserController::class)->middleware('auth:web');

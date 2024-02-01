@@ -136,11 +136,25 @@ color: #ffFF ;
                                             </td>
                                         <td>
                                             @csrf
-                                            <input type="checkbox" name="parte_ids[]" value="{{ $parte->id }}">
+                                            <input type="checkbox" name="parte_ids[]" value="{{ $parte->id }}" onchange="actualizarFormulario()">
                                         </td>
                                        </tr>
                                     @endforeach
                                     </form>
+                                <tr style="font-size:0.9em;">
+
+                                            <td></td> <!-- No. Parte -->
+											<td ></td> <!-- Ubicacion Novedad -->
+											<td></td> <!-- Tipo Parte -->
+											<td></td> <!-- Comunicado por -->
+											<td></td> <!-- Fecha de comunicacion -->
+											<td></td> <!-- Observaciones -->
+											<td></td> <!-- Reparado por -->
+											<td> <strong> Total partes  seleccionados</strong></td> <!-- Fecha reparacion -->
+                                            <td class="totalpartesSEleccionados"> 0</td><!-- Total Importes -->
+											<td > </td> <!-- Estado -->
+                                            <td style="text-align: center">
+                                                       </td>
                                 </tbody>
                             </table>
 
@@ -173,6 +187,36 @@ color: #ffFF ;
                     </div>
 
                 <script>
+
+
+        function actualizarFormulario() {
+        // Crear un objeto FormData
+        var formData = new FormData();
+
+        // Obtener todos los checkboxes seleccionados
+        var checkboxes = document.querySelectorAll('input[name="parte_ids[]"]:checked');
+
+        // Agregar los IDs al objeto FormData
+        checkboxes.forEach(function(checkbox) {
+            formData.append('parte_ids[]', checkbox.value);
+        });
+
+        // Agregar el token CSRF al objeto FormData
+        var csrfToken = document.querySelector('input[name="_token"]').value;
+        formData.append('_token', csrfToken);
+
+
+        fetch('/totalchecks', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            //console.log(data); // Manejar la respuesta del controlador si es necesario
+  $(".totalpartesSEleccionados").text(data.totalPartes.total)
+ })
+        .catch(error => console.error('Error:', error));
+    }
                     function goToHome() {
                         window.location.href = "{{ url('/gestorParte') }}";
                     }
