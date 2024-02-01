@@ -265,7 +265,10 @@
 
     <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
         <label style="text-align: left;" for="descripcionelementos">Descripción</label>
-        {{ Form::select('descripcionelementos', $Descripcionelementos, 'descripcionelementos', ['class' => 'form-control', 'placeholder' => 'seleccione', 'id' => 'descripcionelementos', 'onchange' => 'descEl(this)']) }}
+
+
+        {{ Form::select('descripcionelementos', $Descripcionelementos, 'descripcionelementos', ['class' => 'form-control', 'placeholder' => 'seleccione', 'id' => 'descripcionelementos', 'data-live-search' => 'true',
+'onchange' => 'descEl(this)']) }}
     </div>
 
     <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3">

@@ -2,61 +2,63 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Evidencia;
 use App\Models\Parte;
-use App\Models\Elementosparte;
 use Barryvdh\DomPDF\Facade\Pdf;
 use DB;
-use Luecano\NumeroALetras\NumeroALetras;
 use Illuminate\Http\Request;
+use Luecano\NumeroALetras\NumeroALetras;
+
 class ReportPartesController extends Controller
 {
     public function generarinforme(Request $request)
     {
 
-
-
 /*   "fechaautorizacionInicio" => "2024-01-01"
-      "fechaautorizacionFin" => "2024-02-28*/
+"fechaautorizacionFin" => "2024-02-28*/
 //dd($request);
-$partesid=$request->input('parte_ids');
+        $partesid = $request->input('parte_ids');
 
-$penalidad= $request->input('penalidad');
- //dd($partesid);
+        $penalidad = $request->input('penalidad');
+        //dd($partesid);
 //die();
 
+if (empty($fechaInicio) || empty($fechaFin)) {
+    // Si fecha de inicio no está presente, establece el primer día del mes actual
+    $fechaInicio = date('Y-m-01');
 
+    // Si fecha de fin no está presente, establece el último día del mes actual
+    $fechaFin = date('Y-m-t');
+}
 
         $img = base_path('public/img/icono_representativo_caratulapdf.png');
 //die();
-       $partes = DB::table('parte as P')
-    ->select(
-        'P.id',
-        'LC.cod_localizacion',
-        'TP.nombre as tipoparte',
-        DB::raw("U.codigo as partecreadopor"),
-        'P.fechacreacion',
-        DB::raw("UL.codigo as autorizadopor"),
-        'P.fechaautorizacion',
-        DB::raw("UR.codigo as reportadoPor"),
-        'P.fechareporte',
-        'P.obscreadorparte',
-        'P.fecha_validacion',
-        'EST.estadoparte'
-    )
+        $partes = DB::table('parte as P')
+            ->select(
+                'P.id',
+                'LC.cod_localizacion',
+                'TP.nombre as tipoparte',
+                DB::raw("U.codigo as partecreadopor"),
+                'P.fechacreacion',
+                DB::raw("UL.codigo as autorizadopor"),
+                'P.fechaautorizacion',
+                DB::raw("UR.codigo as reportadoPor"),
+                'P.fechareporte',
+                'P.obscreadorparte',
+                'P.fecha_validacion',
+                'EST.estadoparte'
+            )
 
-    ->join('tipoparte as TP', 'P.idtipoparte', '=', 'TP.id')
-    ->join('localizacion as LC', 'LC.id', '=', 'P.id_localizacion')
-    ->join('estadoparte as EST', 'EST.id', '=', 'P.estadoparte_id')
-    ->join('users as U', 'U.id', '=', 'P.creadopor')
-    ->join('users as UL', 'UL.id', '=', 'P.autorizado_por')
-    ->join('users as UR', 'UR.id', '=', 'P.reportadopor')
+            ->join('tipoparte as TP', 'P.idtipoparte', '=', 'TP.id')
+            ->join('localizacion as LC', 'LC.id', '=', 'P.id_localizacion')
+            ->join('estadoparte as EST', 'EST.id', '=', 'P.estadoparte_id')
+            ->join('users as U', 'U.id', '=', 'P.creadopor')
+            ->join('users as UL', 'UL.id', '=', 'P.autorizado_por')
+            ->join('users as UR', 'UR.id', '=', 'P.reportadopor')
 
-    ->where('EST.id','5')->wherein('P.id',$partesid)->get();
+            ->where('EST.id', '5')->wherein('P.id', $partesid)->get();
 
 //dd($partes);
-$parteIds = $partes->pluck('id')->toArray();
-
+        $parteIds = $partes->pluck('id')->toArray();
 
 // Realiza la segunda consulta utilizando los IDs obtenidos
 $totalPartes = DB::table('elemtos_parte')
@@ -104,8 +106,8 @@ $informeCorrectivo = DB::table('informecorrectivo')
             );
         }
 
-  //dd($totalSum);
-        $pdf = Pdf::loadView('pdf.informeParte', compact('penalidad', 'partes', 'img', 'conjuntosDeInformes','totalSum','totalPartes'));
+        //dd($totalSum);
+        $pdf = Pdf::loadView('pdf.informeParte', compact('penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes'));
         //$pdf->inline('informeParte.pdf');
        $pdf->setPaper('legal');
 //Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
@@ -113,16 +115,17 @@ $informeCorrectivo = DB::table('informecorrectivo')
 
     }
 
-   /* public function procesarFormulario(Request $request)
+    /* public function procesarFormulario(Request $request)
     {
-        // Obtener el valor del input "penalidad" del formulario
-        $penalidad = $request->input('penalidad');
+    // Obtener el valor del input "penalidad" del formulario
+    $penalidad = $request->input('penalidad');
 
-        // Pasar la variable $penalidad a la vista
-        return view('informeParte', ['penalidad' => $penalidad]);
+    // Pasar la variable $penalidad a la vista
+    return view('informeParte', ['penalidad' => $penalidad]);
     }
-*/
-    public  function numerosletras($valor){
+     */
+    public function numerosletras($valor)
+    {
 
     $valor_formateado = number_format($valor / 100, 2, '.', '');
     $formatter = new NumeroALetras();
