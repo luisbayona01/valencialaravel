@@ -7,6 +7,13 @@
 @endsection
 
 @section('content')
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<!-- Add this script before including Bootstrap's JavaScript -->
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
+
     <script>
         function descEl(element) {
             let textcadena = element.options[element.selectedIndex].text;
@@ -236,6 +243,8 @@ evidencias.forEach(evidencia => {
             }
         // Espera a que el DOM esté listo
         $(document).ready(function() {
+     $("#descripcionelementos").selectpicker();
+
            /* $("#fechaautorizacion").datetimepicker({
                 "allowInputToggle": true,
                 "showClose": true,
