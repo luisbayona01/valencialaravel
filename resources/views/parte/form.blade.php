@@ -94,7 +94,7 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
 
             <div class="col-md-6 form-group">
-                {{ Form::label('localización', 'Localización') }}
+                {{ Form::label('localización', 'Localización112') }}
                 {{ Form::select('id_localizacion', $localizaciones, $parte->id_localizacion, [
                     'class' => 'form-control' . ($errors->has('id_localizacion') ? ' is-invalid' : ''),
                     'placeholder' => 'Seleccione una ubicacion',

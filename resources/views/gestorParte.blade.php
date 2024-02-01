@@ -34,7 +34,7 @@ $("#contenpartes").removeClass('d-none');
                             <a href="{{ url('/partes') }}">
                             <img src=" {{ asset(url('img/Inventario.png')) }}" alt="logo" style="width:100%">
                             <h4>
-                                <h4 class="sidebar-link" style="text-align: center">Partes</h4>
+                                <h4 class="sidebar-link" style="text-align: center">Control Partes</h4>
                             </h4>
                             </a>
                         </div>

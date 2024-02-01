@@ -7,6 +7,11 @@
 
 
     <style>
+        @page {
+            size: legal;
+            margin: 1cm;
+        }
+
         table {
 
             color: #212529;
@@ -38,12 +43,14 @@
   .ocultar-bordes {
     border-collapse: collapse;
     border: none;
-}
+    }
 
-/* Opcional: Estilo para ocultar los bordes de las celdas */
-.ocultar-bordes td, .ocultar-bordes th,.ocultar-bordes tr  {
-    border: none;
-}
+    /* Opcional: Estilo para ocultar los bordes de las celdas */
+    .ocultar-bordes td, .ocultar-bordes th,.ocultar-bordes tr  {
+        border: none;
+    }
+
+
     </style>
 
 
@@ -174,7 +181,7 @@
         <tr>
             <td> </td>
             <td> </td>
-            <td style="width:20%; text-align: right; font-size: 0.7em;">{{number_format($totalizacion) .' '. 'Euros' }}</td>
+            <td style="width:20%; text-align: right; font-size: 0.7em;">{{number_format($totalizacion, 2, ',', '.') .' '. 'Euros' }}</td>
             <td style="width:20%; text-align: right; font-size: 0.7em;">0,00 Euros</td>
             <td></td>
         </tr>
@@ -182,34 +189,41 @@
 <!-- class='ocultar-bordes' -->
 <table style='font-size:0.7em; width: 100%' border="1">
     <tr>
-        <td style="width: 80%; border:none">Ejecución material de las obras ...............................................................................................................................</td> <td style='text-align: right; border:none'>{{number_format($Tbajaoppdf).' '.'Euros'}}</td>
+        <td style="width: 80%; border:none">Ejecución material de las obras ...............................................................................................................................</td> <td style='text-align: right; border:none'>{{number_format($Tbajaoppdf, 2, ',', '.').' '.'Euros'}}</td>
     </tr>
     <tr>
         <td style="border:none">Valor por Revisión de Precios ..................................................................................................................................</td> <td style="text-align: right ; border:none">0,00 Euros</td>
     </tr>
     <tr>
-        <td style="border:none">TOTAL REVISADO ..................................................................................................................................................</td> <td style="text-align: right; border:none">{{number_format($Tbajaoppdf).' '.'Euros'}} </td>
+        <td style="border:none">TOTAL REVISADO ..................................................................................................................................................</td> <td style="text-align: right; border:none">{{number_format($Tbajaoppdf, 2, ',', '.').' '.'Euros'}} </td>
     </tr>
     <tr>
-        <td style="border:none">Baja Obtenida 21,90% .............................................................................................................................................</td> <td style="text-align: right; border:none"> {{number_format($resultbaja).' '.'Euros'}}</td>
+        <td style="border:none">Baja Obtenida 21,90% .............................................................................................................................................</td> <td style="text-align: right; border:none"> {{number_format($resultbaja, 2, ',', '.').' '.'Euros'}}</td>
     </tr>
     <tr>
-        <td style="border:none"><strong>DIFERENCIA ...........................................................................................................................................................</strong></td> <td style="text-align: right; border:none"> {{number_format($restarbaja1).' '.'Euros'}}</td>
+        <td style="border:none"><strong>DIFERENCIA ...........................................................................................................................................................</strong></td> <td style="text-align: right; border:none"> {{number_format($restarbaja1, 2, ',', '.').' '.'Euros'}}</td>
     </tr>
     <tr>
-        <td style="border:none">Gastos Generales 13,00% .......................................................................................................................................</td><td style="text-align: right; border:none"> {{number_format($gastosgeneralesS2).' '.'Euros'}} </td>
+        <td style="border:none">Gastos Generales 13,00% .......................................................................................................................................</td><td style="text-align: right; border:none"> {{number_format($gastosgeneralesS2, 2, ',', '.').' '.'Euros'}} </td>
     </tr>
     <tr>
-        <td style="border:none">Beneficio Industrial 6,00% ........................................................................................................................................</td> <td style="text-align: right; border:none"> {{number_format($beneficioInd).' '.'Euros'}} </td>
+        <td style="border:none">Beneficio Industrial 6,00% ........................................................................................................................................</td> <td style="text-align: right; border:none"> {{number_format($beneficioInd, 2, ',', '.').' '.'Euros'}} </td>
     </tr>
     <tr>
-        <td style="border:none">SUMA .......................................................................................................................................................................</td> <td style="text-align: right; border:none">{{number_format($suma).' '.'Euros'}} </td>
+        <td style="border:none">SUMA .......................................................................................................................................................................</td> <td style="text-align: right; border:none">{{number_format($suma, 2, ',', '.').' '.'Euros'}} </td>
     </tr>
     <tr>
-        <td style="border:none">I.V.A 21,00% ............................................................................................................................................................</td> <td style="text-align: right; border:none"> {{number_format($iva21s3).' '.'Euros'}}</td>
+        <td style="border:none">ABONO POR PENALIDAD REFERENTE AL ART. 27.2 .........................................................................................</td> <td style="text-align: right; border:none">- {{ number_format($penalidad, 2, ',', '.' ).' '.'Euros' }}</td>
     </tr>
     <tr>
-        <td style="border:none">LIQUIDO A PERCIBIR EL CONTRATISTA .............................................................................................................</td> <td style="text-align: right; border:none"> {{number_format($totalizacion).' '.'Euros'}}</td>
+        <td style="border:none">SUMA .......................................................................................................................................................................</td> <td style="text-align: right; border:none">{{ number_format($suma2, 2, ',', '.' ).' '.'Euros'}}</td>
+    </tr>
+
+    <tr>
+        <td style="border:none">I.V.A 21,00% ............................................................................................................................................................</td> <td style="text-align: right; border:none"> {{number_format($iva21s3, 2, ',', '.').' '.'Euros'}}</td>
+    </tr>
+    <tr>
+        <td style="border:none">LIQUIDO A PERCIBIR EL CONTRATISTA .............................................................................................................</td> <td style="text-align: right; border:none"> {{number_format($totalizacion, 2, ',', '.').' '.'Euros'}}</td>
     </tr>
 </table>
 <br>
@@ -221,7 +235,7 @@
 <p style="text-align: center; font-size: 0.7em">Documento firmado electrónicamente por el contratista, el Jefe de la Sección y el Concejal Coordinador del Área</p>
 
  <!-- SEGUNDA Area del Formulario principal -->
-<div style="page-break-before: always;"></div>
+<div style="page-break-before: always;">
 
     @php
 
@@ -229,7 +243,7 @@
         $totaltotalesEPartes = 0;
     @endphp
     @foreach ($conjuntosDeInformes as $index => $conjunto)
-        <table class="tables" style="width: 100%" >
+        <table class="tables" style="width: 100%; " id="tablaConservancia" >
             <thead >
                 <tr >
                     <th style="text-align: center; font-size: 0.7em; width: 10%">Codigo</th>
@@ -258,7 +272,7 @@
             </tbody>
         </table>
         @if ($index < count($conjuntosDeInformes) - 1)
-            <div style=""></div> {{-- Añade un salto de página para cada conjunto, excepto el último --}}
+            <div style="page-break-before: always;"></div> {{-- Añade un salto de página para cada conjunto, excepto el último --}}
         @endif
     @endforeach
 
@@ -271,8 +285,9 @@
         </tr>
 
     </table>
+</div>
 
-
+<div style="page-break-before: always; ">
     @foreach ($partes as $index => $parte)
         <table style="width: 100%; page-break-before: always; border:none" class="table table-bordered">
 
@@ -391,6 +406,8 @@
         @endif
         <br><br>
     @endforeach
+
+</div>
     <table style="width:95%">
         </thead>
         <tbody>
@@ -513,11 +530,7 @@
             <td style="padding: 5px 5px 5px 7px; border:none">Euros</td>
         </tr>
 
-        @php
 
-
-
-        @endphp
 
         <!-- Resta de las Penalidades Resumen General -->
         <tr style="font-size:0.7em">
