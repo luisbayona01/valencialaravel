@@ -31,10 +31,10 @@ $("#contenpartes").removeClass('d-none');
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <div class="inner" bis_skin_checked="1">
-                            <a href="{{ url('/partes') }}">
-                            <img src=" {{ asset(url('img/CrearPartes.png')) }}" alt="logo" style="width:100%">
+                            <a href="{{ url('/informecorrectivos') }}">
+                            <img src=" {{ asset(url('img/listaConservacion2.png')) }}" alt="logo" style="width:100%">
                             <h4>
-                                <h4 class="sidebar-link" style="text-align: center">Control Partes</h4>
+                                <h4 class="sidebar-link" style="text-align: center">Lista de Conservación</h4>
                             </h4>
                             </a>
                         </div>
@@ -46,10 +46,10 @@ $("#contenpartes").removeClass('d-none');
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <div class="inner" bis_skin_checked="1">
-                            <a href="{{ url('/generarparte') }}">
-                            <img src=" {{ asset(url('img/CertificadoPartes.png')) }}" alt="logo" style="width:100%">
+                            <a href="{{ url('/informecorrectivos') }}">
+                            <img src=" {{ asset(url('img/ListadePrecios2.png')) }}" alt="logo" style="width:100%">
                             <h4 style="text-align: center;">
-                                <h4 class="sidebar-link" style="text-align: center">Generar Certificados Partes</h4>
+                                <h4 class="sidebar-link" style="text-align: center">Lista de Precios</h4>
                             </h4>
                             </a>
                         </div>

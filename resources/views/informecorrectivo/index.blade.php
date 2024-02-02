@@ -83,5 +83,22 @@ $(document).ready( function () {
 
             </div>
         </div>
+        <!-- Sección de botones -->
+<div class="box-footer mt-20" style="margin-top: 10px; padding: 0px 15px 15px 15px">
+
+    <button type="button" onclick="goBack()" class="btn btn-secondary" style="text-align: right;">Volver</button>
+
+</div>
+
+
+
+    {{ Form::close() }}
+
+       <script>
+        // JavaScript function to go back to the previous page
+        function goBack() {
+        window.history.back();
+        }
+    </script>
     </div>
 @endsection

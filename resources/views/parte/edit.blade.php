@@ -55,17 +55,18 @@
                         <td style="text-align: right;">${item.precioU} € </td>
                         <td style="text-align: right;">${item.cantidad} </td>
                         <td style="text-align: right;">${totalstring} € </td>
-                        <td style="text-align: center;">
+
+                        <td style="text-align: center;" id="acciones">
                             <form action="{{ route('partes.destroy', $parte->id) }}" method="POST">
                                 <a style="text-align: center; margin-right: 10px; font-size: 1.3em; " type="button" class="b" id="selecione">
                                     <i class="fa fa-pencil-square-o" aria-hidden="true">
-                                        <input type="hidden" class="idelementoP" value='${item.idelementos_parte}'>
+                                        <input type="hidden" id="editar" class="idelementoP"  value='${item.idelementos_parte}'>
                                     </i>
                                 </a>
                                 @csrf
                                 <a style="text-align: center; margin-right: 10px; font-size: 1.3em; " type="button" class="b" id="selecione">
                                     <i class="fa fa-trash" aria-hidden="true">
-                                        <input type="hidden" class="idelementoP" value='${item.idelementos_parte}'>
+                                        <input type="hidden" id="delet" class="idelementoP" value='${item.idelementos_parte}'>
                                     </i>
                                 </a>
                             </form>
@@ -75,6 +76,7 @@
                     // Agregar la fila a la tabla
                     $(".contenidoElements").append(rows);
                 });
+
 
                 // Calcular la suma de la columna "Total" después de agregar todas las filas
                 /*var totalImportes = 0;
