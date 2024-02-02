@@ -212,10 +212,19 @@ color: #ffFF ;
         })
         .then(response => response.json())
         .then(data => {
+
+var totalPartes = data.totalPartes.total;
+
+        // Formatear el número para mostrar dos decimales con coma
+        var totalFormateado = parseFloat(totalPartes).toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+
             //console.log(data); // Manejar la respuesta del controlador si es necesario
-  $(".totalpartesSEleccionados").text(data.totalPartes.total)
+  $(".totalpartesSEleccionados").text(totalFormateado + '€')
  })
-        .catch(error => console.error('Error:', error));
+        .catch(error => console.error('Error:', error) , $(".totalpartesSEleccionados").text(0)  );
     }
                     function goToHome() {
                         window.location.href = "{{ url('/gestorParte') }}";
