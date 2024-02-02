@@ -93,17 +93,17 @@ color: #ffFF ;
                             <table class="table table-striped" id="table-parte" >
                                 <thead class="thead">
                                     <tr style="text-align: center;">
-                                        <th>No parte</th>
-										<th>Ubicación novedad</th>
-										<th>Tipo parte</th>
-										<th>Comunicado por</th>
-										<th>Fecha Comunicación</th>
-										<th style="text-align: center;">Observaciones</th>
-										<th>Reparado por</th>
+                                        <th style="font-size: 0.95em">No parte</th>
+										<th style="font-size: 0.95em">Ubicación novedad</th>
+										<th style="font-size: 0.95em">Tipo parte</th>
+										<th style="font-size: 0.95em">Comunicado por</th>
+										<th style="font-size: 0.95em">Fecha Comunicación</th>
+										<th style="text-align: center;font-size: 0.95em">Observaciones</th>
+										<th style="font-size: 0.95em">Reparado por</th>
 										<th style="text-align: center;">Fecha Reparacion</th>
-                                        <th>Total importe</th>
-								        <th>Estado</th>
-                                        <th>Acción</th>
+                                        <th style="font-size: 1.1em">Total importe</th>
+								        <th style="font-size: 0.95em">Estado</th>
+                                        <th style="font-size: 0.95em">Acción</th>
 
                                         <th></th>
                                     </tr>
@@ -122,14 +122,14 @@ color: #ffFF ;
                                         <tr style="font-size:0.9em;">
 
                                             <td style="text-align: center;">{{  $parte->id }}</td> <!-- No. Parte -->
-											<td style="text-align: center;">{{ $parte->cod_localizacion }}</td> <!-- Ubicacion Novedad -->
+											<td style="text-align: center;font-size: 0.95em">{{ $parte->cod_localizacion }}</td> <!-- Ubicacion Novedad -->
 											<td>{{ $parte->tipoparte }}</td> <!-- Tipo Parte -->
-											<td>{{ $parte->reportadoPor }}</td> <!-- Comunicado por -->
-											<td style="text-align: center;">{{ $parte->fechareporte }}</td> <!-- Fecha de comunicacion -->
-											<td>{{ $parte->obscreadorparte }}</td> <!-- Observaciones -->
+											<td style="font-size: 0.95em">{{ $parte->reportadoPor }}</td> <!-- Comunicado por -->
+											<td style="text-align: center;font-size: 0.95em">{{ $parte->fechareporte }}</td> <!-- Fecha de comunicacion -->
+											<td style="font-size: 0.95em">{{ $parte->obscreadorparte }}</td> <!-- Observaciones -->
 											<td>{{ $parte->asignadoA }}</td> <!-- Reparado por -->
-											<td>{{ $parte->fechaAsignacion }}</td> <!-- Fecha reparacion -->
-                                            <td>{{number_format($parte->totalImp, 2, ',', '.')}} €</td><!-- Total Importes -->
+											<td style="font-size: 0.95em">{{ $parte->fechaAsignacion }}</td> <!-- Fecha reparacion -->
+                                            <td style="font-size: 0.95em">{{number_format($parte->totalImp, 2, ',', '.')}} €</td><!-- Total Importes -->
 											<td ><span class="{{ $parte->estadoparte }}" style="display: block; width: 100%; height: 100%; text-align: center;"> {{ $parte->estadoparte }}</span> </td> <!-- Estado -->
                                             <td style="text-align: center">
                                                 <a class="btn btn-sm btn-success" href="{{ route('partes.edit',$parte->id) }}" ><i ></i> {{ __('Ver') }}</a> <!-- Accion -->

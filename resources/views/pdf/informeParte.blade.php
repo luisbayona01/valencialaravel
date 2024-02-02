@@ -8,7 +8,7 @@
 
     <style>
         @page {
-            size: legal;
+            size: oficio;
             margin: 1cm;
         }
 
@@ -229,12 +229,11 @@
 <br>
 <p style="text-align: justify; font-size: 0.9em">Y para que conste y pueda servir de abono, expido la presente certificación de: {{$totalletras}}</p>
 
-<br><br>
-
+<br>
 
 <p style="text-align: center; font-size: 0.7em">Documento firmado electrónicamente por el contratista, el Jefe de la Sección y el Concejal Coordinador del Área</p>
 
- <!-- SEGUNDA Area del Formulario principal -->
+ <!-- SEGUNDA Area TABLA LISTA DE CONSERVACIÓN -->
 <div style="page-break-before: always;">
 
     @php
@@ -242,29 +241,62 @@
         $totalTotal = 0;
         $totaltotalesEPartes = 0;
     @endphp
+    <!--<table>
+        <tr>
+            <td style="width: 100%">
+                <center><img src="{{ base_path('public/img/imagen_Relacion_valorada.png') }}" width="100%" height="50"></center>
+            </td>
+        </tr>
+        <tr>
+
+        </tr>
+    </table>-->
     @foreach ($conjuntosDeInformes as $index => $conjunto)
-        <table class="tables" style="width: 100%; " id="tablaConservancia" >
+        <table style="width: 100%; border:0" id="tablaConservancia">
             <thead >
+                <tr>
+                    <td style="width: 90%; padding: 0; border: none;" colspan="7">
+                        <center><img src="{{ base_path('public/img/LogoTablaConservacion.png') }}" width="90%" height="150px" style="border: none; display: block;"></center>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 90%; padding: 0; border: none;" colspan="7" >
+                        <label for="">Desde el ... hasta el ...</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="7" style="border-bottom: 1px solid black; border-top: none; border-left: none; border-right: none; padding: 0; margin: 0; width: 100%;"></td>
+                </tr>
+                <tr>
+                    <td colspan="7" style="border-bottom: 1px solid black; border-top: none; border-left: none; border-right: none; padding: 0; margin: 0; width: 100%;"></td>
+                </tr>
+                <tr>
+                    <td style="width: 90%; padding: 3px; margin: 3px; border: none;" colspan="7"></td>
+                </tr>
+
+
+
                 <tr >
-                    <th style="text-align: center; font-size: 0.7em; width: 10%">Codigo</th>
-                    <th style="text-align: center; font-size: 0.7em; width:31%;">Concepto</th>
-                    <th style="text-align: center; font-size: 0.7em; width: 11%">Uds en garantía</th>
+                    <th style="text-align: center; font-size: 0.7em; width: 7%">Codigo</th>
+                    <th style="text-align: center; font-size: 0.7em; width:40%;">Concepto</th>
+                    <th style="text-align: center; font-size: 0.7em; width: 8%">Uds en garantía</th>
                     <th style="text-align: center; font-size: 0.7em; width: 11%">Uds en conservación</th>
                     <th style="text-align: center; font-size: 0.7em; width: 11%">Días en conservación</th>
                     <th style="text-align: center; font-size: 0.7em; width: 11%">Precio (€ por día)</th>
-                    <th style="text-align: center; font-size: 0.7em; width: 13%">Total</th>
+                    <th style="text-align: center; font-size: 0.7em; width: 12%">Total</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody style="border:none">
                 @foreach ($conjunto as $item)
                     <tr>
-                        <td style="text-align:center; font-size: 0.7em; ">{{ $item->Codigo }}</td>
-                        <td style="text-align:left; font-size: 0.7em; ">{{ $item->Concepto }}</td>
-                        <td style="text-align:center; font-size: 0.7em; ">{{ $item->Uds_en_garantia }}</td>
-                        <td style="text-align:center; font-size: 0.7em; ">{{ $item->Uds_en_conservacion }}</td>
-                        <td style="text-align:center; font-size: 0.7em; ">{{ $item->Dias_en_conservacion }}</td>
-                        <td style="text-align:right; font-size: 0.7em; ">{{ $item->Euros_por_dia }} €</td>
-                        <td style="text-align:right; font-size: 0.7em; ">{{ number_format($item->Total, 2, ',', '.') }} €</td>
+                        <td style="text-align:center; font-size: 0.7em;  padding: 0; margin: 0 ">{{ $item->Codigo }}</td>
+                        <td style="text-align:left; font-size: 0.7em;  padding: 0; margin: 0 ">{{ $item->Concepto }}</td>
+                        <td style="text-align:center; font-size: 0.7em;  padding: 0; margin: 0 ">{{ $item->Uds_en_garantia }}</td>
+                        <td style="text-align:center; font-size: 0.7em;  padding: 0; margin: 0 ">{{ $item->Uds_en_conservacion }}</td>
+                        <td style="text-align:center; font-size: 0.7em;  padding: 0; margin: 0 ">{{ $item->Dias_en_conservacion }}</td>
+                        <td style="text-align:right; font-size: 0.7em; padding: 0, 5, 0, 0; margin: 0;">{{ $item->Euros_por_dia }} €</td>
+                        <td style="text-align:right; font-size: 0.7em; padding: 0, 5, 0, 0 ; margin: 0;">{{ number_format($item->Total, 2, ',', '.') }} €</td>
+
 
                     </tr>
                 @endforeach
@@ -287,9 +319,13 @@
     </table>
 </div>
 
+<!-- FIN SEGUNDA Area TABLA LISTA DE CONSERVACIÓN -->
+
+<!-- TERCERA Area TABLA RELACION VALORADA - PARTES -->
+
 <div style="page-break-before: always; ">
     @foreach ($partes as $index => $parte)
-        <table style="width: 100%; page-break-before: always; border:none" class="table table-bordered">
+        <table style="width: 100%; border:none" class="table table-bordered">
 
 
             <thead>
@@ -333,7 +369,7 @@
                     <td style="text-align: left; padding: 10px 0px 10px 20px; font-size:0.7em; width:30%; border:none"><strong>Reparado por:</strong>
                         <label>{{ $parte->reportadoPor }}</label></td>
                     <td style="text-align: left; padding: 10px 0px 10px 20px; font-size:0.7em; width:40%; border:none"><strong>Fecha conforme:</strong>
-                        <label>Fecha Reparacion</label></td>
+                        <label>{{$parte->fechaautorizacion}}</label></td>
                 </tr>
                 <tr>
                     <td style="text-align: justify; padding: 10px 0px 10px 20px; font-size:0.8em; border:none" colspan="3" with="100%">
@@ -407,6 +443,8 @@
     @endforeach
 
 </div>
+
+<!-- FIN TERCERA Area TABLA RELACION VALORADA - PARTES -->
     <table style="width:95%" border="1">
         </thead>
         <tbody>
@@ -419,6 +457,8 @@
         </tbody>
 
     </table>
+
+    <!-- FIN TERCERA Area TABLA RELACION VALORADA - PARTES -->
 
     <table border="0" style="width: 95%; page-break-before: always;">
         <tr>
@@ -559,7 +599,7 @@
         </tbody>
     </table>
 
-    <br><br>
+    <br><br><br><br><br>
     <table border="0">
         <tr>
             <td colspan="3" style="text-align: center; padding: 5px 5px 5px 15px; border: none; font-size:0.9em">

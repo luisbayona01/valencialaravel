@@ -49,7 +49,7 @@ $("#contenpartes").removeClass('d-none');
                             <a href="{{ url('/generarparte') }}">
                             <img src=" {{ asset(url('img/CertificadoPartes.png')) }}" alt="logo" style="width:100%">
                             <h4 style="text-align: center;">
-                                <h4 class="sidebar-link" style="text-align: center">Generar Certificados Partes</h4>
+                                <h4 class="sidebar-link" style="text-align: center">Generar Certificaciones</h4>
                             </h4>
                             </a>
                         </div>

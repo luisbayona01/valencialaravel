@@ -14,7 +14,7 @@ $("#contenpartes").removeClass('d-none');
     <div class="container "id="container-principal">
 
         <div class="row justify-content-center">
-            @if (  Auth::user()->idrol==1 )
+            @if (  Auth::user()->idrol==1 || Auth::user()->idrol==3 )
 
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
@@ -49,7 +49,7 @@ $("#contenpartes").removeClass('d-none');
                 </div>
             </div>
 
-            @if (  Auth::user()->idrol==1 )
+            @if (  Auth::user()->idrol==1 || Auth::user()->idrol==3 )
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">

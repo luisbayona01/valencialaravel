@@ -89,7 +89,7 @@ class ReportPartesController extends Controller
             ->toArray();
 //dd($informeCorrectivo);
 
-        $chunkSize = 30;
+        $chunkSize = 28;
         $totalItems = count($informeCorrectivo);
 
 // Calcular cuántos conjuntos completos se pueden formar
