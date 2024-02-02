@@ -32,6 +32,7 @@ $("#contenpartes").removeClass('d-none');
                     </div>
                 </div>
             </div>
+            @endif
 
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
@@ -47,8 +48,8 @@ $("#contenpartes").removeClass('d-none');
                     </div>
                 </div>
             </div>
-            @endif
 
+            @if (  Auth::user()->idrol==1 )
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
@@ -63,6 +64,7 @@ $("#contenpartes").removeClass('d-none');
                     </div>
                 </div>
             </div>
+            @endif
 
         </div>
 
