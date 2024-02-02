@@ -192,25 +192,26 @@ color: #ffFF ;
                     /* Script para obligar el filtro de fechas  */
 
                 document.addEventListener("DOMContentLoaded", function() {
-                    // Desactiva el botón al cargar la página
-                    document.getElementById("btnGenerarCertificacion").disabled = true;
 
-                    // Agrega un evento de cambio a los campos de fecha
-                    document.getElementsByName("fechaautorizacionInicio")[0].addEventListener("input", validarCampos);
-                    document.getElementsByName("fechaautorizacionFin")[0].addEventListener("input", validarCampos);
+                 let searchParams = new URLSearchParams(window.location.search);
+                       let fechaInicio = searchParams.get('fechaautorizacionInicio') || '';
+                        let fechaFin = searchParams.get('fechaautorizacionFin') || '';
+
+    if (fechaInicio=='' || fechaFin=='' ){
+
+        document.getElementById("btnGenerarCertificacion").disabled = true;
+  //return  false
+          }
+
+            let inputFecha = document.querySelector('input[name="fechaautorizacionInicio"]');
+            let  inputFechafn = document.querySelector('input[name="fechaautorizacionFin"]');
+              // Desactiva el botón al cargar la página
+
+           inputFecha.value=fechaInicio;
+           inputFechafn.value=fechaFin;
                 });
 
-                function validarCampos() {
-                    // Obtiene los valores de los campos de fecha
-                    var fechaInicio = document.getElementsByName("fechaautorizacionInicio")[0].value;
-                    var fechaFin = document.getElementsByName("fechaautorizacionFin")[0].value;
 
-                    // Verifica si ambos campos están completos
-                    var camposCompletos = fechaInicio !== "" && fechaFin !== "";
-
-                    // Activa o desactiva el botón según la condición
-                    document.getElementById("btnGenerarCertificacion").disabled = !camposCompletos;
-                }
 /* Script para obligar el filtro de fechas  */
 
 
