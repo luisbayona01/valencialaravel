@@ -247,7 +247,7 @@ var totalPartes = data.totalPartes.total;
             maximumFractionDigits: 2
         });
 
-            //console.log(data); // Manejar la respuesta del controlador si es necesario
+            console.log(data); // Manejar la respuesta del controlador si es necesario
     $(".totalpartesSEleccionados").text(totalFormateado + '€')
 
  })
