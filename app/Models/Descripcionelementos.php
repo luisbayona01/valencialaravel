@@ -22,6 +22,6 @@ class Descripcionelementos extends Model
     protected $fillable = ['elemento', 'ud', 'descripcion', 'precio'];
 
 
-   
+   //asasa
 
 }
