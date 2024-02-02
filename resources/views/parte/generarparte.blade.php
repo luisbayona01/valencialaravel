@@ -67,13 +67,13 @@ color: #ffFF ;
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label>Fecha inicio</label>
-                            <input type="date" name="fechaautorizacionInicio" class="form-control">
+                            <input type="date" name="fechaautorizacionInicio" class="form-control" required>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label>Fecha fin</label>
-                            <input type="date" name="fechaautorizacionFin" class="form-control">
+                            <input type="date" name="fechaautorizacionFin" class="form-control" required>
                         </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-info">Buscar</button>
@@ -183,10 +183,36 @@ color: #ffFF ;
                     <br>
                     <div style="text-align: letf; padding: 0px 10px 10px 10px">
                         <button type="button" onclick="goToHome()" class="btn btn-secondary" style="text-align: right;">Volver</button>
-                        <button type="button" onclick="pdf()" class="btn btn-primary float-right" style="text-align: right;">Generar Certificación</button>
+                        <button type="button" id="btnGenerarCertificacion" onclick="pdf()" class="btn btn-primary float-right" style="text-align: right;">Generar Certificación</button>
+
                     </div>
 
                 <script>
+
+                    /* Script para obligar el filtro de fechas  */
+
+                document.addEventListener("DOMContentLoaded", function() {
+                    // Desactiva el botón al cargar la página
+                    document.getElementById("btnGenerarCertificacion").disabled = true;
+
+                    // Agrega un evento de cambio a los campos de fecha
+                    document.getElementsByName("fechaautorizacionInicio")[0].addEventListener("input", validarCampos);
+                    document.getElementsByName("fechaautorizacionFin")[0].addEventListener("input", validarCampos);
+                });
+
+                function validarCampos() {
+                    // Obtiene los valores de los campos de fecha
+                    var fechaInicio = document.getElementsByName("fechaautorizacionInicio")[0].value;
+                    var fechaFin = document.getElementsByName("fechaautorizacionFin")[0].value;
+
+                    // Verifica si ambos campos están completos
+                    var camposCompletos = fechaInicio !== "" && fechaFin !== "";
+
+                    // Activa o desactiva el botón según la condición
+                    document.getElementById("btnGenerarCertificacion").disabled = !camposCompletos;
+                }
+/* Script para obligar el filtro de fechas  */
+
 
 
         function actualizarFormulario() {
@@ -212,8 +238,11 @@ color: #ffFF ;
         })
         .then(response => response.json())
         .then(data => {
-            //console.log(data); // Manejar la respuesta del controlador si es necesario
-  $(".totalpartesSEleccionados").text(data.totalPartes.total)
+
+        // Obtener el número total formateado como moneda
+        var totalFormateado = data.totalPartes.total.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' }); // Ajusta 'EUR' según tu necesidad
+        //console.log(data); // Manejar la respuesta del controlador si es necesario
+        $(".totalpartesSEleccionados").text(totalFormateado);
  })
         .catch(error => console.error('Error:', error) , $(".totalpartesSEleccionados").text(0)  );
     }

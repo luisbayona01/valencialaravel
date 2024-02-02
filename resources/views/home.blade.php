@@ -14,11 +14,12 @@ $("#contenpartes").removeClass('d-none');
     <div class="container "id="container-principal">
 
         <div class="row justify-content-center">
+            @if (  Auth::user()->idrol==1 )
 
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <div class="inner" bis_skin_checked="1" style="padding: 5% 0% 0% 0%">
+                        <div class="inner" bis_skin_checked="1" style="padding: 5% 0% 0% 0%" id="usser">
                             <a href="{{ route('users.index') }}">
                             <img src="{{ asset(url('img/usuarios.png')) }}"  alt="logo" style="width:100%">
                             <h4>
@@ -35,7 +36,7 @@ $("#contenpartes").removeClass('d-none');
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <div class="inner" bis_skin_checked="1" style="padding: 5% 0% 0% 0%">
+                        <div class="inner" bis_skin_checked="1" style="padding: 5% 0% 0% 0%" id="partesasignados">
                             <a href="{{ url('/partes') }}">
                             <img src=" {{ asset(url('img/TransporteNotas.png')) }}" alt="logo" style="width:100%">
                             <h4>
@@ -46,11 +47,12 @@ $("#contenpartes").removeClass('d-none');
                     </div>
                 </div>
             </div>
+            @endif
 
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <div class="inner" bis_skin_checked="1" style="padding: 5% 0% 0% 0%">
+                        <div class="inner" bis_skin_checked="1" style="padding: 5% 0% 0% 0%" id="gestorinventario">
                             <a href="{{ url('/gestorInventario') }}">
                             <img src=" {{ asset(url('img/Inventario.png')) }}" alt="logo" style="width:100%">
                             <h4>
