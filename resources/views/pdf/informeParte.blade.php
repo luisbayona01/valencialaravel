@@ -323,8 +323,7 @@
                     <td style="text-align: left; padding: 10px 0px 10px 20px; font-size:0.8em; border:none" colspan="1">
                         <strong>Código Localización:</strong> <label>{{ $parte->cod_localizacion }}</label>
                     </td>
-                    <td style="text-align: right; padding: 0px 0px 0px 0px; font-size:0.8em; border:none" colspan="2"><label>JUAN
-                            XXIII - HERMANOS MACHADO ESTE</label></td>
+                    <td style="text-align: right; padding: 0px 0px 0px 0px; font-size:0.8em; border:none" colspan="2"><label>{{ $parte->descripcion}}</label></td>
                 </tr>
 
                 <tr>
@@ -374,7 +373,7 @@
                             <td style="text-align: right; padding: 5px 10px 5px 0px; font-size:0.7em">{{ $elemento->cantidad }}</td>
                             <td style="text-align: right; padding: 5px 10px 5px 0px; font-size:0.7em">{{ $elemento->precioU }} </td>
                             <td style="text-align: right; padding: 5px 10px 5px 0px; font-size:0.7em">
-                                {{ number_format($elemento->precio_total, 2, ',', '.') }} €</td>
+                                {{ number_format($elemento->precio_total, 2, ',', '.') }} eur</td>
                         </tr>
                     @endforeach
 
@@ -388,14 +387,14 @@
             <table style="width:95%">
                 </thead>
                 <tbody>
-                    <td style="width: 70%; border-bottom: 0px solid black;"></td>
+                    <td style="width: 50%; border-bottom: 0px solid black;"></td>
                     <td
                         style="width: 15%; text-align: right; padding: 0px 10px 0px 0px; ; border-top: 1px solid black">
                         <strong>Total</strong></td>
                     @php
                         $totalParte = number_format($totalporparte->total, 2, ',', '.' );
                     @endphp
-                    <td style="width: 15%; text-align: right;  border-top: 1px solid black; padding: 5px 10px 5px 0px">
+                    <td style="width: 35%; text-align: right;  border-top: 1px solid black; padding: 5px 10px 5px 0px">
                         {{ number_format($totalporparte->total, 2, ',', '.') }} eur</td>
                 </tbody>
 
@@ -408,14 +407,14 @@
     @endforeach
 
 </div>
-    <table style="width:95%">
+    <table style="width:95%" border="1">
         </thead>
         <tbody>
 
-            <td style="width: 70%; border-bottom: 0px solid black;"></td>
+            <td style="width: 50%; border-bottom: 0px solid black;"></td>
             <td style="width: 15%; text-align: right; padding: 0px 10px 0px 0px; ; border-top: 1px solid black">
                 <strong>Total</strong></td>
-            <td style="width: 15%; text-align: right;  border-top: 1px solid black; padding: 5px 10px 5px 0px"><label
+            <td style="width: 35%; text-align: right;  border-top: 1px solid black; padding: 5px 10px 5px 0px"><label
                     id="totalGeneralRelacion">{{number_format($totaltotalesEPartes, 2, ',', '.') }} Euros </label></td>
         </tbody>
 

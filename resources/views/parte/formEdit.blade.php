@@ -317,7 +317,7 @@
         <td colspan="2" class="table-bordered" style="width:15%; text-align:right"  >
             <label id="totalImportes"> </label>
         </td>
-        <td colspan="1" style="visibility: hidden; width: 10%"></td>
+        <td colspan="1" style="visibility: hidden; width: 10%" ></td>
     </tr>
    </table>
 
@@ -587,7 +587,10 @@
         });
     });
 
+
+
 </script>
+
 
 
 

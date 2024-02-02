@@ -81,7 +81,7 @@ switch ($rolUsuario) {
     break;
 
     case 3:
-    $partes->where('P.estadoparte_id', '=', 2 );
+    //$partes->where('P.estadoparte_id', '=', 2 );
     break;
 
     case 4:
@@ -152,13 +152,17 @@ $partes = DB::table('parte as P')
   ->addSelect(['totalImp' => $subquery]);
 // Aplicar condición según el rol del usuario
 if ($rolUsuario == 1) {
-  // No aplicar ninguna condición adicional
-$partes->where('P.estadoparte_id','=','5');
-} else {
-  // Filtrar por el usuario asignado si el rol es diferente de 1
-  $partes->where('P.asignadoa', '=',  Auth::user()->id)
-        ->where('P.estadoparte_id','=','5');   /*   solo se mostraran los que estan en estado validado*/
-}
+    // No aplicar ninguna condición adicional
+    $partes->where('P.estadoparte_id','=','5');
+  } elseif ($rolUsuario == 3) {
+    // Aplicar condición adicional para el rol 2
+    $partes->where('P.estadoparte_id','=','5');
+  } else {
+    // Filtrar por el usuario asignado si el rol es diferente de 1 y 2
+    $partes->where('P.asignadoa', '=',  Auth::user()->id)
+          ->where('P.estadoparte_id','=','');   /*   solo se mostraran los que están en estado validado*/
+  }
+
 
 if ($request->filled('fechaautorizacionInicio')  && $request->filled('fechaautorizacionFin')) {
 
@@ -179,6 +183,7 @@ $partes = $partes->get();
       return view('parte.generarparte', compact('partes'));
 
 }
+
 
 
 public function pdf()
@@ -350,10 +355,6 @@ if (Auth::user()->idrol==1){
                 break;
         }
     })->pluck('estadoparte', 'id');
-
-
-
-
 }
 
 
