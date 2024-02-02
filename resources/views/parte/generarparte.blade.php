@@ -171,7 +171,7 @@ color: #ffFF ;
                                     <input type="checkbox" style="text-align:right; " name="penalidadchek" value="" onchange="toggleInputVisibility()">
                                 </td>
                                 <td style="text-align:center;width:7%">
-                                    <input style="text-align: right; width:100%" type="text" id="penalidad" placeholder="0" oninput="validateInput(this)">
+                                    <input style="text-align: right; width:100%" type="text" id="penalidad" value="0" placeholder="0" oninput="validateInput(this)">
                                 </td>
                                 <td id="penalidadEuro" style="text-align:left; width:5%"><h4>€</h4></td>
                             </tr>
@@ -212,8 +212,11 @@ color: #ffFF ;
         })
         .then(response => response.json())
         .then(data => {
-            //console.log(data); // Manejar la respuesta del controlador si es necesario
-  $(".totalpartesSEleccionados").text(data.totalPartes.total)
+
+        // Obtener el número total formateado como moneda
+        var totalFormateado = data.totalPartes.total.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' }); // Ajusta 'EUR' según tu necesidad
+        //console.log(data); // Manejar la respuesta del controlador si es necesario
+        $(".totalpartesSEleccionados").text(totalFormateado);
  })
         .catch(error => console.error('Error:', error));
     }
