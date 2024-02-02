@@ -62,7 +62,7 @@
 @php
 
                $Tbajaoppdf = $totalSum + $totalPartes->total;
-                $porcentaje = floatval('21.90');
+                $porcentaje = floatval(21.90);
                 $resultbaja = ($Tbajaoppdf * $porcentaje) / 100;
                 $restarbaja1 = $Tbajaoppdf - $resultbaja;
 
