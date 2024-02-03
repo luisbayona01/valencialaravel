@@ -275,7 +275,7 @@ var totalPartes = data.totalPartes.total;
 
                     function validateInput(input) {
                         // Permite solo números, comas y puntos en el input
-                        input.value = input.value.replace(/[^0-9,.]/g, '');
+                        input.value = input.value.replace(/[^0-9,]/g, '');
                     }
 
                     function pdf() {
