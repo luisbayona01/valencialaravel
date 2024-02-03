@@ -110,7 +110,7 @@ class ReportPartesController extends Controller
         }
 
         //dd($totalSum);
-        $pdf = Pdf::loadView('pdf.informeParte', compact('penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes'));
+        $pdf = Pdf::loadView('pdf.informeParte', compact('penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes', 'fechaInicio', 'fechaFin'));
         //$pdf->inline('informeParte.pdf');
         $pdf->setPaper('legal');
         Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
@@ -135,6 +135,7 @@ class ReportPartesController extends Controller
     $texto =$formatter->toMoney($valor_formateado, 2, 'EUROS', 'CÉNTIMOS');
     return  $texto;
     }*/
+
 
     public function numerosletras($valor)
     {
