@@ -136,6 +136,7 @@ class ReportPartesController extends Controller
     return  $texto;
     }*/
 
+
     public function numerosletras($valor)
     {
         $formatter = new NumeroALetras();

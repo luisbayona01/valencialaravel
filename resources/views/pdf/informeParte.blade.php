@@ -323,9 +323,21 @@
 
 <!-- TERCERA Area TABLA RELACION VALORADA - PARTES -->
 
-<div style="page-break-before: always; ">
+<div style=" ">
+
+    @php
+        $contador = 0; // Inicializar el contador
+    @endphp
+
     @foreach ($partes as $index => $parte)
-        <table style="width: 100%; border:none" class="table table-bordered">
+
+        @php
+            $contador++; // Incrementar el contador
+            $elementos = app('App\Http\Controllers\ElementosController')->list_data_elements_api_elemntparte($parte->id);
+            $totalporparte = app('App\Http\Controllers\ElementosController')->totalporparte($parte->id);
+        @endphp
+
+        <table style="width: 100%; border:none;page-break-before: always;" class="table table-bordered">
 
 
             <thead>
@@ -349,7 +361,7 @@
             <tbody>
                 <tr>
                     <td colspan="2" style="text-align: left; padding: 10px 0px 10px 20px; font-size:0.8em; border:none">
-                        <strong>No. Orden:</strong> <label>1</label>
+                        <strong>No. Orden:</strong> <label id="noOrden">{{ $contador }}</label>
                     </td>
                     <td colspan="1" style="text-align: right; padding: 0px 20px 0px 0px; font-size:0.8em; border:none">Parte de <label>
                             <strong>{{ $parte->tipoparte }}</strong> </label><strong>No.: </strong> <label><strong>{{ $parte->id }}</strong></label>
@@ -390,7 +402,7 @@
             //dd();
         @endphp
         @if (count($elementos) > 0)
-            <table style="width: 100%" id="table-relacion">
+            <table style="width: 100%" id="table-relacion" border="0">
                 <thead>
                     <tr>
                         <th style="width: 15%">Código</th>
@@ -418,19 +430,22 @@
 
             </tbody>
             </table>
+
+            @if (count($elementos) > 0)
+            @endif
             <br>
 
-            <table style="width:95%">
+            <table style="width:95%" border="0">
                 </thead>
                 <tbody>
-                    <td style="width: 50%; border-bottom: 0px solid black;"></td>
+                    <td style="width: 50%; border: none;"></td>
                     <td
-                        style="width: 15%; text-align: right; padding: 0px 10px 0px 0px; ; border-top: 1px solid black">
+                        style="width: 15%; text-align: right; padding: 0; border-top: 3px solid black; border-bottom:0; border-left:0; border-right:0 ">
                         <strong>Total</strong></td>
                     @php
                         $totalParte = number_format($totalporparte->total, 2, ',', '.' );
                     @endphp
-                    <td style="width: 35%; text-align: right;  border-top: 1px solid black; padding: 5px 10px 5px 0px">
+                    <td style="width: 35%; text-align: right;  padding: 0; border-top: 3px solid black; border-bottom:0; border-left:0; border-right:0 ">
                         {{ number_format($totalporparte->total, 2, ',', '.') }} eur</td>
                 </tbody>
 
@@ -439,24 +454,27 @@
                 $totaltotalesEPartes += 0 + $totalporparte->total;
             @endphp
         @endif
-        <br><br>
+        <br>
+
+
     @endforeach
+
+    <table style="width:95%" border="0">
+    <tbody>
+
+        <td style="width: 50%; border:none;"></td>
+        <td style="width: 15%; text-align: right; padding: 0; border-top: 3px solid black; border-bottom:0; border-left:0; border-right:0">
+            <strong>Total</strong></td>
+        <td style="width: 35%; text-align: right;  padding: 0; border-top: 3px solid black; border-bottom:0; border-left:0; border-right:0"><label
+                id="totalGeneralRelacion">{{number_format($totaltotalesEPartes, 2, ',', '.') }} Euros </label></td>
+    </tbody>
+
+</table>
 
 </div>
 
 <!-- FIN TERCERA Area TABLA RELACION VALORADA - PARTES -->
-    <table style="width:95%" border="1">
-        </thead>
-        <tbody>
 
-            <td style="width: 50%; border-bottom: 0px solid black;"></td>
-            <td style="width: 15%; text-align: right; padding: 0px 10px 0px 0px; ; border-top: 1px solid black">
-                <strong>Total</strong></td>
-            <td style="width: 35%; text-align: right;  border-top: 1px solid black; padding: 5px 10px 5px 0px"><label
-                    id="totalGeneralRelacion">{{number_format($totaltotalesEPartes, 2, ',', '.') }} Euros </label></td>
-        </tbody>
-
-    </table>
 
     <!-- FIN TERCERA Area TABLA RELACION VALORADA - PARTES -->
 
@@ -603,7 +621,7 @@
     <table border="0">
         <tr>
             <td colspan="3" style="text-align: center; padding: 5px 5px 5px 15px; border: none; font-size:0.9em">
-                VALENCIA, <LAbel id="fechaActual2"></LAbel>
+                VALENCIA, <label id="fechaActual2">{{$parte->fechaautorizacion}}</label>
             </td>
         </tr>
         <tr>
