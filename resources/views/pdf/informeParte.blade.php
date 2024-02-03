@@ -231,7 +231,22 @@
 
 <br>
 
-<p style="text-align: center; font-size: 0.7em">Documento firmado electrónicamente por el contratista, el Jefe de la Sección y el Concejal Coordinador del Área</p>
+<table border="0" style="width: 100%">
+    <tr>
+        <td colspan="3" style="text-align: center; padding: 5px 5px 5px 15px; border: none; font-size:0.8em">
+            VALENCIA, <label id="fechaActual2">{{$currentDateTime}}</label>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" style="text-align: center; padding: 5px 5px 5px 15px; border: none; font-size:0.7em">
+            Documento firmado electrónicamente por el contratista, el Jefe de la Sección y el Concejal Coordinador
+            del Área
+        </td>
+    </tr>
+</table>
+
+
+
 
  <!-- SEGUNDA Area TABLA LISTA DE CONSERVACIÓN -->
 <div style="page-break-before: always;">
@@ -462,9 +477,9 @@
     <table style="width:95%" border="0">
     <tbody>
 
-        <td style="width: 50%; border:none;"></td>
-        <td style="width: 15%; text-align: right; padding: 0; border-top: 3px solid black; border-bottom:0; border-left:0; border-right:0">
-            <strong>Total</strong></td>
+        <td style="width: 30%; border:none;"></td>
+        <td style="width: 35%; text-align: right; padding: 0; border-top: 3px solid black; border-bottom:0; border-left:0; border-right:0">
+            <strong>Importe Total Partes </strong></td>
         <td style="width: 35%; text-align: right;  padding: 0; border-top: 3px solid black; border-bottom:0; border-left:0; border-right:0"><label
                 id="totalGeneralRelacion">{{number_format($totaltotalesEPartes, 2, ',', '.') }} Euros </label></td>
     </tbody>
@@ -618,14 +633,14 @@
     </table>
 
     <br><br><br><br><br>
-    <table border="0">
+    <table border="0" style="width: 100%">
         <tr>
-            <td colspan="3" style="text-align: center; padding: 5px 5px 5px 15px; border: none; font-size:0.9em">
-                VALENCIA, <label id="fechaActual2">{{$parte->fechaautorizacion}}</label>
+            <td colspan="3" style="text-align: center; padding: 5px 5px 5px 15px; border: none; font-size:0.8em">
+                VALENCIA, <label id="fechaActual2">{{$currentDateTime}}</label>
             </td>
         </tr>
         <tr>
-            <td colspan="3" style="text-align: center; padding: 5px 5px 5px 15px; border: none; font-size:0.9em">
+            <td colspan="3" style="text-align: center; padding: 5px 5px 5px 15px; border: none; font-size:0.7em">
                 Documento firmado electrónicamente por el contratista, el Jefe de la Sección y el Concejal Coordinador
                 del Área
             </td>

@@ -7,11 +7,14 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use DB;
 use Illuminate\Http\Request;
 use Luecano\NumeroALetras\NumeroALetras;
+use Illuminate\Support\Carbon;
+
 
 class ReportPartesController extends Controller
 {
     public function generarinforme(Request $request)
     {
+        $currentDateTime = Carbon::now()->toDateTimeLocalString();
 
 /*   "fechaautorizacionInicio" => "2024-01-01"
 "fechaautorizacionFin" => "2024-02-28*/
@@ -110,7 +113,7 @@ class ReportPartesController extends Controller
         }
 
         //dd($totalSum);
-        $pdf = Pdf::loadView('pdf.informeParte', compact('penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes', 'fechaInicio', 'fechaFin'));
+        $pdf = Pdf::loadView('pdf.informeParte', compact('penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes', 'fechaInicio', 'fechaFin','currentDateTime'));
         //$pdf->inline('informeParte.pdf');
         $pdf->setPaper('legal');
         Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
