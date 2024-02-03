@@ -261,7 +261,7 @@
                 </tr>
                 <tr>
                     <td style="width: 90%; padding: 0; border: none;" colspan="7" >
-                        <label for="">Desde el ... hasta el ...</label>
+                        <label for="">Desde el {{$fechaInicio}} hasta el {{$fechaFin}}</label>
                     </td>
                 </tr>
                 <tr>
