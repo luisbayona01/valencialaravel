@@ -14,11 +14,18 @@ class ReportPartesController extends Controller
 {
     public function generarinforme(Request $request)
     {
-        $currentDateTime = Carbon::now()->toDateTimeLocalString();
-
+        $currentDateTimes = Carbon::now();
+     Carbon::setLocale('es');
+// Obtener día, mes y año en formato de cadena
+$dia = $currentDateTimes->day;
+$mes = $currentDateTimes->format('m'); // Obtener el número del mes
+$anio = $currentDateTimes->year;
+$nombreMes = $currentDateTimes->isoFormat('MMMM');
 /*   "fechaautorizacionInicio" => "2024-01-01"
 "fechaautorizacionFin" => "2024-02-28*/
 //dd($request);
+
+$currentDateTime=$dia.'-'.$nombreMes.'-'.$anio; 
         $partesid = $request->input('parte_ids');
 
         $penalidad_raw = $request->input('penalidad');
