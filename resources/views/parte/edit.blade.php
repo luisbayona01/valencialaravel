@@ -252,15 +252,43 @@ evidencias.forEach(evidencia => {
         // Espera a que el DOM esté listo
         $(document).ready(function() {
      $("#descripcionelementos").selectpicker();
-
-           /* $("#fechaautorizacion").datetimepicker({
+     if ("#fechaautorizacion"){
+$("#fechaautorizacion").datetimepicker({
                 "allowInputToggle": true,
                 "showClose": true,
                 "showClear": true,
                 "showTodayButton": true,
                 "format": "YYYY/MM/DD HH:mm:ss",
 
-            });*/
+            });
+    }
+
+if($("#Fechareporte")){
+$("#Fechareporte").datetimepicker({
+                "allowInputToggle": true,
+                "showClose": true,
+                "showClear": true,
+                "showTodayButton": true,
+                "format": "YYYY/MM/DD HH:mm:ss",
+
+            });
+
+}
+
+
+if($("#fechaAsignacion")){
+
+$("#fechaAsignacion").datetimepicker({
+                "allowInputToggle": true,
+                "showClose": true,
+                "showClear": true,
+                "showTodayButton": true,
+                "format": "YYYY/MM/DD HH:mm:ss",
+
+            });
+}
+
+           /* */
             $("#showE").click(function() {
                 $("#elementos").removeClass('d-none')
             })
