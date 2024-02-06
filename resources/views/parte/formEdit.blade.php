@@ -87,7 +87,7 @@
     @endphp ">
 
 
-  @if (Auth::user()->idrol!=4)
+  @if (Auth::user()->idrol==4)
   @php
     $dnone = 'd-none';
 @endphp
@@ -96,6 +96,7 @@
     $dnone = '';
 @endphp
   @endif
+
 
 
     <div class="box-body" style="padding: 5px 15px 5px 15px" >
@@ -108,7 +109,7 @@
                     'class' => 'form-control' . ($errors->has('id_localizacion') ? ' is-invalid' : ''),
                     'placeholder' => 'Seleccione una ubicacion',
                     'required' => 'required',
-                   'disabled' =>'disabled'
+                   (Auth::user()->idrol== 4 || Auth::user()->idrol==1) && ($parte->estadoparte_id == 1 || $parte->estadoparte_id == 2) ? '' :'disabled'
                 ]) }}
                 <div class="invalid-feedback">
                     porfavor seleccione una ubicacion
@@ -144,7 +145,7 @@
             <div class="col-md-4">
                 <div class="form-group" style="text-align: left; width: 100%" >
                     {{ Form::label('Tipo de parte') }}
-                    {{ Form::select('idtipoparte', $tipoparte, $parte->idtipoparte, ['class' => 'form-control' . ($errors->has('idtipoparte') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione el tipo de parte', 'required' => 'required','disabled' =>'disabled' ,
+                    {{ Form::select('idtipoparte', $tipoparte, $parte->idtipoparte, ['class' => 'form-control' . ($errors->has('idtipoparte') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione el tipo de parte', 'required' => 'required', (Auth::user()->idrol== 4 || Auth::user()->idrol==1) && ($parte->estadoparte_id == 1 || $parte->estadoparte_id == 2) ? '' :'disabled' ,
                     ]) }}
                     <div class="invalid-feedback">
                         porfavor seleccione el tipo de parte
@@ -158,7 +159,7 @@
             <div class="col">
                 <div class="form-group">
                     {{ Form::label('Autorizado por') }}
-                    {{ Form::select('autorizado_por',$autorizadopor,$parte->autorizado_por, ['class' => 'form-control' . ($errors->has('autorizadopor') ? ' is-invalid' : ''), 'placeholder' => 'selecione', 'id'=>'fechaautorizacion', 'required' => 'required', 'disabled' =>'disabled']) }}
+                    {{ Form::select('autorizado_por',$autorizadopor,$parte->autorizado_por, ['class' => 'form-control' . ($errors->has('autorizadopor') ? ' is-invalid' : ''), 'placeholder' => 'selecione', 'required' => 'required', (Auth::user()->idrol== 4 || Auth::user()->idrol==1) && ($parte->estadoparte_id == 1 || $parte->estadoparte_id == 2) ? '' :'disabled' ,]) }}
                     <div class="invalid-feedback">
                          porfavor seleccione una  opcion
                      </div>
@@ -167,8 +168,8 @@
             <div class="col">
                 <div class="form-group">
                     {{ Form::label('Fecha de Autorización') }}
-                    {{ Form::datetime('fechacreacion', $parte->fechacreacion, ['class' => 'form-control' . ($errors->has('fechacreacion') ? ' is-invalid' : ''),'placeholder' => 'Fechacreacion',
-                        'required' => 'required','readonly' => 'readonly',
+                    {{ Form::datetime('fechaautorizacion', $parte->fechaautorizacion, ['class' => 'form-control' . ($errors->has('fechacreacion') ? ' is-invalid' : ''),'id'=>'fechaautorizacion','placeholder' => 'fechaautorizacion',
+                        'required' => 'required',(Auth::user()->idrol== 4 || Auth::user()->idrol==1) && ($parte->estadoparte_id == 1 || $parte->estadoparte_id == 2) ? '' :'readonly' ,
                     ]) }}
                     {!! $errors->first('fechacreacion', '<div class="invalid-feedback">:message</div>') !!}
                 </div>
@@ -180,7 +181,7 @@
             <div class="col-sm-6" bis_skin_checked="1">
                 <div class="form-group">
                     {{ Form::label('Comunicado Por') }}
-                    {{ Form::select('reportadopor',$reportadopor,$parte->reportadopor, ['class' => 'form-control' . ($errors->has('reportadoPor') ? ' is-invalid' : ''), 'placeholder' => 'selecione', 'required' => 'required', 'disabled' =>'disabled']) }}
+                    {{ Form::select('reportadopor',$reportadopor,$parte->reportadopor, ['class' => 'form-control' . ($errors->has('reportadoPor') ? ' is-invalid' : ''), 'placeholder' => 'selecione', 'required' => 'required', ($errors->has('idtipoparte') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione el tipo de parte', 'required' => 'required', (Auth::user()->idrol== 4 || Auth::user()->idrol==1) && ($parte->estadoparte_id == 1 || $parte->estadoparte_id == 2) ? '' :'disabled' ]) }}
                    <div class="invalid-feedback">
                         porfavor seleccione una  opcion
                     </div>
@@ -191,7 +192,7 @@
                     {{ Form::label('Fecha de Comunicación') }}
                     <div class="input-group date">
 
-                        {{ Form::text('fechareporte', $parte->fechareporte, ['class' => 'form-control', 'placeholder' => 'Fechareporte', 'required' => 'required', 'disabled' =>'disabled']) }}
+                        {{ Form::text('fechareporte', $parte->fechareporte, ['class' => 'form-control', 'placeholder' => 'Fechareporte','id'=>'Fechareporte', 'required' => 'required', ($errors->has('Fechareporte') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione el tipo de parte', 'required' => 'required', (Auth::user()->idrol== 4 || Auth::user()->idrol==1) && ($parte->estadoparte_id == 1 || $parte->estadoparte_id == 2) ? '' :'disabled' ]) }}
                         <div class="input-group-addon input-group-append" bis_skin_checked="1">
                             <div class="input-group-text" bis_skin_checked="1">
                                 <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
@@ -209,7 +210,7 @@
             <div class="col-sm-6" bis_skin_checked="1">
                 <div class="form-group">
                     {{ Form::label('Reparado por') }}
-                    {{ Form::select('asignadoa',$asignadoa,$parte->asignadoa, ['class' => 'form-control' . ($errors->has('asignadoa') ? ' is-invalid' : ''), 'placeholder' => 'seleccione', 'required' => 'required', 'disabled' =>'disabled']) }}
+                    {{ Form::select('asignadoa',$asignadoa,$parte->asignadoa, ['class' => 'form-control' . ($errors->has('asignadoa') ? ' is-invalid' : ''), 'placeholder' => 'seleccione', 'required' => 'required', ($errors->has('idtipoparte') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione el tipo de parte', 'required' => 'required', (Auth::user()->idrol== 4 || Auth::user()->idrol==1) && ($parte->estadoparte_id == 1 || $parte->estadoparte_id == 2) ? '' :'disabled' ]) }}
                   <div class="invalid-feedback">
                         porfavor asigne un usuario
                     </div>
@@ -221,7 +222,7 @@
                     {{ Form::label('fecha de Reparación') }}
                     <div class="input-group date">
 
-                        {{ Form::text('fechaAsignacion', $parte->fechaAsignacion, ['class' => 'form-control', 'placeholder' => 'fechaAsignacion', 'required' => 'required', 'disabled' =>'disabled']) }}
+                        {{ Form::text('fechaAsignacion', $parte->fechaAsignacion, ['class' => 'form-control', 'placeholder' => 'fechaAsignacion', 'id'=>'fechaAsignacion', 'required' => 'required', ($errors->has('idtipoparte') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione el tipo de parte', 'required' => 'required', (Auth::user()->idrol== 4 || Auth::user()->idrol==1) && ($parte->estadoparte_id == 1 || $parte->estadoparte_id == 2) ? '' :'disabled' ]) }}
                         <div class="input-group-addon input-group-append" bis_skin_checked="1">
                             <div class="input-group-text" bis_skin_checked="1">
                                 <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
@@ -244,7 +245,7 @@
                 'class' => 'form-control' . ($errors->has('obscreadorparte') ? ' is-invalid' : ''),
                 'placeholder' => 'Ingrese los detalles del parte',
                 'rows' => 5,
-                'disabled' => 'disabled' // Número de filas del textarea, ajusta según tus necesidades
+                ($errors->has('idtipoparte') ? ' is-invalid' : ''), 'placeholder' => 'Seleccione el tipo de parte', 'required' => 'required', (Auth::user()->idrol== 4 || Auth::user()->idrol==1) && ($parte->estadoparte_id == 1 || $parte->estadoparte_id == 2) ? '' :'disabled'  // Número de filas del textarea, ajusta según tus necesidades
             ]) }}
             {!! $errors->first('obscreadorparte', '<div class="invalid-feedback">:message</div>') !!}
         </div>
