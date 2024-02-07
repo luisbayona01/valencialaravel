@@ -7,7 +7,7 @@ on:
 
 jobs:
   pull_and_update:
-    runs-on:  self-hosted
+    runs-on: windowslatest
 
     steps:
       - name: Checkout code
