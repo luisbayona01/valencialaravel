@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    {{ $localizacion->name ?? "{{ __('Show') Localizacion" }}
+
 @endsection
 
 @section('content')
@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Cod Localizacion:</strong>
                             {{ $localizacion->cod_localizacion }}
