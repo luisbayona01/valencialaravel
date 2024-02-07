@@ -7,7 +7,7 @@ on:
 
 jobs:
   pull_and_update:
-    runs-on: windows-latest
+    runs-on:  self-hosted
 
     steps:
       - name: Checkout code
@@ -16,4 +16,4 @@ jobs:
       - name: Pull changes
         run: git pull origin master
 
-  
+
