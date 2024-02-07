@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    {{ $tipoparte->name ?? "{{ __('Show') Tipoparte" }}
+
 @endsection
 
 @section('content')
@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
                             <strong>Nombre:</strong>
                             {{ $tipoparte->nombre }}
