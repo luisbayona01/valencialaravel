@@ -285,7 +285,7 @@ if ($parte->estadoparte_id == 1) {
                         $errors->has('idtipoparte') ? ' is-invalid' : '',
                         'placeholder' => 'Seleccione el tipo de parte',
                         'required' => 'required',
-                        (Auth::user()->idrol == 4 || Auth::user()->idrol == 1) &&
+                        (Auth::user()->idrol == 4 || Auth::user()->idrol == 1||Auth::user()->idrol == 2) &&
                         ($parte->estadoparte_id == 1 || $parte->estadoparte_id == 2)
                             ? ''
                             : 'disabled', // Número de filas del textarea, ajusta según tus necesidades
