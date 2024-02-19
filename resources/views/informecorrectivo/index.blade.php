@@ -46,14 +46,14 @@ $(document).ready( function () {
                                     <tr>
                                         <th>No</th>
 
-										<th>Codigo</th>
-										<th>Concepto</th>
-										<th>Uds En Garantia</th>
-										<th>Uds En Conservacion</th>
-										<th>Dias En Conservacion</th>
-										<th>Euros Por Dia</th>
+										<th style="text-align:center">Codigo</th>
+										<th style="text-align:center">Concepto</th>
+										<th style="font-size: 0.9em; text-align:center">Uds En Garantia</th>
+										<th style="font-size: 0.9em; text-align:center">Uds En Conservacion</th>
+										<th style="font-size: 0.9em; text-align:center">Dias En Conservacion</th>
+										<th style="font-size: 0.9em; text-align:center">Euros Por Dia</th>
 										<th>Total</th>
-										<th>Fecha De Carga</th>
+										<th style="font-size: 0.9em; text-align:center">Fecha De Carga</th>
 
 
                                     </tr>
@@ -63,14 +63,14 @@ $(document).ready( function () {
                                         <tr>
                                             <td>{{ $informecorrectivo->id }}</td>
 
-											<td>{{ $informecorrectivo->Codigo }}</td>
-											<td>{{ $informecorrectivo->Concepto }}</td>
+											<td style="font-size: 0.9em; text-align:center">{{ $informecorrectivo->Codigo }}</td>
+											<td style="font-size: 0.9em; text-align:center">{{ $informecorrectivo->Concepto }}</td>
 											<td>{{ $informecorrectivo->Uds_en_garantia }}</td>
 											<td>{{ $informecorrectivo->Uds_en_conservacion }}</td>
 											<td>{{ $informecorrectivo->Dias_en_conservacion }}</td>
-											<td>{{ $informecorrectivo->Euros_por_dia }}</td>
-											<td>{{ number_format($informecorrectivo->Total,2, ',', '.')  }}</td>
-											<td>{{ $informecorrectivo->Fecha_de_carga }}</td>
+											<td style="font-size: 0.9em; text-align:right">{{ $informecorrectivo->Euros_por_dia }} €</td>
+											<td style="font-size: 0.9em; text-align:right">{{ number_format($informecorrectivo->Total,2, ',', '.')  }} €</td>
+											<td style="font-size: 0.9em; text-align:center">{{ $informecorrectivo->Fecha_de_carga }}</td>
 
 
                                         </tr>
