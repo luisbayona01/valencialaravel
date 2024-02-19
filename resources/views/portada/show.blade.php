@@ -140,7 +140,7 @@
                 <p style="text-align: center ; font-size: 0.9em ">21,90% </p>
             </td>
             <td style="text-align: left; width:50%; font-size: 0.8em ; ">
-                <p>Fecha de la adjudicación: Jueves, 6 de Abril de 2023</p>
+                <p> Plazo de ejecución: Jueves, 6 de Abril de 2023</p>
                 <p>Fecha de la escritura de contrata:</p>
             </td>
         </tr>

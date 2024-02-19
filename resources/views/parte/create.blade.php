@@ -49,11 +49,11 @@
                             console.log('iditem', item.idelementos_parte);
 
                             let rows = `<tr>
-                    <td style="text-align: center;">${item.elemento}</td>
-                    <td>${item.descripcion}</td>
-                    <td style="text-align: right;">${item.precioU} € </td>
-                    <td style="text-align: right;">${item.cantidad} </td>
-                    <td style="text-align: right;">${item.precio_total.toFixed(2)} € </td>
+                    <td style="text-align: center; font-size:0.8em">${item.elemento}</td>
+                    <td style="text-align: justify; font-size:0.8em">${item.descripcion}</td>
+                    <td style="text-align: right; font-size:0.8em">${item.precioU} € </td>
+                    <td style="text-align: right; font-size:0.8em">${item.cantidad} </td>
+                    <td style="text-align: right; font-size:0.8em">${item.precio_total.toFixed(2)} € </td>
                     <td style="text-align: center;">
 
                         <a style="text-align: center; margin-right: 10px; font-size: 1.3em; " type="button" class="b" id="selecione">
