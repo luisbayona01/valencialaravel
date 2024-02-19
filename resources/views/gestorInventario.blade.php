@@ -61,7 +61,9 @@ $("#contenpartes").removeClass('d-none');
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <div class="inner" bis_skin_checked="1">
+
                             <a href="{{ url('/listaPrecios') }}">
+
                             <img src=" {{ asset(url('img/ListadePrecios2.png')) }}" alt="logo" style="width:100%">
                             <h4 style="text-align: center;">
                                 <h4 class="sidebar-link" style="text-align: center">Lista de Precios</h4>
