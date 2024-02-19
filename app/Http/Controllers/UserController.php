@@ -127,6 +127,7 @@ class UserController extends Controller
 
 
         $data = User::where('email', '=', $request->email)->orWhere('username', $request->input('username'))->get();
+
         if (count($data) != 0) {
             $respuesta = "este usuario  ya esta registrado ";
 

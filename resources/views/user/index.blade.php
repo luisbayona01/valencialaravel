@@ -48,7 +48,6 @@
                                 <tbody>
                                     @foreach ($users as $user)
                                         <tr>
-
 											<td>{{ $user->nombres }}</td>
 											<td>{{ $user->apellidos }}</td>
                                             <td>{{$user->codigo}}</td>
