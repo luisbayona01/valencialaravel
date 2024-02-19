@@ -30,9 +30,12 @@ Route::post('/report',[App\Http\Controllers\ReportPartesController::class,'gener
 Route::resource('partes',  App\Http\Controllers\parteController::class);
 
 //Route::get('/report',[App\Http\Controllers\ReportPartesController::class,'generarinforme'])->name('report');
-
-
+Route::post('/totalchecks',[App\Http\Controllers\ReportPartesController::class,'validarchecks'])->name('totalchecks');
 Route::resource('informecorrectivos', App\Http\Controllers\informecorrectivoController::class);
+Route::resource('listaPrecios', App\Http\Controllers\listaPreciosController::class);
+
+Route::resource('portada', App\Http\Controllers\portadaController::class);
+
 
 Route::resource('users',  App\Http\Controllers\UserController::class)->middleware('auth:web');
 Route::resource('roles',  App\Http\Controllers\RolesController::class)->middleware('auth:web');
@@ -47,6 +50,10 @@ Route::get('/gestorParte', function () {
 Route::get('/gestorInventario', function () {
     return view('gestorInventario');
 })->name('gestorInventario');
+
+Route::get('/configPortada', function () {
+    return view('configPortada');
+})->name('configPortada');
 
 Route::get('generarparte', [App\Http\Controllers\parteController::class, 'generarparte'])->name('generarparte')->middleware('auth');
 Route::get('pdf', [App\Http\Controllers\parteController::class, 'pdf'])->name('pdf')->middleware('auth');

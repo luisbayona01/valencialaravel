@@ -1,0 +1,19 @@
+name: Auto Pull and Composer Update on Windows
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  pull_and_update:
+    runs-on:  self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Pull changes
+        run: git pull origin master
+
+

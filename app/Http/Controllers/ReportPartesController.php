@@ -7,31 +7,44 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use DB;
 use Illuminate\Http\Request;
 use Luecano\NumeroALetras\NumeroALetras;
+use Illuminate\Support\Carbon;
+
 
 class ReportPartesController extends Controller
 {
     public function generarinforme(Request $request)
     {
-
+        $currentDateTimes = Carbon::now();
+     Carbon::setLocale('es');
+// Obtener día, mes y año en formato de cadena
+$dia = $currentDateTimes->day;
+$mes = $currentDateTimes->format('m'); // Obtener el número del mes
+$anio = $currentDateTimes->year;
+$nombreMes = $currentDateTimes->isoFormat('MMMM');
 /*   "fechaautorizacionInicio" => "2024-01-01"
 "fechaautorizacionFin" => "2024-02-28*/
 //dd($request);
+
+$currentDateTime=$dia.'-'.$nombreMes.'-'.$anio; 
         $partesid = $request->input('parte_ids');
 
         $penalidad_raw = $request->input('penalidad');
 
         // Reemplazar comas por puntos (si las comas son el separador decimal)
         $penalidad = str_replace(',', '.', $penalidad_raw);
-                //dd($partesid);
+        //dd($partesid);
 //die();
 
-if (empty($fechaInicio) || empty($fechaFin)) {
-    // Si fecha de inicio no está presente, establece el primer día del mes actual
-    $fechaInicio = date('Y-m-01');
+        $fechaInicio = $request->input('fechaautorizacionInicio');
+        $fechaFin = $request->input('fechaautorizacionFin');
 
-    // Si fecha de fin no está presente, establece el último día del mes actual
-    $fechaFin = date('Y-m-t');
-}
+        if (empty($fechaInicio) || empty($fechaFin)) {
+            // Si fecha de inicio no está presente, establece el primer día del mes actual
+            $fechaInicio = date('Y-m-01');
+
+            // Si fecha de fin no está presente, establece el último día del mes actual
+            $fechaFin = date('Y-m-t');
+        }
 
         $img = base_path('public/img/icono_representativo_caratulapdf.png');
 //die();
@@ -65,32 +78,28 @@ if (empty($fechaInicio) || empty($fechaFin)) {
         $parteIds = $partes->pluck('id')->toArray();
 
 // Realiza la segunda consulta utilizando los IDs obtenidos
-$totalPartes = DB::table('elemtos_parte')
-    ->select(DB::raw('SUM(precio_total) as total'))
-    ->whereIn('parteid', $parteIds)
-    ->first();
+        $totalPartes = DB::table('elemtos_parte')
+            ->select(DB::raw('SUM(precio_total) as total'))
+            ->whereIn('parteid', $parteIds)
+            ->first();
 
 //dd($totalPartes);
 
-       $fechaInicio = $request->input('fechaautorizacionInicio');
-$fechaFin = $request->input('fechaautorizacionFin');
-
 // Consulta para obtener la suma de 'Total' entre las fechas indicadas
-$totalSum = DB::table('informecorrectivo')
-    ->whereBetween(DB::raw('DATE(Fecha_de_carga)'), [$fechaInicio, $fechaFin])
-    ->sum('Total');
-
+        $totalSum = DB::table('informecorrectivo')
+            ->whereBetween(DB::raw('DATE(Fecha_de_carga)'), [$fechaInicio, $fechaFin])
+            ->sum('Total');
 
 //dd($fechaInicio, $fechaFin);
 
 // Consulta para obtener los informes correctivos entre las fechas indicadas
-$informeCorrectivo = DB::table('informecorrectivo')
-    ->whereBetween(DB::raw('DATE(Fecha_de_carga)'), [$fechaInicio, $fechaFin])
-    ->get()
-    ->toArray();
+        $informeCorrectivo = DB::table('informecorrectivo')
+            ->whereBetween(DB::raw('DATE(Fecha_de_carga)'), [$fechaInicio, $fechaFin])
+            ->get()
+            ->toArray();
 //dd($informeCorrectivo);
 
-        $chunkSize = 30;
+        $chunkSize = 28;
         $totalItems = count($informeCorrectivo);
 
 // Calcular cuántos conjuntos completos se pueden formar
@@ -111,9 +120,9 @@ $informeCorrectivo = DB::table('informecorrectivo')
         }
 
         //dd($totalSum);
-        $pdf = Pdf::loadView('pdf.informeParte', compact('penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes'));
+        $pdf = Pdf::loadView('pdf.informeParte', compact('penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes', 'fechaInicio', 'fechaFin','currentDateTime'));
         //$pdf->inline('informeParte.pdf');
-       $pdf->setPaper('legal');
+        $pdf->setPaper('legal');
         Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
         return $pdf->stream();
 
@@ -137,6 +146,7 @@ $informeCorrectivo = DB::table('informecorrectivo')
     return  $texto;
     }*/
 
+
     public function numerosletras($valor)
     {
         $formatter = new NumeroALetras();
@@ -144,5 +154,19 @@ $informeCorrectivo = DB::table('informecorrectivo')
         return $texto;
     }
 
+  public  function validarchecks( Request $request){
+
+$partesid=$request->parte_ids;
+  $totalPartes = DB::table('elemtos_parte')
+            ->select(DB::raw('SUM(precio_total) as total'))
+            ->whereIn('parteid', $partesid)
+            ->first();
+
+ return response()->json([
+            'ok' => true,
+            'totalPartes' => $totalPartes,
+        ]);
+
+}
 
 }

@@ -37,10 +37,6 @@ Route::get('/another-page', function () {
 })->name('another_page');
 
 
-
-
-
-
 //Route::resource('elementoParte', 'ElementosController');
 
 

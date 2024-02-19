@@ -88,21 +88,22 @@ $(".table").DataTable({
             <!-- Closing div for sidebar-link -->
 
             <!-- Administracion CRUD usuarios al sistema -->
-
+            @if (  Auth::user()->idrol==1 || Auth::user()->idrol==3)
             <a href="{{ url('/users') }}" class="sidebar-link collapsed">
                 <!-- Opening div for sidebar-link -->
 
                 <i class="fa fa-user-plus"></i> <span class="align-middle">Administración usuarios</span>
             </a>
-
+            @endif
 
             <!-- Nivel de Adminitracion de Perfiles de acceso al sistema -->
 
-
+            @if (  Auth::user()->idrol==1 || Auth::user()->idrol==3)
             <a href="{{ url('/roles') }}" class="sidebar-link collapsed">
                 <!-- Opening div for sidebar-link -->
                 <i class="fa fa-users"></i> <span class="align-middle">Administración perfiles</span>
             </a>
+            @endif
 
 
             <a href="{{ url('/gestorParte') }}" onclick="gestionPartes()" class="sidebar-link collapsed">

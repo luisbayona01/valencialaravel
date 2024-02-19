@@ -1,7 +1,7 @@
 @extends('layouts.plantilla')
 
 @section('template_title')
-    {{ __('Create') }} Informe correctivo
+    {{ __('Create') }} Lista de Precios
 @endsection
 
 @section('content')
@@ -70,7 +70,7 @@ $(".envio-masivo").click(function() {
         formData.append("xlt_file", archivo);
 formData.append("_token", document.getElementsByName("_token")[0].value);
         //masivoloacalizacion
-        fetch(`{{ route('informecorrectivos.store') }}`, {
+        fetch(`{{ route('listaPrecios.store') }}`, {
                 method: "POST",
                 body: formData
             })
@@ -80,7 +80,7 @@ formData.append("_token", document.getElementsByName("_token")[0].value);
    if (data['ok']){
 toastr.success(data['menssage'])
  $("#loadingM").addClass('d-none');
-window.location.href='/informecorrectivos/'
+window.location.href='/listaPrecios/'
 
   }
             })
@@ -105,13 +105,13 @@ window.location.href='/informecorrectivos/'
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Cargar') }} Lista de Conservación</span>
+                        <span class="card-title">{{ __('Cargar') }} Nueva Lista de Precios</span>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style="padding: 5px 5px 5px 5px; margin-top: 10px; " >
                         <form method="POST"  role="form" enctype="multipart/form-data">
                             @csrf
 
-                            @include('informecorrectivo.form')
+                            @include('listaPrecios.form')
 
                         </form>
                     </div>
