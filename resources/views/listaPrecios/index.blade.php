@@ -55,7 +55,7 @@ $(document).ready( function () {
                                 </thead>
                                 <tbody>
                                     @foreach ($listaPrecio as $listaPrecios)
-                                    @if ($listaPrecios->estado==1)
+
                                         <tr>
                                             <td style="font-size: 1em; text-align:center">{{ $listaPrecios->id }}</td>
 
@@ -66,7 +66,7 @@ $(document).ready( function () {
 											<td style="font-size: 0.9em; text-align:center">{{ $listaPrecios->Fecha_de_carga }}</td>
 
                                         </tr>
-                                        @endif
+
                                     @endforeach
                                 </tbody>
                             </table>

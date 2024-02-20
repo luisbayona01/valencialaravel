@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         $users = DB::table('users as U')
                     ->join('roles as R', 'R.id', '=', 'U.idrol')
-                    ->select('U.id','U.nombres', 'U.apellidos', 'U.codigo', 'U.email','U.username', 'U.password', 'R.name as rollname')
+                    ->select('U.id','U.nombres', 'U.apellidos', 'U.codigo', 'U.email','U.username', 'U.password', 'R.name as rollname')->where('U.estado','1')
                     ->get();
         return view('user.index', compact('users'));
                     /* return view('user.index', compact('users'))
@@ -112,7 +112,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id)->delete();
+             DB::table('users')
+        ->where('id', '=',$id)
+        ->update(['estado' => '0']);
+        //$user = User::find($id)->delete();
 
         return redirect()->route('users.index')
             ->with('success', 'Usuario eliminado del sistema');

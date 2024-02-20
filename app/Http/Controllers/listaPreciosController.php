@@ -20,7 +20,7 @@ class listaPreciosController extends Controller
      */
     public function index()
     {
-        $listaPrecio = listaPrecios::all();
+        $listaPrecio = listaPrecios::where('estado','1')->get();
 
         return view('listaPrecios.index', compact('listaPrecio'));
 
@@ -88,7 +88,9 @@ class listaPreciosController extends Controller
 
     public function eliminarRegistros(Request $request) {
         try {
-            ListaPrecios::truncate(); // Esto eliminará todos los registros de la tabla 'descripcionelementos'
+           DB::table('descripcionelementos')
+        ->where('id', '<>', 0)
+        ->update(['estado' => '0']);
             return response()->json(['message' => 'Registros eliminados con éxito'], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Error al eliminar registros: ' . $e->getMessage()], 500);
