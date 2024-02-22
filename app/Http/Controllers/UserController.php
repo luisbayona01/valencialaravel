@@ -22,7 +22,7 @@ class UserController extends Controller
     {
         $users = DB::table('users as U')
                     ->join('roles as R', 'R.id', '=', 'U.idrol')
-                    ->select('U.id','U.nombres', 'U.apellidos', 'U.codigo', 'U.email','U.username', 'U.password', 'R.name as rollname')->where('U.estado','1')
+                    ->select('U.id','U.nombres', 'U.apellidos', 'U.codigo', 'U.email','U.username', 'U.password', 'R.name as rollname','U.estado' )
                     ->get();
         return view('user.index', compact('users'));
                     /* return view('user.index', compact('users'))
@@ -55,7 +55,7 @@ class UserController extends Controller
     {
         $users = DB::table('users as U')
                             ->join('roles as R', 'R.id', '=', 'U.idrol')
-                            ->select('U.id','U.nombres', 'U.apellidos','U.codigo', 'U.email','U.username','U.password' ,'R.name as rollname')
+                            ->select('U.id','U.nombres', 'U.apellidos','U.codigo', 'U.email','U.username','U.password' ,'R.name as rollname', 'U.estado')
                             ->where('U.id', '=', $id)
                             ->get();
 
@@ -111,10 +111,24 @@ class UserController extends Controller
      * @throws \Exception
      */
     public function destroy($id)
-    {
-             DB::table('users')
+    {    $estado=  DB::table('users')->select('estado')
+        ->where('id', '=',$id)->first();
+
+        $valestado=intval($estado->estado);
+
+        if($valestado==0){
+
+       $estadoupd=1;
+
+        }else{
+
+            $estadoupd=0;
+
+        }
+
+        DB::table('users')
         ->where('id', '=',$id)
-        ->update(['estado' => '0']);
+        ->update(['estado' => $estadoupd]);
         //$user = User::find($id)->delete();
 
         return redirect()->route('users.index')
@@ -177,6 +191,8 @@ class UserController extends Controller
        return  $userData;
 
     }
+
+
 
 }
 

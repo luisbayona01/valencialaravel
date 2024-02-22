@@ -41,7 +41,7 @@ $(document).ready( function () {
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover" id="Informecorrectivo">
+                            <table class="table table-striped table-hover" id="Informecorrectivo" style="padding: 0px 10px 0px 10px">
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>

@@ -169,9 +169,6 @@
                     </div>
 
 
-
-
-
                     <div class="form-group mx-sm-4 pb-2 text-center">
                         <button type="button" style="" class="btn btn-primary" id="logear">
                             <span class="spinner-border spinner-border-sm mr-2" style="display:none;text-align:center" id="loading2"></span>
@@ -192,6 +189,7 @@
                         </div>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>

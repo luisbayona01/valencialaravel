@@ -38,9 +38,8 @@ class portadaController extends Controller
         //$password='Etra1234';//
 
             //dd($datarequest);
-            $Usuarios = new User(["añoCertificado" => $request->añoCertificado,
-                "mesVigente" => $request->mesVigente,
-                "AñoVigente" => $request->AñoVigente,
+            $Usuarios = new portada(["anoCertificado" => $request->anoCertificado,
+                "anoVigente" => $request->anoVigente,
                 "contratista" => $request->contratista,
                 "contactoContratista" => $request->contactoContratista,
                 "ubicacion" => $request->ubicacion,
@@ -52,18 +51,44 @@ class portadaController extends Controller
                 "fechaAdjudicacion"=>$request->fechaAdjudicacion,
                 "beneficioind" => $request->beneficioind,
                 "gastosgenerales" => $request->gastosgenerales,
-                "ejec_anteriores" => $request->idrejec_anterioresol,
-                "ImgPortada" => $request->ImgPortada]);
+                "imgportada" => $request->imgportada]);
 
             if ($Usuarios->save()) {
 
                 //$menssage = "Usuario registrado correctamente";
 
-                return redirect()->route('portada')
+
+
+                return redirect()->route('configPortada')
             ->with('success', 'Portada certificacion Actualizada correctamente');
 
             }
-        }
+
+            $data = $request->all();
+            // Obtener las imágenes del formulario
+            if ($request->hasFile('file')) {
+            $imagenes = $request->file('file');
+
+            foreach ($imagenes as $imagen) {
+                //dd($imagen);
+                    $nombreImagen = Str::slug($imagen->getClientOriginalName(), '_');
+
+                    $imagen->storeAs('img/imgPortadas', $nombreImagen, 'public');
+
+                    // Almacenar la ruta completa en la base de datos
+                    $data['file'] = 'img/imgimgPortadas/' . $nombreImagen;
+
+                    $evidencia = portada::configPortada($data);
+
+                    if (!$evidencia) {
+
+                        return response()->json(['success' => false, 'message' => 'Error al guardar la evidencia']);
+
+                    }
+
+                }
+            }
+    }
 
         //return $token;
 

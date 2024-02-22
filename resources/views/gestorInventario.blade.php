@@ -16,7 +16,7 @@ $("#contenpartes").removeClass('d-none');
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <div class="inner" bis_skin_checked="1">
-                            <a href="{{ url('/configPortada') }}" target="_blank">
+                            <a href="{{ url('configPortada') }}" target="_blank">@csrf
                             <img src=" {{ asset(url('img/Configuracion1.png')) }}" alt="logo" style="width:100%">
                             <h4>
                                 <h4 class="sidebar-link" style="text-align: center">Configuracion de Portada</h4>
