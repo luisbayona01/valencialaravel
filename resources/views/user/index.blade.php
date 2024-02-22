@@ -42,7 +42,7 @@
                                         <!--<th>Contraseña</th>-->
 										<th>E-mail</th>
 									    <th>Perfil</th>
-                                        <!-- <th></th> -->
+                                        <th>Estado</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,16 +57,28 @@
 
 
 											<td style="text-align: center;">{{ $user->rollname}}</td>
+                                            <td style="text-align: center;" id="estado">
+                                                <form action="{{ route('users.destroy',$user->id) }}" method="POST">
+
+                                                    @csrf
+                                                    @method('DELETE')
+
+                                                    @if($user->estado == 0)
+                                                        <button type="submit" class="btn btn-danger btn-sm" ><i class=""></i> {{ __('Inactivo') }}</button>
+                                                    @else
+                                                        <button type="submit" class="btn btn-success btn-sm" ><i class=""></i> {{ __('Activo') }}</button>
+                                                    @endif
+                                                </form>
+                                            </td>
 
                                             <td style="text-align: center;">
                                                 <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('users.show',$user->id) }}"><i class=""></i> {{ __('Ver') }}</a>
-                                                    <a  class="btn btn-sm btn-success" href="{{ route('users.edit',$user->id) }}"><i class=""></i> {{ __('Editar') }}</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class=""></i> {{ __('Eliminar') }}</button>
+                                                    <a class="btn btn-sm btn-primary" href="{{ route('users.show',$user->id) }}"><i class=""></i> {{ __('Ver') }}</a>
+                                                    <a class="btn btn-sm btn-warning" href="{{ route('users.edit',$user->id) }}"><i class=""></i> {{ __('Editar') }}</a>
+
                                                 </form>
                                             </td>
+
                                         </tr>
                                     @endforeach
                                 </tbody>

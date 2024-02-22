@@ -55,6 +55,8 @@ Route::get('/configPortada', function () {
     return view('configPortada');
 })->name('configPortada');
 
+Route::post('/regportada',[App\Http\Controllers\portadaController::class,'store'])->name('regportada');
+
 Route::get('generarparte', [App\Http\Controllers\parteController::class, 'generarparte'])->name('generarparte')->middleware('auth');
 Route::get('pdf', [App\Http\Controllers\parteController::class, 'pdf'])->name('pdf')->middleware('auth');
 

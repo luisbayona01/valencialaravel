@@ -13,27 +13,31 @@ use Spatie\Permission\Traits\HasRoles;
 /**
  * Class portada
  *
- * @property $id
- * @property $elemento
- * @property $ud
- * @property $descripcion
- * @property $precio
- * @property $Fecha_de_carga
-
-
-
+ * @property $añoCertificado
+ * @property $AñoVigente
+ * @property $contratista
+ * @property $contactoContratista
+ * @property $ubicacion
+ * @property $obra
+ * @property $fechaInicioContrato
+ * @property $plazoejecucion
+ * @property $iva
+ * @property $bajaobtenida
+ * @property $fechaAdjudicacion
+ * @property $beneficioind
+ * @property $gastosgenerales
+ * @property $ejec_anteriores
+ * @property $imgportada
  *
+ * @property Portada[] $portada
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
 class portada extends Model
 {
-    protected $table = 'descripcionelementos';
-    protected $primaryKey = 'id';
+    protected $table = 'portada';
+    //protected $primaryKey = 'id';
     public $timestamps = false;
-
-    static $rules = [
-    ];
 
     protected $perPage = 20;
 
@@ -42,5 +46,5 @@ class portada extends Model
      *
      * @var array
      */
-    protected $fillable = ['elemento','ud','descripcion','precio','Fecha_de_carga'];
+    protected $fillable = ['añoCertificado', 'AñoVigente', 'contratista', 'contactoContratista', 'ubicacion', 'obra', 'fechaInicioContrato', 'iva', 'bajaobtenida', 'fechaAdjudicacion', 'beneficioind', 'gastosgenerales', 'plazoejecucion', 'ejec_anteriores', 'imgportada'];
 }

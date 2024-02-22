@@ -9,27 +9,38 @@
 @section('content')
  <style>
 
-.Activo {
-background-color: #00FF00 !important;
-/* Estado 1 Activo */
-}
-.No_Comprobado{
-background-color:#FFDEAD !important;
-/* Estado 2 No_Comprobado */
-}
-.Aceptado{
-background-color:#FFD700 !important;
-/* Estado 3 Aceptado o Verificado */
-}
-.Certificado{
-background-color:#d7f1e7 !important;
- }
-.Rechazado{
-background-color:#FA8072 !important;
-/* Estado 3 Rechazado */
-color: #ffFF ;
- }
+        .Activo {
+        background-color: #00FF00 !important;
+        /* Estado 1 Activo */
+        }
+        .No_Comprobado{
+        background-color:#FFDEAD !important;
+        /* Estado 2 No_Comprobado */
+        }
+        .Aceptado{
+        background-color:#FFD700 !important;
+        /* Estado 3 Aceptado o Verificado */
+        }
+        .Certificado{
+        background-color:#d7f1e7 !important;
+        }
+        .Rechazado{
+        background-color:#FA8072 !important;
+        /* Estado 3 Rechazado */
+        color: #ffFF ;
+        }
 
+        .frame {
+            border: 2px solid black; /* Establece el borde */
+            padding: 10px; /* Añade relleno para separar el contenido del borde */
+            margin: 5px; /* Añade margen para separar los elementos */
+        }
+
+        .frame {
+            border: 2px solid black; /* Establece el borde */
+            padding: 10px; /* Añade relleno para separar el contenido del borde */
+            margin: 5px; /* Añade margen para separar los elementos */
+        }
 
         /* Estilo opcional para ocultar el input inicialmente */
         input[type="text"] {
@@ -45,10 +56,12 @@ color: #ffFF ;
             <div class="col-lg-12">
                 <div class="card">
 
-                    <div class="card-header">
+                    <div class="card-header" >
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                           <div >
                             <img src="{{asset('img/icono_representativo_caratula.png')}}" class="card-img-top" style="width: 30rem;">
+                            <h2 style="position: absolute; top: 55px; right: 30%;"><strong>Modulo certificacion de Partes</strong></h2>
+
                         </div>
 
                         </div>
@@ -88,7 +101,7 @@ color: #ffFF ;
         </div>
 
 
-                    <div class="card-body">
+                    <div class="card-body" style="padding: 0px 10px 0px 10px">
                         <div class="table-responsive">
                             <table class="table table-striped" id="table-parte" >
                                 <thead class="thead">
@@ -126,10 +139,10 @@ color: #ffFF ;
 											<td>{{ $parte->tipoparte }}</td> <!-- Tipo Parte -->
 											<td style="font-size: 0.95em">{{ $parte->reportadoPor }}</td> <!-- Comunicado por -->
 											<td style="text-align: center;font-size: 0.95em">{{ $parte->fechareporte }}</td> <!-- Fecha de comunicacion -->
-											<td style="font-size: 0.95em">{{ $parte->obscreadorparte }}</td> <!-- Observaciones -->
+											<td style="font-size: 0.95em; text-align:justify">{{ $parte->obscreadorparte }}</td> <!-- Observaciones -->
 											<td>{{ $parte->asignadoA }}</td> <!-- Reparado por -->
-											<td style="font-size: 0.95em">{{ $parte->fechaAsignacion }}</td> <!-- Fecha reparacion -->
-                                            <td style="font-size: 0.95em">{{number_format($parte->totalImp, 2, ',', '.')}} €</td><!-- Total Importes -->
+											<td style="font-size: 0.95em; text-align:center">{{ $parte->fechaAsignacion }}</td> <!-- Fecha reparacion -->
+                                            <td style="font-size: 0.95em; text-align:right">{{number_format($parte->totalImp, 2, ',', '.')}} €</td><!-- Total Importes -->
 											<td ><span class="{{ $parte->estadoparte }}" style="display: block; width: 100%; height: 100%; text-align: center;"> {{ $parte->estadoparte }}</span> </td> <!-- Estado -->
                                             <td style="text-align: center">
                                                 <a class="btn btn-sm btn-success" href="{{ route('partes.edit',$parte->id) }}" ><i ></i> {{ __('Ver') }}</a> <!-- Accion -->

@@ -96,7 +96,8 @@
 
 <body class="antialiased">
 
-    <form action="" method="POST" role="form">
+    <form action="{{url('/regportada')}}" method="POST" role="form" >
+        @csrf
     <!-- Seccion del Encabezado del Formulario -->
 
     <div>
@@ -105,30 +106,30 @@
                 <tr>
                     <td rowspan="2" style="width: 60%; text-align:center">
                         <img id="preview" src="{{asset('img/cargarImagen.png')}}" width="80%" height="50">
-                        <input type="file" accept="image/*" id="ImgPortada">
+                        <input type="file" multiple accept=".jpg, .jpeg, .png" id="imgportada" name="imgportada" required>
                     </td>
-                    <td width='40%' colspan="3" style="text-align:center "><input type="text" inputmode="numeric" pattern="[0-9]*" placeholder="No" id="noCertificado" style="width: 30px; text-align:center"> / <input type="text" placeholder="Año" id="añoCertificado"></td>
+                    <td width='40%' colspan="3" style="text-align:center "><input type="text" inputmode="numeric" pattern="[0-9]*" placeholder="No" id="noCertificado" style="width: 30px; text-align:center; display:none" readonly> / <input type="text" placeholder="Año" id="anoCertificado" name="anoCertificado" oninput="validateInput(this)"></td>
                 </tr>
                 <tr>
-                    <td width='40%' colspan="3" style="text-align:center "><strong>Mes de <input type="text" placeholder="Mes" id="mesVigente"> de <input type="text" placeholder="Año" id="AñoVigente"> </strong></td>
+                    <td width='40%' colspan="3" style="text-align:center "><strong>Mes de _______ <input type="text" placeholder="Mes" id="mesVigente" style="; display:none" readonly> de <input type="text" placeholder="Año" id="AnoVigente" oninput="validateInput(this)"> </strong></td>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td rowspan="2" style="text-align:justify;font-size: 12px;"> <strong>OBRA:</strong> <input type="text" style="width: 80%" placeholder="Razon de la Obra" id="obra"> </td>
-                    <td width='50%' rowspan="2" colspan="3" style="text-align:left; font-size: 12px;">CONTRATISTA: <input type="text" placeholder="Nombre del contratista" id="contratista">
-                        <br><input type="text" placeholder="Contacto" id="contactoContratista">
-                        <br><input type="text" placeholder="Ubicacion" id="ubicacion"></td>
+                    <td rowspan="2" style="text-align:justify;font-size: 12px;"> <strong>OBRA:</strong> <input type="text" style="width: 80%" placeholder="Razon de la Obra" id="obra" name="obra"> </td>
+                    <td width='50%' rowspan="2" colspan="3" style="text-align:left; font-size: 12px;">CONTRATISTA:  <input type="text" placeholder="Informacion de contratista" id="contratista" name="contratista">
+                        <br><input type="text" placeholder="Contacto" id="contactoContratista" name="contactoContratista" oninput="validateInput2(this)">
+                        <br><input type="text" placeholder="Ubicacion" id="ubicacion" name="ubicacion"></td>
                 </tr>
             </tbody>
         </table>
     </div>
 
     <script>
-        const ImgPortada = document.getElementById('ImgPortada');
+        const imgportada = document.getElementById('imgportada');
         const preview = document.getElementById('preview');
 
-        ImgPortada.addEventListener('change', function() {
+        imgportada.addEventListener('change', function() {
             const file = this.files[0];
             if (file) {
                 const reader = new FileReader();
@@ -138,6 +139,22 @@
                 reader.readAsDataURL(file);
             }
         });
+
+    </script>
+    <script>
+        function validateInput(input) {
+        // Permite solo números, comas y puntos en el input
+        input.value = input.value.replace(/[^0-9]/g, '');
+    }
+
+        function validateInput2(input) {
+            // Permite solo números, comas y puntos en el input
+            input.value = input.value.replace(/[^0-9-]/g, '');
+        }
+        function validateInput3(input) {
+            // Permite solo números, comas y puntos en el input
+            input.value = input.value.replace(/[^0-9,]/g, '');
+        }
     </script>
 
     <!-- Seccion del Encabezado del Formulario -->
@@ -151,19 +168,17 @@
         </tr>
         <tr >
             <td style="text-align:left; font-size: 0.7em" colspan="2" ><strong>Inicio contrato:
-                <input type="date" id="fechaInicioContrato" onchange="mostrarFechaSeleccionada()">
+                <input type="date" id="fechaInicioContrato" name="fechaInicioContrato" onchange="mostrarFechaSeleccionada()">
                 <input type="text" id="fecha_mostrada" readonly>
             </strong></td>
-            <td style="text-align:justify; font-size: 0.7em;"><strong>Plazo de ejecución: <input type="text" placeholder="Años" id="plazoejecucion"> años</strong>
+            <td style="text-align:justify; font-size: 0.7em;"><strong>Plazo de ejecución: <input type="text" placeholder="Años" id="plazoejecucion" name="plazoejecucion" oninput="validateInput(this)"> años</strong>
                 <br>Fecha de la escritura de contrata</td>
         </tr>
 
         <tr>
             <td width='30%' style="text-align:center;font-size: 0.8em;">PRESUPUESTOS APROBADOS</td>
             <td width='30%' style="text-align:center; font-size: 0.8em;">IMPORTE</td>
-            <td width='30%' style="text-align:center;font-size: 0.8em;">
-                FECHA DE APROBACIÓN</td>
-
+            <td width='30%' style="text-align:center;font-size: 0.8em;">FECHA DE APROBACIÓN</td>
         </tr>
         <tr>
             <td style="text-align:center ">
@@ -179,6 +194,9 @@
         var inputFecha = document.getElementById("fechaInicioContrato");
         var fechaSeleccionada = new Date(inputFecha.value);
 
+        // Ajustar la fecha sumando un día
+        fechaSeleccionada.setDate(fechaSeleccionada.getDate() + 1);
+
         var diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
         var diaSemana = diasSemana[fechaSeleccionada.getDay()];
         var dia = ("0" + fechaSeleccionada.getDate()).slice(-2); // Agregar ceros iniciales si es necesario
@@ -191,19 +209,23 @@
     }
 
     function mostrarFechaSeleccionada2() {
-        var inputFecha = document.getElementById("fechaAdjudicacion");
-        var fechaSeleccionada = new Date(inputFecha.value);
+    var inputFecha = document.getElementById("fechaAdjudicacion");
+    var fechaSeleccionada = new Date(inputFecha.value);
 
-        var diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-        var diaSemana = diasSemana[fechaSeleccionada.getDay()];
-        var dia = ("0" + fechaSeleccionada.getDate()).slice(-2); // Agregar ceros iniciales si es necesario
-        var mes = fechaSeleccionada.toLocaleString('default', { month: 'long' }); // Obtener el nombre del mes
-        var anio = fechaSeleccionada.getFullYear();
+    // Ajustar la fecha sumando un día
+    fechaSeleccionada.setDate(fechaSeleccionada.getDate() + 1);
 
-        var resultado = diaSemana + ", " + dia + " de " + mes + " de " + anio;
+    var diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+    var diaSemana = diasSemana[fechaSeleccionada.getDay()];
+    var dia = ("" + fechaSeleccionada.getDate()).slice(-2); // Agregar ceros iniciales si es necesario
+    var mes = fechaSeleccionada.toLocaleString('default', { month: 'long' }); // Obtener el nombre del mes
+    var anio = fechaSeleccionada.getFullYear();
 
-        document.getElementById("fecha_mostrada2").value = resultado;
-    }
+    var resultado = diaSemana + ", " + dia + " de " + mes + " de " + anio;
+
+    document.getElementById("fecha_mostrada2").value = resultado;
+}
+
 
     </script>
 
@@ -215,7 +237,7 @@
             </td>
             <td style="text-align: left; width:50%; font-size: 0.8em ; ">
                 <p>Fecha de la adjudicación:
-                <input type="date" id="fechaAdjudicacion" onchange="mostrarFechaSeleccionada2()">
+                <input type="date" id="fechaAdjudicacion" name="fechaAdjudicacion" onchange="mostrarFechaSeleccionada2()">
                 <input type="text" id="fecha_mostrada2" readonly>
                 </p>
                 <p>Fecha de la escritura de contrata:</p>
@@ -261,8 +283,8 @@
         <tr>
             <td> </td>
             <td> </td>
-            <td style="width:20%; text-align: center; font-size: 0.7em;"><input type="text" placeholder="Euros" style="text-align: right"></td>
-            <td style="width:20%; text-align: center; font-size: 0.7em;"><input type="text" placeholder="Euros" style="text-align: right"></td>
+            <td style="width:20%; text-align: center; font-size: 0.7em; display:none"><input type="text" placeholder="Euros" style="text-align: right" readonly></td>
+            <td style="width:20%; text-align: center; font-size: 0.7em; display:none"><input type="text" placeholder="Euros" style="text-align: right" readonly></td>
             <td></td>
         </tr>
     </table>
@@ -279,16 +301,16 @@
             <td style="border:none">TOTAL REVISADO </td> <td style="text-align: left; border:none"></td>
         </tr>
         <tr>
-            <td style="border:none">Baja Obtenida </td><td style="text-align: left; border:none"><input type="text" placeholder="Baja Obtenida 0 %" style="text-align: right" id="bajaobtenida"> %</td>
+            <td style="border:none">Baja Obtenida </td><td style="text-align: left; border:none"><input type="text" placeholder="Baja Obtenida 0 %" style="text-align: right" id="bajaobtenida" name="bajaobtenida" oninput="validateInput3(this)"> %</td>
         </tr>
         <tr>
             <td style="border:none"><strong>DIFERENCIA </strong></td> <td style="text-align: right; border:none"></td>
         </tr>
         <tr>
-            <td style="border:none">Gastos Generales </td><td style="text-align: left; border:none"><input type="text" placeholder="Gastos Generales 0 %" style="text-align: right" id="gastosgenerales"> %</td>
+            <td style="border:none">Gastos Generales </td><td style="text-align: left; border:none"><input type="text" placeholder="Gastos Generales 0 %" style="text-align: right" id="gastosgenerales" name="gastosgenerales" oninput="validateInput3(this)"> %</td>
         </tr>
         <tr>
-            <td style="border:none">Beneficio Industrial</td> <td style="text-align: left; border:none"><input type="text" placeholder="Beneficio Industrial 0 %" style="text-align: right" id="beneficioind"> %</td>
+            <td style="border:none">Beneficio Industrial</td> <td style="text-align: left; border:none"><input type="text" placeholder="Beneficio Industrial 0 %" style="text-align: right" id="beneficioind" name="beneficioind" oninput="validateInput3(this)"> %</td>
         </tr>
         <tr>
             <td style="border:none">SUMA </td> <td style="text-align: left; border:none"> </td>
@@ -301,7 +323,7 @@
         </tr>
 
         <tr>
-            <td style="border:none">I.V.A </td> <td style="text-align: rileftght; border:none"><input type="text" placeholder="I. V. A 0 %" style="text-align: right" id="iva"> %</td>
+            <td style="border:none">I.V.A </td> <td style="text-align: rileftght; border:none"><input type="text" placeholder="I. V. A 0 %" style="text-align: right" id="iva" name="iva" oninput="validateInput3(this)"> %</td>
         </tr>
         <tr>
             <td style="border:none">LIQUIDO A PERCIBIR EL CONTRATISTA </td> <td style="text-align: left; border:none"></td>
@@ -313,17 +335,18 @@
     <div style="text-align: center">
         <button type="button" onclick="goBack()" class="btn btn-secondary btnback" style="text-align: right;">Volver</button>
 
-        <button type="button" class="btn btn-primary btnConfig" style="text-align: right;">Guardar Configuración</button>
+        <button type="submit" class="btn btn-primary btnConfig" style="text-align: right;">{{ _('Guardar Configuración') }}</button>
     </div>
 
     {{ Form::close() }}
 
     <script>
-        // JavaScript function to go back to the previous page
         function goBack() {
-        window.history.back();
+            history.back(); // Retrocede en el historial del navegador
+            window.close(); // Cierra la ventana actual
         }
     </script>
+
 
     </form>
 
