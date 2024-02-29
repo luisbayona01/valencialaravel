@@ -57,8 +57,8 @@ Route::get('/configPortada', function () {
 
 Route::post('/regportada',[App\Http\Controllers\portadaController::class,'store'])->name('regportada');
 
-Route::get('generarparte', [App\Http\Controllers\parteController::class, 'generarparte'])->name('generarparte')->middleware('auth');
-Route::get('pdf', [App\Http\Controllers\parteController::class, 'pdf'])->name('pdf')->middleware('auth');
+Route::get('generarparte', [App\Http\Controllers\ParteController::class, 'generarparte'])->name('generarparte')->middleware('auth');
+Route::get('pdf', [App\Http\Controllers\ParteController::class, 'pdf'])->name('pdf')->middleware('auth');
 
 
 //Route::get('/generarparte', function (){
@@ -70,7 +70,7 @@ Route::get('pdf', [App\Http\Controllers\parteController::class, 'pdf'])->name('p
 
 
 Route::resource('elementoParte', 'ElementosController');
-Route::get('/cancelar/{parteId}', [App\Http\Controllers\parteController::class, 'eliminarParteConRelaciones']);
+Route::get('/cancelar/{parteId}', [App\Http\Controllers\ParteController::class, 'eliminarParteConRelaciones']);
 
 //Auth::routes();
 
