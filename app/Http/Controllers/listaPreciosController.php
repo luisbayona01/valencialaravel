@@ -137,7 +137,7 @@ class listaPreciosController extends Controller
         $listaPrecios->update($request->all());
 
         return redirect()->route('listaPrecios.index')
-            ->with('success', 'listaPrecios updated successfully');
+            ->with('success', 'listaPrecios Cargada Correctamente');
     }
 
     /**
