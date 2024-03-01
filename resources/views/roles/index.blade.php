@@ -55,7 +55,7 @@
                                                     <a class="btn btn-sm btn-success" href="{{ route('roles.edit',$role->id) }}"><i class=""></i> {{ __('Editar') }}</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class=""></i> {{ __('Eliminar') }}</button>
+                                                    <button type="submit" style="display: none" class="btn btn-danger btn-sm"><i class=""></i> {{ __('Eliminar') }}</button>
                                                 </form>
                                             </td>
                                         </tr>

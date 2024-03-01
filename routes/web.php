@@ -43,6 +43,34 @@ Route::resource('roles',  App\Http\Controllers\RolesController::class)->middlewa
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'Logout'])->name('logout')->middleware('auth');
 //Route::get('/generarparte', [App\Http\Controllers\parteController::class, 'pdf'])->name('pdf');
 
+//Controlador de Penalidades//
+Route::resource('penalidades', App\Http\Controllers\PenalidadesController::class);
+
+// Mudulo Contenedor de los 15 tipos de penalidades//
+Route::get('/penalidades/panel/modulos', function () {
+    return view('penalidades.panel');
+})->name('penalidades.panel.modulos');
+
+//Formulario contenedor de la Penalizacion No.1
+
+//Formulario contenedor de la Penalizacion No.2
+Route::get('/penalidades/modulospenalizacion/modulospenalizacion2', function () {
+    return view('penalidades.modulospenalizacion2');
+})->name('penalidades.modulospenalizacion.modulospenalizacion2');
+
+//Formulario contenedor de la Penalizacion No.3
+//Formulario contenedor de la Penalizacion No.4
+Route::get('/penalidades/modulospenalizacion/modulospenalizacion', function () {
+    return view('penalidades.modulospenalizacion');
+})->name('penalidades.modulospenalizacion.modulospenalizacion');
+
+
+Route::post('/regpenalizacion4',[App\Http\Controllers\PenalidadesController::class,'store'])->name('regpenalizacion4');
+
+//Controlador de Penalidades//
+
+
+
 Route::get('/gestorParte', function () {
     return view('gestorParte');
 })->name('gestorParte');

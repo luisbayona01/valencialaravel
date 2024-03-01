@@ -154,6 +154,7 @@ class UserController extends Controller
             //dd($datarequest);
             $Usuarios = new User(["nombres" => $request->nombres,
                 "apellidos" => $request->apellidos,
+                "codigo" => $request->codigo,
                 "identificacion" => $request->identificacion,
                 "telefono" => $request->telefono,
                 "username"=>$request->username,

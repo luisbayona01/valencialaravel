@@ -52,10 +52,13 @@
 
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <img src="{{ asset('img/icono_representativo_caratula.png') }}" class="card-img-top"
-                                    style="width: 30rem;">
-                            </div>
+
+                          <div >
+                            <img src="{{asset('img/icono_representativo_caratula.png')}}" class="card-img-top" style="width: 30rem;">
+                            <h2 style="position: absolute; top: 55px; right: 5%;"><strong>Modulo certificacion de Partes</strong></h2>
+
+                        </div>
+
 
                         </div>
                     </div>

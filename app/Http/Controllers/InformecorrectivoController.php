@@ -121,7 +121,7 @@ class InformecorrectivoController extends Controller
         $informecorrectivo->update($request->all());
 
         return redirect()->route('informecorrectivos.index')
-            ->with('success', 'Informecorrectivo updated successfully');
+            ->with('success', 'Informecorrectivo Editado correctamente');
     }
 
     /**
@@ -134,6 +134,6 @@ class InformecorrectivoController extends Controller
         $informecorrectivo = Informecorrectivo::find($id)->delete();
 
         return redirect()->route('informecorrectivos.index')
-            ->with('success', 'Informecorrectivo deleted successfully');
+            ->with('success', 'Informecorrectivo Eliminado Correctamente');
     }
 }

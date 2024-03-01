@@ -95,7 +95,7 @@ color: #ffFF ;
                     @endif
 
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="padding: 1% 1% 1% 1%">
                             <table class="table table-striped" id="table-parte" >
                                 <thead class="thead">
                                     <tr style="text-align: center;">
