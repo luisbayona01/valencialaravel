@@ -8,7 +8,7 @@ use App\Models\Tipoparte;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
- use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Descripcionelementos;
 use App\Models\ElementoParte;
@@ -179,8 +179,11 @@ $fechaFin=$request->fechaautorizacionFin;
 $partes = $partes->get();
 //dd($partes);
 
-
-      return view('parte.generarparte', compact('partes'));
+$resultado = DB::table('informecorrectivo')
+                ->select(DB::raw('MONTH(Fecha_de_carga) AS Mes'), DB::raw('YEAR(Fecha_de_carga) AS Ano'))
+                ->groupBy(DB::raw('MONTH(Fecha_de_carga)'), DB::raw('YEAR(Fecha_de_carga)'))
+                ->get();
+      return view('parte.generarparte', compact('partes','resultado'));
 
 }
 

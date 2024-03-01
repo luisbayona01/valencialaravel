@@ -14,6 +14,13 @@ class ReportPartesController extends Controller
 {
     public function generarinforme(Request $request)
     {
+
+
+   //dd($request->fechacorrectivo);
+$fechacorectivo= explode("-",$request->fechacorrectivo);
+$mesC=$fechacorectivo[0];
+$anioC=$fechacorectivo[1];
+//dd($dia,$mes,$fechacorectivo);
         $currentDateTimes = Carbon::now();
      Carbon::setLocale('es');
 // Obtener día, mes y año en formato de cadena
@@ -25,7 +32,7 @@ $nombreMes = $currentDateTimes->isoFormat('MMMM');
 "fechaautorizacionFin" => "2024-02-28*/
 //dd($request);
 
-$currentDateTime=$dia.'-'.$nombreMes.'-'.$anio; 
+$currentDateTime=$dia.'-'.$nombreMes.'-'.$anio;
         $partesid = $request->input('parte_ids');
 
         $penalidad_raw = $request->input('penalidad');
@@ -87,17 +94,21 @@ $currentDateTime=$dia.'-'.$nombreMes.'-'.$anio;
 
 // Consulta para obtener la suma de 'Total' entre las fechas indicadas
         $totalSum = DB::table('informecorrectivo')
-            ->whereBetween(DB::raw('DATE(Fecha_de_carga)'), [$fechaInicio, $fechaFin])
+             ->whereRaw('YEAR(Fecha_de_carga) = ?', [$anioC])
+             ->whereRaw('MONTH(Fecha_de_carga) = ?', [$mesC])
             ->sum('Total');
+
 
 //dd($fechaInicio, $fechaFin);
 
+
 // Consulta para obtener los informes correctivos entre las fechas indicadas
         $informeCorrectivo = DB::table('informecorrectivo')
-            ->whereBetween(DB::raw('DATE(Fecha_de_carga)'), [$fechaInicio, $fechaFin])
-            ->get()
-            ->toArray();
-//dd($informeCorrectivo);
+     ->whereRaw('YEAR(Fecha_de_carga) = ?', [$anioC])
+    ->whereRaw('MONTH(Fecha_de_carga) = ?', [$mesC])
+    ->get()
+    ->toArray();
+//dd($informeCorrectivo,$totalSum);
 
         $chunkSize = 28;
         $totalItems = count($informeCorrectivo);
