@@ -53,15 +53,18 @@
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                          <div >
+                        <div>
                             <img src="{{asset('img/icono_representativo_caratula.png')}}" class="card-img-top" style="width: 30rem;">
-                            <h2 style="position: absolute; top: 55px; right: 5%;"><strong>Modulo certificacion de Partes</strong></h2>
-
                         </div>
 
 
                         </div>
                     </div>
+
+                    <div style="text-align: right; padding:0% 3% 0% 0%">
+                        <h2><strong>Módulo Certificación de Partes</strong></h2>
+                    </div>
+
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success">
                             <p>{{ $message }}</p>
@@ -74,8 +77,8 @@
                             <form action="{{ route('generarparte') }}" method="GET">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label>Fecha inicio</label>
+                                        <div class="form-group" style="padding: 0% 1% 0% 2%">
+                                            <label >Fecha inicio</label>
                                             <input type="date" name="fechaautorizacionInicio" class="form-control"
                                                 required>
                                         </div>
@@ -92,13 +95,13 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label>Fecha de informe corectivo</label>
-                                            <select name="fecha-informe" class="form-control">
+                                        <div class="form-group" style="padding: 0% 2% 0% 1%">
+                                            <label>Fecha Carga Lista Conservación</label>
+                                            <select name="fecha-informe" class="form-control" required>
                                                 <option value="">seleccione</option>
                                                 @foreach ($resultado as $fechacorrectivo)
                                                     <option value="{{ $fechacorrectivo->Mes . '-' . $fechacorrectivo->Ano }}">
-                                                        {{ $fechacorrectivo->Mes . '-' . $fechacorrectivo->Ano }}</option>
+                                                        {{ $fechacorrectivo->Mes . '-' . $fechacorrectivo->Ano }} </option>
                                                 @endforeach
 
                                             </select>
@@ -112,8 +115,8 @@
 
 
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped" id="table-parte">
+                        <div class="table-responsive" style="padding: 1% 1% 1% 1%">
+                            <table class="table table-striped" id="table-parte" >
                                 <thead class="thead">
                                     <tr style="text-align: center;">
                                         <th style="font-size: 0.95em">No parte</th>

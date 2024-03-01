@@ -93,7 +93,7 @@ $("#contenpartes").removeClass('d-none');
                                             @endif
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>Importe de conservacion Anual : </strong> <br><input type="text" style="width: 40%; font-size:1em; text-align: right" placeholder="0 €" id="importeConservacionAnual4" name="importeConservacionAnual4" oninput="validateInput3(this)"> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>tiempo tardado en detección de la incidencia o avería : </strong> <br><input type="text" style="width: 40%; font-size:1em; text-align: right" placeholder="0 €" id="importeConservacionAnual4" name="importeConservacionAnual4" oninput="validateInput3(this)"> </td>
                                                 <td style="width:5%"> / </td>
                                                 <td style="text-align:left; font-size: 12px; border:none; "><strong>número de veces que se ha de realizar la
                                                     operación no efectuada : </strong><br><input type="text" style="text-align: right" placeholder="0 €" id="Repeticiones4" name="Repeticiones4" oninput="validateInput(this)">

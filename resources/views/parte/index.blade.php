@@ -61,17 +61,17 @@ color: #ffFF ;
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                          <div >
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
                             <img src="{{asset('img/icono_representativo_caratula.png')}}" class="card-img-top" style="width: 30rem;">
-                        </div>
-                            <!--
-                            <span id="card_title">
-                                {{ __('Parte') }}
-                            </span>
-                            -->
 
-                            <div class="float-right">
+                            <!-- Línea Modulo -->
+                            <br><br>
+
+                            <!-- Fin de la línea Modulo -->
+
+                        </div>
+                        <div class="float-right">
                             @php
                                 $idrol = Auth::user()->idrol;
                             @endphp
@@ -82,17 +82,22 @@ color: #ffFF ;
                                 </a>
                             @endif
                         </div>
-
-
-
-
-                        </div>
                     </div>
+                </div>
+
+                <div style="text-align: center;">
+                    <h2><strong>Módulo Partes</strong></h2>
+                </div>
+
+
+
+
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success">
                             <p>{{ $message }}</p>
                         </div>
                     @endif
+
 
                     <div class="card-body">
                         <div class="table-responsive" style="padding: 1% 1% 1% 1%">
@@ -198,6 +203,7 @@ color: #ffFF ;
 
                         </div>
                     </div>
+
 
 
 

@@ -36,10 +36,27 @@ class portadaController extends Controller
     {
 
         //$password='Etra1234';//
+        // Validar el formulario según tus necesidades
+        $request->validate([
+            'imagenes.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            // Añade más reglas de validación según sea necesario
+        ]);
 
-            //dd($datarequest);
+        // Obtener las imágenes del formulario
+        if ($request->hasFile('imgportada')) {
+
+            $imagenes = $request->file('imgportada');
+            // Generar un nombre único para cada imagen
+            $nombreImagen = uniqid('imagen_') . '.' . $imagenes->getClientOriginalExtension();
+
+            // Guardar la imagen en la ruta public/img/imaPartes
+            $imagenes->move(public_path('/public/img/imgPortadas'), $nombreImagen);
+            //dd($request);
+            }
+
+
             $Usuarios = new portada(["anoCertificado" => $request->anoCertificado,
-                "anoVigente" => $request->anoVigente,
+                "AnoVigente" => $request->AnoVigente,
                 "contratista" => $request->contratista,
                 "contactoContratista" => $request->contactoContratista,
                 "ubicacion" => $request->ubicacion,
@@ -51,7 +68,7 @@ class portadaController extends Controller
                 "fechaAdjudicacion"=>$request->fechaAdjudicacion,
                 "beneficioind" => $request->beneficioind,
                 "gastosgenerales" => $request->gastosgenerales,
-                "imgportada" => $request->imgportada]);
+                "imgportada" => $nombreImagen]);
 
             if ($Usuarios->save()) {
 

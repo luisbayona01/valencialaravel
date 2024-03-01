@@ -86,20 +86,19 @@
         <thead >
             <tr>
                 <td rowspan="2" style="width: 60%"> <img src="{{ $img }}" width="80%" height="50"></td>
-                <td width='40%' colspan="3" style="text-align:center ">1/23</td>
+                <td width='40%' colspan="3" style="text-align:center ">1 / {{ $portada->anoCertificado }}</td>
             </tr>
             <tr>
-                <td width='40%' colspan="3" style="text-align:center ">Mes de Agosto de 2023</td>
+                <td width='40%' colspan="3" style="text-align:center ">Mes de Agosto de {{ $portada->AnoVigente }}</td>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td rowspan="2" style="text-align:justify;font-size: 12px;"> <strong>OBRA:</strong> CONTRATO DE GESTIÓN DEL TRÁFICO EN
-                    LA CIUDAD DE VALENCIA</td>
-                <td width='50%' rowspan="2" colspan="3" style="text-align:left; font-size: 12px;">CONTRATISTA: ELECTRONIC
-                    TRAFIC, S.A.
-                    <br>A/ 46138921
-                    <br>C/ Tres Forques, nº 147 VALENCIA</td>
+                <td rowspan="2" style="text-align:justify;font-size: 12px;"> <strong>OBRA:</strong>{{ $portada->obra }}</td>
+                <td width='50%' rowspan="2" colspan="3" style="text-align:left; font-size: 12px;">
+                    {{ $portada->contratista }}
+                    <br>{{ $portada->contactoContratista }}
+                    <br>{{ $portada->ubicacion }}</td>
             </tr>
 
 
@@ -113,8 +112,8 @@
 
         </tr>
         <tr width='100%'>
-            <td style="text-align:left; font-size: 0.7em" colspan="2">Inicio contrato: Miércoles, 02 de Agosto de 2023</td>
-            <td width='100%' style="text-align:justify; font-size: 0.7em ">Plazo de ejecución: 5 años
+            <td style="text-align:left; font-size: 0.7em" colspan="2">Inicio contrato: {{ $portada->fechaInicioContrato }}</td>
+            <td width='100%' style="text-align:justify; font-size: 0.7em ">Plazo de ejecución:  {{ $portada->plazoejecucion}} años
                 <br>Fecha de la escritura de contrata</td>
 
         </tr>
@@ -137,10 +136,10 @@
         <tr>
             <td style="text-align: center; width:50% ">
                 <p style="text-align: left; font-size: 0.8em ">Baja obtenida en la subasta o concurso:</p>
-                <p style="text-align: center ; font-size: 0.9em ">21,90% </p>
+                <p style="text-align: center ; font-size: 0.9em ">{{ $portada->bajaobtenida }} %</p>
             </td>
             <td style="text-align: left; width:50%; font-size: 0.8em ; ">
-                <p>Fecha de la adjudicación: Jueves, 6 de Abril de 2023</p>
+                <p>Fecha de la adjudicación: {{ $portada->fechaAdjudicacion }}</p>
                 <p>Fecha de la escritura de contrata:</p>
             </td>
         </tr>
@@ -539,7 +538,7 @@
         <tr style="font-size:0.7em">
             @php
                 $Tbajaoppdf = $totalSum + $totaltotalesEPartes;
-                $porcentaje = floatval('21.90');
+                $porcentaje = floatval( $portada->bajaobtenida );
                 $resultbaja = ($Tbajaoppdf * $porcentaje) / 100;
             @endphp
             <td style="border: none">BAJA OBTENIDA 21,90% s/(1) ...................................................................................</td>

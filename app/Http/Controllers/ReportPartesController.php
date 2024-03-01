@@ -41,7 +41,8 @@ $currentDateTime=$dia.'-'.$nombreMes.'-'.$anio;
         $penalidad = str_replace(',', '.', $penalidad_raw);
         //dd($partesid);
 //die();
-
+        //$portada = DB::table('portada')->latest()->first();
+        $portada = DB::table('portada')->orderBy('noCertificado', 'desc')->first();
         $fechaInicio = $request->input('fechaautorizacionInicio');
         $fechaFin = $request->input('fechaautorizacionFin');
 
@@ -131,7 +132,7 @@ $currentDateTime=$dia.'-'.$nombreMes.'-'.$anio;
         }
 
         //dd($totalSum);
-        $pdf = Pdf::loadView('pdf.informeParte', compact('penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes', 'fechaInicio', 'fechaFin','currentDateTime'));
+        $pdf = Pdf::loadView('pdf.informeParte', compact('portada','penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes', 'fechaInicio', 'fechaFin','currentDateTime'));
         //$pdf->inline('informeParte.pdf');
         $pdf->setPaper('legal');
         Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);

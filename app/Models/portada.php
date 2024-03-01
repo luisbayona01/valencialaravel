@@ -13,8 +13,8 @@ use Spatie\Permission\Traits\HasRoles;
 /**
  * Class portada
  *
- * @property $añoCertificado
- * @property $AñoVigente
+ * @property $anoCertificado
+ * @property $AnoVigente
  * @property $contratista
  * @property $contactoContratista
  * @property $ubicacion
@@ -46,5 +46,5 @@ class portada extends Model
      *
      * @var array
      */
-    protected $fillable = ['añoCertificado', 'AñoVigente', 'contratista', 'contactoContratista', 'ubicacion', 'obra', 'fechaInicioContrato', 'iva', 'bajaobtenida', 'fechaAdjudicacion', 'beneficioind', 'gastosgenerales', 'plazoejecucion', 'ejec_anteriores', 'imgportada'];
+    protected $fillable = ['anoCertificado', 'AnoVigente', 'contratista', 'contactoContratista', 'ubicacion', 'obra', 'fechaInicioContrato', 'iva', 'bajaobtenida', 'fechaAdjudicacion', 'beneficioind', 'gastosgenerales', 'plazoejecucion', 'ejec_anteriores', 'imgportada'];
 }

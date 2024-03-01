@@ -92,7 +92,7 @@ $(".table").DataTable({
             <a href="{{ url('/users') }}" class="sidebar-link collapsed">
                 <!-- Opening div for sidebar-link -->
 
-                <i class="fa fa-user-plus"></i> <span class="align-middle">Administración usuarios</span>
+                <i class="fa fa-user-plus"></i> <span class="align-middle">Gestión Usuarios</span>
             </a>
             @endif
 
@@ -101,20 +101,30 @@ $(".table").DataTable({
             @if (  Auth::user()->idrol==1 || Auth::user()->idrol==3)
             <a href="{{ url('/roles') }}" class="sidebar-link collapsed">
                 <!-- Opening div for sidebar-link -->
-                <i class="fa fa-users"></i> <span class="align-middle">Administración perfiles</span>
+                <i class="fa fa-users"></i> <span class="align-middle">Gestión Perfiles</span>
             </a>
             @endif
 
 
             <a href="{{ url('/gestorParte') }}" onclick="gestionPartes()" class="sidebar-link collapsed">
                 <!-- Opening div for sidebar-link -->
-                <i class="fa fa-check-square"></i> <span class="align-middle" >Gestión de partes</span>
+                <i class="fa fa-check-square"></i> <span class="align-middle">Gestión Partes</span>
             </a>
 
- <a href="{{ url('/informecorrectivos') }}" class="sidebar-link collapsed" style="display: none">
+            <a href="{{ url('/penalidades') }}" onclick="gestionPartes()" class="sidebar-link collapsed">
+                <!-- Opening div for sidebar-link -->
+                <i class="fa fa-usd"></i> <span class="align-middle">Gestión Penalizaciones</span>
+            </a>
+
+
+
+
+            <a href="{{ url('/informecorrectivos') }}" class="sidebar-link collapsed" style="display: none">
                 <!-- Opening div for sidebar-link -->
                 <i class="fa fa-file-text-o"></i> <span class="align-middle" > Cargar lista de Conservacion</span>
             </a>
+
+
 
 
            <!-- <li > -->

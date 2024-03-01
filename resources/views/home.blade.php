@@ -23,7 +23,7 @@ $("#contenpartes").removeClass('d-none');
                             <a href="{{ route('users.index') }}">
                             <img src="{{ asset(url('img/usuarios.png')) }}"  alt="logo" style="width:100%">
                             <h4>
-                               <a class="sidebar-link" href="{{ route('users.index') }}" style="text-align: center">Usuarios Registrados</a>
+                               <a class="sidebar-link" href="{{ route('users.index') }}" style="text-align: center">Gestión Usuarios</a>
                             </h4>
 
 
@@ -56,7 +56,7 @@ $("#contenpartes").removeClass('d-none');
                             <a href="{{ url('/penalidades') }}">
                             <img src=" {{ asset(url('img/crearPenalidad.png')) }}" alt="logo" style="width:100%">
                             <h4>
-                                <a class="sidebar-link" href="{{ url('/penalidades') }}" style="text-align: center">Gestión Penalidades</a>
+                                <a class="sidebar-link" href="{{ url('/penalidades') }}" style="text-align: center">Gestión Penalizaciones</a>
                             </h4>
                             </a>
                         </div>
@@ -72,7 +72,7 @@ $("#contenpartes").removeClass('d-none');
                             <a href="{{ url('/gestorInventario') }}">
                             <img src=" {{ asset(url('img/Inventario.png')) }}" alt="logo" style="width:100%">
                             <h4>
-                                <a class="sidebar-link" href="{{ url('/gestorInventario') }}" style="text-align: center">Gestor de Configuraciones</a>
+                                <a class="sidebar-link" href="{{ url('/gestorInventario') }}" style="text-align: center">Gestión Configuraciones</a>
                             </h4>
                             </a>
                         </div>

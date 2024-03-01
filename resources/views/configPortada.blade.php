@@ -96,7 +96,7 @@
 
 <body class="antialiased">
 
-    <form action="{{url('/regportada')}}" method="POST" role="form" >
+    <form enctype="multipart/form-data" action="{{url('/regportada')}}" method="POST" role="form" >
         @csrf
     <!-- Seccion del Encabezado del Formulario -->
 
@@ -106,19 +106,19 @@
                 <tr>
                     <td rowspan="2" style="width: 60%; text-align:center">
                         <img id="preview" src="{{asset('img/cargarImagen.png')}}" width="80%" height="50">
-                        <input type="file" multiple accept=".jpg, .jpeg, .png" id="imgportada" name="imgportada" required>
+                        <input type="file" accept=".jpg, .jpeg, .png" id="imgportada" name="imgportada" required>
                     </td>
                     <td width='40%' colspan="3" style="text-align:center "><input type="text" inputmode="numeric" pattern="[0-9]*" placeholder="No" id="noCertificado" style="width: 30px; text-align:center; display:none" readonly> / <input type="text" placeholder="Año" id="anoCertificado" name="anoCertificado" oninput="validateInput(this)"></td>
                 </tr>
                 <tr>
-                    <td width='40%' colspan="3" style="text-align:center "><strong>Mes de _______ <input type="text" placeholder="Mes" id="mesVigente" style="; display:none" readonly> de <input type="text" placeholder="Año" id="AnoVigente" oninput="validateInput(this)"> </strong></td>
+                    <td width='40%' colspan="3" style="text-align:center "><strong>Mes de _______ <input type="text" placeholder="Mes" id="mesVigente" style="; display:none" readonly> de <input type="text" placeholder="Año" id="AnoVigente" name="AnoVigente" oninput="validateInput(this)"> </strong></td>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td rowspan="2" style="text-align:justify;font-size: 12px;"> <strong>OBRA:</strong> <input type="text" style="width: 80%" placeholder="Razon de la Obra" id="obra" name="obra"> </td>
                     <td width='50%' rowspan="2" colspan="3" style="text-align:left; font-size: 12px;">CONTRATISTA:  <input type="text" placeholder="Informacion de contratista" id="contratista" name="contratista">
-                        <br><input type="text" placeholder="Contacto" id="contactoContratista" name="contactoContratista" oninput="validateInput2(this)">
+                        <br><input type="text" placeholder="Id Tributario" id="contactoContratista" name="contactoContratista" oninput="validateInput2(this)">
                         <br><input type="text" placeholder="Ubicacion" id="ubicacion" name="ubicacion"></td>
                 </tr>
             </tbody>
