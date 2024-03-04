@@ -94,7 +94,7 @@ $("#contenpartes").removeClass('d-none');
                                     </div>
                                     <script>
                                         function goToHome3() {
-                                            window.location.href = "{{ url('/penalidades/modulospenalizacion/modulospenalizacion2') }}";
+                                            window.location.href = "{{ url('/penalidades/modulospenalizacion/modulospenalizacion3') }}";
                                         }
                                     </script>
                                 </td>
@@ -124,7 +124,7 @@ $("#contenpartes").removeClass('d-none');
                                     </div>
                                     <script>
                                         function goToHome5() {
-                                            window.location.href = "{{ url('') }}";
+                                            window.location.href = "{{ url('/penalidades/modulospenalizacion/modulospenalizacion5') }}";
                                         }
                                     </script>
                                 </td>
@@ -139,7 +139,7 @@ $("#contenpartes").removeClass('d-none');
                                     </div>
                                     <script>
                                         function goToHome6() {
-                                            window.location.href = "{{ url('/') }}";
+                                            window.location.href = "{{ url('/penalidades/modulospenalizacion/modulospenalizacion6') }}";
                                         }
                                     </script>
                                 </td>
@@ -154,7 +154,7 @@ $("#contenpartes").removeClass('d-none');
                                     </div>
                                     <script>
                                         function goToHome7() {
-                                            window.location.href = "{{ url('/') }}";
+                                            window.location.href = "{{ url('/penalidades/modulospenalizacion/modulospenalizacion7') }}";
                                         }
                                     </script>
                                 </td>
@@ -169,7 +169,7 @@ $("#contenpartes").removeClass('d-none');
                                     </div>
                                     <script>
                                         function goToHome8() {
-                                            window.location.href = "{{ url('/') }}";
+                                            window.location.href = "{{ url('/penalidades/modulospenalizacion/modulospenalizacion8') }}";
                                         }
                                     </script>
                                 </td>
@@ -184,7 +184,7 @@ $("#contenpartes").removeClass('d-none');
                                     </div>
                                     <script>
                                         function goToHome9() {
-                                            window.location.href = "{{ url('/') }}";
+                                            window.location.href = "{{ url('/penalidades/modulospenalizacion/modulospenalizacion9') }}";
                                         }
                                     </script>
                                 </td>
@@ -199,7 +199,7 @@ $("#contenpartes").removeClass('d-none');
                                     </div>
                                     <script>
                                         function goToHome10() {
-                                            window.location.href = "{{ url('/') }}";
+                                            window.location.href = "{{ url('/penalidades/modulospenalizacion/modulospenalizacion10') }}";
                                         }
                                     </script>
                                 </td>
@@ -214,7 +214,7 @@ $("#contenpartes").removeClass('d-none');
                                     </div>
                                     <script>
                                         function goToHome11() {
-                                            window.location.href = "{{ url('/') }}";
+                                            window.location.href = "{{ url('/penalidades/modulospenalizacion/modulospenalizacion11') }}";
                                         }
                                     </script>
                                 </td>
@@ -229,7 +229,7 @@ $("#contenpartes").removeClass('d-none');
                                     </div>
                                     <script>
                                         function goToHome12() {
-                                            window.location.href = "{{ url('/') }}";
+                                            window.location.href = "{{ url('/penalidades/modulospenalizacion/modulospenalizacion12') }}";
                                         }
                                     </script>
                                 </td>
@@ -244,7 +244,7 @@ $("#contenpartes").removeClass('d-none');
                                     </div>
                                     <script>
                                         function goToHome13() {
-                                            window.location.href = "{{ url('/') }}";
+                                            window.location.href = "{{ url('/penalidades/modulospenalizacion/modulospenalizacion13') }}";
                                         }
                                     </script>
                                 </td>
@@ -259,7 +259,7 @@ $("#contenpartes").removeClass('d-none');
                                     </div>
                                     <script>
                                         function goToHome14() {
-                                            window.location.href = "{{ url('/') }}";
+                                            window.location.href = "{{ url('/penalidades/modulospenalizacion/modulospenalizacion14') }}";
                                         }
                                     </script>
                                 </td>
@@ -274,7 +274,7 @@ $("#contenpartes").removeClass('d-none');
                                     </div>
                                     <script>
                                         function goToHome15() {
-                                            window.location.href = "{{ url('/') }}";
+                                            window.location.href = "{{ url('/penalidades/modulospenalizacion/modulospenalizacion15') }}";
                                         }
                                     </script>
                                 </td>

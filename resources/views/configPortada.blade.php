@@ -111,14 +111,15 @@
                     <td width='40%' colspan="3" style="text-align:center "><input type="text" inputmode="numeric" pattern="[0-9]*" placeholder="No" id="noCertificado" style="width: 30px; text-align:center; display:none" readonly> / <input type="text" placeholder="Año" id="anoCertificado" name="anoCertificado" oninput="validateInput(this)"></td>
                 </tr>
                 <tr>
-                    <td width='40%' colspan="3" style="text-align:center "><strong>Mes de _______ <input type="text" placeholder="Mes" id="mesVigente" style="; display:none" readonly> de <input type="text" placeholder="Año" id="AnoVigente" name="AnoVigente" oninput="validateInput(this)"> </strong></td>
+                   <!--<td width='40%' colspan="3" style="text-align:center "><strong>Mes de <label id="mesVigente" name="mesVigente"></label> de <label id="AnoVigente" name="AnoVigente"></label> </strong></td>-->
+                   <td width='40%' colspan="3" style="text-align:center"><strong>Mes de <input type="text" id="mesVigente" name="mesVigente" readonly> de <input type="text" id="AnoVigente" name="AnoVigente" readonly></strong></td>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td rowspan="2" style="text-align:justify;font-size: 12px;"> <strong>OBRA:</strong> <input type="text" style="width: 80%" placeholder="Razon de la Obra" id="obra" name="obra"> </td>
                     <td width='50%' rowspan="2" colspan="3" style="text-align:left; font-size: 12px;">CONTRATISTA:  <input type="text" placeholder="Informacion de contratista" id="contratista" name="contratista">
-                        <br><input type="text" placeholder="Id Tributario" id="contactoContratista" name="contactoContratista" oninput="validateInput2(this)">
+                        <br><input type="text" placeholder="Id Tributario" id="contactoContratista" name="contactoContratista" >
                         <br><input type="text" placeholder="Ubicacion" id="ubicacion" name="ubicacion"></td>
                 </tr>
             </tbody>
@@ -155,6 +156,33 @@
             // Permite solo números, comas y puntos en el input
             input.value = input.value.replace(/[^0-9,]/g, '');
         }
+
+        //SCRIPT PARA TRAER MES Y AÑO ACTUA A LA HORA DE GENERAR EL REPORTE
+        var fechaActual = new Date();
+
+        // Obteniendo el mes actual
+        var mesVigente = fechaActual.getMonth() + 1; // Los meses en JavaScript son indexados desde 0
+        var mesTexto = obtenerNombreMes(mesVigente);
+
+        // Obteniendo la fecha actual
+        var fechaActual = new Date();
+
+        // Obteniendo el mes actual
+        var mesVigente = fechaActual.getMonth() + 1; // Los meses en JavaScript son indexados desde 0
+        var mesTexto = obtenerNombreMes(mesVigente);
+
+        // Obteniendo el año actual
+        var anoActual = fechaActual.getFullYear();
+
+        // Mostrando el mes y el año en los campos de entrada correspondientes
+        document.getElementById("mesVigente").value = mesTexto;
+        document.getElementById("AnoVigente").value = anoActual;
+
+        // Función para obtener el nombre del mes a partir de su número
+        function obtenerNombreMes(numeroMes) {
+            var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+            return meses[numeroMes - 1];
+        }
     </script>
 
     <!-- Seccion del Encabezado del Formulario -->
@@ -171,7 +199,7 @@
                 <input type="date" id="fechaInicioContrato" name="fechaInicioContrato" onchange="mostrarFechaSeleccionada()">
                 <input type="text" id="fecha_mostrada" readonly>
             </strong></td>
-            <td style="text-align:justify; font-size: 0.7em;"><strong>Plazo de ejecución: <input type="text" placeholder="Años" id="plazoejecucion" name="plazoejecucion" oninput="validateInput(this)"> años</strong>
+            <td style="text-align:justify; font-size: 0.7em;"><strong>Plazo de ejecución: <input type="text" placeholder="Años" id="plazoejecucion" name="plazoejecucion" > años</strong>
                 <br>Fecha de la escritura de contrata</td>
         </tr>
 
@@ -233,7 +261,7 @@
         <tr>
             <td style="text-align: center; width:50% ">
                 <p style="text-align: left; font-size: 0.8em ">Baja obtenida en la subasta o concurso:</p>
-                <p style="text-align: center ; font-size: 0.9em "><input type="text" placeholder="21,90%" readonly> </p>
+                <p style="text-align: center ; font-size: 0.9em "><input type="text" placeholder="32,00%" readonly> </p>
             </td>
             <td style="text-align: left; width:50%; font-size: 0.8em ; ">
                 <p>Fecha de la adjudicación:

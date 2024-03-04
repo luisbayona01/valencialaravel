@@ -57,6 +57,7 @@ class portadaController extends Controller
 
             $Usuarios = new portada(["anoCertificado" => $request->anoCertificado,
                 "AnoVigente" => $request->AnoVigente,
+                "mesVigente" => $request->mesVigente,
                 "contratista" => $request->contratista,
                 "contactoContratista" => $request->contactoContratista,
                 "ubicacion" => $request->ubicacion,

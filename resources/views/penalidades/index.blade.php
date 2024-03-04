@@ -141,7 +141,18 @@ $(document).ready( function () {
                                             </td>
 
 											<td style="text-align: center; font-size: 0.9em">{{ $penalidades->fechaCreacion }}</td>
-											<td style="text-align: center; font-size: 0.9em">{{ $penalidades->creadoPor }}</td>
+											<td style="text-align: center; font-size: 0.9em">
+                                                <?php
+                                                    // Suponiendo que $penalidades->creadoPor es el ID del usuario
+                                                    $usuario = App\Models\User::find($penalidades->creadoPor);
+                                                    if($usuario) {
+                                                        echo $usuario->codigo;
+                                                    } else {
+                                                        echo "Usuario no encontrado";
+                                                    }
+                                                ?>
+                                            </td>
+
 											<td style="text-align: Justify; font-size: 0.9em">{{ $penalidades->obsCreacion }}</td>
 											<td style="text-align: right; font-size: 0.9em">{{ $penalidades->valorPenalidad4 }}</td>
                                             <td style="text-align: center; font-size:0.7em">

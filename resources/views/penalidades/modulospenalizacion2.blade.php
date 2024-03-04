@@ -93,17 +93,20 @@ $("#contenpartes").removeClass('d-none');
                                             @endif
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>tiempo tardado en detección de la incidencia o avería : </strong> <br><input type="text" style="width: 40%; font-size:1em; text-align: right" placeholder="0 €" id="importeConservacionAnual4" name="importeConservacionAnual4" oninput="validateInput3(this)"> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>tiempo tardado en detección de la incidencia o avería : </strong> <br><input type="text" style="width: 40%; font-size:1em; text-align: right" placeholder="0 " id="Tiempo1" name="Tiempo1" oninput="validateInput3(this)"> </td>
                                                 <td style="width:5%"> / </td>
-                                                <td style="text-align:left; font-size: 12px; border:none; "><strong>número de veces que se ha de realizar la
-                                                    operación no efectuada : </strong><br><input type="text" style="text-align: right" placeholder="0 €" id="Repeticiones4" name="Repeticiones4" oninput="validateInput(this)">
+                                                <td style="text-align:left; font-size:  1em; border:none; "><strong>tiempo máximo del plazo correspondiente : </strong><br><input type="text" style="text-align: right" placeholder="0 " id="Tiempo2" name="Tiempo2" >
+                                                </td>
                                             </tr>
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>I (Importe correspondiente al plazo de conservación)</strong> <input type="text" style="width: 70%; font-size:1em; text-align: right " placeholder="0 €" id="S44" name="S44" oninput="validateInput3(this)" readonly></td>
+                                                <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>Valor Fijo</strong><br> <input type="text" style="width: 70%; font-size:1em; text-align: right " value="1000" id="valorFijo" name="valorFijo" oninput="validateInput3(this)" readonly></td>
                                                 <td style="width:5%"> * </td>
-                                                <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>K : </strong> <input type="text" style="width: 40%; font-size:1em" placeholder="" id="K44" name="K44" value="1,5" oninput="validateInput3(this)"> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>T : </strong> <input type="text" style="width: 40%; font-size:1em" placeholder="" id="T" name="T" value="0 " oninput="validateInput3(this)" readonly> </td>
                                             </tr>
+
+                                            <tr></tr>
+
 
                                             <tr>
 
@@ -111,63 +114,78 @@ $("#contenpartes").removeClass('d-none');
                                         </tbody>
                                     </table>
                                 </div>
+
                                 <!-- Seccion Operativo del Formulario -->
 
-                <script>
-                    function validateInput(input) {
-                    // Permite solo números, comas y puntos en el input
-                    input.value = input.value.replace(/[^0-9]/g, '');
-                }
+                                    <script>
+                                        function validateInput(input) {
+                                        // Permite solo números, comas y puntos en el input
+                                        input.value = input.value.replace(/[^0-9]/g, '');
+                                    }
 
-                    function validateInput2(input) {
-                        // Permite solo números, comas y puntos en el input
-                        input.value = input.value.replace(/[^0-9-]/g, '');
-                    }
-                    function validateInput3(input) {
-                        // Permite solo números, comas y puntos en el input
-                        input.value = input.value.replace(/[^0-9,]/g, '');
-                    }
+                                        function validateInput2(input) {
+                                            // Permite solo números, comas y puntos en el input
+                                            input.value = input.value.replace(/[^0-9-]/g, '');
+                                        }
+                                        function validateInput3(input) {
+                                            // Permite solo números, comas y puntos en el input
+                                            input.value = input.value.replace(/[^0-9,]/g, '');
+                                        }
+                                        function validateInput4(input) {
+                                            // Permite solo números, comas y puntos en el input
+                                            input.value = input.value.replace(/[^0-9.]/g, '');
+                                        }
 
 
-                    function calcularDivision() {
-                    // Obtener los valores de los campos
-                    var importe = parseFloat(document.getElementById("importeConservacionAnual4").value.replace(',', '.'));
-                    var repeticiones = parseFloat(document.getElementById("Repeticiones4").value.replace(',', '.'));
 
-                    // Verificar si los valores son válidos
-                    if (isNaN(importe) || isNaN(repeticiones) || repeticiones === 0) {
-                        document.getElementById("S44").value = "0 €";
-                        return;
-                    }
+                                        function calcularDivision() {
+                                        // Obtener los valores de los campos
+                                        var Tiempo = parseFloat(document.getElementById("Tiempo1").value.replace(',', '.'));
+                                        var Tiempo2 = parseFloat(document.getElementById("Tiempo2").value.replace(',', '.'));
 
-                    // Calcular la división
-                    var resultado = importe / repeticiones;
+                                        // Verificar si los valores son válidos
+                                        if (isNaN(Tiempo) || isNaN(Tiempo2) || Tiempo2 === 0) {
+                                            document.getElementById("T").value = "0 ";
+                                            return;
+                                        }
 
-                    // Formatear el resultado
-                    var resultadoFormateado = resultado.toLocaleString('es-ES', {
-                        minimumFractionDigits: 0,
-                        maximumFractionDigits: 2
-                    });
+                                        function formatearNumero(numero) {
+                                        return numero.toLocaleString('es-ES', {
+                                            minimumFractionDigits: 2,
+                                            maximumFractionDigits: 2
+                                        });
+                                    }
 
-                    // Actualizar el valor en el campo S44
-                    document.getElementById("S44").value = resultadoFormateado.replace('.', ',') + " €"; // Ajusta el resultado y utiliza coma como separador decimal
+                                        // Calcular la división
+                                        var resultado = Tiempo / Tiempo2;
 
-                    // Multiplicar por K44 y actualizar S4
-                    var k44 = parseFloat(document.getElementById("K44").value.replace(',', '.'));
-                    var s4 = resultado * k44;
+                                        // Formatear el resultado
+                                        var resultadoFormateado = resultado.toLocaleString('es-ES', {
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 2
+                                        });
 
-                    // Actualizar el valor en el campo S4
-                    document.getElementById("S4").value = s4.toFixed(2).replace('.', ',') + " €"; // Ajusta el resultado a dos decimales y utiliza coma como separador decimal
-                }
+                                        // Actualizar el valor en el campo S44
+                                        document.getElementById("T").value = resultadoFormateado.replace('.', ',') + " "; // Ajusta el resultado y utiliza coma como separador decimal
 
-                // Llamar a la función al cargar la página y cada vez que haya un cambio en los campos relevantes
-                window.onload = function() {
-                    calcularDivision();
-                    document.getElementById("importeConservacionAnual4").addEventListener("input", calcularDivision);
-                    document.getElementById("Repeticiones4").addEventListener("input", calcularDivision);
-                    document.getElementById("K44").addEventListener("input", calcularDivision);
-                };
-                </script>
+                                        // Multiplicar por valorFijo y actualizar S2
+                                        var valorFijo = parseFloat(document.getElementById("valorFijo").value.replace(',', '.'));
+                                        var s2 = resultado * valorFijo;
+
+                                        // Actualizar el valor en el campo S4
+                                        document.getElementById("S2").value = s2.toFixed(2).replace('.', ',') + " €"; // Ajusta el resultado a dos decimales y utiliza coma como separador decimal
+                                    }
+
+                                    // Llamar a la función al cargar la página y cada vez que haya un cambio en los campos relevantes
+                                    window.onload = function() {
+                                        calcularDivision();
+                                        document.getElementById("Tiempo1").addEventListener("input", calcularDivision);
+                                        document.getElementById("Tiempo2").addEventListener("input", calcularDivision);
+                                        document.getElementById("valorFijo").addEventListener("input", calcularDivision);
+                                    };
+
+
+                                    </script>
 
                 <!-- Seccion Resultado del Formulario -->
                 <br><br>
@@ -190,7 +208,7 @@ $("#contenpartes").removeClass('d-none');
                     </div>
                 </div>
 
-                <div class="row" bis_skin_checked="1" style="display: none">
+                <div class="row" bis_skin_checked="1" style="display: block">
                     <div class="col-sm-2" bis_skin_checked="1" style="display: block">
                         <div class="form-group">
                             {{ Form::label('Tipo de Penalizacion') }}
@@ -198,14 +216,7 @@ $("#contenpartes").removeClass('d-none');
                             <input type="text" style="width: 40%; font-size:1em; text-align:center" placeholder="" id="tipoPenalidad" name="tipoPenalidad" value="2" oninput="validateInput3(this)" readonly>
                         </div>
                     </div>
-
-
-
-            </div>
-
-
-
-
+                </div>
 
             <div class="form-group">
                 {{ Form::label('observaciones') }}
@@ -220,15 +231,13 @@ $("#contenpartes").removeClass('d-none');
                 <table width="95%" style="margin: auto; padding: 3% 3% 3% 3% ">
 
                     <tr>
-                        <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>S₄ (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="0 €" id="S4" name="S4" oninput="validateInput3(this)" readonly></td>
+                        <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>S₂ (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="0 €" id="S2" name="S2" oninput="validateInput3(this)" readonly></td>
                     </tr>
 
                 </table>
 
                  <br><br>
                             </body>
-
-
                         </div>
 
                         <div class="box-footer mt20">
@@ -242,9 +251,6 @@ $("#contenpartes").removeClass('d-none');
 
 </form>
 
-
-
-
                 </div>
                 <div style="text-align: right; padding: 0px 10px 10px 10px">
                     <button type="button" onclick="goToHome()" class="btn btn-secondary" style="text-align: right;">Volver</button>
@@ -256,7 +262,6 @@ $("#contenpartes").removeClass('d-none');
                 </script>
             </div>
         </div>
-
 
         </div>
 

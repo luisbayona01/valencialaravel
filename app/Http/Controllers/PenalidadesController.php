@@ -59,8 +59,10 @@ class PenalidadesController extends Controller
         $Penalidad4 = new penalidades(["creadoPor" => $request->creadoPor,
                 "fechaCreacion" => $request->fechaCreacion,
                 "valorPenalidad4" => $request->S4,
+                "valorPenalidad4" => $request->S2,
                 "tipoPenalidad" => $request->tipoPenalidad,
                 "obsCreacion" => $request->obsCreacion]);
+
 
                 // Establecer el estado como 1
                 $Penalidad4->estadopenalidad_id = 1;

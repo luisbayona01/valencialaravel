@@ -89,7 +89,7 @@
                 <td width='40%' colspan="3" style="text-align:center ">1 / {{ $portada->anoCertificado }}</td>
             </tr>
             <tr>
-                <td width='40%' colspan="3" style="text-align:center ">Mes de Agosto de {{ $portada->AnoVigente }}</td>
+                <td width='40%' colspan="3" style="text-align:center ">Mes de {{ $portada->mesVigente }} de {{ $portada->AnoVigente }}</td>
             </tr>
         </thead>
         <tbody>
@@ -112,7 +112,8 @@
 
         </tr>
         <tr width='100%'>
-            <td style="text-align:left; font-size: 0.7em" colspan="2">Inicio contrato: {{ $portada->fechaInicioContrato }}</td>
+
+            <td style="text-align:left; font-size: 0.7em" colspan="2">Inicio contrato: {{ \Carbon\Carbon::parse($portada->fechaInicioContrato)->locale('es_ES')->isoFormat('dddd, DD [de] MMMM [de] YYYY') }}</td>
             <td width='100%' style="text-align:justify; font-size: 0.7em ">Plazo de ejecución:  {{ $portada->plazoejecucion}} años
                 <br>Fecha de la escritura de contrata</td>
 
@@ -139,7 +140,7 @@
                 <p style="text-align: center ; font-size: 0.9em ">{{ $portada->bajaobtenida }} %</p>
             </td>
             <td style="text-align: left; width:50%; font-size: 0.8em ; ">
-                <p>Fecha de la adjudicación: {{ $portada->fechaAdjudicacion }}</p>
+                <p>Fecha de la adjudicación: {{ \Carbon\Carbon::parse($portada->fechaAdjudicacion)->locale('es_ES')->isoFormat('dddd, DD [de] MMMM [de] YYYY') }}</p>
                 <p>Fecha de la escritura de contrata:</p>
             </td>
         </tr>
@@ -197,7 +198,7 @@
         <td style="border:none">TOTAL REVISADO ..................................................................................................................................................</td> <td style="text-align: right; border:none">{{number_format($Tbajaoppdf, 2, ',', '.').' '.'Euros'}} </td>
     </tr>
     <tr>
-        <td style="border:none">Baja Obtenida 21,90% .............................................................................................................................................</td> <td style="text-align: right; border:none"> {{number_format($resultbaja, 2, ',', '.').' '.'Euros'}}</td>
+        <td style="border:none">Baja Obtenida 32,00% .............................................................................................................................................</td> <td style="text-align: right; border:none"> {{number_format($resultbaja, 2, ',', '.').' '.'Euros'}}</td>
     </tr>
     <tr>
         <td style="border:none"><strong>DIFERENCIA ...........................................................................................................................................................</strong></td> <td style="text-align: right; border:none"> {{number_format($restarbaja1, 2, ',', '.').' '.'Euros'}}</td>
