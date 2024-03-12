@@ -8,8 +8,8 @@ use DB;
 use Illuminate\Http\Request;
 use Luecano\NumeroALetras\NumeroALetras;
 use Illuminate\Support\Carbon;
-
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 class ReportPartesController extends Controller
 {
     public function generarinforme(Request $request)
@@ -34,7 +34,7 @@ $nombreMes = $currentDateTimes->isoFormat('MMMM');
 
 $currentDateTime=$dia.'-'.$nombreMes.'-'.$anio;
         $partesid = $request->input('parte_ids');
-
+  //dd( $partesid);
         $penalidad_raw = $request->input('penalidad');
 
         // Reemplazar comas por puntos (si las comas son el separador decimal)
@@ -131,12 +131,24 @@ $currentDateTime=$dia.'-'.$nombreMes.'-'.$anio;
             );
         }
 
+  $fechaActual = now()->format('Ymd');
+
+// Obtener el ID del usuario logeado
+$idUsuario = Auth::id();
+$user=new User();
+$rollname=  $user->rolname();
+// Generar el nombre del archivo PDF con la fecha actual y el ID del usuario
+ $nombreArchivo = 'informe_' . $fechaActual .'_'.$rollname.'_' . $idUsuario . '.pdf';
+
         //dd($totalSum);
         $pdf = Pdf::loadView('pdf.informeParte', compact('portada','penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes', 'fechaInicio', 'fechaFin','currentDateTime'));
         //$pdf->inline('informeParte.pdf');
         $pdf->setPaper('legal');
-        Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
-        return $pdf->stream();
+        //Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
+        $pdfPath = public_path('pdfs/'.$nombreArchivo);
+        $pdf->save($pdfPath);
+     return view('pdf.pdf_viewer', ['pdfUrl' => asset('pdfs/'.$nombreArchivo),'idspartes'=>$parteIds]);
+     //return $pdf->stream();
 
     }
 
@@ -180,5 +192,18 @@ $partesid=$request->parte_ids;
         ]);
 
 }
+
+  public   function    certificarpartes(Request $request){
+  $parteIds= $request->parte_ids;
+  Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
+  return response()->json([
+            'ok' => true,
+            'respuesta' => 'se han certificado los partes',
+        ]);
+
+   }
+
+
+
 
 }
