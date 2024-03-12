@@ -68,6 +68,61 @@ Route::get('/penalidades/modulospenalizacion/modulospenalizacion', function () {
     return view('penalidades.modulospenalizacion');
 })->name('penalidades.modulospenalizacion.modulospenalizacion');
 
+//Formulario contenedor de la Penalizacion No.5
+Route::get('/penalidades/modulospenalizacion/modulospenalizacion5', function () {
+    return view('penalidades.modulospenalizacion5');
+})->name('penalidades.modulospenalizacion.modulospenalizacion5');
+
+//Formulario contenedor de la Penalizacion No.6
+Route::get('/penalidades/modulospenalizacion/modulospenalizacion6', function () {
+    return view('penalidades.modulospenalizacion6');
+})->name('penalidades.modulospenalizacion.modulospenalizacion6');
+
+//Formulario contenedor de la Penalizacion No.7
+Route::get('/penalidades/modulospenalizacion/modulospenalizacion7', function () {
+    return view('penalidades.modulospenalizacion7');
+})->name('penalidades.modulospenalizacion.modulospenalizacion7');
+
+//Formulario contenedor de la Penalizacion No.8
+Route::get('/penalidades/modulospenalizacion/modulospenalizacion8', function () {
+    return view('penalidades.modulospenalizacion8');
+})->name('penalidades.modulospenalizacion.modulospenalizacion8');
+
+//Formulario contenedor de la Penalizacion No.9
+Route::get('/penalidades/modulospenalizacion/modulospenalizacion9', function () {
+    return view('penalidades.modulospenalizacion9');
+})->name('penalidades.modulospenalizacion.modulospenalizacion9');
+
+//Formulario contenedor de la Penalizacion No.10
+Route::get('/penalidades/modulospenalizacion/modulospenalizacion10', function () {
+    return view('penalidades.modulospenalizacion10');
+})->name('penalidades.modulospenalizacion.modulospenalizacion10');
+
+//Formulario contenedor de la Penalizacion No.11
+Route::get('/penalidades/modulospenalizacion/modulospenalizacion11', function () {
+    return view('penalidades.modulospenalizacion11');
+})->name('penalidades.modulospenalizacion.modulospenalizacion11');
+
+//Formulario contenedor de la Penalizacion No.12
+Route::get('/penalidades/modulospenalizacion/modulospenalizacion12', function () {
+    return view('penalidades.modulospenalizacion12');
+})->name('penalidades.modulospenalizacion.modulospenalizacion12');
+
+//Formulario contenedor de la Penalizacion No.13
+Route::get('/penalidades/modulospenalizacion/modulospenalizacion13', function () {
+    return view('penalidades.modulospenalizacion13');
+})->name('penalidades.modulospenalizacion.modulospenalizacion13');
+
+//Formulario contenedor de la Penalizacion No.14
+Route::get('/penalidades/modulospenalizacion/modulospenalizacion14', function () {
+    return view('penalidades.modulospenalizacion14');
+})->name('penalidades.modulospenalizacion.modulospenalizacion14');
+
+//Formulario contenedor de la Penalizacion No.15
+Route::get('/penalidades/modulospenalizacion/modulospenalizacion15', function () {
+    return view('penalidades.modulospenalizacion15');
+})->name('penalidades.modulospenalizacion.modulospenalizacion15');
+
 
 Route::post('/regpenalizacion4',[App\Http\Controllers\PenalidadesController::class,'store'])->name('regpenalizacion4');
 
@@ -99,6 +154,10 @@ Route::get('pdf', [App\Http\Controllers\ParteController::class, 'pdf'])->name('p
 
 //Route::post('/ReportPartesController')->name('informeParte');
 
+Route::get('/user/editpassword', function () {
+return view('user.editContrasena');
+})->name('user.editpassword')->middleware('auth');
+
 
 
 Route::resource('elementoParte', 'ElementosController');
@@ -109,3 +168,6 @@ Route::get('/cancelar/{parteId}', [App\Http\Controllers\ParteController::class, 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //URL::forceScheme('https');
+
+
+

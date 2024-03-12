@@ -75,10 +75,28 @@ $("#contenpartes").removeClass('d-none');
                                     <div>
                                         <img src="{{ asset('img/icono_representativo_caratula.png') }}" class="card-img-top" style="width: 30rem;">
                                     </div><br>
-                                    <span class="card-title">{{ __('Creacion') }} De Penalidades No. </span>
+                                    <span class="card-title" style="color: black">{{ __('') }}U.2.- PENALIDAD POR FALLOS EN LA DETECCIÓN DE INCIDENCIAS </span>
                                 </div><!-- IMAGEN ENCABEZADO DE LA HOJA DE CALCULO PENALIZACION -->
 
-                                <form action="{{url('/regpenalizacion4')}}" method="POST" role="form" >
+                                <script>
+                                    // Función para validar los campos antes de enviar el formulario
+                                    function validarCampos() {
+                                        // Obtener los valores de los campos
+                                        var TValue = document.getElementById('T').value;
+                                        var S2Value = document.getElementById('S2').value;
+
+                                        // Verificar si algún campo está vacío
+                                        if (TValue.trim() === '' || S2Value.trim() === '') {
+                                            alert('Por favor complete todos los campos antes de guardar.');
+                                            return false; // Evitar enviar el formulario
+                                        }
+
+                                        return true; // Permitir enviar el formulario si todos los campos están completos
+                                    }
+                                </script>
+
+                            <form action="{{url('/regpenalizacion4')}}" method="POST" role="form" onsubmit="return validarCampos()" >
+
                                     @csrf
                                 <!-- Seccion del Encabezado del Formulario -->
 
@@ -203,12 +221,12 @@ $("#contenpartes").removeClass('d-none');
                     <div class="form-group">
                         {{ Form::label('Fecha y hora de creacion') }}
                         <?php $fechaHoraActual = date("Y-m-d H:i:s"); ?>
-                        {{ Form::text('fechaCreacion', $fechaHoraActual, ['class' => 'form-control', 'id' => 'fechaCreacion', 'readonly' => 'true']) }}
+                        {{ Form::text('fechaCreacion', $fechaHoraActual, ['class' => 'form-control', 'id' => 'fechaCreacion', 'readonly' => 'true', 'style' => 'width: 200px;']) }}
                         {!! $errors->first('fechaCreacion', '<div class="invalid-feedback">:message</div>') !!}
                     </div>
                 </div>
 
-                <div class="row" bis_skin_checked="1" style="display: block">
+                <div class="row" bis_skin_checked="1" style="display: none">
                     <div class="col-sm-2" bis_skin_checked="1" style="display: block">
                         <div class="form-group">
                             {{ Form::label('Tipo de Penalizacion') }}
@@ -231,7 +249,7 @@ $("#contenpartes").removeClass('d-none');
                 <table width="95%" style="margin: auto; padding: 3% 3% 3% 3% ">
 
                     <tr>
-                        <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>S₂ (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="0 €" id="S2" name="S2" oninput="validateInput3(this)" readonly></td>
+                        <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>S₂ (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="0 €" id="S2" name="S2" oninput="validateInput3(this)" readonly>&nbsp &nbsp <strong> S<sub>2</sub> = 1000 * T</strong></td>
                     </tr>
 
                 </table>

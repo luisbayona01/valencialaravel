@@ -65,6 +65,8 @@ class UserController extends Controller
          //$roles = Roles::pluck('name', 'id');
      //dd($roles);
         return view('user.show', compact('user'));
+
+
     }
 
     /**
@@ -81,7 +83,10 @@ class UserController extends Controller
         $codigo = 'readonly';
         return view('user.edit', compact('user','roles','estado','codigo'));
 
+
     }
+
+
 
     /**
      * Update the specified resource in storage.

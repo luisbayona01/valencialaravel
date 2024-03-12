@@ -38,7 +38,7 @@ $(document).ready(function () {
                             {{ method_field('PATCH') }}
                             @csrf
 
-                            @include('user.form')
+                            @include('user.editpassword')
 
                         </form>
                     </div>

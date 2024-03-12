@@ -56,10 +56,24 @@ class PenalidadesController extends Controller
         /* FUNCION FORMULARIO INDEPENDIENTES POR PENALIDAD */
         //dd($request);
 
+        // Crear el registro para S1
         $Penalidad4 = new penalidades(["creadoPor" => $request->creadoPor,
                 "fechaCreacion" => $request->fechaCreacion,
-                "valorPenalidad4" => $request->S4,
-                "valorPenalidad4" => $request->S2,
+                "valorPenalidad4" => $request->S1 ? $request->S1 :
+                    ($request->S2 ? $request->S2 :
+                    ($request->S3 ? $request->S3 :
+                    ($request->S4 ? $request->S4 :
+                    ($request->S5 ? $request->S5 :
+                    ($request->S6 ? $request->S6 :
+                    ($request->S7 ? $request->S7 :
+                    ($request->S8 ? $request->S8 :
+                    ($request->S9 ? $request->S9 :
+                    ($request->S10 ? $request->S10 :
+                    ($request->S11 ? $request->S11 :
+                    ($request->S12 ? $request->S12 :
+                    ($request->S13 ? $request->S13 :
+                    ($request->S14 ? $request->S14 :
+                    ($request->S15 ? $request->S15 : null)))))))))))))),
                 "tipoPenalidad" => $request->tipoPenalidad,
                 "obsCreacion" => $request->obsCreacion]);
 
@@ -68,7 +82,9 @@ class PenalidadesController extends Controller
                 $Penalidad4->estadopenalidad_id = 1;
 
 
-            if ($Penalidad4->save()) {
+            if ($Penalidad4->save())
+
+            {
 
                 //$menssage = "Usuario registrado correctamente";
 

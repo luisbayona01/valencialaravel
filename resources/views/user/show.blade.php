@@ -50,11 +50,7 @@
                         </div>
 
                     </div>
-                    <div style="padding: 15px 15px 15px 15px">
-                        <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                            <a class="btn btn-sm btn-warning" href="{{ route('users.editContraseña',$user->id) }}"><i class=""></i> {{ __('Cambiar Contraseña') }}</a>
-                        </form>
-                    </div>
+
                 </div>
             </div>
         </div>

@@ -186,14 +186,16 @@ $(".table").DataTable({
                                     {{ Auth::user()->apellidos }}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
+                                <!-- Linea para vista de Usuarios diferente a Administradores -->
                                 <a class="dropdown-item" href="{{ route('users.show',Auth::user()->id) }}"><i class="align-middle mr-1"
-                                        data-feather="user"></i> Perfil</a>
+                                    data-feather="user"></i> Perfil</a>
 
+                                <!-- Linea para el Cambio de contraseña Usuarios diferente a Administradores -->
+                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#perfilModal">
+                                    <i class="align-middle mr-1" data-feather="user"></i> Cambiar Contraseña
+                                </a>
 
-
-
-
-
+                                <!-- Linea para Salida de Actividad en Aplicación -->
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{url('/logout')}}">Salir</a>
                             </div>
@@ -213,6 +215,47 @@ $(".table").DataTable({
         </div>
 
 </div>
+
+
+        <div class="modal fade" id="perfilModal" tabindex="-1" role="dialog" aria-labelledby="perfilModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="perfilModalLabel">Cambiar Contraseña</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- formulario de edición de contraseña -->
+                        <div class="box box-info padding-1" style="padding: 0% 5% 5% 5%">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    {{ Form::label('Contraseña') }}
+                                    {{ Form::text('password', null, ['id' => 'password', 'class' => 'form-control' . ($errors->has('password') ? ' is-invalid' : ''), 'placeholder' => 'Contraseña','required' => 'required']) }}
+                                    <div class="invalid-feedback"> La contraseña es obligatoria  </div>
+                                </div>
+                            </div>
+                            <div class="box-footer mt20">
+                                <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>
+                                <button style="text-align: right;" type="button" class="btn btn-danger" data-dismiss="modal">
+                                    Cancelar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function() {
+                $('#perfilModal').on('shown.bs.modal', function () {
+                    $('#password').val(''); // Limpia el campo de contraseña
+                });
+            });
+        </script>
+
+
 
 
         @yield('scripts')
