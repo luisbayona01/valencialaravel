@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Parte;
 use App\Models\Localizacion;
+use App\Models\Penalidades;
 use App\Models\Tipoparte;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -177,13 +178,16 @@ $fechaFin=$request->fechaautorizacionFin;
 
 
 $partes = $partes->get();
+$penalidades= Penalidades::all();
 //dd($partes);
 
 $resultado = DB::table('informecorrectivo')
                 ->select(DB::raw('MONTH(Fecha_de_carga) AS Mes'), DB::raw('YEAR(Fecha_de_carga) AS Ano'))
                 ->groupBy(DB::raw('MONTH(Fecha_de_carga)'), DB::raw('YEAR(Fecha_de_carga)'))
                 ->get();
-      return view('parte.generarparte', compact('partes','resultado'));
+      return view('parte.generarparte', compact('partes','resultado','penalidades'));
+
+//-- AREA GENERAL DE LA TABLA APLICABLE DE LAS PENALIZACIONES -->
 
 }
 

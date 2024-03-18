@@ -233,9 +233,8 @@
                                     </thead>
                                     <tbody>
 
-                                    <form id="pdfForm" action="{{ route('report') }}" method="POST" target="_blank">
+                                        <form id="pdfForm" action="{{ route('report') }}" method="POST" target="_blank">
                                         @foreach ($penalidades as $penalidad)
-                                        @if ($penalidad->estadopenalidad_Id == 2)
                                         <tr>
                                             <td style="text-align: center; font-size: 0.9em">{{ $penalidad->idpenalidad }}</td>
                                             <td style="text-align: center; font-size: 0.9em">
@@ -307,23 +306,22 @@
                                                     onchange="actualizarFormulario2()">
                                             </td>
                                         </tr>
-                                        @endif
                                         @endforeach
                                     </form>
                                         <tr style="font-size:0.9em;">
 
                                             <td></td> <!-- No. Parte -->
                                             <td colspan="2" style="text-align:center">
-                                                <input style="text-align: right; width:100%; display:none" type="text" id="penalidad"
+                                                <input style="text-align: right; width:100%; display:block" type="text" id="penalidad"
                                                     value="0" placeholder="0" oninput="validateInput(this)">
                                             </td>
                                             <td></td> <!-- Comunicado por -->
                                             <td></td> <!-- Fecha de comunicacion -->
                                             <td></td> <!-- Observaciones -->
-                                            <!--<td></td> -- Reparado por -->
+                                            <!--<td></td> <!-- Reparado por -->
                                             <td> <strong> Total Penalizaciones Seleccionados</strong></td> <!-- Fecha reparacion -->
                                             <td colspan="3" class="totalpenalizacionSelect" id="totalPenalizacionSeleccionada" style="width: 10%"> 0</td><!-- Total Importes -->
-                                            <!--<td> </td> !-- Estado -->
+                                            <!--<td> </td> <!-- Estado -->
                                             <td style="text-align: center">
                                             </td>
                                         </tr>
@@ -416,39 +414,39 @@
                         }
 
                         function actualizarFormulario2() {
-                        var totalPenalidades = 0;
+        var totalPenalidades = 0;
 
-                        // Obtener todos los checkboxes seleccionados
-                        var checkboxes = document.querySelectorAll('input[name="penalidad_ids[]"]:checked');
+        // Obtener todos los checkboxes seleccionados
+        var checkboxes = document.querySelectorAll('input[name="penalidad_ids[]"]:checked');
 
-                        // Iterar sobre cada checkbox seleccionado
-                        checkboxes.forEach(function(checkbox) {
-                            // Obtener la fila padre del checkbox (tr)
-                            var row = checkbox.closest('tr');
+        // Iterar sobre cada checkbox seleccionado
+        checkboxes.forEach(function(checkbox) {
+            // Obtener la fila padre del checkbox (tr)
+            var row = checkbox.closest('tr');
 
-                            // Obtener el valor de la columna valorPenalidad4 y reemplazar la coma por un punto para manejar correctamente el valor
-                            var valorPenalidad4 = parseFloat(row.querySelector('.valorPenalidad4').textContent.replace(',', '.'));
+            // Obtener el valor de la columna valorPenalidad4 y reemplazar la coma por un punto para manejar correctamente el valor
+            var valorPenalidad4 = parseFloat(row.querySelector('.valorPenalidad4').textContent.replace(',', '.'));
 
-                            // Sumar al total
-                            totalPenalidades += valorPenalidad4;
-                        });
+            // Sumar al total
+            totalPenalidades += valorPenalidad4;
+        });
 
-                        // Convertir el total a string y separar la parte entera de la decimal
-                        var totalString = totalPenalidades.toFixed(2);
-                        var partes = totalString.split('.');
+        // Convertir el total a string y separar la parte entera de la decimal
+        var totalString = totalPenalidades.toFixed(2);
+        var partes = totalString.split('.');
 
-                        // Formatear la parte entera con puntos como separador de miles
-                        var parteEnteraFormateada = partes[0].replace(/\B(?=(\d{3})+(?!\d))/g, '');
+        // Formatear la parte entera con puntos como separador de miles
+        var parteEnteraFormateada = partes[0].replace(/\B(?=(\d{3})+(?!\d))/g, '');
 
-                        // Unir la parte entera formateada con la parte decimal y añadir la coma de los centavos
-                        var totalFormateado = parteEnteraFormateada + ',' + partes[1];
+        // Unir la parte entera formateada con la parte decimal y añadir la coma de los centavos
+        var totalFormateado = parteEnteraFormateada + ',' + partes[1];
 
-                        // Mostrar el total de penalidades seleccionadas en el td correspondiente
-                        document.getElementById('totalPenalizacionSeleccionada').textContent = totalFormateado + ' €';
+        // Mostrar el total de penalidades seleccionadas en el td correspondiente
+        document.getElementById('totalPenalizacionSeleccionada').textContent = totalFormateado + ' €';
 
-                        // Replicar el valor formateado en el input "penalidad"
-                        document.getElementById('penalidad').value = totalFormateado;
-                    }
+        // Replicar el valor formateado en el input "penalidad"
+        document.getElementById('penalidad').value = totalFormateado;
+    }
 
                         function goToHome() {
                             window.location.href = "{{ url('/gestorParte') }}";

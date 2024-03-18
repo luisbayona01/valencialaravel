@@ -50,6 +50,10 @@ $(".table").DataTable({
 
 
     <style>
+        .custom-width {
+    width: 300px;
+}
+
 
     </style>
 
@@ -59,7 +63,7 @@ $(".table").DataTable({
 
 
     <div class="wrapper">
-       <nav id="sidebar" class="sidebar js-sidebar">
+    <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
         <!-- Opening div for sidebar-content -->
 
@@ -106,18 +110,27 @@ $(".table").DataTable({
             @endif
 
 
-            <a href="{{ url('/gestorParte') }}" onclick="gestionPartes()" class="sidebar-link collapsed">
+            <a href="{{ url('/partes') }}" onclick="gestionPartes()" class="sidebar-link collapsed">
                 <!-- Opening div for sidebar-link -->
                 <i class="fa fa-check-square"></i> <span class="align-middle">Gestión Partes</span>
             </a>
 
             <a href="{{ url('/penalidades') }}" onclick="gestionPartes()" class="sidebar-link collapsed">
                 <!-- Opening div for sidebar-link -->
-                <i class="fa fa-usd"></i> <span class="align-middle">Gestión Penalizaciones</span>
+                <i class="fa fa-gavel"></i> <span class="align-middle">Gestión Penalizaciones</span>
+            </a>
+
+            <a href="{{ url('/generarparte') }}" onclick="gestionPartes()" class="sidebar-link collapsed">
+                <!-- Opening div for sidebar-link -->
+                <i class="fa fa-usd" aria-hidden="true"></i><span class="align-middle">Gestión Certificados</span>
             </a>
 
 
 
+            <a href="{{ url('/gestorInventario') }}" onclick="gestionPartes()" class="sidebar-link collapsed">
+                <!-- Opening div for sidebar-link -->
+                <i class="fa  fa-cogs"></i> <span class="align-middle">Gestión Configuración</span>
+            </a>
 
             <a href="{{ url('/informecorrectivos') }}" class="sidebar-link collapsed" style="display: none">
                 <!-- Opening div for sidebar-link -->
@@ -146,7 +159,7 @@ $(".table").DataTable({
                 <!-- Closing div for sidebar-dropdown -->
                 <!-- onclick="gestionPartes()" style="cursor:pointer" -->
 
-        <!--    </li> -->
+            <!--    </li> -->
             <!-- Closing div for the second list item -->
 
 

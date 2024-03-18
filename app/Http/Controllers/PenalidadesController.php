@@ -72,8 +72,9 @@ class PenalidadesController extends Controller
                     ($request->S11 ? $request->S11 :
                     ($request->S12 ? $request->S12 :
                     ($request->S13 ? $request->S13 :
+                    ($request->S133 ? $request->S133 :
                     ($request->S14 ? $request->S14 :
-                    ($request->S15 ? $request->S15 : null)))))))))))))),
+                    ($request->S15 ? $request->S15 : null))))))))))))))),
                 "tipoPenalidad" => $request->tipoPenalidad,
                 "obsCreacion" => $request->obsCreacion]);
 
@@ -115,6 +116,8 @@ class PenalidadesController extends Controller
 
         return view('penalidades.show', compact('penalidades'));
     }
+
+
 
     /**
      * Show the form for editing the specified resource.

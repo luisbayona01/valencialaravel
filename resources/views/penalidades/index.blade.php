@@ -65,151 +65,98 @@ $(document).ready( function () {
                         </div>
                     </div>
 
+                    <div style="text-align: center;">
+                        <h2><strong>Módulo Penalizaciones</strong></h2>
+                    </div>
+
                     <div class="card-body">
                         <div class="table-responsive" style="padding: 1% 1% 1% 1%">
                             <table class="table table-striped table-hover" id="penalidades">
                                 <thead class="thead">
                                     <tr>
-										<th style="text-align: center">Id penalidad</th>
+                                        <th style="text-align: center">Id penalidad</th>
                                         <th style="text-align: center">Tipo</th>
-										<th style="text-align: center">Fecha creacion</th>
-										<th style="text-align: center">Creado por</th>
-										<th style="text-align: center">Observaciones creacion</th>
-										<th style="text-align: center">Valor penalidad</th>
-										<th style="text-align: center">Estado</th>
-
+                                        <th style="text-align: center">Fecha creación</th>
+                                        <th style="text-align: center">Creado por</th>
+                                        <th style="text-align: center">Observaciones creación</th>
+                                        <th style="text-align: center">Valor penalidad</th>
+                                        <th style="text-align: center">Estado</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($penalidades as $penalidades)
-                                        <tr>
-
-											<td style="text-align: center; font-size: 0.9em">{{ $penalidades->idpenalidad }}</td>
-                                            <td style="text-align: center; font-size: 0.9em">
-                                                <?php
-                                                switch ($penalidades->tipoPenalidad) {
-                                                    case 1:
-                                                        echo 'P-1';
-                                                        break;
-                                                    case 2:
-                                                        echo 'P-2';
-                                                        break;
-                                                    case 3:
-                                                        echo 'P-3';
-                                                        break;
-                                                    case 4:
-                                                        echo 'P-4';
-                                                        break;
-                                                    case 5:
-                                                        echo 'P-5';
-                                                        break;
-                                                    case 6:
-                                                        echo 'p-6';
-                                                        break;
-                                                    case 7:
-                                                        echo 'P-7';
-                                                        break;
-                                                    case 8:
-                                                        echo 'P-8';
-                                                        break;
-                                                    case 9:
-                                                        echo 'P-9';
-                                                        break;
-                                                    case 10:
-                                                        echo 'P-10';
-                                                        break;
-                                                    case 11:
-                                                        echo 'P-11';
-                                                        break;
-                                                    case 12:
-                                                        echo 'P-12';
-                                                        break;
-                                                    case 13:
-                                                        echo 'P-13';
-                                                        break;
-                                                    case 14:
-                                                        echo 'P-14';
-                                                        break;
-                                                    case 15:
-                                                        echo 'P-15';
-                                                        break;
-                                                    default:
-                                                        echo 'No definido';
-                                                }
-                                                ?>
-                                            </td>
-
-											<td style="text-align: center; font-size: 0.9em">{{ $penalidades->fechaCreacion }}</td>
-											<td style="text-align: center; font-size: 0.9em">
-                                                <?php
-                                                    // Suponiendo que $penalidades->creadoPor es el ID del usuario
-                                                    $usuario = App\Models\User::find($penalidades->creadoPor);
-                                                    if($usuario) {
-                                                        echo $usuario->codigo;
-                                                    } else {
-                                                        echo "Usuario no encontrado";
-                                                    }
-                                                ?>
-                                            </td>
-
-											<td style="text-align: Justify; font-size: 0.9em">{{ $penalidades->obsCreacion }}</td>
-											<td style="text-align: right; font-size: 0.9em">{{ $penalidades->valorPenalidad4 }}</td>
-                                            <td style="text-align: center; font-size:0.7em">
-                                                <span class="{{ $penalidades->estadopenalidad_Id }}" style="display: block; width: 100%; height: 100%; text-align: center;
-                                                    <?php
-                                                        switch ($penalidades->estadopenalidad_Id) {
-                                                            case 1:
-                                                                echo 'background-color: #00FF0090; color: black; !important';
-                                                                echo '">Activo';
-                                                                break;
-                                                            case 2:
-                                                                echo 'background-color: #0000ee; color: white; !important';
-                                                                echo '">Aceptado';
-                                                                break;
-                                                            case 3:
-                                                                echo 'background-color: #ff000090; color: black; !important';
-                                                                echo '">Rechazado';
-                                                                break;
-                                                            case 4:
-                                                                echo 'background-color: gray; color: white; !important';
-                                                                echo '">Anulado';
-                                                                break;
-                                                            default:
-                                                                echo '">Estado no válido';
-                                                                break;
-                                                        }
-                                                    ?>
-                                                </span>
-                                            </td>
-
-
-                                            <td style="text-align: center; font-size:1em">
-
-                                                @if ($penalidades->estadopenalidad_Id == 1)
-                                                    <a href="#" class="btn btn-primary btn-sm common-button" style="color:white;"><strong>Revisar</strong></a>
-                                                @elseif ($penalidades->estadopenalidad_Id == 2)
-                                                    <a href="#" class="btn btn-primary btn-sm common-button" style="color:white;"><strong>Imputar</strong></a>
-                                                @elseif ($penalidades->estadopenalidad_Id == 3)
-                                                    <a href="#" class="btn btn-primary btn-sm common-button" style="color:white;"><strong>Verificar</strong></a>
-                                                @elseif ($penalidades->estadopenalidad_Id == 4)
-                                                    <a href="#" class="btn btn-secondary btn-sm common-button" style="color:white;"><strong>Ver</strong></a>
-                                                @endif
-
-                                                <form action="{{ route('penalidades.destroy',$penalidades->idpenalidad) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary" style="display: none; color:white;" href="{{ route('penalidades.show',$penalidades->idpenalidad) }}"><i class=""></i> {{ __('Ver') }}</a>
-                                                    <a class="btn btn-sm btn-warning" style="display: none; color:black" href="{{ route('penalidades.edit',$penalidades->idpenalidad) }}"><i class=""></i> {{ __('Editar') }}</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" style="display: none"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                    @foreach ($penalidades as $penalidad)
+                                    <tr>
+                                        <td style="text-align: center; font-size: 0.9em">{{ $penalidad->idpenalidad }}</td>
+                                        <td style="text-align: center; font-size: 0.9em">
+                                            @switch($penalidad->tipoPenalidad)
+                                                @case(1) P-1 @break
+                                                @case(2) P-2 @break
+                                                @case(3) P-3 @break
+                                                @case(4) P-4 @break
+                                                @case(5) P-5 @break
+                                                @case(6) P-6 @break
+                                                @case(7) P-7 @break
+                                                @case(8) P-8 @break
+                                                @case(9) P-9 @break
+                                                @case(10) P-10 @break
+                                                @case(11) P-11 @break
+                                                @case(12) P-12 @break
+                                                @case(13) P-13 @break
+                                                @case(14) P-14 @break
+                                                @case(15) P-15 @break
+                                                @default No definido
+                                            @endswitch
+                                        </td>
+                                        <td style="text-align: center; font-size: 0.9em">{{ $penalidad->fechaCreacion }}</td>
+                                        <td style="text-align: center; font-size: 0.9em">
+                                            <?php
+                                            $usuario = App\Models\User::find($penalidad->creadoPor);
+                                            if($usuario) {
+                                                echo $usuario->codigo;
+                                            } else {
+                                                echo "Usuario no encontrado";
+                                            }
+                                            ?>
+                                        </td>
+                                        <td style="text-align: justify; font-size: 0.9em">{{ $penalidad->obsCreacion }}</td>
+                                        <td style="text-align: right; font-size: 0.9em">{{ $penalidad->valorPenalidad4 }}</td>
+                                        <td style="text-align: center; font-size: 0.7em">
+                                            <span class="{{ $penalidad->estadopenalidad_Id }}" style="display: block; width: 100%; height: 100%; text-align: center; @switch($penalidad->estadopenalidad_Id) @case(1) background-color: #00FF0090; color: black; @break @case(2) background-color: #0000ee; color: white; @break @case(3) background-color: #ff000090; color: black; @break @case(4) background-color: gray; color: white; @break @default background-color: red; color: white; @endswitch">
+                                                @switch($penalidad->estadopenalidad_Id)
+                                                    @case(1) Activo @break
+                                                    @case(2) Aceptado @break
+                                                    @case(3) Rechazado @break
+                                                    @case(4) Anulado @break
+                                                    @default Estado no válido
+                                                @endswitch
+                                            </span>
+                                        </td>
+                                        <td style="text-align: center; font-size: 1em">
+                                            @if ($penalidad->estadopenalidad_Id == 1)
+                                                <a href="#" class="btn btn-primary btn-sm common-button" style="color: white;"><strong>Revisar</strong></a>
+                                            @elseif ($penalidad->estadopenalidad_Id == 2)
+                                                <a href="#" class="btn btn-primary btn-sm common-button" style="color: white;"><strong>Imputar</strong></a>
+                                            @elseif ($penalidad->estadopenalidad_Id == 3)
+                                                <a href="#" class="btn btn-primary btn-sm common-button" style="color: white;"><strong>Verificar</strong></a>
+                                            @elseif ($penalidad->estadopenalidad_Id == 4)
+                                                <a href="#" class="btn btn-secondary btn-sm common-button" style="color: white;"><strong>Ver</strong></a>
+                                            @endif
+                                            <form action="{{ route('penalidades.destroy',$penalidad->idpenalidad) }}" method="POST">
+                                                <a class="btn btn-sm btn-primary" style="display: none; color: white;" href="{{ route('penalidades.show',$penalidad->idpenalidad) }}"><i class=""></i> {{ __('Ver') }}</a>
+                                                <a class="btn btn-sm btn-warning" style="display: none; color: black" href="{{ route('penalidades.edit',$penalidad->idpenalidad) }}"><i class=""></i> {{ __('Editar') }}</a>
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm" style="display: none"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
+                                            </form>
+                                        </td>
+                                    </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
+
                     <div style="text-align: right; padding: 0px 10px 10px 10px">
                         <button type="button" onclick="goToHome()" class="btn btn-secondary" style="text-align: right;">Volver</button>
                     </div>

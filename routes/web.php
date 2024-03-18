@@ -52,6 +52,9 @@ Route::get('/penalidades/panel/modulos', function () {
 })->name('penalidades.panel.modulos');
 
 //Formulario contenedor de la Penalizacion No.1
+Route::get('/penalidades/modulospenalizacion/modulospenalizacion1', function () {
+    return view('penalidades.modulospenalizacion1');
+})->name('penalidades.modulospenalizacion.modulospenalizacion1');
 
 //Formulario contenedor de la Penalizacion No.2
 Route::get('/penalidades/modulospenalizacion/modulospenalizacion2', function () {
@@ -168,6 +171,7 @@ Route::get('/cancelar/{parteId}', [App\Http\Controllers\ParteController::class, 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //URL::forceScheme('https');
+
 
 
 

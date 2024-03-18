@@ -226,7 +226,7 @@ color: #ffFF ;
                     </div>
                     <script>
                         function goToHome() {
-                            window.location.href = "{{ url('/gestorParte') }}";
+                            window.location.href = "{{ url('/home') }}";
                         }
                     </script>
                 </div>

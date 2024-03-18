@@ -64,7 +64,7 @@ $("#contenpartes").removeClass('d-none');
                                     </div>
                                     <script>
                                         function goToHome1() {
-                                            window.location.href = "{{ url('/') }}";
+                                            window.location.href = "{{ url('/penalidades/modulospenalizacion/modulospenalizacion1') }}";
                                         }
                                     </script>
                                 </td>

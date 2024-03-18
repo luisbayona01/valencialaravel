@@ -36,7 +36,7 @@
                                     <tr>
                                         <th>No</th>
 
-										<th>Name</th>
+										<th>Descripcion del Perfil</th>
 
                                         <th></th>
                                     </tr>

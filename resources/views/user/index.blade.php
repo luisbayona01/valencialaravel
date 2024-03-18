@@ -85,6 +85,14 @@
                             </table>
                         </div>
                     </div>
+                    <div style="text-align: right; padding: 0px 10px 10px 10px">
+                        <button type="button" onclick="goToHome()" class="btn btn-secondary" style="text-align: right;">Volver</button>
+                    </div>
+                    <script>
+                        function goToHome() {
+                            window.location.href = "{{ url('/home') }}";
+                        }
+                    </script>
                 </div>
 
             </div>
