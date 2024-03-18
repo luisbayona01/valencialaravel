@@ -26,7 +26,7 @@ Route::get('/home', function () {
 
 //generarinforme
 Route::post('/report',[App\Http\Controllers\ReportPartesController::class,'generarinforme'])->name('report');
-
+Route::post('/certificarpartes',[App\Http\Controllers\ReportPartesController::class,'certificarpartes'])->name('certificarpartes');
 Route::resource('partes',  App\Http\Controllers\parteController::class);
 
 //Route::get('/report',[App\Http\Controllers\ReportPartesController::class,'generarinforme'])->name('report');
