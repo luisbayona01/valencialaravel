@@ -128,7 +128,7 @@ $("#contenpartes").removeClass('d-none');
                                             <tr>
                                                 <td style="text-align:left; font-size: 1em; border:none;">
                                                     <strong>T<sup>1.5</sup></strong><br>
-                                                    <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="Texponente" name="Texponente" oninput="validateInput3(this); calcularExponente(); calcularResultado() " readonly  required>
+                                                    <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="Texponente" name="Texponente" oninput="validateInput3(this); calcularExponente(); calcularResultado() " readonly  required>
                                                 </td>
                                             </tr>
                                             <!-- FIN SEGUNDA FILA DE OPERACIONES T -->
@@ -141,7 +141,7 @@ $("#contenpartes").removeClass('d-none');
                                             </tr>
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>( T<sup>1.5</sup> * C * K )</strong><br> <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="multiplicacion" name="multiplicacion" oninput="validateInput(this); calcularResultado(); calcularSuma()" readonly> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>( T<sup>1.5</sup> * C * K )</strong><br> <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="multiplicacion" name="multiplicacion" oninput="validateInput(this); calcularResultado(); calcularSuma()" readonly> </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -240,7 +240,7 @@ $("#contenpartes").removeClass('d-none');
                                             calcularResultado();
                                         } else {
                                             // Si los valores no son válidos, mostrar un mensaje de error
-                                            document.getElementById('Texponente').value = "0";
+                                            document.getElementById('Texponente').value = "Solo Lectura";
 
                                             // Después de establecer el valor predeterminado, llamar a la función para calcular el resultado
                                             calcularResultado();
@@ -254,14 +254,6 @@ $("#contenpartes").removeClass('d-none');
                                     document.getElementById('costeDiarioAveria').addEventListener('input', calcularResultado);
                                     document.getElementById('K').addEventListener('input', calcularResultado);
                                 </script>
-
-
-
-
-
-
-
-
 
                 <!-- Seccion Resultado del Formulario -->
                 <br><br>
@@ -305,7 +297,7 @@ $("#contenpartes").removeClass('d-none');
 
                 <table width="95%" style="margin: auto; padding: 3% 3% 3% 3%; display:block ">
                     <tr>
-                        <td  style="text-align:justify;font-size: 1em"> <strong>S₅ (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="0 €" id="S5" name="S5" oninput="validateInput3(this); calcularSuma()" readonly> &nbsp &nbsp <strong>S₅ = F + ( T<sup>1.5</sup> * C * K )</strong></td>
+                        <td  style="text-align:justify;font-size: 1em"> <strong>S₅ (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S5" name="S5" oninput="validateInput3(this); calcularSuma()" readonly> &nbsp &nbsp <strong>S₅ = F + ( T<sup>1.5</sup> * C * K )</strong></td>
                     </tr>
                 </table>
 

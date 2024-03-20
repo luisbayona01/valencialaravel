@@ -106,7 +106,7 @@ $("#contenpartes").removeClass('d-none');
                                                 <td style="text-align:left; font-size:  1em; border:none; "><strong>Referencia Mes</strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="30 " id="mes" name="mes" oninput="validateInput3(this); validateInput33(this)" readonly ></td>
                                             </tr>
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>D</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="D" name="D" oninput="validateInput3(this)" readonly> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>D</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="D" name="D" oninput="validateInput3(this)" readonly> </td>
 
                                             </tr>
 
@@ -223,7 +223,7 @@ $("#contenpartes").removeClass('d-none');
 
                 <table width="95%" style="margin: auto; padding: 3% 3% 3% 3%; display:block ">
                     <tr>
-                        <td  style="text-align:justify;font-size: 1em"> <strong> S<sub>11</sub> (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="0 €" id="S11" name="S11" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>11</sub> = D * N</strong></td>
+                        <td  style="text-align:justify;font-size: 1em; width:50%"> <strong> S<sub>11</sub> (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 40%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S11" name="S11" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>11</sub> = D * N</strong></td>
                     </tr>
                 </table>
 

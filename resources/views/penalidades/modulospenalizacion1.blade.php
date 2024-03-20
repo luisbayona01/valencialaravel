@@ -127,7 +127,7 @@ $("#contenpartes").removeClass('d-none');
                                                 <td style="width:5%; text-align:center"> / </td>
                                                 <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>FC<sub>cmo</sub> = Factor de calidad del mismo mes del año anterior</strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="FC" name="FC" oninput="validateInput3(this);calcularS1()"> </td>
                                                 <td style="width:5%; text-align:center"> = </td>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>Q<sub>m</sub> = Índice de calidad del mes actual</strong><br> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0 " id="Q" name="Q" oninput="calcularS1()" readonly> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>Q<sub>m</sub> = Índice de calidad del mes actual</strong><br> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="Solo Lectura " id="Q" name="Q" oninput="calcularS1()" readonly> </td>
 
                                             </tr>
 
@@ -163,11 +163,11 @@ $("#contenpartes").removeClass('d-none');
                                                 <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong> L<sub>i</sub> Longitud del recorrido i en metros </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="Li3" name="Li3" oninput="validateInput3(this);"> </td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"><strong> T<sub>di</sub> * I<sub>i</sub> * L<sub>i</sub> </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="oper1" name="oper1" oninput="validateInput3(this);S1B()"></td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"><strong> T<sub>di</sub> * I<sub>i</sub> * L<sub>i</sub> </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="oper1" name="oper1" oninput="validateInput3(this);S1B()" readonly></td>
                                                 <td style="width:5%; text-align:center"> + </td>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"><strong>4T<sub>ci</sub> * I<sub>i</sub> * L<sub>i</sub> </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="oper2" name="oper2" oninput="validateInput3(this);S1B()"></td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"><strong>4T<sub>ci</sub> * I<sub>i</sub> * L<sub>i</sub> </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="oper2" name="oper2" oninput="validateInput3(this);S1B()" readonly></td>
                                                 <td style="width:5%; text-align:center"> / </td>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"><strong>&#8721;<sup>n</sup> <sub>i=1</sub>   I<sub>i</sub> * L<sub>i</sub> </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="oper3" name="oper3" oninput="validateInput3(this);S1B()"></td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"><strong>&#8721;<sup>n</sup> <sub>i=1</sub>   I<sub>i</sub> * L<sub>i</sub> </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="oper3" name="oper3" oninput="validateInput3(this);S1B()" readonly></td>
                                             </tr>
 
                                         </tbody>

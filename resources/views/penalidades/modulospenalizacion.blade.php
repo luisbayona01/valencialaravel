@@ -109,12 +109,12 @@ $("#contenpartes").removeClass('d-none');
                                             <tr>
                                                 <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>Importe de conservacion Anual : </strong> <br><input type="text" style="width: 40%; font-size:1em; text-align: right" placeholder="0 €" id="importeConservacionAnual4" name="importeConservacionAnual4" oninput="validateInput3(this)"> </td>
                                                 <td style="width:5%"> / </td>
-                                                <td style="text-align:left; font-size: 12px; border:none; "><strong>número de veces que se ha de realizar la
-                                                    operación no efectuada : </strong><br><input type="text" style="text-align: right" placeholder="0 €" id="Repeticiones4" name="Repeticiones4" oninput="validateInput(this)">
+                                                <td style="text-align:left; font-size: 1em; border:none; "><strong>número de veces que se ha de realizar la
+                                                    operación no efectuada : </strong><br><input type="text" style="text-align: right; font-size:1em;" placeholder="0 €" id="Repeticiones4" name="Repeticiones4" oninput="validateInput(this)">
                                             </tr>
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>I (Importe correspondiente al plazo de conservación)</strong> <input type="text" style="width: 70%; font-size:1em; text-align: right " placeholder="0 €" id="S44" name="S44" oninput="validateInput3(this)" readonly></td>
+                                                <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>I (Importe correspondiente al plazo de conservación)</strong> <input type="text" style="width: 70%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="S44" name="S44" oninput="validateInput3(this)" readonly></td>
                                                 <td style="width:5%"> * </td>
                                                 <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>K : </strong> <input type="text" style="width: 40%; font-size:1em" placeholder="" id="K44" name="K44" value="1,5" oninput="validateInput3(this)"> </td>
                                             </tr>
@@ -150,7 +150,7 @@ $("#contenpartes").removeClass('d-none');
 
                     // Verificar si los valores son válidos
                     if (isNaN(importe) || isNaN(repeticiones) || repeticiones === 0) {
-                        document.getElementById("S44").value = "0 €";
+                        document.getElementById("S44").value = "Solo Lectura";
                         return;
                     }
 
@@ -234,7 +234,7 @@ $("#contenpartes").removeClass('d-none');
                 <table width="95%" style="margin: auto; padding: 3% 3% 3% 3% ">
 
                     <tr>
-                        <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>S₄ (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="0 €" id="S4" name="S4" oninput="validateInput3(this)" readonly>&nbsp &nbsp <strong> S<sub>4</sub> = I * K</strong></td>
+                        <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>S₄ (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S4" name="S4" oninput="validateInput3(this)" readonly>&nbsp &nbsp <strong> S<sub>4</sub> = I * K</strong></td>
                     </tr>
 
                 </table>

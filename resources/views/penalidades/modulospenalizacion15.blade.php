@@ -216,7 +216,7 @@ $("#contenpartes").removeClass('d-none');
 
                 <table width="95%" style="margin: auto; padding: 3% 3% 3% 3%; display:block ">
                     <tr>
-                        <td  style="text-align:justify;font-size: 1em"> <strong> S<sub>15</sub> (el importe de la penalidad en euros, en el mes i) : </strong> <input type="text" style="width: 26%; font-size:1em; text-align: right " placeholder="0 €" id="S15" name="S15" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>15</sub> = F + P * T </strong></td>
+                        <td  style="text-align:justify;font-size: 1em; width:50%"> <strong> S<sub>15</sub> (el importe de la penalidad en euros, en el mes i) : </strong> <input type="text" style="width: 26%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S15" name="S15" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>15</sub> = F + P * T </strong></td>
                     </tr>
                 </table>
 

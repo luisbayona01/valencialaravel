@@ -64,13 +64,28 @@ $("#contenpartes").removeClass('d-none');
                 </div>
             </div>
 
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <div class="inner" bis_skin_checked="1" style="padding: 5% 0% 0% 0%" id="gestorPenalidades" name="gestorPenalidades">
+                            <a href="{{ url('/penalidades') }}">
+                            <img src=" {{ asset(url('img/CertificadoPartes.png')) }}" alt="logo" style="width:100%">
+                            <h4>
+                                <a class="sidebar-link" href="{{ url('/penalidades') }}" style="text-align: center">Gestión Certificaciones</a>
+                            </h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             @if (  Auth::user()->idrol==1 || Auth::user()->idrol==3 )
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <div class="inner" bis_skin_checked="1" style="padding: 5% 0% 0% 0%" id="gestorinventario">
                             <a href="{{ url('/gestorInventario') }}">
-                            <img src=" {{ asset(url('img/Inventario.png')) }}" alt="logo" style="width:100%">
+                            <img src=" {{ asset(url('img/Configuracion1.png')) }}" alt="logo" style="width:100%">
                             <h4>
                                 <a class="sidebar-link" href="{{ url('/gestorInventario') }}" style="text-align: center">Gestión Configuraciones</a>
                             </h4>

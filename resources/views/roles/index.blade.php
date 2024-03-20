@@ -70,7 +70,7 @@
                     </div>
                     <script>
                         function goToHome() {
-                            window.location.href = "{{ url('/home') }}";
+                            window.location.href = "{{ url('/gestorInventario') }}";
                         }
                     </script>
                 </div>

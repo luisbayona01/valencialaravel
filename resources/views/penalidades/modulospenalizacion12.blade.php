@@ -108,14 +108,14 @@ $("#contenpartes").removeClass('d-none');
                                             <tr>
                                                 <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>D</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="D" name="D" oninput="validateInput3(this)"> </td>
                                                 <td style="width:5%"> = </td>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong><sup>A*365</sup>/<sub>D</sub></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="primeraOp" name="primeraOp" oninput="validateInput3(this)" readonly  > </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong><sup>A*365</sup>/<sub>D</sub></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="primeraOp" name="primeraOp" oninput="validateInput3(this)" readonly  > </td>
                                             </tr>
 
                                             <tr>
                                                 <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>N = Número total de focos sustituidos por la empresa</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="N" name="N" oninput="validateInput(this)"> </td>
                                                 <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%; display:none"> <strong>N = Value de Operacion</strong> <br><input type="hiddens" style="width: 50%; font-size:1em; text-align: right " value="1" id="valueN" name="valueN" oninput="validateInput(this)" readonly> </td>
                                                 <td style="width:5%">  </td>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong><sup>1</sup>/<sub>N</sub></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="segundaOp" name="segundaOp" oninput="validateInput(this)" disabled> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong><sup>1</sup>/<sub>N</sub></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="segundaOp" name="segundaOp" oninput="validateInput(this)" disabled> </td>
                                             </tr>
 
                                             <tr>
@@ -206,29 +206,26 @@ $("#contenpartes").removeClass('d-none');
 
 
                                    // Función para realizar la multiplicación y actualizar el campo S12
-function actualizarS12() {
-    // Obtener los valores de los campos primeraOp, segundaOp y terceraOp
-    var primeraOp = parseFloat(document.getElementById('primeraOp').value.replace(',', '.'));
-    var segundaOp = parseFloat(document.getElementById('segundaOp').value.replace(',', '.'));
-    var terceraOp = parseFloat(document.getElementById('terceraOp').value.replace(',', '.'));
+                                    function actualizarS12() {
+                                        // Obtener los valores de los campos primeraOp, segundaOp y terceraOp
+                                        var primeraOp = parseFloat(document.getElementById('primeraOp').value.replace(',', '.'));
+                                        var segundaOp = parseFloat(document.getElementById('segundaOp').value.replace(',', '.'));
+                                        var terceraOp = parseFloat(document.getElementById('terceraOp').value.replace(',', '.'));
 
-    // Realizar la multiplicación de los tres valores
-    var resultadoMultiplicacion = primeraOp * segundaOp * terceraOp;
+                                        // Realizar la multiplicación de los tres valores
+                                        var resultadoMultiplicacion = primeraOp * segundaOp * terceraOp;
 
-    // Formatear el resultado con coma como separador decimal y dos dígitos después de la coma
-    var resultadoFormateado = resultadoMultiplicacion.toFixed(2).replace('.', ',');
+                                        // Formatear el resultado con coma como separador decimal y dos dígitos después de la coma
+                                        var resultadoFormateado = resultadoMultiplicacion.toFixed(2).replace('.', ',');
 
-    // Actualizar el campo S12 con el resultado formateado
-    document.getElementById('S12').value = resultadoFormateado;
-}
+                                        // Actualizar el campo S12 con el resultado formateado
+                                        document.getElementById('S12').value = resultadoFormateado;
+                                    }
 
-// Llamar a la función actualizarS12 cada vez que se modifiquen los campos primeraOp, segundaOp y terceraOp
-document.getElementById('primeraOp').addEventListener('input', actualizarS12);
-document.getElementById('segundaOp').addEventListener('input', actualizarS12);
-document.getElementById('terceraOp').addEventListener('input', actualizarS12);
-
-
-
+                                    // Llamar a la función actualizarS12 cada vez que se modifiquen los campos primeraOp, segundaOp y terceraOp
+                                    document.getElementById('primeraOp').addEventListener('input', actualizarS12);
+                                    document.getElementById('segundaOp').addEventListener('input', actualizarS12);
+                                    document.getElementById('terceraOp').addEventListener('input', actualizarS12);
 
                                 </script>
 
@@ -274,7 +271,7 @@ document.getElementById('terceraOp').addEventListener('input', actualizarS12);
 
             <table width="95%" style="margin: auto; padding: 3% 3% 3% 3%; display:block ">
                 <tr>
-                    <td  style="text-align:justify;font-size: 1em"> <strong> S<sub>12</sub> (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="0 €" id="S12" name="S12" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>12</sub> = <sup>A*365</sup>/<sub>D</sub> * <sup>1</sup>/<sub>N</sub> * <sup>1</sup>/<sub>P</sub></strong></td>
+                    <td  style="text-align:justify;font-size: 1em; width:50%"> <strong> S<sub>12</sub> (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S12" name="S12" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>12</sub> = <sup>A*365</sup>/<sub>D</sub> * <sup>1</sup>/<sub>N</sub> * <sup>1</sup>/<sub>P</sub></strong></td>
                 </tr>
             </table>
 

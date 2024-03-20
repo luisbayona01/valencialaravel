@@ -109,7 +109,7 @@ $("#contenpartes").removeClass('d-none');
                             <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>PDi = número de personas con alguna deficiencia o con riesgo de exclusión social</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="pdi" name="pdi" oninput="validateInput3(this)"> </td>
                             <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%; display: none"> <strong>Valor Fijo de Referencia -1</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="1" id="valorfijo" name="valorfijo" oninput="validateInput3(this)" readonly> </td>
                             <td style="text-align: center"> = </td>
-                            <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>(1 - PDi)</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="resultado" name="resultado" oninput="validateInput3(this)" readonly > </td>
+                            <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>(1 - PDi)</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="resultado" name="resultado" oninput="validateInput3(this)" readonly > </td>
                         </tr>
 
                     </tbody>
@@ -210,7 +210,7 @@ $("#contenpartes").removeClass('d-none');
 
                 <table width="95%" style="margin: auto; padding: 3% 3% 3% 3%; display:block ">
                     <tr>
-                        <td  style="text-align:justify;font-size: 1em"> <strong> S<sub>14</sub> (el importe de la penalidad en euros, en el mes i) : </strong> <input type="text" style="width: 26%; font-size:1em; text-align: right " placeholder="0 €" id="S14" name="S14" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>14</sub> = 3000 ( 1 - PDi )</strong></td>
+                        <td  style="text-align:justify;font-size: 1em; width:50%"> <strong> S<sub>14</sub> (el importe de la penalidad en euros, en el mes i) : </strong> <input type="text" style="width: 25%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S14" name="S14" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>14</sub> = 3000 ( 1 - PDi )</strong></td>
                     </tr>
                 </table>
 

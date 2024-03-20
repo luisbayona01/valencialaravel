@@ -120,7 +120,7 @@ $("#contenpartes").removeClass('d-none');
                                             <tr>
                                                 <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>Valor Fijo</strong><br> <input type="text" style="width: 70%; font-size:1em; text-align: right " value="1000" id="valorFijo" name="valorFijo" oninput="validateInput3(this)" readonly></td>
                                                 <td style="width:5%"> * </td>
-                                                <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>T : </strong> <input type="text" style="width: 40%; font-size:1em" placeholder="" id="T" name="T" value="0 " oninput="validateInput3(this)" readonly> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>T : </strong> <input type="text" style="width: 40%; font-size:1em" placeholder="Solo Lectura" id="T" name="T"  readonly> </td>
                                             </tr>
 
                                             <tr></tr>
@@ -249,7 +249,7 @@ $("#contenpartes").removeClass('d-none');
                 <table width="95%" style="margin: auto; padding: 3% 3% 3% 3% ">
 
                     <tr>
-                        <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>S₂ (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="0 €" id="S2" name="S2" oninput="validateInput3(this)" readonly>&nbsp &nbsp <strong> S<sub>2</sub> = 1000 * T</strong></td>
+                        <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>S₂ (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S2" name="S2" oninput="validateInput3(this)" readonly>&nbsp &nbsp <strong> S<sub>2</sub> = 1000 * T</strong></td>
                     </tr>
 
                 </table>

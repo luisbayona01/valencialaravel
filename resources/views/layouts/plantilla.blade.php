@@ -103,9 +103,9 @@ $(".table").DataTable({
             <!-- Nivel de Adminitracion de Perfiles de acceso al sistema -->
 
             @if (  Auth::user()->idrol==1 || Auth::user()->idrol==3)
-            <a href="{{ url('/roles') }}" class="sidebar-link collapsed">
+            <a href="{{ url('/roles') }}" class="sidebar-link collapsed" style="display: none">
                 <!-- Opening div for sidebar-link -->
-                <i class="fa fa-users"></i> <span class="align-middle">Gestión Perfiles</span>
+                <i class="fa fa-users" style="display: none"></i> <span class="align-middle">Gestión Perfiles</span>
             </a>
             @endif
 
@@ -122,7 +122,7 @@ $(".table").DataTable({
 
             <a href="{{ url('/generarparte') }}" onclick="gestionPartes()" class="sidebar-link collapsed">
                 <!-- Opening div for sidebar-link -->
-                <i class="fa fa-usd" aria-hidden="true"></i><span class="align-middle">Gestión Certificados</span>
+                <i class="fa fa-usd" aria-hidden="true"></i><span class="align-middle" >Gestión Certificaciones</span>
             </a>
 
 

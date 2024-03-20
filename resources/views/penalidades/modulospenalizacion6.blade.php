@@ -105,7 +105,7 @@ $("#contenpartes").removeClass('d-none');
                                             <tr>
                                                 <td style="text-align:left; font-size: 1em; border:none;">
                                                     <strong>T</strong><br>
-                                                    <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="Texponente" name="Texponente" oninput="validateInput3(this) " readonly  required>
+                                                    <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="Texponente" name="Texponente" oninput="validateInput3(this) " readonly  required>
                                                 </td>
                                             </tr>
                                             <!-- FIN SEGUNDA FILA DE OPERACIONES T -->
@@ -114,7 +114,7 @@ $("#contenpartes").removeClass('d-none');
                                                 <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>Valor de la modificación o instalación </strong><br> <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="costeModificacion" name="costeModificacion" oninput="validateInput3(this)"> </td>
                                                 <td></td>
                                                 <td style="text-align:left; font-size:  1em; border:none; display:none "><strong> 1% </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " value="1%" id="porcentaje" name="porcentaje" oninput="validateInput3(this)" >
-                                                    <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>V</strong><br> <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="V" name="V" oninput="validateInput(this)" readonly> </td>
+                                                    <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>V</strong><br> <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="V" name="V" oninput="validateInput(this)" readonly> </td>
                                             </tr>
 
                                             <tr>
@@ -244,7 +244,7 @@ $("#contenpartes").removeClass('d-none');
 
                 <table width="95%" style="margin: auto; padding: 3% 3% 3% 3%; display:block ">
                     <tr>
-                        <td  style="text-align:justify;font-size: 1em"> <strong> S₆ (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="0 €" id="S6" name="S6" oninput="validateInput3(this); calcularSuma()" readonly> &nbsp &nbsp <strong> S₆ = T * V + 1000</strong></td>
+                        <td  style="text-align:justify;font-size: 1em"> <strong> S₆ (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S6" name="S6" oninput="validateInput3(this); calcularSuma()" readonly> &nbsp &nbsp <strong> S₆ = T * V + 1000</strong></td>
                     </tr>
                 </table>
 

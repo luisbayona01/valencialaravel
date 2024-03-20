@@ -131,7 +131,7 @@ $("#contenpartes").removeClass('d-none');
                                                 <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>M= Número de meses</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="noMeses" name="noMeses" oninput="calcularS13()"> </td>
                                                 <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%; display:none"> <strong>Numero Fijo = 1</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="1" id="NoFijo" name="NoFijo" oninput="calcularS13()"> </td>
                                                 <td style="width:5%"> = </td>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>(M + 1)</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="primeraOp" name="primeraOp" oninput="calcularS13()" readonly> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>(M + 1)</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="primeraOp" name="primeraOp" oninput="calcularS13()" readonly> </td>
                                             </tr>
 
                                         </tbody>
@@ -158,7 +158,7 @@ $("#contenpartes").removeClass('d-none');
                                             <tr>
                                                 <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>Numero Fijo = -1</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="1" id="NoFijo3" name="NoFijo3" oninput="calcularS133()" readonly> </td>
                                                 <td style="width:5%"> = </td>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"><strong>(HC<sub>i</sub> / HCM<sub>Ri</sub> - 1)<br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="segundaOp" name="segundaOp" oninput="calcularS133()" readonly> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"><strong>(HC<sub>i</sub> / HCM<sub>Ri</sub> - 1)<br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="segundaOp" name="segundaOp" oninput="calcularS133()" readonly> </td>
                                             </tr>
 
                                         </tbody>
@@ -367,12 +367,12 @@ $("#contenpartes").removeClass('d-none');
 
             <table width="100%" style="margin: auto; padding: 3% 3% 3% 3% ;display:none" id="resultadosA">
                 <tr>
-                    <th  style="text-align:justify;font-size: 1em; width:100%" id="filaA"> <strong> S<sub>13-A</sub> (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 25%; font-size:1em; text-align: right " placeholder="0 €" id="S13" name="S13" oninput="validateInput3(this);sumarYMostrar()" readonly> &nbsp &nbsp <strong> S <sub>13-A</sub> = 1000 * (M + 1)</strong></th>
+                    <th  style="text-align:justify;font-size: 1em; width:50%" id="filaA"> <strong> S<sub>13-A</sub> (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S13" name="S13" oninput="validateInput3(this);sumarYMostrar()" readonly> &nbsp &nbsp <strong> S <sub>13-A</sub> = 1000 * (M + 1)</strong></th>
                 </tr>
             </table>
             <table width="100%" style="margin: auto; padding: 3% 3% 3% 3% ;display:none" id="resultadosB">
                 <tr>
-                    <th  style="text-align:justify;font-size: 1em; width:100%;" id="filaB"> <strong> S<sub>13-B</sub> (Importe de la penalidad en euros del ejercicio i): </strong> <input type="text" style="width: 23%; font-size:1em; text-align: right " placeholder="0 €" id="S133" name="S133" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>13-B</sub> = 50000 * (HC<sub>i</sub> / HCM<sub>Ri</sub> - 1)</strong></th>
+                    <th  style="text-align:justify;font-size: 1em; width:50%;" id="filaB"> <strong> S<sub>13-B</sub> (Importe de la penalidad en euros del ejercicio i): </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S133" name="S133" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>13-B</sub> = 50000 * (HC<sub>i</sub> / HCM<sub>Ri</sub> - 1)</strong></th>
                 </tr>
             </table>
 

@@ -105,7 +105,7 @@ $("#contenpartes").removeClass('d-none');
                                             </tr>
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>F </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 €" id="F" name="F" oninput="validateInput3(this);" readonly required></td>
+                                                <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>F </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="F" name="F" oninput="validateInput3(this);" readonly required></td>
                                                 <td></td>
 
                                             </tr>
@@ -123,7 +123,7 @@ $("#contenpartes").removeClass('d-none');
                                         <tr>
                                             <td style="text-align:left; font-size: 1em; border:none;">
                                                 <strong>T<sup>1.5</sup></strong><br>
-                                                <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="Texponente" name="Texponente" oninput="validateInput3(this)" readonly  required>
+                                                <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura " id="Texponente" name="Texponente" oninput="validateInput3(this)" readonly  required>
                                             </td>
                                             <td style="width:5%"> * </td>
                                             <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>K </strong><br> <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="K" name="k" oninput="validateInput(this)">  --></td>
@@ -131,7 +131,7 @@ $("#contenpartes").removeClass('d-none');
                                         <!-- FIN SEGUNDA FILA DE OPERACIONES T -->
 
                                             <tr>
-                                                <td style="text-align:left; font-size:  1em; border:none; "><strong> T<sup>1.5</sup> * K </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="Texponente2" name="Texponente2" oninput="validateInput3(this)" readonly required>
+                                                <td style="text-align:left; font-size:  1em; border:none; "><strong> T<sup>1.5</sup> * K </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="Texponente2" name="Texponente2" oninput="validateInput3(this)" readonly required>
                                             </tr>
 
                                             <tr>
@@ -139,7 +139,8 @@ $("#contenpartes").removeClass('d-none');
                                                 <td style="width:5%"> * </td>
                                                 <td style="text-align:justify;font-size: 1em; border:none; width:45%">
                                                     <strong>N</strong><br>
-                                                    <select style="width: 50%; font-size:1em; text-align: right " id="N" name="N" onchange="">
+                                                    <select style="width: 50%; font-size:1em; text-align: Left " id="N" name="N" onchange="">
+                                                        <option value="0%">Seleccione un valor </option>
                                                         <option value="10%">10 % Nivel G (Centralizado)</option>
                                                         <option value="20%">20 % Nivel I (Intermedio)</option>
                                                         <option value="30%">30 % Nivel L (Local)</option>
@@ -148,7 +149,7 @@ $("#contenpartes").removeClass('d-none');
                                             </tr>
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>C </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="0 €" id="C" name="C" oninput="validateInput3(this)" readonly required></td>
+                                                <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>C </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="Solo Lectura" id="C" name="C" oninput="validateInput3(this)" readonly required></td>
                                             </tr>
 
 
@@ -337,7 +338,7 @@ $("#contenpartes").removeClass('d-none');
                 <table width="95%" style="margin: auto; padding: 3% 3% 3% 3% ">
 
                     <tr>
-                        <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>S₃ (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="0 €" id="S3" name="S3" oninput="validateInput3(this)" readonly>&nbsp &nbsp <strong>S₃ = F + ( T<sup>1.5</sup> * K ) + C x N</strong></td>
+                        <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>S₃ (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S3" name="S3" oninput="validateInput3(this)" readonly>&nbsp &nbsp <strong>S₃ = F + ( T<sup>1.5</sup> * K ) + C x N</strong></td>
                     </tr>
 
                 </table>

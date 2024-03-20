@@ -16,8 +16,23 @@ $("#contenpartes").removeClass('d-none');
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
                         <div class="inner" bis_skin_checked="1">
+                            <a href="{{ url('roles') }}">@csrf
+                            <img src=" {{ asset(url('img/Perfiles.png')) }}" alt="logo" style="width:100%">
+                            <h4>
+                                <h4 class="sidebar-link" style="text-align: center">Gestión de Perfiles</h4>
+                            </h4>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <div class="inner" bis_skin_checked="1">
                             <a href="{{ url('configPortada') }}" target="_blank">@csrf
-                            <img src=" {{ asset(url('img/Configuracion1.png')) }}" alt="logo" style="width:100%">
+                            <img src=" {{ asset(url('img/Portada.png')) }}" alt="logo" style="width:100%">
                             <h4>
                                 <h4 class="sidebar-link" style="text-align: center">Configuracion de Portada</h4>
                             </h4>

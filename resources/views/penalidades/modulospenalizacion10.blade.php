@@ -109,7 +109,7 @@ $("#contenpartes").removeClass('d-none');
                                                 <td style="text-align:left; font-size:  1em; border:none; "><strong>Tiempo establecido por el Ayuntamiento</strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="tiempoAyu" name="tiempoAyu" oninput="validateInput3(this)" ></td>
                                             </tr>
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>T<sup>2</sup></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="T" name="T" oninput="validateInput3(this)" readonly> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>T<sup>2</sup></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="T" name="T" oninput="validateInput3(this)" readonly> </td>
 
                                             </tr>
 
@@ -123,7 +123,7 @@ $("#contenpartes").removeClass('d-none');
                                                     </select>
                                                 </td>
                                                 <td><input type="text" id="N" style="display: none;"></td>
-                                                <td><strong>Resultado "D" </strong><br><input type="text" id="D1" readonly></td>
+                                                <td><strong>Resultado "D" </strong><br><input type="text" placeholder="Solo Lectura" id="D1" readonly></td>
                                             </tr>
 
                                             <tr>
@@ -133,7 +133,7 @@ $("#contenpartes").removeClass('d-none');
                                             <tr>
                                                 <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%" class="float-right" > <strong>F</strong> <br><input type="text" style="width: 100%; font-size:1em; text-align: right " value="1000 " id="F" name="F" oninput="validateInput3(this);; calcularSuma()" readonly> </td>
                                                 <td style="text-align: center"> + </td>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>Resultado ( T<sup>2</sup> * D * K )</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="resultado" name="resultado" oninput="validateInput3(this);; calcularSuma()" readonly> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>Resultado ( T<sup>2</sup> * D * K )</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="resultado" name="resultado" oninput="validateInput3(this);; calcularSuma()" readonly> </td>
                                             </tr>
 
 
@@ -288,7 +288,7 @@ $("#contenpartes").removeClass('d-none');
 
                 <table width="95%" style="margin: auto; padding: 3% 3% 3% 3%; display:block ">
                     <tr>
-                        <td  style="text-align:justify;font-size: 1em"> <strong> S<sub>10</sub> (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="0 €" id="S10" name="S10" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>10</sub> = F ( T<sup>2</sup> * D * K )</strong></td>
+                        <td  style="text-align:justify;font-size: 1em; width:50%"> <strong> S<sub>10</sub> (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 40%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S10" name="S10" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>10</sub> = F ( T<sup>2</sup> * D * K )</strong></td>
                     </tr>
                 </table>
 

@@ -6,9 +6,9 @@
 <div  class="row">
 <div class="col-sm-4">
 
-</div> 
+</div>
 <div class="col-sm-4">
-<button type="button" class="btn btn-info" onclick="certificar()">  validar  cerificar </button>
+<button type="button" class="btn btn-info" onclick="certificar()">  Validar  certificado </button>
 </div>
 </div>
 </div>

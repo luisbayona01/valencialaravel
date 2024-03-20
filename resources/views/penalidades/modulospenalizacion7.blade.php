@@ -144,7 +144,7 @@ $("#contenpartes").removeClass('d-none');
                                             $("#S7").val(resultado.toFixed(2).replace('.', ',') + " €");
                                         } else {
                                             // Si uno de los valores no es un número válido, mostrar mensaje de error
-                                            $("#S7").val("0,00 €");
+                                            $("#S7").val("Solo Lectura (resultado €)");
                                         }
                                     }
 
@@ -201,7 +201,7 @@ $("#contenpartes").removeClass('d-none');
 
                 <table width="95%" style="margin: auto; padding: 3% 3% 3% 3%; display:block ">
                     <tr>
-                        <td  style="text-align:justify;font-size: 1em"> <strong> S<sub>7</sub> (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="0 €" id="S7" name="S7" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>7</sub> = 5000 * N</strong></td>
+                        <td  style="text-align:justify;font-size: 1em; width:50%"> <strong> S<sub>7</sub> (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S7" name="S7" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>7</sub> = 5000 * N</strong></td>
                     </tr>
                 </table>
 
