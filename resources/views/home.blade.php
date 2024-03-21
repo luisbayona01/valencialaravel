@@ -67,11 +67,11 @@ $("#contenpartes").removeClass('d-none');
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <div class="inner" bis_skin_checked="1" style="padding: 5% 0% 0% 0%" id="gestorPenalidades" name="gestorPenalidades">
-                            <a href="{{ url('/penalidades') }}">
+                        <div class="inner" bis_skin_checked="1" style="padding: 5% 0% 0% 0%" id="gestorCertificaciones" name="gestorCertificaciones">
+                            <a href="{{ url('/generarparte') }}">
                             <img src=" {{ asset(url('img/CertificadoPartes.png')) }}" alt="logo" style="width:100%">
                             <h4>
-                                <a class="sidebar-link" href="{{ url('/penalidades') }}" style="text-align: center">Gestión Certificaciones</a>
+                                <a class="sidebar-link" href="{{ url('/generarparte') }}" style="text-align: center">Gestión Certificaciones</a>
                             </h4>
                             </a>
                         </div>
