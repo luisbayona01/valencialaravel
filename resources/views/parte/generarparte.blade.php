@@ -227,7 +227,8 @@
                                             <th style="text-align: center">Observaciones creación</th>
                                             <th style="text-align: center">Valor penalidad</th>
                                             <th style="text-align: center">Estado</th>
-                                            <th style="font-size: 0.95em">Acción</th>
+                                            <!-- <th style="font-size: 0.95em">Acción</th>-->
+                                            <th style="text-align: center">Select</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -283,7 +284,7 @@
                                                     @endswitch
                                                 </span>
                                             </td>
-                                            <td style="text-align: center; font-size: 1em">
+                                            <!--<td style="text-align: center; font-size: 1em">
                                                 @if ($penalidad->estadopenalidad_Id == 1)
                                                     <a href="#" class="btn btn-primary btn-sm common-button" style="color: white;"><strong>Revisar</strong></a>
                                                 @elseif ($penalidad->estadopenalidad_Id == 2)
@@ -300,8 +301,8 @@
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm" style="display: none"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
                                                 </form>
-                                            </td>
-                                            <td>
+                                            </td>-->
+                                            <td style="text-align: center">
                                                 @csrf
                                                 <input type="checkbox" name="penalidad_ids[]" id="penalidad_ids penalidad" value="{{ $penalidad->valorPenalidad4 }}"
                                                     onchange="actualizarFormulario2()">
@@ -322,7 +323,7 @@
                                             <td></td> <!-- Observaciones -->
                                             <!--<td></td> -- Reparado por -->
                                             <td> <strong> Total Penalizaciones Seleccionados</strong></td> <!-- Fecha reparacion -->
-                                            <td colspan="3" class="totalpenalizacionSelect" id="totalPenalizacionSeleccionada" style="width: 10%"> 0</td><!-- Total Importes -->
+                                            <td colspan="3" class="totalpenalizacionSelect" id="totalPenalizacionSeleccionada" style="width: 10%; text-align:center"> 0</td><!-- Total Importes -->
                                             <!--<td> </td> !-- Estado -->
                                             <td style="text-align: center">
                                             </td>
