@@ -50,12 +50,11 @@ color: #ffFF ;
     height: 25px; /* Ajusta el valor según tus necesidades */
 }
 
+
+</style>
 @php
     $totalPartes = count($partes);
 @endphp
-
-
-</style>
     <div class="container-fluid" >
         <div class="row">
             <div class="col-lg-12">
