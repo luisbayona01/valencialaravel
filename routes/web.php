@@ -23,7 +23,7 @@ Route::post('/auth/logear',[App\Http\Controllers\Auth\LoginController::class, 'l
 Route::get('/home', function () {
  return view('home');
 })->middleware('auth:web');
-
+Route::post('/cambiarcontrasena',[App\Http\Controllers\UserController::class,'Updatepassword']);
 //generarinforme
 Route::post('/report',[App\Http\Controllers\ReportPartesController::class,'generarinforme'])->name('report');
 Route::post('/certificarpartes',[App\Http\Controllers\ReportPartesController::class,'certificarpartes'])->name('certificarpartes');
