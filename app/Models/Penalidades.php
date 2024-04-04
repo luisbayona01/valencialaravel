@@ -35,7 +35,7 @@ class Penalidades extends Model
      *
      * @var array
      */
-    protected $fillable = ['creadoPor','fechaCreacion','valorPenalidad4','obsCreacion','obsCreacion', 'tipoPenalidad'];
+    protected $fillable = ['creadoPor','fechaCreacion','valorPenalidad4','obsCreacion','obsCreacion', 'tipoPenalidad', 'operaciones'];
 
 
 

@@ -123,17 +123,63 @@ $("#contenpartes").removeClass('d-none');
                                                 </div>
                                             @endif
                                             <tr>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>F<sub>cm</sub> = Factor de calidad del mes actual</strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="F" name="F" oninput="validateInput7(this);calcularS1()"> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>F<sub>cm</sub> = Factor de calidad del mes actual</strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="F" name="F" oninput="validateInput7(this);calcularS1();concatenarValores()"> </td>
                                                 <td style="width:5%; text-align:center"> / </td>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>FC<sub>cmo</sub> = Factor de calidad del mismo mes del año anterior</strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="FC" name="FC" oninput="validateInput3(this);calcularS1()"> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>FC<sub>cmo</sub> = Factor de calidad del mismo mes del año anterior</strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="FC" name="FC" oninput="validateInput3(this);calcularS1();concatenarValores()"> </td>
                                                 <td style="width:5%; text-align:center"> = </td>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>Q<sub>m</sub> = Índice de calidad del mes actual</strong><br> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="Solo Lectura " id="Q" name="Q" oninput="calcularS1()" readonly> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>Q<sub>m</sub> = Índice de calidad del mes actual</strong><br> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="Solo Lectura " id="Q" name="Q" oninput="calcularS1();concatenarValores()" readonly> </td>
+
+                                            </tr>
+
+                                            <tr>
 
                                             </tr>
 
                                         </tbody>
                                     </table>
+
+
+
                                 </div>
+
+                                <script>
+                                    function concatenarValores() {
+                                        // Obtener los valores de los campos de entrada
+                                        var valorF = document.getElementById("F").value;
+                                        var valorFC = document.getElementById("FC").value;
+                                        var valorQ = document.getElementById("Q").value;
+
+                                        // Concatenar los valores
+                                        var resultado = "Fcm = " + valorF + " / " + " FCcmo =" + valorFC + " = " + "Qm =" + valorQ;
+
+                                        // Asignar el resultado al campo de entrada "operaciones"
+                                        document.getElementById("operaciones").value = resultado;
+                                    }
+
+                                    function concatenarValoresB() {
+                                        // Obtener los valores de los campos de entrada
+                                        var valorTdi = document.getElementById("Tdi").value;
+                                        var valorIi = document.getElementById("Ii").value;
+                                        var valorLi = document.getElementById("Li").value;
+                                        var valor4Tci = document.getElementById("4T").value;
+                                        var valorIi2 = document.getElementById("Ii2").value;
+                                        var valorLi2 = document.getElementById("Li2").value;
+                                        var valorIi3 = document.getElementById("Li3").value;
+                                        var valoroper1 = document.getElementById("oper1").value;
+                                        var valoroper2 = document.getElementById("oper2").value;
+                                        var valoroper3 = document.getElementById("oper3").value;
+                                        var valorS1B = document.getElementById("S1B").value;
+
+
+                                        // Concatenar los valores
+                                        var resultado = "Tdi = " + valorTdi + " * " + "Ii =" + valorIi + " * " + "Li =" + valorLi + " + " + "4Tci =" + valor4Tci + " * " + "Ii =" + valorIi2 + " * " + "Li =" + valorLi2 + " / " + "Ii =" + valorIi3 + " * " + "Li =" + valorIi3 + " = " ;
+
+                                        // Asignar el resultado al campo de entrada "operaciones"
+                                        document.getElementById("operaciones").value = resultado;
+                                    }
+                                </script>
+
+
                                 <!-- TABLA REFERENCIA FORMULACION B -->
                                 <div>
                                     <table class="" border="1" width="95%" style="margin: auto; padding:3% 3% 3% 3%; display:none" id="claseB-table" >
@@ -144,30 +190,30 @@ $("#contenpartes").removeClass('d-none');
                                                 </div>
                                             @endif
                                             <tr>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong> T<sub>di</sub> Tiempo Denso (del recorrido i) </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0 " id="Tdi" name="Tdi" oninput="validateInput3(this); "> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong> T<sub>di</sub> Tiempo Denso (del recorrido i) </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0 " id="Tdi" name="Tdi" oninput="validateInput3(this); concatenarValoresB() "> </td>
                                                 <td style="width:5%; text-align:center"> * </td>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong> I<sub>i</sub> Intensidad media del recorrido </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="Ii" name="Ii" oninput="validateInput3(this);"> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong> I<sub>i</sub> Intensidad media del recorrido </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="Ii" name="Ii" oninput="validateInput3(this); concatenarValoresB() "> </td>
                                                 <td style="width:5%; text-align:center"> * </td>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong> L<sub>i</sub> Longitud del recorrido i en metros </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="Li" name="Li" oninput="validateInput3(this);"> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong> L<sub>i</sub> Longitud del recorrido i en metros </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="Li" name="Li" oninput="validateInput3(this); concatenarValoresB()"> </td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>4T<sub>ci</sub> Longitud del recorrido (metros)</strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="4T" name="4T" oninput="validateInput3(this);"> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>4T<sub>ci</sub> Longitud del recorrido (metros)</strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="4T" name="4T" oninput="validateInput3(this); concatenarValoresB()"> </td>
                                                 <td style="width:5%; text-align:center"> * </td>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong> I<sub>i</sub> Intensidad media del recorrido </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="Ii2" name="Ii2" oninput="validateInput3(this);"> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong> I<sub>i</sub> Intensidad media del recorrido </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="Ii2" name="Ii2" oninput="validateInput3(this); concatenarValoresB()"> </td>
                                                 <td style="width:5%; text-align:center"> * </td>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong> L<sub>i</sub> Longitud del recorrido i en metros </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="Li2" name="Li2" oninput="validateInput3(this);"> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong> L<sub>i</sub> Longitud del recorrido i en metros </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="Li2" name="Li2" oninput="validateInput3(this); concatenarValoresB()"> </td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong> I<sub>i</sub> Intensidad media del recorrido </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="Ii3" name="Ii3" oninput="validateInput3(this);"> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong> I<sub>i</sub> Intensidad media del recorrido </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="Ii3" name="Ii3" oninput="validateInput3(this); concatenarValoresB()"> </td>
                                                 <td style="width:5%; text-align:center"> * </td>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong> L<sub>i</sub> Longitud del recorrido i en metros </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="Li3" name="Li3" oninput="validateInput3(this);"> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong> L<sub>i</sub> Longitud del recorrido i en metros </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="0" id="Li3" name="Li3" oninput="validateInput3(this); concatenarValoresB()"> </td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"><strong> T<sub>di</sub> * I<sub>i</sub> * L<sub>i</sub> </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="oper1" name="oper1" oninput="validateInput3(this);S1B()" readonly></td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"><strong> T<sub>di</sub> * I<sub>i</sub> * L<sub>i</sub> </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="oper1" name="oper1" oninput="validateInput3(this);S1B(); concatenarValoresB()" readonly></td>
                                                 <td style="width:5%; text-align:center"> + </td>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"><strong>4T<sub>ci</sub> * I<sub>i</sub> * L<sub>i</sub> </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="oper2" name="oper2" oninput="validateInput3(this);S1B()" readonly></td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"><strong>4T<sub>ci</sub> * I<sub>i</sub> * L<sub>i</sub> </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="oper2" name="oper2" oninput="validateInput3(this);S1B(); concatenarValoresB()" readonly></td>
                                                 <td style="width:5%; text-align:center"> / </td>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"><strong>&#8721;<sup>n</sup> <sub>i=1</sub>   I<sub>i</sub> * L<sub>i</sub> </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="oper3" name="oper3" oninput="validateInput3(this);S1B()" readonly></td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"><strong>&#8721;<sup>n</sup> <sub>i=1</sub>   I<sub>i</sub> * L<sub>i</sub> </strong> <br><input type="text" style="width: 80%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="oper3" name="oper3" oninput="validateInput3(this);S1B(); concatenarValoresB()" readonly></td>
                                             </tr>
 
                                         </tbody>
@@ -428,16 +474,29 @@ $("#contenpartes").removeClass('d-none');
             <table width="100%" style="margin: auto; padding: 3% 3% 3% 3% ;display:none" id="resultadosA">
                 <tr>
                     <th  style="text-align:justify;font-size: 1em; width:100%" id="filaA"> <strong> Q<sub>m</sub> = (Índice de calidad del mes actual) : </strong> <input type="text" style="width: 25%; font-size:1em; text-align: right " placeholder="0 €" id="S1A" name="S1A" oninput="validateInput3(this);sumarYMostrar()" readonly> &nbsp &nbsp <strong> Q <sub>m</sub> = F<sub>cmo</sub> / F<sub>cm</sub> </strong></th>
+
                 </tr>
             </table>
             <table width="100%" style="margin: auto; padding: 3% 3% 3% 3% ;display:none" id="resultadosB">
                 <tr>
-                    <th  style="text-align:justify;font-size: 1em; width:100%;" id="filaB"> <strong> F<sub>C</sub> = Factor de calidad (calculado sólo para los días laborables): </strong> <input type="text" style="width: 23%; font-size:1em; text-align: right " placeholder="0 €" id="S1B" name="S1B" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong>&#8721;<sup>n</sup> <sub>i=1</sub>  <sup> T<sub>di</sub> * I<sub>i</sub> * L<sub>i</sub> + 4T<sub>ci</sub> * I<sub>i</sub> * L<sub>i</sub></sup> / <sub>&#8721;<sup>n</sup> <sub>i=1</sub>L<sub>i</sub> * L<sub>i</sub></sub></strong></th>
+                    <th  style="text-align:justify;font-size: 1em; width:100%;" id="filaB"> <strong> F<sub>C</sub> = Factor de calidad (calculado sólo para los días laborables): </strong> <input type="text" style="width: 23%; font-size:1em; text-align: right " placeholder="0 €" id="S1B" name="S1B" oninput="validateInput3(this); concatenarValoresB()" readonly> &nbsp &nbsp <strong>&#8721;<sup>n</sup> <sub>i=1</sub>  <sup> T<sub>di</sub> * I<sub>i</sub> * L<sub>i</sub> + 4T<sub>ci</sub> * I<sub>i</sub> * L<sub>i</sub></sup> / <sub>&#8721;<sup>n</sup> <sub>i=1</sub>I<sub>i</sub> * L<sub>i</sub></sub></strong></th>
                 </tr>
             </table>
+
+            <table style="margin: auto; padding: 3% 3% 3% 3% ;display:none;width:95%" id="operAritmeticaMaster" border="1">
+                <!--<th style="text-align:justify;font-size: 1em; width:100%; padding: 3% 3% 3% 3%"> </th>
+                <td><input type="text" style="font-size:1em; text-align: right; width:90% " placeholder="Solo Lectura " id="operaciones" name="operaciones" readonly></td>-->
+                <div class="form-group" style="display: none">
+                    {{ Form::label('Valores de las Operaciones') }}
+                    {!! $errors->first('operaciones', '<div class="invalid-feedback">:message</div>') !!}
+                    <textarea class="form-control" id="operaciones" name="operaciones" style="white-space: pre-line;"></textarea>
+                </div>
+            </table>
+
                  <br><br>
                             </body>
-                        </div>
+        </div>
+        <br><br>
 
                         <div class="box-footer mt20">
                             <a href="{{url('penalidades')}}" type="button"  class="btn btn-danger" id="backButton">

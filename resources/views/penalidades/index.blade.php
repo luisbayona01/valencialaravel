@@ -79,6 +79,7 @@ $(document).ready( function () {
                                         <th style="text-align: center">Fecha creación</th>
                                         <th style="text-align: center">Creado por</th>
                                         <th style="text-align: center">Observaciones creación</th>
+                                        <th style="text-align: center">Operaciones</th>
                                         <th style="text-align: center">Valor penalidad</th>
                                         <th style="text-align: center">Estado</th>
                                         <th></th>
@@ -120,6 +121,7 @@ $(document).ready( function () {
                                             ?>
                                         </td>
                                         <td style="text-align: justify; font-size: 0.9em">{{ $penalidad->obsCreacion }}</td>
+                                        <td style="text-align: right; font-size: 0.9em">{{ $penalidad->operaciones }}</td>
                                         <td style="text-align: right; font-size: 0.9em">{{ $penalidad->valorPenalidad4 }}</td>
                                         <td style="text-align: center; font-size: 0.7em">
                                             <span class="{{ $penalidad->estadopenalidad_Id }}" style="display: block; width: 100%; height: 100%; text-align: center; @switch($penalidad->estadopenalidad_Id) @case(1) background-color: #00FF0090; color: black; @break @case(2) background-color: #0000ee; color: white; @break @case(3) background-color: #ff000090; color: black; @break @case(4) background-color: gray; color: white; @break @default background-color: red; color: white; @endswitch">
@@ -132,16 +134,22 @@ $(document).ready( function () {
                                                 @endswitch
                                             </span>
                                         </td>
+
+
                                         <td style="text-align: center; font-size: 1em">
                                             @if ($penalidad->estadopenalidad_Id == 1)
-                                                <a href="#" class="btn btn-primary btn-sm common-button" style="color: white;"><strong>Revisar</strong></a>
+                                                <a  href='{{ url('vistas/'. $penalidad->idpenalidad) }}' class="btn btn-primary btn-sm common-button" style="color: white;"><strong>Revisar</strong></a>
                                             @elseif ($penalidad->estadopenalidad_Id == 2)
-                                                <a href="#" class="btn btn-primary btn-sm common-button" style="color: white;"><strong>Imputar</strong></a>
+                                                <a  href='{{ url('vistas/'. $penalidad->idpenalidad) }}' class="btn btn-primary btn-sm common-button" style="color: white;"><strong>Imputar</strong></a>
                                             @elseif ($penalidad->estadopenalidad_Id == 3)
-                                                <a href="#" class="btn btn-primary btn-sm common-button" style="color: white;"><strong>Verificar</strong></a>
+                                                <a  href='{{ url('vistas/'. $penalidad->idpenalidad) }}' class="btn btn-primary btn-sm common-button" style="color: white;"><strong>Verificar</strong></a>
                                             @elseif ($penalidad->estadopenalidad_Id == 4)
-                                                <a href="#" class="btn btn-secondary btn-sm common-button" style="color: white;"><strong>Ver</strong></a>
+                                                <a  href='{{ url('vistas/'. $penalidad->idpenalidad) }}' class="btn btn-secondary btn-sm common-button" style="color: white;"><strong>Ver</strong></a>
                                             @endif
+
+
+
+
                                             <form action="{{ route('penalidades.destroy',$penalidad->idpenalidad) }}" method="POST">
                                                 <a class="btn btn-sm btn-primary" style="display: none; color: white;" href="{{ route('penalidades.show',$penalidad->idpenalidad) }}"><i class=""></i> {{ __('Ver') }}</a>
                                                 <a class="btn btn-sm btn-warning" style="display: none; color: black" href="{{ route('penalidades.edit',$penalidad->idpenalidad) }}"><i class=""></i> {{ __('Editar') }}</a>
@@ -154,6 +162,7 @@ $(document).ready( function () {
                                     @endforeach
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
 

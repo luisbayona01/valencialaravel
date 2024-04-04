@@ -107,16 +107,16 @@ $("#contenpartes").removeClass('d-none');
                                             @endif
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>Importe de conservacion Anual : </strong> <br><input type="text" style="width: 40%; font-size:1em; text-align: right" placeholder="0 €" id="importeConservacionAnual4" name="importeConservacionAnual4" oninput="validateInput3(this)"> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>Importe de conservacion Anual : </strong> <br><input type="text" style="width: 40%; font-size:1em; text-align: right" placeholder="0 €" id="importeConservacionAnual4" name="importeConservacionAnual4" oninput="validateInput3(this); concatenarValores()"> </td>
                                                 <td style="width:5%"> / </td>
                                                 <td style="text-align:left; font-size: 1em; border:none; "><strong>número de veces que se ha de realizar la
-                                                    operación no efectuada : </strong><br><input type="text" style="text-align: right; font-size:1em;" placeholder="0 €" id="Repeticiones4" name="Repeticiones4" oninput="validateInput(this)">
+                                                    operación no efectuada : </strong><br><input type="text" style="text-align: right; font-size:1em;" placeholder="0 " id="Repeticiones4" name="Repeticiones4" oninput="validateInput(this); concatenarValores()">
                                             </tr>
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>I (Importe correspondiente al plazo de conservación)</strong> <input type="text" style="width: 70%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="S44" name="S44" oninput="validateInput3(this)" readonly></td>
+                                                <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>I (Importe correspondiente al plazo de conservación)</strong> <input type="text" style="width: 70%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="S44" name="S44" oninput="validateInput3(this); concatenarValores()" readonly></td>
                                                 <td style="width:5%"> * </td>
-                                                <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>K : </strong> <input type="text" style="width: 40%; font-size:1em" placeholder="" id="K44" name="K44" value="1,5" oninput="validateInput3(this)"> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>K : </strong> <input type="text" style="width: 40%; font-size:1em" placeholder="" id="K44" name="K44" value="1,5" oninput="validateInput3(this); concatenarValores()"> </td>
                                             </tr>
 
                                             <tr>
@@ -181,6 +181,25 @@ $("#contenpartes").removeClass('d-none');
                     document.getElementById("Repeticiones4").addEventListener("input", calcularDivision);
                     document.getElementById("K44").addEventListener("input", calcularDivision);
                 };
+
+                function concatenarValores() {
+                    // Obtener los valores de los campos de entrada
+                    var importeConservacionAnual = document.getElementById("importeConservacionAnual4").value;
+                    var repeticiones = document.getElementById("Repeticiones4").value;
+                    var K44 = document.getElementById("K44").value;
+
+                    // Calcular el valor de I
+                    var I = parseFloat(importeConservacionAnual.replace(',', '.')) / parseFloat(repeticiones.replace(',', '.'));
+
+                    // Calcular el valor de la operación no efectuada
+                    var S44 = I * parseFloat(K44.replace(',', '.'));
+
+                    // Concatenar los valores
+                    var operaciones = "€ Conservación Anual: " + importeConservacionAnual + " / " + "Número de veces: " + repeticiones + " = " + "I: " + I + " * " + "K: " + K44 + "\n" + "(I * K): " + S44;
+
+                    // Mostrar el resultado en el campo de texto
+                    document.getElementById("operaciones").value = operaciones;
+                }
                 </script>
 
                 <!-- Seccion Resultado del Formulario -->
@@ -213,8 +232,6 @@ $("#contenpartes").removeClass('d-none');
                         </div>
                     </div>
 
-
-
             </div>
 
 
@@ -237,6 +254,16 @@ $("#contenpartes").removeClass('d-none');
                         <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>S₄ (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S4" name="S4" oninput="validateInput3(this)" readonly>&nbsp &nbsp <strong> S<sub>4</sub> = I * K</strong></td>
                     </tr>
 
+                </table>
+                <br><br>
+                <table style="margin: auto; padding: 3% 3% 3% 3% ;display:none;width:95%" id="operAritmeticaMaster" >
+                    <!--<th style="text-align:justify;font-size: 1em; width:100%; padding: 3% 3% 3% 3%"> </th>
+                    <td><input type="text" style="font-size:1em; text-align: right; width:90% " placeholder="Solo Lectura " id="operaciones" name="operaciones" readonly></td>-->
+                    <div class="form-group" style="display: block">
+                        {{ Form::label('Valores de las Operaciones') }}
+                        {!! $errors->first('operaciones', '<div class="invalid-feedback">:message</div>') !!}
+                        <textarea class="form-control" id="operaciones" name="operaciones" style="white-space: pre-line;"></textarea>
+                    </div>
                 </table>
 
                  <br><br>

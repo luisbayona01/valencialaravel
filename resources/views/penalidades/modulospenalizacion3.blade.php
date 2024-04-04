@@ -98,14 +98,14 @@ $("#contenpartes").removeClass('d-none');
                                             @endif
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:45%"> <strong>Valor del coste diario de la conservación del elemento averiado </strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 €" id="costeDiarioConservacion" name="costeDiarioConservacion" oninput="validateInput3(this);"> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:45%"> <strong>Valor del coste diario de la conservación del elemento averiado </strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 €" id="costeDiarioConservacion" name="costeDiarioConservacion" oninput="validateInput3(this); concatenarValores()"> </td>
                                                 <td style="width:5%"> * </td>
-                                                <td style="text-align:left; font-size:  1em; border:none; "><strong>Valor establecido (Min 10 €) </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 €" id="valorMinimoestablecido" name="valorMinimoestablecido" oninput="validateInput3(this);" >
+                                                <td style="text-align:left; font-size:  1em; border:none; "><strong>Valor establecido (Min 10 €) </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="10" id="valorMinimoestablecido" name="valorMinimoestablecido" oninput="validateInput3(this); concatenarValores()" >
                                                 </td>
                                             </tr>
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>F </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="F" name="F" oninput="validateInput3(this);" readonly required></td>
+                                                <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>F </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="F" name="F" oninput="validateInput3(this); concatenarValores()" readonly required></td>
                                                 <td></td>
 
                                             </tr>
@@ -114,32 +114,32 @@ $("#contenpartes").removeClass('d-none');
 
                                            <!-- INICIO SEGUNDA FILA DE OPERACIONES T -->
                                            <tr>
-                                            <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>tiempo tardado en detección de la incidencia o avería </strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="Tiempo1" name="Tiempo1" oninput="validateInput3(this)"> </td>
+                                            <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>tiempo tardado en detección de la incidencia o avería </strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="Tiempo1" name="Tiempo1" oninput="validateInput3(this); concatenarValores()"> </td>
                                             <td style="width:5%"> / </td>
-                                            <td style="text-align:left; font-size:  1em; border:none; "><strong>Plazo establecido en pliego de condiciones técnicas </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="Tiempo2" name="Tiempo2" oninput="validateInput3(this)" >
+                                            <td style="text-align:left; font-size:  1em; border:none; "><strong>Plazo establecido en pliego de condiciones técnicas </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="Tiempo2" name="Tiempo2" oninput="validateInput3(this); concatenarValores()" >
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <td style="text-align:left; font-size: 1em; border:none;">
                                                 <strong>T<sup>1.5</sup></strong><br>
-                                                <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura " id="Texponente" name="Texponente" oninput="validateInput3(this)" readonly  required>
+                                                <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura " id="Texponente" name="Texponente" oninput="validateInput3(this); concatenarValores()" readonly  required>
                                             </td>
                                             <td style="width:5%"> * </td>
-                                            <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>K </strong><br> <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="K" name="k" oninput="validateInput(this)">  --></td>
+                                            <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>K </strong><br> <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="K" name="k" oninput="validateInput(this); concatenarValores()">  --></td>
                                         </tr>
                                         <!-- FIN SEGUNDA FILA DE OPERACIONES T -->
 
                                             <tr>
-                                                <td style="text-align:left; font-size:  1em; border:none; "><strong> T<sup>1.5</sup> * K </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="Texponente2" name="Texponente2" oninput="validateInput3(this)" readonly required>
+                                                <td style="text-align:left; font-size:  1em; border:none; "><strong> T<sup>1.5</sup> * K </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="Texponente2" name="Texponente2" oninput="validateInput3(this); concatenarValores()" readonly required>
                                             </tr>
 
                                             <tr>
-                                                <td style="text-align:left; font-size:  1em; border:none; "><strong> Coste diario de conservación de los elementos afectados por la avería </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="costeDiarioAveria" name="costeDiarioAveria" oninput="validateInput3(this)" >
+                                                <td style="text-align:left; font-size:  1em; border:none; "><strong> Coste diario de conservación de los elementos afectados por la avería </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="costeDiarioAveria" name="costeDiarioAveria" oninput="validateInput3(this); concatenarValores()" >
                                                 <td style="width:5%"> * </td>
                                                 <td style="text-align:justify;font-size: 1em; border:none; width:45%">
                                                     <strong>N</strong><br>
-                                                    <select style="width: 50%; font-size:1em; text-align: Left " id="N" name="N" onchange="">
+                                                    <select style="width: 50%; font-size:1em; text-align: Left " id="N" name="N" onchange="; concatenarValores()">
                                                         <option value="0%">Seleccione un valor </option>
                                                         <option value="10%">10 % Nivel G (Centralizado)</option>
                                                         <option value="20%">20 % Nivel I (Intermedio)</option>
@@ -149,7 +149,7 @@ $("#contenpartes").removeClass('d-none');
                                             </tr>
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>C </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="Solo Lectura" id="C" name="C" oninput="validateInput3(this)" readonly required></td>
+                                                <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>C </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="Solo Lectura" id="C" name="C" oninput="validateInput3(this); concatenarValores()" readonly required></td>
                                             </tr>
 
 
@@ -169,7 +169,7 @@ $("#contenpartes").removeClass('d-none');
                                         function validateInput(input) {
                                         // Permite solo números, comas y puntos en el input
                                         input.value = input.value.replace(/[^0-9]/g, '');
-                                    }
+                                        }
 
                                         function validateInput2(input) {
                                             // Permite solo números, comas y puntos en el input
@@ -286,10 +286,55 @@ $("#contenpartes").removeClass('d-none');
 
                                             // Mostrar el resultado en el campo "S3"
                                             document.getElementById("S3").value = resultadoFormateadoS3 + ' €';
-    }
+                                            }
 
 
+
+                                            function concatenarValores() {
+                                                // Obtener los valores de los campos de entrada
+                                                var costeDiarioConservacion = parseFloat(document.getElementById("costeDiarioConservacion").value.replace(',', '.'));
+                                                var valorMinimoestablecido = parseFloat(document.getElementById("valorMinimoestablecido").value.replace(',', '.'));
+                                                var tiempo1 = parseFloat(document.getElementById("Tiempo1").value.replace(',', '.'));
+                                                var tiempo2 = parseFloat(document.getElementById("Tiempo2").value.replace(',', '.'));
+                                                var K = parseFloat(document.getElementById("K").value.replace(',', '.'));
+                                                var costeDiarioAveria = parseFloat(document.getElementById("costeDiarioAveria").value.replace(',', '.'));
+                                                var N = parseFloat(document.getElementById("N").value.replace('%', '')) / 100; // Convertir porcentaje a decimal
+
+                                                // Calcular el valor de F
+                                                var F = costeDiarioConservacion * valorMinimoestablecido;
+
+                                                // Calcular el valor de C
+                                                var C = costeDiarioAveria * N;
+
+                                                // Calcular el valor de T^1.5
+                                                var T_15 = Math.pow(tiempo1 / tiempo2, 1.5);
+
+                                                // Calcular el valor de T^1.5 * K
+                                                var Texponente2 = T_15 * K;
+
+                                                // Formatear los valores para mostrarlos en la cadena
+                                                var formatter = new Intl.NumberFormat('es-ES', {
+                                                    style: 'currency',
+                                                    currency: 'EUR',
+                                                    minimumFractionDigits: 2,
+                                                    maximumFractionDigits: 2
+                                                });
+
+                                                var costeDiarioConservacionText = formatter.format(costeDiarioConservacion);
+                                                var valorMinimoestablecidoText = formatter.format(valorMinimoestablecido);
+                                                var costeDiarioAveriaText = formatter.format(costeDiarioAveria);
+                                                var FText = formatter.format(F);
+
+                                                // Concatenar los valores
+                                                var operaciones = "€ Diario Conservación: " + costeDiarioConservacionText + " * " + "ValorMín: " + valorMinimoestablecidoText + " = " + "F: " + FText + " + " + " ( " + "Tiempo 1: " + tiempo1 + " / " + "Tiempo 2: " + tiempo2 + " = " + "T^1.5: " + formatter.format(T_15) + " * " + "K: " + K + " = " + ") " + " + " + "€ Diario Avería: " + costeDiarioAveriaText + " * " + "N: " + N
+                                                                /* "C: " + formatter.format(C) + "\n" + */
+                                                                /* "T^1.5: " + formatter.format(T_15) + "\n" */   ;
+
+                                                // Mostrar el resultado en el campo de texto
+                                                document.getElementById("operaciones").value = operaciones;
+                                            }
                                     </script>
+
 
 
 
@@ -336,11 +381,19 @@ $("#contenpartes").removeClass('d-none');
 
 
                 <table width="95%" style="margin: auto; padding: 3% 3% 3% 3% ">
-
                     <tr>
-                        <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>S₃ (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S3" name="S3" oninput="validateInput3(this)" readonly>&nbsp &nbsp <strong>S₃ = F + ( T<sup>1.5</sup> * K ) + C x N</strong></td>
+                        <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>S₃ (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S3" name="S3" oninput="validateInput3(this)" readonly>&nbsp &nbsp <strong>S₃ = F + ( T<sup>1.5</sup> * K ) + C * N</strong></td>
                     </tr>
-
+                </table>
+                <br>
+                <table style="margin: auto; padding: 3% 3% 3% 3% ;display:none;width:95%" id="operAritmeticaMaster">
+                    <!--<th style="text-align:justify;font-size: 1em; width:100%; padding: 3% 3% 3% 3%"> </th>
+                    <td><input type="text" style="font-size:1em; text-align: right; width:90% " placeholder="Solo Lectura " id="operaciones" name="operaciones" readonly></td>-->
+                    <div class="form-group" style="display: none">
+                        {{ Form::label('Valores de las Operaciones') }}
+                        {!! $errors->first('operaciones', '<div class="invalid-feedback">:message</div>') !!}
+                        <textarea class="form-control" id="operaciones" name="operaciones" style="white-space: pre-line;"></textarea>
+                    </div>
                 </table>
 
                  <br><br>

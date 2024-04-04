@@ -51,6 +51,9 @@ Route::get('/penalidades/panel/modulos', function () {
     return view('penalidades.panel');
 })->name('penalidades.panel.modulos');
 
+//Modulo vistas de revisión de las Penalidades
+Route::get('/vistas/{idPenalidad}', [App\Http\Controllers\PenalidadesController::class, 'vistasPenalidad'])->middleware('auth');
+
 //Formulario contenedor de la Penalizacion No.1
 Route::get('/penalidades/modulospenalizacion/modulospenalizacion1', function () {
     return view('penalidades.modulospenalizacion1');

@@ -85,36 +85,36 @@
 <div class="box box-info padding-1"
     style="background-color:
     @php
-if ($parte->estadoparte_id == 1) {
-            echo '#00FF0020'; // Set the background color to #00FF0020 for estado 1
-        } elseif ($parte->estadoparte_id == 2) {
-            echo '#ff000005'; // Set the background color to #ff000020 for estado 2
-        } elseif ($parte->estadoparte_id == 3) {
-            echo '#ffff0020'; // Set the background color to #FFD70060 for estado 3
-        } elseif ($parte->estadoparte_id == 4) {
-            echo '#ED912109'; // Set the background color to #ED912170 for estado 4
-        } elseif ($parte->estadoparte_id == 5) {
-            echo '#ED912109'; // Set the background color to #ED912109 for estado 5
-        } elseif ($parte->estadoparte_id == 6) {
-            echo '#00a2d310'; // Set the background color to #00a2d310 for estado 6
-        } elseif ($parte->estadoparte_id == 7) {
-            echo '#ff000050'; // Set the background color to #ff000090 for estado 7
-        } elseif ($parte->estadoparte_id == 8) {
-            echo '#84857d10'; // Set the background color to #84857d for estado 8
-        } else {
-            echo 'initial'; // Set the default background color here
-        } @endphp ">
+    if ($parte->estadoparte_id == 1) {
+                echo '#00FF0020'; // Set the background color to #00FF0020 for estado 1
+            } elseif ($parte->estadoparte_id == 2) {
+                echo '#ff000005'; // Set the background color to #ff000020 for estado 2
+            } elseif ($parte->estadoparte_id == 3) {
+                echo '#ffff0020'; // Set the background color to #FFD70060 for estado 3
+            } elseif ($parte->estadoparte_id == 4) {
+                echo '#ED912109'; // Set the background color to #ED912170 for estado 4
+            } elseif ($parte->estadoparte_id == 5) {
+                echo '#ED912109'; // Set the background color to #ED912109 for estado 5
+            } elseif ($parte->estadoparte_id == 6) {
+                echo '#00a2d310'; // Set the background color to #00a2d310 for estado 6
+            } elseif ($parte->estadoparte_id == 7) {
+                echo '#ff000050'; // Set the background color to #ff000090 for estado 7
+            } elseif ($parte->estadoparte_id == 8) {
+                echo '#84857d10'; // Set the background color to #84857d for estado 8
+            } else {
+                echo 'initial'; // Set the default background color here
+            } @endphp ">
 
 
-    @if (Auth::user()->idrol == 4)
-        @php
-            $dnone = 'd-none';
-        @endphp
-    @else
-        @php
-            $dnone = '';
-        @endphp
-    @endif
+        @if (Auth::user()->idrol == 4)
+            @php
+                $dnone = 'd-none';
+            @endphp
+        @else
+            @php
+                $dnone = '';
+            @endphp
+        @endif
 
 
 
