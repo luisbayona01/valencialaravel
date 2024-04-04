@@ -95,6 +95,12 @@ class UserController extends Controller
      * @param  User $user
 
      */
+
+     public function  Updatepassword(Request $request){
+      //dd();
+    User::where('id',$request->input('id'))->update(['password'=> bcrypt($request->input('password'))]);
+     return redirect()->back()->with('success', 'Password Editado Correctamente');
+    }
     public function update(Request $request, User $user)
     {
         //request()->validate(User::$rules);
