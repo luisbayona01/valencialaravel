@@ -31,6 +31,10 @@ Route::resource('partes',  App\Http\Controllers\parteController::class);
 
 //Route::get('/report',[App\Http\Controllers\ReportPartesController::class,'generarinforme'])->name('report');
 Route::post('/totalchecks',[App\Http\Controllers\ReportPartesController::class,'validarchecks'])->name('totalchecks');
+
+Route::post('/updatepestado',[App\Http\Controllers\PenalidadesController::class,'Updateestado'])->name('totalchecks');
+
+//updatepestado
 Route::resource('informecorrectivos', App\Http\Controllers\informecorrectivoController::class);
 Route::resource('listaPrecios', App\Http\Controllers\listaPreciosController::class);
 
