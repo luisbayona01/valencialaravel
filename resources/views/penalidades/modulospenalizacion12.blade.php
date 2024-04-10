@@ -101,28 +101,28 @@ $("#contenpartes").removeClass('d-none');
 
                                             <!-- Valor D  -->
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>A = Número de averías registradas en el periodo considerado</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="NoAverias" name="NoAverias" oninput="validateInput3(this)"> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>A = Número de averías registradas en el periodo considerado</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="NoAverias" name="NoAverias" oninput="validateInput3(this); concatenarValores()"> </td>
                                                 <td style="width:5%"> * </td>
-                                                <td style="text-align:left; font-size:  1em; border:none; "><strong>365</strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="365 " id="anio" name="anio" oninput="validateInput3(this)" readonly ></td>
+                                                <td style="text-align:left; font-size:  1em; border:none; "><strong>365</strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="365 " id="anio" name="anio" oninput="validateInput3(this); concatenarValores()" readonly ></td>
                                             </tr>
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>D</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="D" name="D" oninput="validateInput3(this)"> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>D (días)</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="D" name="D" oninput="validateInput(this); concatenarValores()"> </td>
                                                 <td style="width:5%"> = </td>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong><sup>A*365</sup>/<sub>D</sub></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="primeraOp" name="primeraOp" oninput="validateInput3(this)" readonly  > </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong><sup>A*365</sup>/<sub>D</sub></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="primeraOp" name="primeraOp" oninput="validateInput3(this); concatenarValores(); calcularS12()" readonly  > </td>
                                             </tr>
 
+
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>N = Número total de focos sustituidos por la empresa</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="N" name="N" oninput="validateInput(this)"> </td>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%; display:none"> <strong>N = Value de Operacion</strong> <br><input type="hiddens" style="width: 50%; font-size:1em; text-align: right " value="1" id="valueN" name="valueN" oninput="validateInput(this)" readonly> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>N = Número total de focos sustituidos por la empresa</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="N" name="N" oninput="validateInput(this); concatenarValores()"> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%; display:none"> <strong>N = Value de Operacion</strong> <br><input type="hiddens" style="width: 50%; font-size:1em; text-align: right " value="1" id="valueN" name="valueN" oninput="validateInput(this); concatenarValores()" readonly> </td>
                                                 <td style="width:5%">  </td>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong><sup>1</sup>/<sub>N</sub></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="segundaOp" name="segundaOp" oninput="validateInput(this)" disabled> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong><sup>1</sup>/<sub>N</sub></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="segundaOp" name="segundaOp" oninput="validateInput3(this); concatenarValores(); calcularS12()" readonly > </td>
                                             </tr>
-
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong><sup>1</sup>/<sub>P</sub> = 0.02 <2%> (porcentaje anual máximo de fallos admitido)</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0,02" id="terceraOp" name="terceraOp" oninput="(this)"  > </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50% ; display:none"> <strong><sup>1</sup>/<sub>P</sub></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="1" id="1" name="valuePor" oninput="validateInput(this); concatenarValores()" readonly> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50% "> <strong>P</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="" id="P" name="P" oninput="validateInput3(this); concatenarValores()" > </td>
                                                 <td style="width:5%">  </td>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50% ; display:none"> <strong><sup>1</sup>/<sub>P</sub></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="1" id="valuePor" name="valuePor" oninput="validateInput(this)" readonly> </td>
-
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong><sup>1</sup>/<sub>P</sub> = (porcentaje anual máximo de fallos admitido)</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="" id="terceraOp" name="terceraOp" oninput="concatenarValores(); calcularS12()" readonly > </td>
                                             </tr>
 
 
@@ -152,80 +152,66 @@ $("#contenpartes").removeClass('d-none');
                                     }
 
 
-                                    // Función para calcular la primera operación (NoAverias * anio) y mostrar el resultado en el campo primeraOp
-                                    function calcularPrimeraOperacion() {
-                                        // Obtener los valores de los campos NoAverias, anio y D
-
-                                        var NoAverias = parseFloat(document.getElementById('NoAverias').value.replace(',', '.'));
-                                        var anio = parseFloat(document.getElementById('anio').value.replace(',', '.'));
-                                        var D = parseFloat(document.getElementById('D').value.replace(',', '.'));
-
-                                        // Realizar la primera operación (NoAverias * anio)
-                                        var primeraOperacion = NoAverias * anio;
-
-                                        // Dividir el resultado obtenido por el valor de D
-                                        var resultadoFinal = primeraOperacion / D;
-
-                                        // Formatear el resultado con coma como separador decimal y dos dígitos después de la coma
-                                        var resultadoFormateado = resultadoFinal.toFixed(2).replace('.', ',');
-
-                                        // Actualizar el campo primeraOp con el resultado formateado
-                                        document.getElementById('primeraOp').value = resultadoFormateado ; // Agregar el símbolo de euro al final
+                                    function calcularPrimeraOp() {
+                                        var NoAverias = parseFloat(document.getElementById("NoAverias").value);
+                                        var anio = parseFloat(document.getElementById("anio").value);
+                                        var D = parseFloat(document.getElementById("D").value);
+                                        var primeraOp = (NoAverias * anio) / D;
+                                        document.getElementById("primeraOp").value = primeraOp.toFixed(2);
+                                        calcularS12(); // Llamamos a calcularS12() después de actualizar primeraOp
                                     }
 
-                                    // Llamar a la función calcularPrimeraOperacion cuando se modifique el valor de los campos NoAverias, anio y D
-                                    document.getElementById('NoAverias').addEventListener('input', calcularPrimeraOperacion);
-                                    document.getElementById('anio').addEventListener('input', calcularPrimeraOperacion);
-                                    document.getElementById('D').addEventListener('input', calcularPrimeraOperacion);
-
-                                    // Llamar a la función calcularPrimeraOperacion cuando se cargue la página para calcular el valor inicial
-                                    window.addEventListener('load', calcularPrimeraOperacion);
-
-                                    // Función para calcular la segunda operación (N / valueN) y mostrar el resultado en el campo segundaOp
-                                    function calcularSegundaOperacion() {
-                                        // Obtener los valores de los campos N y valueN
-                                        var N = parseFloat(document.getElementById('N').value.replace(',', '.'));
-                                        var valueN = parseFloat(document.getElementById('valueN').value.replace(',', '.'));
-
-                                        // Realizar la segunda operación (N / valueN)
-                                        var segundaOperacion = N / valueN;
-
-                                        // Formatear el resultado con coma como separador decimal y dos dígitos después de la coma
-                                        var resultadoFormateado = segundaOperacion.toFixed(2).replace('.', ',');
-
-                                        // Actualizar el campo segundaOp con el resultado formateado
-                                        document.getElementById('segundaOp').value = resultadoFormateado ; // Agregar el símbolo de euro al final
+                                    function calcularSegundaOp() {
+                                        var N = parseFloat(document.getElementById("N").value);
+                                        var valueN = parseFloat(document.getElementById("valueN").value);
+                                        var segundaOp = valueN/N;
+                                        document.getElementById("segundaOp").value = segundaOp.toFixed(2);
+                                        calcularS12(); // Llamamos a calcularS12() después de actualizar segundaOp
                                     }
 
-                                    // Llamar a la función calcularSegundaOperacion cuando se modifique el valor de los campos N y valueN
-                                    document.getElementById('N').addEventListener('input', calcularSegundaOperacion);
-                                    document.getElementById('valueN').addEventListener('input', calcularSegundaOperacion);
-
-                                    // Llamar a la función calcularSegundaOperacion cuando se cargue la página para calcular el valor inicial
-                                    window.addEventListener('load', calcularSegundaOperacion);
-
-
-                                   // Función para realizar la multiplicación y actualizar el campo S12
-                                    function actualizarS12() {
-                                        // Obtener los valores de los campos primeraOp, segundaOp y terceraOp
-                                        var primeraOp = parseFloat(document.getElementById('primeraOp').value.replace(',', '.'));
-                                        var segundaOp = parseFloat(document.getElementById('segundaOp').value.replace(',', '.'));
-                                        var terceraOp = parseFloat(document.getElementById('terceraOp').value.replace(',', '.'));
-
-                                        // Realizar la multiplicación de los tres valores
-                                        var resultadoMultiplicacion = primeraOp * segundaOp * terceraOp;
-
-                                        // Formatear el resultado con coma como separador decimal y dos dígitos después de la coma
-                                        var resultadoFormateado = resultadoMultiplicacion.toFixed(2).replace('.', ',');
-
-                                        // Actualizar el campo S12 con el resultado formateado
-                                        document.getElementById('S12').value = resultadoFormateado;
+                                    function calcularTerceraOp() {
+                                        var P = parseFloat(document.getElementById("P").value);
+                                        var terceraOp1 = P / 100;
+                                        var terceraOp = 1 / terceraOp1;
+                                        if (Number.isInteger(terceraOp)) {
+                                            document.getElementById("terceraOp").value = terceraOp.toFixed(0);
+                                        } else {
+                                            document.getElementById("terceraOp").value = terceraOp.toFixed(2);
+                                        }
+                                        calcularS12(); // Llamamos a calcularS12() después de actualizar terceraOp
                                     }
 
-                                    // Llamar a la función actualizarS12 cada vez que se modifiquen los campos primeraOp, segundaOp y terceraOp
-                                    document.getElementById('primeraOp').addEventListener('input', actualizarS12);
-                                    document.getElementById('segundaOp').addEventListener('input', actualizarS12);
-                                    document.getElementById('terceraOp').addEventListener('input', actualizarS12);
+                                    function calcularS12() {
+                                        var primeraOp = parseFloat(document.getElementById("primeraOp").value);
+                                        var segundaOp = parseFloat(document.getElementById("segundaOp").value);
+                                        var terceraOp = parseFloat(document.getElementById("terceraOp").value);
+                                        var S12 = primeraOp * segundaOp * terceraOp;
+                                        document.getElementById("S12").value = S12.toFixed(2).replace(".", ",");
+                                    }
+
+                                    document.getElementById("NoAverias").addEventListener("input", calcularPrimeraOp);
+                                    document.getElementById("anio").addEventListener("input", calcularPrimeraOp);
+                                    document.getElementById("D").addEventListener("input", calcularPrimeraOp);
+                                    document.getElementById("N").addEventListener("input", calcularSegundaOp);
+                                    document.getElementById("P").addEventListener("input", calcularTerceraOp);
+
+                                    function concatenarValores() {
+                                        // Obtener los valores de los campos de entrada
+                                        var NoAverias = document.getElementById("NoAverias").value;
+                                        var anio = document.getElementById("anio").value;
+                                        var valD = document.getElementById("D").value;
+                                        var N = document.getElementById("N").value;
+                                        var P = document.getElementById("P").value;
+                                        var segundaOp = document.getElementById("segundaOp").value;
+                                        var primeraOp = document.getElementById("primeraOp").value;
+                                        var valterceraOp = document.getElementById("terceraOp").value;
+
+                                        // Concatenar los valores
+                                       var operaciones = " < " + "A: " + NoAverias + " * " + anio + " / " + "D: " + valD + " > " + " * " + " < " + " 1 " + " / " + "N: " + N + " > " + " * " + " < " + " 1 " + " / " + "P: " + P +"%" + " > " ;
+
+                                        // Mostrar el resultado en el campo de texto
+                                        document.getElementById("operaciones").value = operaciones;
+                                    }
 
                                 </script>
 
@@ -271,8 +257,17 @@ $("#contenpartes").removeClass('d-none');
 
             <table width="95%" style="margin: auto; padding: 3% 3% 3% 3%; display:block ">
                 <tr>
-                    <td  style="text-align:justify;font-size: 1em; width:50%"> <strong> S<sub>12</sub> (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S12" name="S12" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>12</sub> = <sup>A*365</sup>/<sub>D</sub> * <sup>1</sup>/<sub>N</sub> * <sup>1</sup>/<sub>P</sub></strong></td>
+                    <td  style="text-align:justify;font-size: 1em; width:50%"> <strong> S<sub>12</sub> (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="S12" name="S12" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>12</sub> = <sup>A*365</sup>/<sub>D</sub> * <sup>1</sup>/<sub>N</sub> * <sup>1</sup>/<sub>P</sub></strong></td>
                 </tr>
+            </table>
+            <table style="margin: auto; padding: 3% 3% 3% 3% ;display:none;width:95%" id="operAritmeticaMaster" >
+                <!--<th style="text-align:justify;font-size: 1em; width:100%; padding: 3% 3% 3% 3%"> </th>
+                <td><input type="text" style="font-size:1em; text-align: right; width:90% " placeholder="Solo Lectura " id="operaciones" name="operaciones" readonly></td>-->
+                <div class="form-group" style="display: none">
+                    {{ Form::label('Valores de las Operaciones') }}
+                    {!! $errors->first('operaciones', '<div class="invalid-feedback">:message</div>') !!}
+                    <textarea class="form-control" id="operaciones" name="operaciones" style="white-space: pre-line;"></textarea>
+                </div>
             </table>
 
                  <br><br>

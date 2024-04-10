@@ -150,7 +150,7 @@ $("#contenpartes").removeClass('d-none');
                                         var valorQ = document.getElementById("Q").value;
 
                                         // Concatenar los valores
-                                        var resultado = "Fcm = " + valorF + " / " + " FCcmo =" + valorFC + " = " + "Qm =" + valorQ;
+                                        var resultado = "Fcm = " + valorF + " / " + " FCcmo =" + valorFC + "==>";
 
                                         // Asignar el resultado al campo de entrada "operaciones"
                                         document.getElementById("operaciones").value = resultado;
@@ -305,10 +305,10 @@ $("#contenpartes").removeClass('d-none');
 
                                             // Mostrar el resultado en el input "S13"
                                             console.log('S1A:', S1A);
-                                            document.getElementById('S1A').value = S1A.toFixed().replace('.', ','); // Redondear a 2 decimales y agregar el símbolo de euro
+                                            document.getElementById('S1A').value = S1A.toFixed(2).replace('.', ','); // Redondear a 2 decimales y agregar el símbolo de euro
 
                                             // Duplicar el resultado y colocarlo en el campo Q
-                                            document.getElementById('Q').value = S1A.toFixed().replace('.', ',');
+                                            document.getElementById('Q').value = S1A.toFixed(2).replace('.', ',');
                                         }
                                     }
 
@@ -432,6 +432,42 @@ $("#contenpartes").removeClass('d-none');
                                     document.getElementById('oper3').addEventListener('input', sumarOperaciones);
 
 
+                                    function concatenarValores() {
+                                        // Obtener los valores de los campos de entrada
+                                        var valorF = document.getElementById("F").value;
+                                        var valorFC = document.getElementById("FC").value;
+                                        var valorQ = document.getElementById("Q").value;
+
+                                        // Concatenar los valores
+                                        var resultado = "Fcm = " + valorF + " / " + " FCcmo =" + valorFC + "==>";
+
+                                        // Asignar el resultado al campo de entrada "operaciones"
+                                        document.getElementById("operaciones").value = resultado;
+                                    }
+
+                                    function concatenarValoresB() {
+                                        // Obtener los valores de los campos de entrada
+                                        var valorTdi = document.getElementById("Tdi").value;
+                                        var valorIi = document.getElementById("Ii").value;
+                                        var valorLi = document.getElementById("Li").value;
+                                        var valor4Tci = document.getElementById("4T").value;
+                                        var valorIi2 = document.getElementById("Ii2").value;
+                                        var valorLi2 = document.getElementById("Li2").value;
+                                        var valorIi3 = document.getElementById("Li3").value;
+                                        var valoroper1 = document.getElementById("oper1").value;
+                                        var valoroper2 = document.getElementById("oper2").value;
+                                        var valoroper3 = document.getElementById("oper3").value;
+                                        var valorS1B = document.getElementById("S1B").value;
+
+
+                                        // Concatenar los valores
+                                        var resultado = "Tdi = " + valorTdi + " * " + "Ii =" + valorIi + " * " + "Li =" + valorLi + " + " + "4Tci =" + valor4Tci + " * " + "Ii =" + valorIi2 + " * " + "Li =" + valorLi2 + " / " + "Ii =" + valorIi3 + " * " + "Li =" + valorIi3 + " = " ;
+
+                                        // Asignar el resultado al campo de entrada "operaciones"
+                                        document.getElementById("operaciones").value = resultado;
+                                    }
+
+
                                 </script>
 
                 <!-- Seccion Resultado del Formulario -->
@@ -486,7 +522,7 @@ $("#contenpartes").removeClass('d-none');
             <table style="margin: auto; padding: 3% 3% 3% 3% ;display:none;width:95%" id="operAritmeticaMaster" border="1">
                 <!--<th style="text-align:justify;font-size: 1em; width:100%; padding: 3% 3% 3% 3%"> </th>
                 <td><input type="text" style="font-size:1em; text-align: right; width:90% " placeholder="Solo Lectura " id="operaciones" name="operaciones" readonly></td>-->
-                <div class="form-group" style="display: none">
+                <div class="form-group" style="display: none ">
                     {{ Form::label('Valores de las Operaciones') }}
                     {!! $errors->first('operaciones', '<div class="invalid-feedback">:message</div>') !!}
                     <textarea class="form-control" id="operaciones" name="operaciones" style="white-space: pre-line;"></textarea>

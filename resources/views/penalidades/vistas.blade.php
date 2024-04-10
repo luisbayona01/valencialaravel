@@ -43,6 +43,13 @@
         #penalidadEuro {
             display: none;
         }
+
+        .main-div {
+    border: 1px solid black; /* Ajusta el grosor y color del borde según tus necesidades */
+    padding: 10px; /* Opcional: agrega relleno alrededor del contenido dentro del div */
+    margin-bottom: 20px; /* Opcional: agrega espacio entre este div y otros elementos */
+}
+
     </style>
 <div class="box box-info padding-1"
 style="background-color:
@@ -150,23 +157,21 @@ if ($penalidades->estadopenalidad_Id == 1) {
                             </div>
                         </div>
                         <br>
-                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3" style="width: 100%; text-align:left">
-
-                            <div class="col-sm-6">
+                        <div class="row row-cols-2 row-cols-sm-2 row-cols-md-2" style="width: 100%; text-align:left">
+                            <div class="col-sm-8 ">
+                                <div class="form-group">
+                                    <strong>{{ Form::label('Valores de la Operacion') }}</strong>
+                                    <div class="form-group" style="text-align: justify">
+                                        {{$penalidades->operaciones}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <strong>{{ Form::label('Costo de la Penalidad') }}</strong>
                                     <div class="form-group" style="text-align: center">
                                         {{$penalidades->valorPenalidad4}}
-                                      </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <strong>{{ Form::label('Valores de la Operacion') }}</strong>
-                                    <div class="form-group" style="text-align: center">
-                                        {{$penalidades->operaciones}}
-                                      </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

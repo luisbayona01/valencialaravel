@@ -97,30 +97,31 @@ $("#contenpartes").removeClass('d-none');
 
                                             <!-- INICIO FILA DE OPERACIONES T -->
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>tiempo tardado en detección de la incidencia o avería </strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="Tiempo1" name="Tiempo1" oninput="validateInput3(this)"> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>Valor de la modificación o instalación </strong><br> <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="costeModificacion" name="costeModificacion" oninput="validateInput3(this); concatenarValores()"> </td>
+                                                <td></td>
+                                                <td style="text-align:left; font-size:  1em; border:none; display:none "><strong> 1% </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " value="1%" id="porcentaje" name="porcentaje" oninput="validateInput3(this); concatenarValores()" >
+                                                    <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>V</strong><br> <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="" id="V" name="V" oninput="validateInput(this); concatenarValores()" readonly> </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>* 1000</strong><br> <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " value="1000" id="valueFijo" name="valueFijo" oninput="validateInput(this); concatenarValores()" readonly> </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>tiempo tardado en detección de la incidencia o avería (T1) </strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="Tiempo1" name="Tiempo1" oninput="validateInput(this); concatenarValores()"> </td>
                                                 <td style="width:5%"> / </td>
-                                                <td style="text-align:left; font-size:  1em; border:none; "><strong>Plazo establecido en pliego de condiciones técnicas </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="Tiempo2" name="Tiempo2" oninput="validateInput3(this)" ></td>
+                                                <td style="text-align:left; font-size:  1em; border:none; "><strong>Plazo establecido en pliego de condiciones técnicas (T2)</strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="Tiempo2" name="Tiempo2" oninput="validateInput(this); concatenarValores()" ></td>
                                             </tr>
 
                                             <tr>
                                                 <td style="text-align:left; font-size: 1em; border:none;">
                                                     <strong>T</strong><br>
-                                                    <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="Texponente" name="Texponente" oninput="validateInput3(this) " readonly  required>
+                                                    <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="Texponente" name="Texponente" oninput="validateInput3(this); concatenarValores()" readonly  required>
                                                 </td>
                                             </tr>
                                             <!-- FIN SEGUNDA FILA DE OPERACIONES T -->
 
-                                            <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>Valor de la modificación o instalación </strong><br> <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="costeModificacion" name="costeModificacion" oninput="validateInput3(this)"> </td>
-                                                <td></td>
-                                                <td style="text-align:left; font-size:  1em; border:none; display:none "><strong> 1% </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " value="1%" id="porcentaje" name="porcentaje" oninput="validateInput3(this)" >
-                                                    <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>V</strong><br> <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="V" name="V" oninput="validateInput(this)" readonly> </td>
-                                            </tr>
 
-                                            <tr>
-                                                <td style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>* 1000</strong><br> <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " value="1000" id="valueFijo" name="valueFijo" oninput="validateInput(this)" readonly> </td>
-
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -129,7 +130,7 @@ $("#contenpartes").removeClass('d-none');
                                 <!-- Seccion Operativo del Formulario -->
                                 <script>
                                     function validateInput(input) {
-                                        // Permite solo números, comas y puntos en el input
+                                        // Permite solo números en el input
                                         input.value = input.value.replace(/[^0-9]/g, '');
                                     }
 
@@ -200,6 +201,31 @@ $("#contenpartes").removeClass('d-none');
                                     document.getElementById("V").addEventListener("input", calcularS6);
                                     document.getElementById("valueFijo").addEventListener("input", calcularS6);
 
+
+
+                                    function concatenarValores() {
+                                        // Obtener los valores de los campos de entrada
+                                        var valT1 = document.getElementById("Tiempo1").value;
+                                        var valT2 = document.getElementById("Tiempo2").value;
+                                        var valR1 = document.getElementById("Texponente").value.replace('.', ',');
+                                        var valCosteModificacion = document.getElementById("costeModificacion").value;
+                                        var valV = document.getElementById("V").value;
+                                        var valueFijo = document.getElementById("valueFijo").value;
+
+                                        // Concatenar los valores
+                                        /*var operaciones = "F: " + valF + "\n" +
+                                                        "Tiempo 1: " + valT1 + "\n" +
+                                                        "Tiempo 2: " + valT2 + "\n" +
+                                                        "T^1.5: " + valR1 + "\n" +
+                                                        "K: " + valK + "\n" +
+                                                        "C: " + costeDiarioAveria;*/
+
+                                        var operaciones = " < " + "T1: " + valT1 + " / " + "T2: " + valT2 + " > " + " = " + "T: " + valR1 + " * " + " < " + "€ Modificación: " + valCosteModificacion + " > " + "V: " + valV + " + " + valueFijo;
+
+                                        // Mostrar el resultado en el campo de texto
+                                        document.getElementById("operaciones").value = operaciones;
+                                    }
+
                                 </script>
 
                 <!-- Seccion Resultado del Formulario -->
@@ -247,6 +273,17 @@ $("#contenpartes").removeClass('d-none');
                         <td  style="text-align:justify;font-size: 1em"> <strong> S₆ (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S6" name="S6" oninput="validateInput3(this); calcularSuma()" readonly> &nbsp &nbsp <strong> S₆ = T * V + 1000</strong></td>
                     </tr>
                 </table>
+
+                <table style="margin: auto; padding: 3% 3% 3% 3% ;display:none;width:95%" id="operAritmeticaMaster" >
+                    <!--<th style="text-align:justify;font-size: 1em; width:100%; padding: 3% 3% 3% 3%"> </th>
+                    <td><input type="text" style="font-size:1em; text-align: right; width:90% " placeholder="Solo Lectura " id="operaciones" name="operaciones" readonly></td>-->
+                    <div class="form-group" style="display: block">
+                        {{ Form::label('Valores de las Operaciones') }}
+                        {!! $errors->first('operaciones', '<div class="invalid-feedback">:message</div>') !!}
+                        <textarea class="form-control" id="operaciones" name="operaciones" style="white-space: pre-line;"></textarea>
+                    </div>
+                </table>
+
 
                  <br><br>
                             </body>

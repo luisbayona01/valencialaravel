@@ -452,7 +452,7 @@
                     }
 
                         function goToHome() {
-                            window.location.href = "{{ url('/gestorParte') }}";
+                            window.location.href = "{{ url('/home') }}";
                         }
 
                         function toggleInputVisibility() {

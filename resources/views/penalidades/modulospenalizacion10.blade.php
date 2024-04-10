@@ -104,36 +104,36 @@ $("#contenpartes").removeClass('d-none');
 
                                             <!-- Valor T  -->
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>Tiempo tardado en la ejecución de la tarea</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="tiempoTarea" name="tiempoTarea" oninput="validateInput3(this)"> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>Tiempo tardado en la ejecución de la tarea</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="tiempoTarea" name="tiempoTarea" oninput="validateInput3(this); concatenarValores()"> </td>
                                                 <td style="width:5%"> / </td>
-                                                <td style="text-align:left; font-size:  1em; border:none; "><strong>Tiempo establecido por el Ayuntamiento</strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="tiempoAyu" name="tiempoAyu" oninput="validateInput3(this)" ></td>
+                                                <td style="text-align:left; font-size:  1em; border:none; "><strong>Tiempo establecido por el Ayuntamiento</strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="tiempoAyu" name="tiempoAyu" oninput="validateInput3(this); concatenarValores()" ></td>
                                             </tr>
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>T<sup>2</sup></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="T" name="T" oninput="validateInput3(this)" readonly> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>T<sup>2</sup></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="T" name="T" oninput="validateInput3(this); concatenarValores()" readonly> </td>
 
                                             </tr>
 
                                             <tr>
                                                 <td style="text-align:justify;font-size: 1em; border:none; width:50%">
-                                                    <strong>En función del tipo de elemento</strong><br>
-                                                    <select style="width: 100%; font-size:1em; text-align: left; white-space: pre-wrap;" id="D" name="D" onchange="calcularD()">
+                                                    <strong>En función del tipo de elemento (D)</strong><br>
+                                                    <select style="width: 100%; font-size:1em; text-align: left; white-space: pre-wrap;" id="D" name="D" onchange="calcularD(); mostrarOcultarInput(); concatenarValores()">
                                                         <option value="" disabled selected hidden>Selecciona una opción</option>
                                                         <option value="200" id="1">1- Actualización del Inventario = 200 €</option>
                                                         <option value="150" id="2">2- Recambios = 100 * N </option>
                                                     </select>
                                                 </td>
-                                                <td><input type="text" id="N" style="display: none;"></td>
-                                                <td><strong>Resultado "D" </strong><br><input type="text" placeholder="Solo Lectura" id="D1" readonly></td>
+                                                <td id="TN" style="display: none;"><strong>"N" </strong><br><input type="text" id="N" oninput="concatenarValores()"></td>
+                                                <td><strong>Resultado "D" (RD) </strong><br><input type="text" placeholder="Solo Lectura" id="D1" oninput="concatenarValores()" readonly></td>
                                             </tr>
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>K</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="K" name="K" oninput="validateInput(this)"> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>K</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="K" name="K" oninput="validateInput(this); concatenarValores()"> </td>
                                             </tr>
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%" class="float-right" > <strong>F</strong> <br><input type="text" style="width: 100%; font-size:1em; text-align: right " value="1000 " id="F" name="F" oninput="validateInput3(this);; calcularSuma()" readonly> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%" class="float-right" > <strong>F</strong> <br><input type="text" style="width: 100%; font-size:1em; text-align: right " value="1000 " id="F" name="F" oninput="validateInput3(this); calcularSuma(); concatenarValores()" readonly> </td>
                                                 <td style="text-align: center"> + </td>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>Resultado ( T<sup>2</sup> * D * K )</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="resultado" name="resultado" oninput="validateInput3(this);; calcularSuma()" readonly> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>Resultado ( T<sup>2</sup> * D * K )</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="resultado" name="resultado" oninput="validateInput3(this); calcularSuma(); concatenarValores()" readonly> </td>
                                             </tr>
 
 
@@ -164,23 +164,30 @@ $("#contenpartes").removeClass('d-none');
                                         // Permite solo números, comas y puntos en el input
                                         input.value = input.value.replace(/[^0-9.]/g, '');
                                     }
+                                    function mostrarOcultarInput() {
+                                        var selectElement = document.getElementById("D");
+                                        var inputValue = selectElement.value;
+                                        var inputTN = document.getElementById("TN");
+
+                                        if (inputValue === "150") {
+                                            inputTN.style.display = "table-cell";
+                                        } else {
+                                            inputTN.style.display = "none";
+                                        }
+                                    }
 
                                     function calcularT() {
-                                        // Obtener los valores de los campos de entrada
-                                        var tiempoTarea = parseFloat(document.getElementById("tiempoTarea").value.replace(',', '.'));
-                                        var tiempoAyu = parseFloat(document.getElementById("tiempoAyu").value.replace(',', '.'));
+                                        var tiempo1 = parseFloat(document.getElementById("tiempoTarea").value);
+                                        var tiempo2 = parseFloat(document.getElementById("tiempoAyu").value);
 
-                                        // Calcular el resultado de la división
-                                        var resultado = tiempoTarea / tiempoAyu;
-
-                                        // Elevar el resultado al cuadrado
-                                        resultado *= resultado;
-
-                                        // Formatear el resultado con coma para las centésimas
-                                        var resultadoFormateado = resultado.toFixed(2).replace('.', ',');
-
-                                        // Mostrar el resultado en el campo "T"
-                                        document.getElementById("T").value = resultadoFormateado;
+                                        if (!isNaN(tiempo1) && !isNaN(tiempo2) && tiempo2 !== 0) {
+                                            var resultado = (tiempo1 / tiempo2).toFixed(2); // Limitar a dos decimales
+                                            resultado = resultado.replace('.', ',');
+                                            document.getElementById("T").value = resultado;
+                                            calcularS6(); // Actualizar S6 después de actualizar Texponente
+                                        } else {
+                                            document.getElementById("T").value = '';
+                                        }
                                     }
                                     // Llamar a la función calcularT() cada vez que cambie el valor en los campos de entrada
                                     document.getElementById("tiempoTarea").addEventListener("input", calcularT);
@@ -243,7 +250,27 @@ $("#contenpartes").removeClass('d-none');
                                     document.getElementById("D1").addEventListener("input", calcularResultado);
                                     document.getElementById("K").addEventListener("input", calcularResultado);
 
+                                    function concatenarValores() {
+                                        // Obtener los valores de los campos de entrada
+                                        var tiempoTarea = document.getElementById("tiempoTarea").value;
+                                        var tiempoAyu = document.getElementById("tiempoAyu").value;
+                                        var valT = document.getElementById("T").value;
+                                        var valD = document.getElementById("D").value;
+                                        var valD1 = document.getElementById("D1").value;
+                                        var valN = document.getElementById("N").value;
+                                        var valK = document.getElementById("K").value;
+                                        var valF = document.getElementById("F").value;
+                                        var resultado = document.getElementById("resultado").value;
 
+
+                                        // Concatenar los valores
+
+
+                                       var operaciones = "F: " + valF + " ( " + " < " + "T1: " + tiempoTarea + " / " + " T2: " + tiempoAyu + " > " + "--> " + "T^2: " + valT + " * " + "D: " +  valD +"€ " + "N: " + valN + " --> " + "RD: " + valD1 + " * " + "K: " + valK + " ) ";
+
+                                        // Mostrar el resultado en el campo de texto
+                                        document.getElementById("operaciones").value = operaciones;
+                                    }
                                 </script>
 
                 <!-- Seccion Resultado del Formulario -->
@@ -290,6 +317,15 @@ $("#contenpartes").removeClass('d-none');
                     <tr>
                         <td  style="text-align:justify;font-size: 1em; width:50%"> <strong> S<sub>10</sub> (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 40%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S10" name="S10" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>10</sub> = F ( T<sup>2</sup> * D * K )</strong></td>
                     </tr>
+                </table>
+                <table style="margin: auto; padding: 3% 3% 3% 3% ;display:none;width:95%" id="operAritmeticaMaster" >
+                    <!--<th style="text-align:justify;font-size: 1em; width:100%; padding: 3% 3% 3% 3%"> </th>
+                    <td><input type="text" style="font-size:1em; text-align: right; width:90% " placeholder="Solo Lectura " id="operaciones" name="operaciones" readonly></td>-->
+                    <div class="form-group" style="display: none">
+                        {{ Form::label('Valores de las Operaciones') }}
+                        {!! $errors->first('operaciones', '<div class="invalid-feedback">:message</div>') !!}
+                        <textarea class="form-control" id="operaciones" name="operaciones" style="white-space: pre-line;"></textarea>
+                    </div>
                 </table>
 
                  <br><br>

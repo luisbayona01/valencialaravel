@@ -111,7 +111,7 @@ $("#contenpartes").removeClass('d-none');
                                             @endif
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:45%"> <strong>F </strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="1000 €" placeholder="" id="F" name="F" oninput="validateInput3(this); calcularSuma()" readonly> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:45%"> <strong>F </strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="1000 €" placeholder="" id="F" name="F" oninput="validateInput3(this); calcularSuma(); concatenarValores()" readonly> </td>
                                                 <td style="width:5%">  </td>
                                                 </td>
                                             </tr>
@@ -119,29 +119,29 @@ $("#contenpartes").removeClass('d-none');
                                             <br><br>
                                             <!-- INICIO SEGUNDA FILA DE OPERACIONES T -->
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>tiempo tardado en detección de la incidencia o avería </strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="Tiempo1" name="Tiempo1" oninput="validateInput3(this)"> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>tiempo tardado en detección de la incidencia o avería (T1) </strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="Tiempo1" name="Tiempo1" oninput="validateInput3(this); concatenarValores()"> </td>
                                                 <td style="width:5%"> / </td>
-                                                <td style="text-align:left; font-size:  1em; border:none; "><strong>Plazo establecido en pliego de condiciones técnicas </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="Tiempo2" name="Tiempo2" oninput="validateInput3(this)" >
+                                                <td style="text-align:left; font-size:  1em; border:none; "><strong>Plazo establecido en pliego de condiciones técnicas (T2) </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="Tiempo2" name="Tiempo2" oninput="validateInput3(this); concatenarValores()" >
                                                 </td>
                                             </tr>
 
                                             <tr>
                                                 <td style="text-align:left; font-size: 1em; border:none;">
                                                     <strong>T<sup>1.5</sup></strong><br>
-                                                    <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="Texponente" name="Texponente" oninput="validateInput3(this); calcularExponente(); calcularResultado() " readonly  required>
+                                                    <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="" id="Texponente" name="Texponente" oninput="validateInput3(this); calcularExponente(); calcularResultado(); concatenarValores() " readonly  required>
                                                 </td>
                                             </tr>
                                             <!-- FIN SEGUNDA FILA DE OPERACIONES T -->
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>Elementos del sistema de tráfico y comunicaciones (K) </strong><br> <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="K" name="k" oninput="validateInput(this); calcularResultado()"> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>Elementos del sistema de tráfico y comunicaciones (K) </strong><br> <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="K" name="k" oninput="validateInput(this); calcularResultado(); concatenarValores()"> </td>
                                                 <td></td>
-                                                <td style="text-align:left; font-size:  1em; border:none; "><strong> Coste diario de conservación de los elementos afectados por la avería (C) </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " value="20 €" id="costeDiarioAveria" name="costeDiarioAveria" oninput="validateInput3(this); calcularResultado()" >
+                                                <td style="text-align:left; font-size:  1em; border:none; "><strong> Coste diario de conservación de los elementos afectados por la avería (C) </strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " value="20 €" id="costeDiarioAveria" name="costeDiarioAveria" oninput="validateInput3(this); calcularResultado(); concatenarValores()" >
 
                                             </tr>
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>( T<sup>1.5</sup> * C * K )</strong><br> <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="multiplicacion" name="multiplicacion" oninput="validateInput(this); calcularResultado(); calcularSuma()" readonly> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>( T<sup>1.5</sup> * C * K )</strong><br> <input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="multiplicacion" name="multiplicacion" oninput="validateInput(this); calcularResultado(); calcularSuma(); concatenarValores()" readonly> </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -219,33 +219,20 @@ $("#contenpartes").removeClass('d-none');
                                         calcularSuma();
                                     }
 
-                                    // Función para calcular el resultado de la primera operación (T^1.5)
                                     function calcularExponente() {
-                                        // Obtener los valores de los campos Tiempo1 y Tiempo2
-                                        var tiempo1 = parseFloat(document.getElementById('Tiempo1').value);
-                                        var tiempo2 = parseFloat(document.getElementById('Tiempo2').value);
+                                    var tiempo1 = parseFloat(document.getElementById("Tiempo1").value);
+                                        var tiempo2 = parseFloat(document.getElementById("Tiempo2").value);
 
-                                        // Verificar si los valores son válidos
                                         if (!isNaN(tiempo1) && !isNaN(tiempo2) && tiempo2 !== 0) {
-                                            // Calcular el resultado
-                                            var resultado = Math.pow(tiempo1 / tiempo2, 1.5);
-
-                                            // Formatear el resultado con punto como separador decimal
-                                            var resultadoFormateado = resultado.toFixed(2).replace(',', '.');
-
-                                            // Actualizar el campo de texto con el resultado formateado
-                                            document.getElementById('Texponente').value = resultadoFormateado;
-
-                                            // Después de calcular el exponente, llamar a la función para calcular el resultado
-                                            calcularResultado();
+                                            var resultado = (tiempo1 / tiempo2).toFixed(2); // Limitar a dos decimales
+                                            resultado = resultado.replace('.', ',');
+                                            document.getElementById("Texponente").value = resultado;
+                                            calcularS6(); // Actualizar S6 después de actualizar Texponente
                                         } else {
-                                            // Si los valores no son válidos, mostrar un mensaje de error
-                                            document.getElementById('Texponente').value = "Solo Lectura";
-
-                                            // Después de establecer el valor predeterminado, llamar a la función para calcular el resultado
-                                            calcularResultado();
+                                            document.getElementById("Texponente").value = '';
                                         }
                                     }
+
 
                                     // Llamar a las funciones correspondientes cuando se cambien los valores en los campos relevantes
                                     document.getElementById('Tiempo1').addEventListener('input', calcularExponente);
@@ -253,6 +240,33 @@ $("#contenpartes").removeClass('d-none');
                                     document.getElementById('Texponente').addEventListener('input', calcularResultado);
                                     document.getElementById('costeDiarioAveria').addEventListener('input', calcularResultado);
                                     document.getElementById('K').addEventListener('input', calcularResultado);
+
+
+
+                                    function concatenarValores() {
+                                        // Obtener los valores de los campos de entrada
+                                        var valF = document.getElementById("F").value;
+                                        var valT1 = document.getElementById("Tiempo1").value;
+                                        var valT2 = document.getElementById("Tiempo2").value;
+                                        var valR1 = document.getElementById("Texponente").value.replace('.', ',');
+                                        var valK = document.getElementById("K").value;
+                                        var costeDiarioAveria = document.getElementById("costeDiarioAveria").value;
+
+                                        // Concatenar los valores
+                                        /*var operaciones = "F: " + valF + "\n" +
+                                                        "Tiempo 1: " + valT1 + "\n" +
+                                                        "Tiempo 2: " + valT2 + "\n" +
+                                                        "T^1.5: " + valR1 + "\n" +
+                                                        "K: " + valK + "\n" +
+                                                        "C: " + costeDiarioAveria;*/
+
+                                        var operaciones = "F: " + valF + " < " + "T1: " + valT1 + " / " + "T2: " + valT2 + " > " + " = " + "T^1.5: " + valR1 + " * " + "K: " + valK + " * " +" C: " + costeDiarioAveria;
+
+                                        // Mostrar el resultado en el campo de texto
+                                        document.getElementById("operaciones").value = operaciones;
+                                    }
+
+
                                 </script>
 
                 <!-- Seccion Resultado del Formulario -->
@@ -299,6 +313,17 @@ $("#contenpartes").removeClass('d-none');
                     <tr>
                         <td  style="text-align:justify;font-size: 1em"> <strong>S₅ (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S5" name="S5" oninput="validateInput3(this); calcularSuma()" readonly> &nbsp &nbsp <strong>S₅ = F + ( T<sup>1.5</sup> * C * K )</strong></td>
                     </tr>
+                </table>
+
+                <br><br>
+                <table style="margin: auto; padding: 3% 3% 3% 3% ;display:none;width:95%" id="operAritmeticaMaster" >
+                    <!--<th style="text-align:justify;font-size: 1em; width:100%; padding: 3% 3% 3% 3%"> </th>
+                    <td><input type="text" style="font-size:1em; text-align: right; width:90% " placeholder="Solo Lectura " id="operaciones" name="operaciones" readonly></td>-->
+                    <div class="form-group" style="display: none">
+                        {{ Form::label('Valores de las Operaciones') }}
+                        {!! $errors->first('operaciones', '<div class="invalid-feedback">:message</div>') !!}
+                        <textarea class="form-control" id="operaciones" name="operaciones" style="white-space: pre-line;"></textarea>
+                    </div>
                 </table>
 
                  <br><br>

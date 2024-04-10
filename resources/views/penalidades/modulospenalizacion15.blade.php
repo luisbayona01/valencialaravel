@@ -103,11 +103,11 @@ $("#contenpartes").removeClass('d-none');
 
                         <!-- Valor T  -->
                         <tr>
-                            <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:25%"> <strong>F = 1000 €</strong> <br><input type="text" style="width: 100%; font-size:1em; text-align: right " value="1000" id="F" name="F" oninput="validateInput3(this)" readonly > </td>
+                            <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:25%"> <strong>F = 1000 €</strong> <br><input type="text" style="width: 100%; font-size:1em; text-align: right " value="1000" id="F" name="F" oninput="validateInput3(this); concatenarValores()" readonly > </td>
                             <td style="width: 5%; text-align:center">+</td>
-                            <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:25%"> <strong>P = No. de personas desinformadas</strong> <br><input type="text" style="width: 100%; font-size:1em; text-align: right " placeholder="0" id="P" name="P" oninput="validateInput7(this)" > </td>
+                            <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:25%"> <strong>P = No. de personas desinformadas</strong> <br><input type="text" style="width: 100%; font-size:1em; text-align: right " placeholder="0" id="P" name="P" oninput="validateInput7(this); concatenarValores()" > </td>
                             <td style="width: 5%; text-align:center">*</td>
-                            <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:25%"> <strong>T = 500 €</strong> <br><input type="text" style="width: 100%; font-size:1em; text-align: right " value="500" id="T" name="T" oninput="validateInput3(this)"readonly > </td>
+                            <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:25%"> <strong>T = 500 €</strong> <br><input type="text" style="width: 100%; font-size:1em; text-align: right " value="500" id="T" name="T" oninput="validateInput3(this); concatenarValores()"readonly > </td>
                         </tr>
 
 
@@ -172,6 +172,22 @@ $("#contenpartes").removeClass('d-none');
             document.getElementById('P').addEventListener('input', actualizarS15);
             document.getElementById('T').addEventListener('input', actualizarS15);
 
+            function concatenarValores() {
+                // Obtener los valores de los campos de entrada
+                var valF = document.getElementById("F").value;
+                var valP = document.getElementById("P").value;
+                var valT = document.getElementById("T").value;
+
+
+
+                // Concatenar los valores
+                var resultado = "F: " + valF + " + " + "P: " + valP + " * " + "T: " + valT + " ==>";
+
+                // Asignar el resultado al campo de entrada "operaciones"
+                document.getElementById("operaciones").value = resultado;
+            }
+
+
             </script>
 
                 <!-- Seccion Resultado del Formulario -->
@@ -218,6 +234,15 @@ $("#contenpartes").removeClass('d-none');
                     <tr>
                         <td  style="text-align:justify;font-size: 1em; width:50%"> <strong> S<sub>15</sub> (el importe de la penalidad en euros, en el mes i) : </strong> <input type="text" style="width: 26%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S15" name="S15" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>15</sub> = F + P * T </strong></td>
                     </tr>
+                </table>
+                <table style="margin: auto; padding: 3% 3% 3% 3% ;display:none;width:95%" id="operAritmeticaMaster" >
+                    <!--<th style="text-align:justify;font-size: 1em; width:100%; padding: 3% 3% 3% 3%"> </th>
+                    <td><input type="text" style="font-size:1em; text-align: right; width:90% " placeholder="Solo Lectura " id="operaciones" name="operaciones" readonly></td>-->
+                    <div class="form-group" style="display: none ">
+                        {{ Form::label('Valores de las Operaciones') }}
+                        {!! $errors->first('operaciones', '<div class="invalid-feedback">:message</div>') !!}
+                        <textarea class="form-control" id="operaciones" name="operaciones" style="white-space: pre-line;"></textarea>
+                    </div>
                 </table>
 
                  <br><br>

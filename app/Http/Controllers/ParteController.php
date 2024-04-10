@@ -215,12 +215,12 @@ public function pdf()
         $estado='';
         $localizaciones = Localizacion::pluck(DB::raw("CONCAT(cod_localizacion, ', ', descripcion, ', ', zona) as ubicacion"), 'id');
         $tipoparte= Tipoparte::pluck('nombre', 'id');
-        $reportadopor = User::whereIn('idrol', [3, 4])->pluck('codigo', 'id');
+        $reportadopor = User::whereIn('idrol', [3, 4])->where('estado', '=', 1)->pluck('codigo', 'id');
 
-        $autorizadopor = User::where('idrol', '=','5')->pluck('codigo', 'id');;
+        $autorizadopor = User::where('idrol', '=','5')->where('estado', '=', 1)->pluck('codigo', 'id');;
 
 
-         $asignadoa = User::where('idrol', '=','2')->pluck('codigo', 'id');
+         $asignadoa = User::where('idrol', '=','2')->where('estado', '=', 1)->pluck('codigo', 'id');
         //dd($reportadopor);
         //dd($reportadopor);
         $Descripcionelementos = Descripcionelementos::pluck(DB::raw("CONCAT(descripcion,'-',elemento,'-',precio) as valor"), 'id');

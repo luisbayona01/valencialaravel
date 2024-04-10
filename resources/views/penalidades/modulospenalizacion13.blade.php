@@ -125,13 +125,13 @@ $("#contenpartes").removeClass('d-none');
                                             @endif
 
                                             <tr>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>Valor de referencia</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="1000 " id="referencia" name="referencia" oninput="calcularS13()" readonly> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>Valor de referencia</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="1000 " id="referencia" name="referencia" oninput="calcularS13(); concatenarValoresA()" readonly> </td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>M= Número de meses</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="noMeses" name="noMeses" oninput="calcularS13()"> </td>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%; display:none"> <strong>Numero Fijo = 1</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="1" id="NoFijo" name="NoFijo" oninput="calcularS13()"> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>M= Número de meses</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="noMeses" name="noMeses" oninput="validateInput(this); calcularS13(); concatenarValoresA()"> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%; display:none"> <strong>Numero Fijo = 1</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="1" id="NoFijo" name="NoFijo" oninput="calcularS13(); concatenarValoresA()"> </td>
                                                 <td style="width:5%"> = </td>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>(M + 1)</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="primeraOp" name="primeraOp" oninput="calcularS13()" readonly> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>(M + 1)</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="primeraOp" name="primeraOp" oninput="calcularS13(); concatenarValoresA()" readonly> </td>
                                             </tr>
 
                                         </tbody>
@@ -148,17 +148,17 @@ $("#contenpartes").removeClass('d-none');
                                             @endif
 
                                             <tr>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>Valor de referencia</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="50000 " id="referencia2" name="referencia2" oninput="calcularS133()" readonly> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>Valor de referencia</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="50000 " id="referencia2" name="referencia2" oninput="calcularS133(); concatenarValoresB()" readonly> </td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>HC<sub>i</sub></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="noMeses2" name="noMeses2" oninput="calcularS133()"> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>HC<sub>i</sub></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="noMeses2" name="noMeses2" oninput="calcularS133(); concatenarValoresB()"> </td>
                                                 <td style="width:5%"> / </td>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>HCM<sub>Ri</sub></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="NoFijo2" name="NoFijo2" oninput="calcularS133()"> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>HCM<sub>Ri</sub></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="NoFijo2" name="NoFijo2" oninput="calcularS133(); concatenarValoresB()"> </td>
                                             </tr>
                                             <tr>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>Numero Fijo = -1</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="1" id="NoFijo3" name="NoFijo3" oninput="calcularS133()" readonly> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>Numero Fijo = -1</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="1" id="NoFijo3" name="NoFijo3" oninput="calcularS133(); concatenarValoresB()" readonly> </td>
                                                 <td style="width:5%"> = </td>
-                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"><strong>(HC<sub>i</sub> / HCM<sub>Ri</sub> - 1)<br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="segundaOp" name="segundaOp" oninput="calcularS133()" readonly> </td>
+                                                <td style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"><strong>(HC<sub>i</sub> / HCM<sub>Ri</sub> - 1)<br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="segundaOp" name="segundaOp" oninput="calcularS133(); concatenarValoresB()" readonly> </td>
                                             </tr>
 
                                         </tbody>
@@ -252,7 +252,7 @@ $("#contenpartes").removeClass('d-none');
 
                                             // Mostrar el resultado en el input "S13"
                                             console.log('S13:', S13);
-                                            document.getElementById('S13').value = S13.toFixed(2).replace('.', ',') + ' €'; // Redondear a 2 decimales y agregar el símbolo de euro
+                                            document.getElementById('S13').value = S13.toFixed(0).replace('.', ',') + ' €'; // Redondear a 2 decimales y agregar el símbolo de euro
                                         }
                                     }
 
@@ -307,7 +307,7 @@ $("#contenpartes").removeClass('d-none');
 
                                             // Mostrar el resultado en el input "S13"
                                             console.log('S133:', S133);
-                                            document.getElementById('S133').value = S133.toFixed(2).replace('.', ',') + ' €'; // Redondear a 2 decimales y agregar el símbolo de euro
+                                            document.getElementById('S133').value = S133.toFixed(0).replace('.', ',') + ' €'; // Redondear a 2 decimales y agregar el símbolo de euro
                                         }
                                     }
 
@@ -322,6 +322,34 @@ $("#contenpartes").removeClass('d-none');
                                     // Llamar a la función calcularS13 cuando se modifique el valor de los campos primeraOp y referencia
                                     document.getElementById('segundaOp').addEventListener('input', calcularS133);
                                     document.getElementById('referencia2').addEventListener('input', calcularS133);
+
+                                    //Funcion para concatenar los valores de los Formularios <input>
+                                    function concatenarValoresA() {
+                                        // Obtener los valores de los campos de entrada
+                                        var referencia = document.getElementById("referencia").value;
+                                        var noMeses = document.getElementById("noMeses").value;
+
+                                        // Concatenar los valores
+                                        var resultado = referencia + " * " + " ( " + " M: " + noMeses + " + " + " 1 " + " ) " + "==>";
+
+                                        // Asignar el resultado al campo de entrada "operaciones"
+                                        document.getElementById("operaciones").value = resultado;
+                                    }
+
+                                    function concatenarValoresB() {
+                                        // Obtener los valores de los campos de entrada
+                                        var referencia2 = document.getElementById("referencia2").value;
+                                        var noMeses2 = document.getElementById("noMeses2").value;
+                                        var NoFijo2 = document.getElementById("NoFijo2").value;
+                                        var NoFijo3 = document.getElementById("NoFijo3").value;
+
+
+                                        // Concatenar los valores
+                                        var resultado = referencia2 + " * " + " ( " + "HCi: " + noMeses2 + " / " + "HCMRi: " + NoFijo2 + " - " + NoFijo3 + " ) " + "==>";
+
+                                        // Asignar el resultado al campo de entrada "operaciones"
+                                        document.getElementById("operaciones").value = resultado;
+                                    }
 
                                 </script>
 
@@ -374,6 +402,16 @@ $("#contenpartes").removeClass('d-none');
                 <tr>
                     <th  style="text-align:justify;font-size: 1em; width:50%;" id="filaB"> <strong> S<sub>13-B</sub> (Importe de la penalidad en euros del ejercicio i): </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S133" name="S133" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>13-B</sub> = 50000 * (HC<sub>i</sub> / HCM<sub>Ri</sub> - 1)</strong></th>
                 </tr>
+            </table>
+
+            <table style="margin: auto; padding: 3% 3% 3% 3% ;display:none;width:95%" id="operAritmeticaMaster" >
+                <!--<th style="text-align:justify;font-size: 1em; width:100%; padding: 3% 3% 3% 3%"> </th>
+                <td><input type="text" style="font-size:1em; text-align: right; width:90% " placeholder="Solo Lectura " id="operaciones" name="operaciones" readonly></td>-->
+                <div class="form-group" style="display:none ">
+                    {{ Form::label('Valores de las Operaciones') }}
+                    {!! $errors->first('operaciones', '<div class="invalid-feedback">:message</div>') !!}
+                    <textarea class="form-control" id="operaciones" name="operaciones" style="white-space: pre-line;"></textarea>
+                </div>
             </table>
 
 
