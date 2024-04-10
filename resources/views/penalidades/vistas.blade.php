@@ -116,7 +116,7 @@ if ($penalidades->estadopenalidad_Id == 1) {
 
 
 
-
+ {!! Form::open(['id' => 'formulario', 'method' => 'POST', 'url' => '/updatepestado']) !!} 
                     <div class="box-body" style="padding: 5px 15px 5px 15px; width:100%">
                         <!-- Primera Fila de Campos -->
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3" style="width: 100%; text-align:left">
@@ -244,7 +244,7 @@ if ($penalidades->estadopenalidad_Id == 1) {
                                 </label>
                                 <td>
                                     {{ Form::select(
-                                        'estadoparte_id',
+                                        'estadopenalidad_id',
                                         // Condicionalmente selecciona los estados permitidos
                                         [
                                             // Opciones de estados permitidos
@@ -269,8 +269,8 @@ if ($penalidades->estadopenalidad_Id == 1) {
                                 <p>La penalidad no está en un estado que permita cambios.</p>
                             @endif
                         </div>
-                        {!! Form::open(['id' => 'formulario']) !!}
-
+                      
+                       <input type="hidden" name ="idpenalidad" value="{{$penalidades->idpenalidad}}">
                         <!-- Sección de botones -->
                         <div class="box-footer mt-20" style="margin-top: 10px; padding: 0px 15px 15px 15px">
                             &nbsp;
@@ -279,7 +279,7 @@ if ($penalidades->estadopenalidad_Id == 1) {
                             &nbsp;
                             @if (in_array($penalidades->estadopenalidad_Id, [2, 3, 4, 5]) === false)
                                 <!-- Si el estado actual NO es "Validado" -->
-                                <button style="text-align: left;" type="submit" onclick="submitForm()"
+                                <button style="text-align: left;" type="button" onclick="submitForm()"
                                     class="btn btn-primary float-right">{{ __('Procesar') }}</button>
                             @endif
                         </div>
@@ -303,14 +303,16 @@ if ($penalidades->estadopenalidad_Id == 1) {
                     <script>
                         // JavaScript function to submit the form
                         function submitForm() {
+                              //console.log(1);
+                              //return false;
                             // Obtiene el valor seleccionado en el select
-                            var estadoSeleccionado = document.getElementById('estadoparte_id').value;
+                            //var estadoSeleccionado = document.getElementById('estadoparte_id').value;
 
                             // Si el estado seleccionado es "Aceptado" (valor 2)
-                            if (estadoSeleccionado == 1) {
+                            //if (estadoSeleccionado == 1) {
                                 // Cambia el valor de estadopenalidad_Id a 2
-                                document.getElementById('estadopenalidad_Id').value = 2;
-                            }
+                                //document.getElementById('estadopenalidad_Id').value = 2;
+                            //}
 
                             // Envía el formulario
                             document.getElementById('formulario').submit();
