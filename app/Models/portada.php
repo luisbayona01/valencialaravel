@@ -48,4 +48,6 @@ class portada extends Model
      * @var array
      */
     protected $fillable = ['anoCertificado', 'AnoVigente', 'mesVigente', 'contratista', 'contactoContratista', 'ubicacion', 'obra', 'fechaInicioContrato', 'iva', 'bajaobtenida', 'fechaAdjudicacion', 'beneficioind', 'gastosgenerales', 'plazoejecucion', 'ejec_anteriores', 'imgportada'];
+
 }
+

@@ -11,6 +11,7 @@ use Luecano\NumeroALetras\NumeroALetras;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Certificados;
 class ReportPartesController extends Controller
 {
     public function generarinforme(Request $request)
@@ -42,6 +43,7 @@ $currentDateTime=$dia.'-'.$nombreMes.'-'.$anio;
         $penalidad = str_replace(',', '.', $penalidad_raw);
         //dd($partesid);
 //die();
+
         //$portada = DB::table('portada')->latest()->first();
         $portada = DB::table('portada')->orderBy('noCertificado', 'desc')->first();
         $fechaInicio = $request->input('fechaautorizacionInicio');
@@ -132,17 +134,50 @@ $currentDateTime=$dia.'-'.$nombreMes.'-'.$anio;
             );
         }
 
+
+        // Obtener el mes y el año actual
+        $currentDateTime = Carbon::now();
+        $mes_actual_espanol = $currentDateTime->translatedFormat('F');
+        $ano_actual = $currentDateTime->year;
+
   $fechaActual = now()->format('Ymd');
 
 // Obtener el ID del usuario logeado
 $idUsuario = Auth::id();
 $user=new User();
 $rollname=  $user->rolname();
+
+ //$portada = DB::table('portada')->latest()->first();
+ /*$portada = DB::table('portada')->orderBy('noCertificado', 'desc')->first();
+ $fechaInicio = $request->input('fechaautorizacionInicio');
+ $fechaFin = $request->input('fechaautorizacionFin');*/
+
+
+ $Certificados= Certificados::where('mesCertificado', 2)->first()->toarray();
+ //dd($Certificados);
+ /*if(count($Certificados)!=0){
+    $nocertif =  $Certificados['noCertificado'] +1;
+    DB::table('certificados')
+    ->where('id', $Certificados['id'])
+    ->update([
+        'noCertificado' => $nocertif,
+    ]);*/
+    $Certificados = new certificados(["noCertificado" => $request->noCertificado,
+                                    "mesCertificado" => $mes_actual_espanol,
+                                    "anioCertificacion" => $ano_actual,
+                                    "penalidades" => $request->penalidades,
+                                    "totalCertificacion" => $request->totalCertificacion,
+                                    "Val_LisConservacion" => $request->Val_LisConservacion]);
+
+$Certificados->save();
+
+
+
 // Generar el nombre del archivo PDF con la fecha actual y el ID del usuario
  $nombreArchivo = 'informe_' . $fechaActual .'_'.$rollname.'_' . $idUsuario . '.pdf';
 
         //dd($totalSum);
-        $pdf = Pdf::loadView('pdf.informeParte', compact('portada','penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes', 'fechaInicio', 'fechaFin','currentDateTime'));
+        $pdf = Pdf::loadView('pdf.informeParte', compact('portada','penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes', 'fechaInicio', 'fechaFin','currentDateTime', 'mes_actual_espanol', 'ano_actual','nocertif'));
         //$pdf->inline('informeParte.pdf');
         $pdf->setPaper('legal');
         //Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
@@ -194,7 +229,7 @@ $partesid=$request->parte_ids;
 
 }
 
-  public   function    certificarpartes(Request $request){
+  public function certificarpartes(Request $request){
   $parteIds= $request->parte_ids;
   Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
   return response()->json([
@@ -203,6 +238,83 @@ $partesid=$request->parte_ids;
         ]);
 
    }
+
+
+   public function store(Request $request)
+    {
+
+        //$password='Etra1234';//
+        // Validar el formulario según tus necesidades
+        $request->validate([
+            'imagenes.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            // Añade más reglas de validación según sea necesario
+        ]);
+
+        // Obtener las imágenes del formulario
+        if ($request->hasFile('imgportada')) {
+
+            $imagenes = $request->file('imgportada');
+            // Generar un nombre único para cada imagen
+            $nombreImagen = uniqid('imagen_') . '.' . $imagenes->getClientOriginalExtension();
+
+            // Guardar la imagen en la ruta public/img/imaPartes
+            $imagenes->move(public_path('/public/img/imgPortadas'), $nombreImagen);
+            //dd($request);
+            }
+
+
+            $Usuarios = new certificados(["anoCertificado" => $request->anoCertificado,
+                "AnoVigente" => $request->AnoVigente,
+                "mesVigente" => $request->mesVigente,
+                "contratista" => $request->contratista,
+                "contactoContratista" => $request->contactoContratista,
+                "ubicacion" => $request->ubicacion,
+                "obra"=>$request->obra,
+                "fechaInicioContrato"=>$request->fechaInicioContrato,
+                "plazoejecucion" => $request->plazoejecucion,
+                "iva" => $request->iva,
+                "bajaobtenida" => $request->bajaobtenida,
+                "fechaAdjudicacion"=>$request->fechaAdjudicacion,
+                "beneficioind" => $request->beneficioind,
+                "gastosgenerales" => $request->gastosgenerales,
+                "imgportada" => $nombreImagen]);
+
+            if ($Usuarios->save()) {
+
+                //$menssage = "Usuario registrado correctamente";
+
+
+
+                return redirect()->route('configPortada')
+            ->with('success', 'Portada certificacion Actualizada correctamente');
+
+            }
+
+            $data = $request->all();
+            // Obtener las imágenes del formulario
+            if ($request->hasFile('file')) {
+            $imagenes = $request->file('file');
+
+            foreach ($imagenes as $imagen) {
+                //dd($imagen);
+                    $nombreImagen = Str::slug($imagen->getClientOriginalName(), '_');
+
+                    $imagen->storeAs('img/imgPortadas', $nombreImagen, 'public');
+
+                    // Almacenar la ruta completa en la base de datos
+                    $data['file'] = 'img/imgimgPortadas/' . $nombreImagen;
+
+                    $evidencia = portada::configPortada($data);
+
+                    if (!$evidencia) {
+
+                        return response()->json(['success' => false, 'message' => 'Error al guardar la evidencia']);
+
+                    }
+
+                }
+            }
+    }
 
 
 
