@@ -153,31 +153,12 @@ $rollname=  $user->rolname();
  $fechaFin = $request->input('fechaautorizacionFin');*/
 
 
- $Certificados= Certificados::where('mesCertificado', 2)->first()->toarray();
- //dd($Certificados);
- /*if(count($Certificados)!=0){
-    $nocertif =  $Certificados['noCertificado'] +1;
-    DB::table('certificados')
-    ->where('id', $Certificados['id'])
-    ->update([
-        'noCertificado' => $nocertif,
-    ]);*/
-    $Certificados = new certificados(["noCertificado" => $request->noCertificado,
-                                    "mesCertificado" => $mes_actual_espanol,
-                                    "anioCertificacion" => $ano_actual,
-                                    "penalidades" => $request->penalidades,
-                                    "totalCertificacion" => $request->totalCertificacion,
-                                    "Val_LisConservacion" => $request->Val_LisConservacion]);
-
-$Certificados->save();
-
-
 
 // Generar el nombre del archivo PDF con la fecha actual y el ID del usuario
  $nombreArchivo = 'informe_' . $fechaActual .'_'.$rollname.'_' . $idUsuario . '.pdf';
 
         //dd($totalSum);
-        $pdf = Pdf::loadView('pdf.informeParte', compact('portada','penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes', 'fechaInicio', 'fechaFin','currentDateTime', 'mes_actual_espanol', 'ano_actual','nocertif'));
+        $pdf = Pdf::loadView('pdf.informeParte', compact('portada','penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes', 'fechaInicio', 'fechaFin','currentDateTime', 'mes_actual_espanol', 'ano_actual'));
         //$pdf->inline('informeParte.pdf');
         $pdf->setPaper('legal');
         //Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
