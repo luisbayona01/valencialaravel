@@ -47,7 +47,7 @@ class Parte extends Model
      *
      * @var array
      */
-    protected $fillable = ['id','id_localizacion','idtipoparte','creadopor','fechacreacion','reportadopor', 'fechareporte','obscreadorparte','asignadoa','fechaAsignacion','obsOperador','validado_por','fecha_validacion','obscliente','estadoparte_id','autorizado_por','fechaautorizacion' ];
+    protected $fillable = ['id','id_localizacion','idtipoparte','creadopor','fechacreacion','reportadopor', 'fechareporte','obscreadorparte','asignadoa','fechaAsignacion','obsOperador','validado_por','fecha_validacion','obscliente','estadoparte_id','autorizado_por','fechaautorizacion'];
 
 
     /**

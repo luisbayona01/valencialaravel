@@ -388,7 +388,6 @@ if (Auth::user()->idrol==1){
         die;
        }*/
 
-
         /* Casos para determinar nivel de Privilegios y Vistas */
 
       switch (Auth::user()->idrol) {
@@ -415,8 +414,6 @@ if (Auth::user()->idrol==1){
             $data['estadoparte_id']=$request->input('estadoparte_id');
             break;
 
-
-
         // Otros casos si es necesario
 
         default:
@@ -442,7 +439,6 @@ if (Auth::user()->idrol==1){
             ->with('success', 'Elemento eliminado correctamente');
 
     }
-
 
     // app/Http/Controllers/PartesController.php
 

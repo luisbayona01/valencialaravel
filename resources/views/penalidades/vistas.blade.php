@@ -116,7 +116,7 @@ if ($penalidades->estadopenalidad_Id == 1) {
 
 
 
- {!! Form::open(['id' => 'formulario', 'method' => 'POST', 'url' => '/updatepestado']) !!} 
+ {!! Form::open(['id' => 'formulario', 'method' => 'POST', 'url' => '/updatepestado']) !!}
                     <div class="box-body" style="padding: 5px 15px 5px 15px; width:100%">
                         <!-- Primera Fila de Campos -->
                         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3" style="width: 100%; text-align:left">
@@ -138,7 +138,7 @@ if ($penalidades->estadopenalidad_Id == 1) {
                                 <div class="form-group">
                                     <strong>{{ Form::label('Creado Por') }}</strong>
                                     <div class="form-group" style="text-align: center">
-                                        {{$penalidades->creadoPor}}
+                                        {{Auth::user()->codigo }}
                                       </div>
                                 </div>
                             </div>
@@ -269,7 +269,7 @@ if ($penalidades->estadopenalidad_Id == 1) {
                                 <p>La penalidad no está en un estado que permita cambios.</p>
                             @endif
                         </div>
-                      
+
                        <input type="hidden" name ="idpenalidad" value="{{$penalidades->idpenalidad}}">
                         <!-- Sección de botones -->
                         <div class="box-footer mt-20" style="margin-top: 10px; padding: 0px 15px 15px 15px">

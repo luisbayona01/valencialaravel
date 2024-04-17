@@ -14,7 +14,7 @@
                             <span class="card-title" style="font-weight: bold; color: black;">{{ __('Perfil') }} De Usuario</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ url('/users') }}"> {{ __('Volver') }}</a>
+                            <a class="btn btn-primary" href="{{ url('/home') }}"> {{ __('Volver') }}</a>
                         </div>
                     </div>
 

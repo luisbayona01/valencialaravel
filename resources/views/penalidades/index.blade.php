@@ -51,7 +51,7 @@ $(document).ready( function () {
                                 $idrol = Auth::user()->idrol;
                             @endphp
 
-                            @if ($idrol == 1 || $idrol == 2 || $idrol == 3)
+                            @if ($idrol == 1 || $idrol == 5)
                                 <a href="{{ route('penalidades.panel.modulos') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                     {{ __('Nueva Penalidad') }}
                                 </a>
