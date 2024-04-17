@@ -425,7 +425,7 @@
 
             <div class="mb-3">
                 <label for="formFileSm" class="form-label">
-                    <h5 style="font-weight: bold; color: black;">Adjunte evidencias fotograficas</h5>
+                    <h5 style="font-weight: bold; color: black;">Adjunte evidencias fotograficas1</h5>
                 </label>
                 <input class="form-control form-control-sm multiple" id="formFileSm" type="file" multiple
                     accept=".jpg, .jpeg, .png" style="background-color: #e6e6e6; color: #706c6c;"

@@ -280,6 +280,8 @@ public function pdf()
 
 
 
+
+
     public function show($id)
     {
         $parte = Parte::find($id);
@@ -365,9 +367,6 @@ if (Auth::user()->idrol==1){
 }
 
 
-
-
-
        /* elmentos*/
           $Descripcionelementos = Descripcionelementos::pluck(DB::raw("CONCAT(descripcion,'-',elemento,'-',precio) as valor"), 'id');
     return view('parte.edit', compact('parte','no','localizaciones','tipoparte','currentDateTime','reportadopor','asignadoa','Descripcionelementos','autorizadopor','estadopPartes'));
@@ -441,7 +440,9 @@ if (Auth::user()->idrol==1){
 
         return redirect()->route('partes.index')
             ->with('success', 'Elemento eliminado correctamente');
+
     }
+
 
     // app/Http/Controllers/PartesController.php
 

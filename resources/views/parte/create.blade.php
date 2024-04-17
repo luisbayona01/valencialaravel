@@ -106,105 +106,69 @@
         // Puedes utilizar la variable sumaTotalGlobal en otras partes de tu código
         // Por ejemplo, si tienes otra función que necesita este valor
 
-
+/* ESPACIO CONTROL DE SUBIDA DE LAS IMAGENES COMO EVIDENCIAS */
         function listevidencias() {
 
-            const hostname = window.location.hostname;
+const hostname = window.location.hostname;
+const port = window.location.port !== '' ? ':' + window.location.port : '';
+const urlCompleta = hostname + port;
+var idParte = $('#idparte').text();
 
-            // Obtener el puerto (si es diferente de 80, que es el puerto predeterminado para HTTP)
-            const port = window.location.port !== '' ? ':' + window.location.port : '';
-
-            // Crear la URL completa con el hostname y el puerto
-            const urlCompleta = hostname + port;
-
-            //console.log(urlCompleta);
-            var idParte = $('#idparte').text();
-            fetch(`/api/partes/listevidencias/${idParte}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Validar que data exista y no esté vacío
-                    if (data && Object.keys(data).length > 0) {
-                        //console.log(data);
-
-                        const evidencias = data.evidencias;
-                        const imageListContainer = document.getElementById('imageListContainer');
-                        const imageList = document.getElementById('imageList');
-                        //imageList.innerHTML = ''
-                        evidencias.forEach(evidencia => {
-                            const imgElement = document.createElement('img');
-
-
-const listItem = document.createElement('div');
-listItem.appendChild(imgElement);
-
-imageList.appendChild(listItem);
-
-var imageURL = '/storage/' + evidencia.file;  // Utiliza la URL proporcionada en evidencia.file
-// Crear miniatura de la imagen
-var thumbnail = document.createElement("div");
-        thumbnail.style.width = "100px"; // Ancho de la miniatura
-        thumbnail.style.height = "100px"; // Altura de la miniatura
-        thumbnail.style.backgroundImage = "url('" + imageURL + "')";
-        thumbnail.style.backgroundSize = "cover";
-        thumbnail.style.margin = "5px"; // Espaciado entre miniaturas
-        thumbnail.style.cursor = "pointer";
-        thumbnail.onclick = function () {
-            // Mostrar la imagen grande al hacer clic en la miniatura
-            window.open(imageURL, "_blank");
-        };
-
-        // Agregar la miniatura a la lista de imágenes
-        imageList.appendChild(thumbnail);
-                            /*
-
-                             var fileList = input.files;
-        var imageListContainer = document.getElementById("imageList");
-
-        for (var i = 0; i < fileList.length; i++) {
-            var file = fileList[i];
-            var imageURL = URL.createObjectURL(file);
-
-            // Crear miniatura de la imagen
-
-                             var thumbnail = document.createElement("div");
-            thumbnail.style.width = "100px"; // Ancho de la miniatura
-            thumbnail.style.height = "100px"; // Altura de la miniatura
-            thumbnail.style.backgroundImage = "url('" + imageURL + "')";
-            thumbnail.style.backgroundSize = "cover";
-            thumbnail.style.margin = "5px"; // Espaciado entre miniaturas
-            thumbnail.style.cursor = "pointer";
-
-            // Usar una función anónima para mantener la URL en la iteración actual
-            thumbnail.onclick = (function(url) {
-                return function() {
-                    // Mostrar la imagen grande al hacer clic en la miniatura
-                    window.open(url, "_blank");
-                };
-            })(imageURL);
-
-            // Agregar la miniatura a la lista de imágenes
-            imageListContainer.appendChild(thumbnail);
-
-                            */
-                        });
-
-
-                    } else {
-                        // No hay datos o los datos están vacíos
-                        // No hay datos o los datos están vacíos
-                        console.log('La respuesta de la API no contiene datos.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-
+fetch(`/api/partes/listevidencias/${idParte}`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
+        return response.json();
+    })
+    .then(data => {
+        if (data && Object.keys(data).length > 0) {
+            const evidencias = data.evidencias;
+            const imageList = document.getElementById('imageList');
+            // Limpiar el contenedor de imágenes antes de añadir nuevas
+            imageList.innerHTML = '';
+
+            evidencias.forEach(evidencia => {
+                const imageURL = '/storage/' + evidencia.file;
+
+                // Crear miniatura de la imagen
+                const thumbnail = document.createElement("div");
+                thumbnail.style.width = "100px";
+                thumbnail.style.height = "100px";
+                thumbnail.style.backgroundImage = "url('" + imageURL + "')";
+                thumbnail.style.backgroundSize = "cover";
+                thumbnail.style.margin = "5px";
+                thumbnail.style.cursor = "pointer";
+                thumbnail.onclick = function () {
+                    window.open(imageURL, "_blank");
+                };
+
+                // Agregar la miniatura al contenedor de imágenes
+                imageList.appendChild(thumbnail);
+            });
+        } else {
+            console.log('La respuesta de la API no contiene datos.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+/* ESPACIO CONTROL DE SUBIDA DE LAS IMAGENES COMO EVIDENCIAS */
+
+        function eliminarImagen(fileName) {
+
+                const imageList = document.getElementById('imageList');
+                const images = imageList.getElementsByTagName('img');
+                for (let i = 0; i < images.length; i++) {
+                    const src = images[i].src;
+                    if (src.includes(fileName)) {
+                        imageList.removeChild(images[i].parentNode);
+                        break;
+                    }
+                }
+            }
 
         function limpiarCampos() {
             // Limpiar los campos del container
@@ -215,8 +179,6 @@ var thumbnail = document.createElement("div");
             // Otros campos que desees limpiar
         }
 
-        //document.getElementById('formFileSm').addEventListener('change', handleFileSelect);
-        //document.getElementById('formFileSm').addEventListener('change', handleFileSelect);
 
         function handleFileSelect(event) {
               //console.log(event);
@@ -236,15 +198,7 @@ var thumbnail = document.createElement("div");
                     formData.append('file[]', file);
 
 
-                    /*const imgElement = document.createElement('img');
-                     imgElement.src = URL.createObjectURL(file);
-                     imgElement.alt = file.name;
-                     imgElement.style.width = '100%';
 
-                     const listItem = document.createElement('div');
-                     listItem.appendChild(imgElement);
-
-                     imageList.appendChild(listItem);*/
                 } else {
                     alert('Invalid file: ' + file.name);
                 }

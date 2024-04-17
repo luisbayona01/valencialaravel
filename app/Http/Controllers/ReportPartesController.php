@@ -153,6 +153,7 @@ $rollname=  $user->rolname();
  $fechaFin = $request->input('fechaautorizacionFin');*/
 
 
+<<<<<<< HEAD
  $Certificados= Certificados::where('mesCertificado', $mesActualN)->first()->toarray();
  //dd($Certificados);
  if(count($Certificados)!=0){
@@ -173,12 +174,18 @@ $totalSum]
 
 */
 
+=======
+>>>>>>> f9ef96401bd2f2c04e5df250bfa80c8fbd42be10
 
 // Generar el nombre del archivo PDF con la fecha actual y el ID del usuario
  $nombreArchivo = 'informe_' . $fechaActual .'_'.$rollname.'_' . $idUsuario . '.pdf';
 
         //dd($totalSum);
+<<<<<<< HEAD
         $pdf = Pdf::loadView('pdf.informeParte', compact('portada','penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes', 'fechaInicio', 'fechaFin','currentDateTime', 'mes_actual_espanol', 'ano_actual','noCertificado'));
+=======
+        $pdf = Pdf::loadView('pdf.informeParte', compact('portada','penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes', 'fechaInicio', 'fechaFin','currentDateTime', 'mes_actual_espanol', 'ano_actual'));
+>>>>>>> f9ef96401bd2f2c04e5df250bfa80c8fbd42be10
         //$pdf->inline('informeParte.pdf');
         $pdf->setPaper('legal');
         //Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
