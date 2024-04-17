@@ -187,7 +187,7 @@
             <td style="width:20%; text-align: right; font-size: 0.7em;">0,00 Euros</td>
             <td></td>
         </tr>
-</table>
+</table> 
 <!-- class='ocultar-bordes' -->
 <table style='font-size:0.7em; width: 100%' border="1">
     <tr>
