@@ -153,10 +153,10 @@ $rollname=  $user->rolname();
  $fechaFin = $request->input('fechaautorizacionFin');*/
 
 
- $Certificados= Certificados::where('mesCertificado', $mesActualN)->first()->toarray();
+ $Certificados= Certificados::where('mesCertificado', $mesActualN)->first();
  //dd($Certificados);
- if(count($Certificados)!=0){
- $noCertificado=$Certificados['noCertificado']+1;
+ if($Certificados !== null){
+ $noCertificado=$Certificados->noCertificado + 1;
 }else{
 $noCertificado=1;
 
@@ -237,14 +237,17 @@ penalidad
 totalSum*/
   public function certificarpartes(Request $request){
   $parteIds= $request->parte_ids;
+
   Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
 $Certificados = new certificados(["noCertificado" => $request->noCertificado,
                                     "mesCertificado" => $request->mesActualN,
                                     "anioCertificacion" => $request->ano_actual,
                                     "penalidades" => $request->penalidad,
-                                    "Val_LisConservacion" => $request->totalSum]);
+                                    "Val_LisConservacion" => $request->totalSuma]);
 
 $Certificados->save();
+
+//Parte::whereIn('id', $parteIds)->update(['numeroparte' =>$request->noCertificado]);
 return response()->json([
             'ok' => true,
             'respuesta' => 'se han certificado los partes',
