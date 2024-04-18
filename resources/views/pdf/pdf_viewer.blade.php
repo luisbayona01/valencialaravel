@@ -21,6 +21,7 @@
 
 
             <input type="hidden" id="noCertificado"name="noCertificado" value="{{$noCertificado}}">
+            <input type="hidden" id="noCertificados"name="noCertificados" value="{{$noCertificado+1}}">
             <input type="hidden" id="mesActualN"name="mesActualN" value="{{$mesActualN}}">
             <input type="hidden" id="ano_actual"name="ano_actual" value="{{$ano_actual}}">
             <input type="hidden" id="penalidad"name="penalidad" value="{{$penalidad}}">
@@ -52,11 +53,11 @@ let totalSuma=document.getElementById('totalSuma').value;
 
 // Agregar el token CSRF al formData
 formData.append('_token', token);
- formData.append('noCertificado',noCertificado);
- formData.append('mesActualN',mesActualN) ;
- formData.append('ano_actual',ano_actual);
- formData.append('penalidad',penalidad) ;
- formData.append('totalSuma',totalSuma);
+formData.append('noCertificado',noCertificado);
+formData.append('mesActualN',mesActualN) ;
+formData.append('ano_actual',ano_actual);
+formData.append('penalidad',penalidad) ;
+formData.append('totalSuma',totalSuma);
 // Crear una nueva solicitud AJAX
 var xhr = new XMLHttpRequest();
 

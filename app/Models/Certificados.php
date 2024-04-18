@@ -38,6 +38,6 @@ class Certificados extends Model
       *
       * @var array
       */
-     protected $fillable = ['noCertificado', 'mesCertificado', 'penalidades', 'totalCertificacion', 'Val_LisConservacion', 'anioCertificacion'];
+     protected $fillable = ['noCertificado', 'mesCertificado', 'penalidades', 'totalCertificacion', 'Val_LisConservacion', 'anioCertificacion','partes'];
 
 }
