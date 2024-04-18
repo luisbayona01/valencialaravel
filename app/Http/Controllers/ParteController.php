@@ -277,11 +277,6 @@ public function pdf()
         //dd($request->hasFile('imgParte') );
     }
 
-
-
-
-
-
     public function show($id)
     {
         $parte = Parte::find($id);

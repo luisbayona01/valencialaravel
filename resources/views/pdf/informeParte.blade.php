@@ -87,7 +87,7 @@
         <thead >
             <tr>
                 <td rowspan="2" style="width: 60%"> <img src="{{ $img }}" width="80%" height="50"></td>
-                <td width='40%' colspan="3" style="text-align:center ">   / {{ $portada->anoCertificado }}</td>
+                <td width='40%' colspan="3" style="text-align:center "> {{$noCertificado}}  / {{ $portada->anoCertificado }}</td>
             </tr>
 
             <tr>
@@ -187,7 +187,7 @@
             <td style="width:20%; text-align: right; font-size: 0.7em;">0,00 Euros</td>
             <td></td>
         </tr>
-</table> 
+</table>
 <!-- class='ocultar-bordes' -->
 <table style='font-size:0.7em; width: 100%' border="1">
     <tr>
