@@ -259,7 +259,7 @@ $("#contenpartes").removeClass('d-none');
                 <table style="margin: auto; padding: 3% 3% 3% 3% ;display:none;width:95%" id="operAritmeticaMaster" >
                     <!--<th style="text-align:justify;font-size: 1em; width:100%; padding: 3% 3% 3% 3%"> </th>
                     <td><input type="text" style="font-size:1em; text-align: right; width:90% " placeholder="Solo Lectura " id="operaciones" name="operaciones" readonly></td>-->
-                    <div class="form-group" style="display: block">
+                    <div class="form-group" style="display: none">
                         {{ Form::label('Valores de las Operaciones') }}
                         {!! $errors->first('operaciones', '<div class="invalid-feedback">:message</div>') !!}
                         <textarea class="form-control" id="operaciones" name="operaciones" style="white-space: pre-line;"></textarea>
