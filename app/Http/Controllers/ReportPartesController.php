@@ -12,6 +12,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Certificados;
+use App\Models\Penalidades;
 use Illuminate\Support\Facades\Log;
 class ReportPartesController extends Controller
 {
@@ -278,9 +279,11 @@ totalSum*/
   //die();
     $Certificados->save();
     Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
+    //penalidades::whereIn('id', $penalidad)->update(['estadopenalidad_Id' => 3]);
 
 //
 Parte::whereIn('id', $parteIds)->update(['ParteEnCertificado' =>$request->noCertificado]);
+//penalidades::whereIn('id', $penalidad)->update(['penalidadEnCertificado' =>$request->noCertificado]);
  }
 
 

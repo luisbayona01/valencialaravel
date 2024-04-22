@@ -112,6 +112,7 @@ color: #ffFF ;
 										<th>Reparado por</th>
 										<th style="text-align: center;">Fecha Reparacion</th>
                                         <th>Total importe</th>
+                                        <th>Certificado</th>
 								        <th>Estado</th>
                                         <th>Acción</th>
 
@@ -130,6 +131,7 @@ color: #ffFF ;
 											<td style="text-align: center;">{{ $parte->asignadoA }}</td> <!-- Reparado por -->
 											<td>{{ $parte->fechaAsignacion }}</td> <!-- Fecha reparacion -->
                                             <td>{{ number_format($parte->totalImp, 2, ',', '.') }} €</td>
+                                            <td style="text-align: center;">N. {{ $parte->ParteEnCertificado }}</td>
 
 											<td style="text-align: center;">
                                                 <span class="{{ $parte->estadoparte }}" style="display: block; width: 100%; height: 100%; text-align: center;">

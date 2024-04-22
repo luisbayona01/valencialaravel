@@ -58,7 +58,8 @@ class ParteController extends Controller
         'P.fechaAsignacion',
         'P.validado_por',
         'P.fecha_validacion',
-        'EST.estadoparte'
+        'EST.estadoparte',
+        'P.ParteEnCertificado'
     )
     ->join('tipoparte as TP', 'P.idtipoparte', '=', 'TP.id')
     ->join('localizacion as LC', 'LC.id', '=', 'P.id_localizacion')
@@ -141,7 +142,8 @@ $partes = DB::table('parte as P')
       'P.fechaAsignacion',
       'P.validado_por',
       'P.fecha_validacion',
-      'EST.estadoparte'
+      'EST.estadoparte',
+      'P.ParteEnCertificado'
   )
   ->join('tipoparte as TP', 'P.idtipoparte', '=', 'TP.id')
   ->join('localizacion as LC', 'LC.id', '=', 'P.id_localizacion')
