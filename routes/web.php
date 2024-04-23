@@ -74,9 +74,9 @@ Route::get('/penalidades/modulospenalizacion/modulospenalizacion3', function () 
 })->name('penalidades.modulospenalizacion.modulospenalizacion3');
 
 //Formulario contenedor de la Penalizacion No.4
-Route::get('/penalidades/modulospenalizacion/modulospenalizacion', function () {
-    return view('penalidades.modulospenalizacion');
-})->name('penalidades.modulospenalizacion.modulospenalizacion');
+Route::get('/penalidades/modulospenalizacion/modulospenalizacion4', function () {
+    return view('penalidades.modulospenalizacion4');
+})->name('penalidades.modulospenalizacion.modulospenalizacion4');
 
 //Formulario contenedor de la Penalizacion No.5
 Route::get('/penalidades/modulospenalizacion/modulospenalizacion5', function () {

@@ -352,7 +352,7 @@
                             <th style="width: 10%">Precio</th>
                             <th style="width: 10%">Cantidad</th>
                             <th style="width: 10%">Total</th>
-                            <th style="width: 10%">Acción</th>
+                            <th style="width: 10%" id="accionesHeader">Acción</th>
                         </tr>
                     </thead>
                     <tbody class="contenidoElements">
@@ -376,34 +376,10 @@
             </div>
 
             <script>
-                // Espera a que el DOM esté completamente cargado
-                /*document.addEventListener("DOMContentLoaded", function() {
-                    // Obtiene la tabla
-                    var tablaRecibe2 = document.getElementById("tabla-recibe2");
 
-                    // Obtiene todas las filas de la tabla, excluyendo la primera (encabezados)
-                    var filas = tablaRecibe2.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
 
-                    // Inicializa la variable para la suma total
-                    var total = 0;
 
-                    // Recorre todas las filas y suma los valores de la columna "Total"
-                    for (var i = 0; i < filas.length; i++) {
-                        var celdaTotal = filas[i].getElementsByTagName("td")[4]; // La columna "Total" es la quinta (índice 4)
-                        var valorTotal = parseFloat(celdaTotal.textContent || celdaTotal.innerText);
-
-                        // Asegúrate de que el valor sea un número válido antes de sumarlo
-                        if (!isNaN(valorTotal)) {
-                            total += valorTotal;
-                        }
-                    }
-
-                    let total = total.toFixed(2)
-               let   totalstring= total.replace(".", ",");
-                    // Actualiza el contenido del label "totalImportes" con la suma total
-                    document.getElementById("totalImportes").textContent =totalstring + " €1"; // Puedes ajustar el número de decimales según tus necesidades
-                });*/
-            </script>
+ </script>
 
 
 
@@ -440,34 +416,7 @@
                 <div id="imageList" style="display: flex; flex-wrap: wrap;"></div>
             </div>
 
-            <!-- SCRIPT PARA EL CARGE DE LAS IMAGENES -->
-            <!--<script>
-                function handleFileSelect(input) {
-                    var fileList = input.files;
-                    var imageListContainer = document.getElementById("imageList");
 
-                    for (var i = 0; i < fileList.length; i++) {
-                        var file = fileList[i];
-                        var imageURL = URL.createObjectURL(file);
-
-                        // Crear miniatura de la imagen
-                        var thumbnail = document.createElement("div");
-                        thumbnail.style.width = "100px"; // Ancho de la miniatura
-                        thumbnail.style.height = "100px"; // Altura de la miniatura
-                        thumbnail.style.backgroundImage = "url('" + imageURL + "')";
-                        thumbnail.style.backgroundSize = "cover";
-                        thumbnail.style.margin = "5px"; // Espaciado entre miniaturas
-                        thumbnail.style.cursor = "pointer";
-                        thumbnail.onclick = function() {
-                            // Mostrar la imagen grande al hacer clic en la miniatura
-                            window.open(imageURL, "_blank");
-                        };
-
-                        // Agregar la miniatura a la lista de imágenes
-                        imageListContainer.appendChild(thumbnail);
-                    }
-                }
-            </script>-->
 
             <br><br>
 

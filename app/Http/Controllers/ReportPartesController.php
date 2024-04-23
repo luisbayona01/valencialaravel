@@ -187,8 +187,8 @@ $totalSum]
 
 
 // Generar el nombre del archivo PDF con la fecha actual y el ID del usuario
- $nombreArchivo = 'informe_' . $fechaActual .'_'.$rollname.'_' . $idUsuario . '.pdf';
-
+ $nombreArchivo = 'Certificado_'.$noCertificado.'_'.$fechaActual.'_' . $idUsuario . '.pdf';
+/*Certificado_6_20240422_2*/
         //dd($totalSum);
         $pdf = Pdf::loadView('pdf.informeParte', compact('portada','penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes', 'fechaInicio', 'fechaFin','currentDateTime', 'mes_actual_espanol', 'ano_actual','noCertificado'));
         //$pdf->inline('informeParte.pdf');
