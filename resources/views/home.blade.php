@@ -53,6 +53,7 @@ $("#contenpartes").removeClass('d-none');
                 </div>
             </div>
 
+            @if (  Auth::user()->idrol==1 || Auth::user()->idrol==5 )
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
@@ -67,6 +68,11 @@ $("#contenpartes").removeClass('d-none');
                     </div>
                 </div>
             </div>
+            @endif
+
+
+
+            @if (  Auth::user()->idrol==1 || Auth::user()->idrol==3 )
 
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
@@ -82,6 +88,7 @@ $("#contenpartes").removeClass('d-none');
                     </div>
                 </div>
             </div>
+            @endif
 
             @if (  Auth::user()->idrol==1 || Auth::user()->idrol==3 )
             <div class="col-md-4">

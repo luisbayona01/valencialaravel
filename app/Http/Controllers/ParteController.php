@@ -350,7 +350,7 @@ if (Auth::user()->idrol==1){
                 $query->whereIn('id', [5, 4, 7, 3]);
                 break;
             case 4:
-                $query->whereIn('id', [5, 7,4]);
+                $query->whereIn('id', [5, 7, 4]);
                 break;
             case 5:
                 $query->where('id', [4,7,5]);
