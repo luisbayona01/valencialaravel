@@ -110,36 +110,43 @@
                         </a>
                     @endif
 
-
+                    <!-- Vista y Acceso a GESTION DE PARTES <TODOS> -->
                     <a href="{{ url('/partes') }}" onclick="gestionPartes()" class="sidebar-link collapsed">
                         <!-- Opening div for sidebar-link -->
                         <i class="fa fa-check-square"></i> <span class="align-middle">Gestión Partes</span>
                     </a>
 
+                    <!-- Vista y Acceso a GESTION DE PENALIZACIONES -->
+                    @if (Auth::user()->idrol == 1 || Auth::user()->idrol == 3 || Auth::user()->idrol == 5)
                     <a href="{{ url('/penalidades') }}" onclick="gestionPartes()" class="sidebar-link collapsed">
                         <!-- Opening div for sidebar-link -->
                         <i class="fa fa-gavel"></i> <span class="align-middle">Gestión Penalizaciones</span>
                     </a>
+                    @endif
 
+                    <!-- Vista y Acceso a GESTION DE CERTIFICACIONES -->
+                    @if (Auth::user()->idrol == 1 || Auth::user()->idrol == 3)
                     <a href="{{ url('/generarparte') }}" onclick="gestionPartes()" class="sidebar-link collapsed">
                         <!-- Opening div for sidebar-link -->
                         <i class="fa fa-usd" aria-hidden="true"></i><span class="align-middle">Gestión
                             Certificaciones</span>
                     </a>
+                    @endif
 
 
-
+                    @if (Auth::user()->idrol == 1 )
                     <a href="{{ url('/gestorInventario') }}" onclick="gestionPartes()" class="sidebar-link collapsed">
                         <!-- Opening div for sidebar-link -->
                         <i class="fa  fa-cogs"></i> <span class="align-middle">Gestión Configuración</span>
                     </a>
+
 
                     <a href="{{ url('/informecorrectivos') }}" class="sidebar-link collapsed" style="display: none">
                         <!-- Opening div for sidebar-link -->
                         <i class="fa fa-file-text-o"></i> <span class="align-middle"> Cargar lista de
                             Conservacion</span>
                     </a>
-
+                    @endif
 
 
 
