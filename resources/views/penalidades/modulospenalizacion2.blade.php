@@ -111,16 +111,16 @@ $("#contenpartes").removeClass('d-none');
                                             @endif
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>tiempo tardado en detección de la incidencia o avería : </strong> <br><input type="text" style="width: 40%; font-size:1em; text-align: right" placeholder="0 " id="Tiempo1" name="Tiempo1" oninput="validateInput3(this)"> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:30%"> <strong>tiempo tardado en detección de la incidencia o avería : </strong> <br><input type="text" style="width: 40%; font-size:1em; text-align: right" placeholder="0 " id="Tiempo1" name="Tiempo1" oninput="validateInput3(this); concatenarValores()"> </td>
                                                 <td style="width:5%"> / </td>
-                                                <td style="text-align:left; font-size:  1em; border:none; "><strong>tiempo máximo del plazo correspondiente : </strong><br><input type="text" style="text-align: right" placeholder="0 " id="Tiempo2" name="Tiempo2" >
+                                                <td style="text-align:left; font-size:  1em; border:none; "><strong>tiempo máximo del plazo correspondiente : </strong><br><input type="text" style="text-align: right" placeholder="0 " id="Tiempo2" name="Tiempo2" oninput=" concatenarValores()" >
                                                 </td>
                                             </tr>
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>Valor Fijo</strong><br> <input type="text" style="width: 70%; font-size:1em; text-align: right " value="1000" id="valorFijo" name="valorFijo" oninput="validateInput3(this)" readonly></td>
+                                                <td  style="text-align:justify;font-size: 1em; border:none; width:45%"> <strong>Valor Fijo</strong><br> <input type="text" style="width: 70%; font-size:1em; text-align: right " value="1000" id="valorFijo" name="valorFijo" oninput="validateInput3(this); concatenarValores()" readonly></td>
                                                 <td style="width:5%"> * </td>
-                                                <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>T : </strong> <input type="text" style="width: 40%; font-size:1em" placeholder="Solo Lectura" id="T" name="T"  readonly> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border:none;"> <strong>T : </strong> <input type="text" style="width: 40%; font-size:1em" placeholder="Solo Lectura" id="T" name="T" oninput="concatenarValores()"  readonly> </td>
                                             </tr>
 
                                             <tr></tr>
@@ -202,6 +202,27 @@ $("#contenpartes").removeClass('d-none');
                                         document.getElementById("valorFijo").addEventListener("input", calcularDivision);
                                     };
 
+                                    function concatenarValores() {
+                                        // Obtener los valores de los campos de entrada
+                                        var tiempo1 = parseFloat(document.getElementById("Tiempo1").value);
+                                        var tiempo2 = parseFloat(document.getElementById("Tiempo2").value);
+                                        var valorFijo = parseFloat(document.getElementById("valorFijo").value);
+                                        var T;
+
+                                        // Calcular el valor de T según las condiciones
+                                        if (tiempo1 === 0 || tiempo2 === 0) {
+                                            T = 0; // Si alguno de los tiempos es 0, entonces T es 0
+                                        } else {
+                                            T = tiempo1 / tiempo2; // Calcular T normalmente
+                                        }
+
+                                        // Concatenar los valores
+                                        var operaciones = "T_Det : " + tiempo1 + " / " + "T_Max :" + tiempo2 + " = " + "T : " + T.toFixed(2) + " * " + valorFijo + " = " ;  // Limitar T a 2 decimales
+
+                                        // Mostrar el resultado en el campo de texto
+                                        document.getElementById("operaciones").value = operaciones;
+                                    }
+
 
                                     </script>
 
@@ -253,6 +274,17 @@ $("#contenpartes").removeClass('d-none');
                     </tr>
 
                 </table>
+
+                <table style="margin: auto; padding: 3% 3% 3% 3% ;display:none;width:95%" id="operAritmeticaMaster" border="1">
+                    <!--<th style="text-align:justify;font-size: 1em; width:100%; padding: 3% 3% 3% 3%"> </th>
+                    <td><input type="text" style="font-size:1em; text-align: right; width:90% " placeholder="Solo Lectura " id="operaciones" name="operaciones" readonly></td>-->
+                    <div class="form-group" style="display: none">
+                        {{ Form::label('Valores de las Operaciones') }}
+                        {!! $errors->first('operaciones', '<div class="invalid-feedback">:message</div>') !!}
+                        <textarea class="form-control" id="operaciones" name="operaciones" style="white-space: pre-line;"></textarea>
+                    </div>
+                </table>
+
 
                  <br><br>
                             </body>

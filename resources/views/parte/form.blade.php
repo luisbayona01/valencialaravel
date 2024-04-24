@@ -52,6 +52,8 @@
     }
 
 
+
+
 </style>
 <div class="box box-info padding-1" style="background-color:
     @php
@@ -357,31 +359,19 @@
         <!-- DIVISION PARA EL FRONT DE ADD IMAGENES -->
 
         <div class="mb-3">
-            <label for="formFileSm" class="form-label"><h5 style="font-weight: bold; color: black;">Adjunte evidencias fotograficas</h5></label>
+            <label for="formFileSm" class="form-label"><h5 style="font-weight: bold; color: black;">Adjunte evidencias fotográficas</h5></label>
             <input class="form-control form-control-sm multiple" id="formFileSm" type="file" multiple accept=".jpg, .jpeg, .png" style="background-color: #e6e6e6; color: #706c6c;" onchange="handleFileSelect(this)">
-
         </div>
-        <br><label for="formFileSm" class="form-label"><h5 style="bold; color: black;">Vista previa</h5></label>
+        <br>
+        <label for="formFileSm" class="form-label"><h5 style="bold; color: black;">Vista previa</h5></label>
 
         <div id="imageListContainer" style="max-height: 300px; overflow-y: auto;">
             <div id="imageList" style="display: flex; flex-wrap: wrap;"></div>
         </div>
-
         <!-- SCRIPT PARA EL CARGO DE LAS IMÁGENES -->
-<script>
-    /*function handleFileSelect(input) {
-        var fileList = input.files;
-        var imageListContainer = document.getElementById("imageList");
+        <script>
 
-        for (var i = 0; i < fileList.length; i++) {
-            var file = fileList[i];
-            var imageURL = URL.createObjectURL(file);
-
-            // Crear miniatura de la imagen
-
-        }
-    }*/
-</script>
+        </script>
 
 
         <div class="form-group"style="display:none">

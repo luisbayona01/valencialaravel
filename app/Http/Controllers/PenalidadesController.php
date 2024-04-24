@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Penalidades;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
-
+use  DB;
 
 /**
  * Class PenalidadesController
@@ -26,11 +26,43 @@ class PenalidadesController extends Controller
 
     }
 
+    public function vistasPenalidad($id)
+    {
+
+        $penalidad = Penalidades::where('idPenalidad',$id)->get();
+        //dd($penalidades);
+        $penalidadesestado = DB::table('penalidadesestado')->pluck('estadopenalidad', 'id');
+
+       $penalidades=$penalidad[0];
+        return view('penalidades.vistas', compact('penalidades','penalidadesestado'));
+
+
+
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+
+public  function Updateestado(Request $request){
+  //dd($_POST);
+ //print_r($_POST);
+/*
+ [estadopenalidad_id] => [idpenalidad] => 7
+*/
+ DB::table('penalidades')
+    ->where('idpenalidad',  $request->idpenalidad)
+    ->update([
+        'estadopenalidad_Id' => $request->estadopenalidad_id,
+    ]);
+return redirect()->route('penalidades.index')
+            ->with('success', 'estado actualizado');
+}
+
     public function create()
     {
         $penalidades = new Penalidades();
@@ -55,11 +87,13 @@ class PenalidadesController extends Controller
 
         /* FUNCION FORMULARIO INDEPENDIENTES POR PENALIDAD */
         //dd($request);
-
+        //dd($Penalidad4);
         // Crear el registro para S1
         $Penalidad4 = new penalidades(["creadoPor" => $request->creadoPor,
                 "fechaCreacion" => $request->fechaCreacion,
                 "valorPenalidad4" => $request->S1 ? $request->S1 :
+                    ($request->S1A ? $request->S1A :
+                    ($request->S1B ? $request->S1B :
                     ($request->S2 ? $request->S2 :
                     ($request->S3 ? $request->S3 :
                     ($request->S4 ? $request->S4 :
@@ -74,9 +108,10 @@ class PenalidadesController extends Controller
                     ($request->S13 ? $request->S13 :
                     ($request->S133 ? $request->S133 :
                     ($request->S14 ? $request->S14 :
-                    ($request->S15 ? $request->S15 : null))))))))))))))),
-                "tipoPenalidad" => $request->tipoPenalidad,
-                "obsCreacion" => $request->obsCreacion]);
+                    ($request->S15 ? $request->S15 : null))))))))))))))))),
+                    "operaciones" => $request->operaciones,
+                    "tipoPenalidad" => $request->tipoPenalidad,
+                    "obsCreacion" => $request->obsCreacion]);
 
 
                 // Establecer el estado como 1
@@ -167,4 +202,6 @@ class PenalidadesController extends Controller
         $fechaActual = date("Y-m-d H:i:s"); // Fecha y hora actual
         return View::make('penalidades/modulospenalizacion/modulospenalizacion')->with('fechaActual', $fechaActual);
     }
+
+
 }

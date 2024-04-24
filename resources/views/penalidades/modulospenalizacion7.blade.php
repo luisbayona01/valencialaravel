@@ -97,9 +97,9 @@ $("#contenpartes").removeClass('d-none');
 
                                             <!-- INICIO FILA DE OPERACIONES  -->
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>* 5000 </strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="5000 " id="valorFijo" name="valorFijo" oninput="validateInput3(this)"> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>* 5000 </strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="5000 " id="valorFijo" name="valorFijo" oninput="validateInput3(this); concatenarValores()"> </td>
                                                 <td style="width:5%"> * </td>
-                                                <td style="text-align:left; font-size:  1em; border:none; "><strong>Número de meses sin obtener datos (N)</strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="N" name="Tiempo" oninput="validateInput3(this)" ></td>
+                                                <td style="text-align:left; font-size:  1em; border:none; "><strong>Número de meses sin obtener datos (N)</strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="N" name="Tiempo" oninput="validateInput3(this); concatenarValores()" ></td>
                                             </tr>
 
 
@@ -141,10 +141,10 @@ $("#contenpartes").removeClass('d-none');
                                         // Verificar si los valores son válidos
                                         if (!isNaN(valorFijo) && !isNaN(N)) {
                                             var resultado = valorFijo * N;
-                                            $("#S7").val(resultado.toFixed(2).replace('.', ',') + " €");
+                                            $("#S7").val(resultado + " €");
                                         } else {
                                             // Si uno de los valores no es un número válido, mostrar mensaje de error
-                                            $("#S7").val("Solo Lectura (resultado €)");
+                                            $("#S7").val("Solo Lectura)");
                                         }
                                     }
 
@@ -156,6 +156,21 @@ $("#contenpartes").removeClass('d-none');
                                         calcularResultado();
                                     });
                                 });
+
+                                function concatenarValores() {
+                                        // Obtener los valores de los campos de entrada
+                                        var valvalorFijo = document.getElementById("valorFijo").value;
+                                        var valN = document.getElementById("N").value;
+
+                                        // Concatenar los valores
+                                        /*var operaciones = valvalorFijo + "\n" +
+                                                        "N: " + valN;*/
+
+                                        var operaciones = valvalorFijo + " * " + "N: " + valN + "  " ;
+
+                                        // Mostrar el resultado en el campo de texto
+                                        document.getElementById("operaciones").value = operaciones;
+                                    }
 
                                 </script>
 
@@ -203,6 +218,16 @@ $("#contenpartes").removeClass('d-none');
                     <tr>
                         <td  style="text-align:justify;font-size: 1em; width:50%"> <strong> S<sub>7</sub> (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S7" name="S7" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>7</sub> = 5000 * N</strong></td>
                     </tr>
+                </table>
+                <br>
+                <table style="margin: auto; padding: 3% 3% 3% 3% ;display:none;width:95%" id="operAritmeticaMaster" >
+                    <!--<th style="text-align:justify;font-size: 1em; width:100%; padding: 3% 3% 3% 3%"> </th>
+                    <td><input type="text" style="font-size:1em; text-align: right; width:90% " placeholder="Solo Lectura " id="operaciones" name="operaciones" readonly></td>-->
+                    <div class="form-group" style="display: none">
+                        {{ Form::label('Valores de las Operaciones') }}
+                        {!! $errors->first('operaciones', '<div class="invalid-feedback">:message</div>') !!}
+                        <textarea class="form-control" id="operaciones" name="operaciones" style="white-space: pre-line;"></textarea>
+                    </div>
                 </table>
 
                  <br><br>

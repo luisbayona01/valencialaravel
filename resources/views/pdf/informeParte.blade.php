@@ -82,14 +82,16 @@
             $totalletras = app('App\Http\Controllers\ReportPartesController')->numerosletras($totalizacion);
 @endphp
 
+
     <table class="border table-bordered" width="100%">
         <thead >
             <tr>
                 <td rowspan="2" style="width: 60%"> <img src="{{ $img }}" width="80%" height="50"></td>
-                <td width='40%' colspan="3" style="text-align:center ">1 / {{ $portada->anoCertificado }}</td>
+                <td width='40%' colspan="3" style="text-align:center "> {{$noCertificado}}  / {{ $portada->anoCertificado }}</td>
             </tr>
+
             <tr>
-                <td width='40%' colspan="3" style="text-align:center ">Mes de {{ $portada->mesVigente }} de {{ $portada->AnoVigente }}</td>
+                <td width='40%' colspan="3" style="text-align:center">Mes de {{ $mes_actual_espanol }} de {{ $ano_actual }}</td>
             </tr>
         </thead>
         <tbody>

@@ -23,7 +23,7 @@ Route::post('/auth/logear',[App\Http\Controllers\Auth\LoginController::class, 'l
 Route::get('/home', function () {
  return view('home');
 })->middleware('auth:web');
-
+Route::post('/cambiarcontrasena',[App\Http\Controllers\UserController::class,'Updatepassword']);
 //generarinforme
 Route::post('/report',[App\Http\Controllers\ReportPartesController::class,'generarinforme'])->name('report');
 Route::post('/certificarpartes',[App\Http\Controllers\ReportPartesController::class,'certificarpartes'])->name('certificarpartes');
@@ -31,6 +31,10 @@ Route::resource('partes',  App\Http\Controllers\parteController::class);
 
 //Route::get('/report',[App\Http\Controllers\ReportPartesController::class,'generarinforme'])->name('report');
 Route::post('/totalchecks',[App\Http\Controllers\ReportPartesController::class,'validarchecks'])->name('totalchecks');
+
+Route::post('/updatepestado',[App\Http\Controllers\PenalidadesController::class,'Updateestado'])->name('totalchecks');
+
+//updatepestado
 Route::resource('informecorrectivos', App\Http\Controllers\informecorrectivoController::class);
 Route::resource('listaPrecios', App\Http\Controllers\listaPreciosController::class);
 
@@ -51,6 +55,9 @@ Route::get('/penalidades/panel/modulos', function () {
     return view('penalidades.panel');
 })->name('penalidades.panel.modulos');
 
+//Modulo vistas de revisión de las Penalidades
+Route::get('/vistas/{idPenalidad}', [App\Http\Controllers\PenalidadesController::class, 'vistasPenalidad'])->middleware('auth');
+
 //Formulario contenedor de la Penalizacion No.1
 Route::get('/penalidades/modulospenalizacion/modulospenalizacion1', function () {
     return view('penalidades.modulospenalizacion1');
@@ -67,9 +74,9 @@ Route::get('/penalidades/modulospenalizacion/modulospenalizacion3', function () 
 })->name('penalidades.modulospenalizacion.modulospenalizacion3');
 
 //Formulario contenedor de la Penalizacion No.4
-Route::get('/penalidades/modulospenalizacion/modulospenalizacion', function () {
-    return view('penalidades.modulospenalizacion');
-})->name('penalidades.modulospenalizacion.modulospenalizacion');
+Route::get('/penalidades/modulospenalizacion/modulospenalizacion4', function () {
+    return view('penalidades.modulospenalizacion4');
+})->name('penalidades.modulospenalizacion.modulospenalizacion4');
 
 //Formulario contenedor de la Penalizacion No.5
 Route::get('/penalidades/modulospenalizacion/modulospenalizacion5', function () {

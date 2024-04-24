@@ -109,7 +109,7 @@ $("#contenpartes").removeClass('d-none');
                                     </div>
                                     <script>
                                         function goToHome4() {
-                                            window.location.href = "{{ url('/penalidades/modulospenalizacion/modulospenalizacion') }}";
+                                            window.location.href = "{{ url('/penalidades/modulospenalizacion/modulospenalizacion4') }}";
                                         }
                                     </script>
                                 </td>

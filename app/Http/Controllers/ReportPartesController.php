@@ -11,6 +11,9 @@ use Luecano\NumeroALetras\NumeroALetras;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Certificados;
+use App\Models\Penalidades;
+use Illuminate\Support\Facades\Log;
 class ReportPartesController extends Controller
 {
     public function generarinforme(Request $request)
@@ -42,6 +45,7 @@ $currentDateTime=$dia.'-'.$nombreMes.'-'.$anio;
         $penalidad = str_replace(',', '.', $penalidad_raw);
         //dd($partesid);
 //die();
+
         //$portada = DB::table('portada')->latest()->first();
         $portada = DB::table('portada')->orderBy('noCertificado', 'desc')->first();
         $fechaInicio = $request->input('fechaautorizacionInicio');
@@ -132,23 +136,67 @@ $currentDateTime=$dia.'-'.$nombreMes.'-'.$anio;
             );
         }
 
-  $fechaActual = now()->format('Ymd');
 
+        // Obtener el mes y el año actual
+        $currentDateTime = Carbon::now();
+        $mes_actual_espanol = $currentDateTime->translatedFormat('F');
+        $ano_actual = $currentDateTime->year;
+
+  $fechaActual = now()->format('Ymd');
+$mesActualN = now()->format('m');
 // Obtener el ID del usuario logeado
 $idUsuario = Auth::id();
 $user=new User();
 $rollname=  $user->rolname();
-// Generar el nombre del archivo PDF con la fecha actual y el ID del usuario
- $nombreArchivo = 'informe_' . $fechaActual .'_'.$rollname.'_' . $idUsuario . '.pdf';
 
+ //$portada = DB::table('portada')->latest()->first();
+ /*$portada = DB::table('portada')->orderBy('noCertificado', 'desc')->first();
+ $fechaInicio = $request->input('fechaautorizacionInicio');
+ $fechaFin = $request->input('fechaautorizacionFin');*/
+
+//dd($parteIds);
+$cadenaDelimitadaPorComas='';
+if (is_array($parteIds)) {
+    $cadenaDelimitadaPorComas = implode(',', $parteIds);
+}
+ $Certificados= Certificados::where('mesCertificado', $mesActualN)->latest('noCertificado')->first();
+ //echo $cadenaDelimitadaPorComas;
+ //die();
+ //var_dump($Certificados);
+ if($Certificados != null){
+   // echo  "aaaa";
+    //die();
+ $noCertificado=$Certificados->noCertificado + 1;
+}else{
+    //echo 0;
+     //die();
+$noCertificado=1;
+
+}
+
+
+/*
+
+$noCertificado
+$mesActualN
+ano_actual
+$penalidad,
+$totalSum]
+
+*/
+
+
+// Generar el nombre del archivo PDF con la fecha actual y el ID del usuario
+ $nombreArchivo = 'Certificado_'.$noCertificado.'_'.$fechaActual.'_' . $idUsuario . '.pdf';
+/*Certificado_6_20240422_2*/
         //dd($totalSum);
-        $pdf = Pdf::loadView('pdf.informeParte', compact('portada','penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes', 'fechaInicio', 'fechaFin','currentDateTime'));
+        $pdf = Pdf::loadView('pdf.informeParte', compact('portada','penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes', 'fechaInicio', 'fechaFin','currentDateTime', 'mes_actual_espanol', 'ano_actual','noCertificado'));
         //$pdf->inline('informeParte.pdf');
         $pdf->setPaper('legal');
         //Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
         $pdfPath = public_path('pdfs/'.$nombreArchivo);
         $pdf->save($pdfPath);
-     return view('pdf.pdf_viewer', ['pdfUrl' => asset('pdfs/'.$nombreArchivo),'idspartes'=>$parteIds]);
+     return view('pdf.pdf_viewer', ['pdfUrl' => asset('pdfs/'.$nombreArchivo),'idspartes'=>$parteIds,'noCertificado'=>$noCertificado,'mesActualN'=>$mesActualN,'ano_actual'=>$ano_actual,'penalidad'=>$penalidad,'totalSum'=>$totalSum]);
      //return $pdf->stream();
 
     }
@@ -194,15 +242,136 @@ $partesid=$request->parte_ids;
 
 }
 
-  public   function    certificarpartes(Request $request){
+/*noCertificado
+mesActualN
+ano_actual
+penalidad
+totalSum*/
+  public function certificarpartes(Request $request){
   $parteIds= $request->parte_ids;
-  Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
-  return response()->json([
+  $cadenaDelimitadaPorComas='';
+  if (is_array($parteIds)) {
+    // Paso 2: Convertir el array en una cadena delimitada por comas
+    $cadenaDelimitadaPorComas = implode(',', $parteIds);
+
+
+}
+
+
+  $Certificados= Certificados::where('mesCertificado',$request->mesActualN)->where('partes',$cadenaDelimitadaPorComas)->first();
+  //dd($Certificados);
+
+
+  if($Certificados !== null){
+    return response()->json([
+        'ok' => true,
+        'respuesta' => 'ya se  han certificado los partes',
+    ]);
+ }else{
+    $Certificados = new certificados(["noCertificado" => $request->noCertificado,
+    "mesCertificado" => $request->mesActualN,
+    "anioCertificacion" => $request->ano_actual,
+    "penalidades" => $request->penalidad,
+    "Val_LisConservacion" => $request->totalSuma,
+    "partes"=> $cadenaDelimitadaPorComas
+       ]);
+  //var_dump($Certificados);
+  //die();
+    $Certificados->save();
+    Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
+    //penalidades::whereIn('id', $penalidad)->update(['estadopenalidad_Id' => 3]);
+
+//
+Parte::whereIn('id', $parteIds)->update(['ParteEnCertificado' =>$request->noCertificado]);
+//penalidades::whereIn('id', $penalidad)->update(['penalidadEnCertificado' =>$request->noCertificado]);
+ }
+
+
+
+//
+return response()->json([
             'ok' => true,
             'respuesta' => 'se han certificado los partes',
         ]);
 
    }
+
+
+   public function store(Request $request)
+    {
+
+        //$password='Etra1234';//
+        // Validar el formulario según tus necesidades
+        $request->validate([
+            'imagenes.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            // Añade más reglas de validación según sea necesario
+        ]);
+
+        // Obtener las imágenes del formulario
+        if ($request->hasFile('imgportada')) {
+
+            $imagenes = $request->file('imgportada');
+            // Generar un nombre único para cada imagen
+            $nombreImagen = uniqid('imagen_') . '.' . $imagenes->getClientOriginalExtension();
+
+            // Guardar la imagen en la ruta public/img/imaPartes
+            $imagenes->move(public_path('/public/img/imgPortadas'), $nombreImagen);
+            //dd($request);
+            }
+
+
+            $Usuarios = new certificados(["anoCertificado" => $request->anoCertificado,
+                "AnoVigente" => $request->AnoVigente,
+                "mesVigente" => $request->mesVigente,
+                "contratista" => $request->contratista,
+                "contactoContratista" => $request->contactoContratista,
+                "ubicacion" => $request->ubicacion,
+                "obra"=>$request->obra,
+                "fechaInicioContrato"=>$request->fechaInicioContrato,
+                "plazoejecucion" => $request->plazoejecucion,
+                "iva" => $request->iva,
+                "bajaobtenida" => $request->bajaobtenida,
+                "fechaAdjudicacion"=>$request->fechaAdjudicacion,
+                "beneficioind" => $request->beneficioind,
+                "gastosgenerales" => $request->gastosgenerales,
+                "imgportada" => $nombreImagen]);
+
+            if ($Usuarios->save()) {
+
+                //$menssage = "Usuario registrado correctamente";
+
+
+
+                return redirect()->route('configPortada')
+            ->with('success', 'Portada certificacion Actualizada correctamente');
+
+            }
+
+            $data = $request->all();
+            // Obtener las imágenes del formulario
+            if ($request->hasFile('file')) {
+            $imagenes = $request->file('file');
+
+            foreach ($imagenes as $imagen) {
+                //dd($imagen);
+                    $nombreImagen = Str::slug($imagen->getClientOriginalName(), '_');
+
+                    $imagen->storeAs('img/imgPortadas', $nombreImagen, 'public');
+
+                    // Almacenar la ruta completa en la base de datos
+                    $data['file'] = 'img/imgimgPortadas/' . $nombreImagen;
+
+                    $evidencia = portada::configPortada($data);
+
+                    if (!$evidencia) {
+
+                        return response()->json(['success' => false, 'message' => 'Error al guardar la evidencia']);
+
+                    }
+
+                }
+            }
+    }
 
 
 

@@ -58,7 +58,8 @@ class ParteController extends Controller
         'P.fechaAsignacion',
         'P.validado_por',
         'P.fecha_validacion',
-        'EST.estadoparte'
+        'EST.estadoparte',
+        'P.ParteEnCertificado'
     )
     ->join('tipoparte as TP', 'P.idtipoparte', '=', 'TP.id')
     ->join('localizacion as LC', 'LC.id', '=', 'P.id_localizacion')
@@ -141,7 +142,8 @@ $partes = DB::table('parte as P')
       'P.fechaAsignacion',
       'P.validado_por',
       'P.fecha_validacion',
-      'EST.estadoparte'
+      'EST.estadoparte',
+      'P.ParteEnCertificado'
   )
   ->join('tipoparte as TP', 'P.idtipoparte', '=', 'TP.id')
   ->join('localizacion as LC', 'LC.id', '=', 'P.id_localizacion')
@@ -215,12 +217,12 @@ public function pdf()
         $estado='';
         $localizaciones = Localizacion::pluck(DB::raw("CONCAT(cod_localizacion, ', ', descripcion, ', ', zona) as ubicacion"), 'id');
         $tipoparte= Tipoparte::pluck('nombre', 'id');
-        $reportadopor = User::whereIn('idrol', [3, 4])->pluck('codigo', 'id');
+        $reportadopor = User::whereIn('idrol', [3, 4])->where('estado', '=', 1)->pluck('codigo', 'id');
 
-        $autorizadopor = User::where('idrol', '=','5')->pluck('codigo', 'id');;
+        $autorizadopor = User::where('idrol', '=','5')->where('estado', '=', 1)->pluck('codigo', 'id');;
 
 
-         $asignadoa = User::where('idrol', '=','2')->pluck('codigo', 'id');
+         $asignadoa = User::where('idrol', '=','2')->where('estado', '=', 1)->pluck('codigo', 'id');
         //dd($reportadopor);
         //dd($reportadopor);
         $Descripcionelementos = Descripcionelementos::pluck(DB::raw("CONCAT(descripcion,'-',elemento,'-',precio) as valor"), 'id');
@@ -276,9 +278,6 @@ public function pdf()
 
         //dd($request->hasFile('imgParte') );
     }
-
-
-
 
     public function show($id)
     {
@@ -351,7 +350,7 @@ if (Auth::user()->idrol==1){
                 $query->whereIn('id', [5, 4, 7, 3]);
                 break;
             case 4:
-                $query->whereIn('id', [5, 7,4]);
+                $query->whereIn('id', [5, 7, 4]);
                 break;
             case 5:
                 $query->where('id', [4,7,5]);
@@ -363,9 +362,6 @@ if (Auth::user()->idrol==1){
         }
     })->pluck('estadoparte', 'id');
 }
-
-
-
 
 
        /* elmentos*/
@@ -388,7 +384,6 @@ if (Auth::user()->idrol==1){
         echo'hola mundo';
         die;
        }*/
-
 
         /* Casos para determinar nivel de Privilegios y Vistas */
 
@@ -416,8 +411,6 @@ if (Auth::user()->idrol==1){
             $data['estadoparte_id']=$request->input('estadoparte_id');
             break;
 
-
-
         // Otros casos si es necesario
 
         default:
@@ -441,6 +434,7 @@ if (Auth::user()->idrol==1){
 
         return redirect()->route('partes.index')
             ->with('success', 'Elemento eliminado correctamente');
+
     }
 
     // app/Http/Controllers/PartesController.php

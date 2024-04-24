@@ -106,19 +106,19 @@ $("#contenpartes").removeClass('d-none');
 
                                             <!-- Valor T  -->
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>Tiempo tardado en la ejecución de la tarea</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="tiempoTarea" name="tiempoTarea" oninput="validateInput3(this)"> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>Tiempo tardado en la ejecución de la tarea (T1)</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="tiempoTarea" name="tiempoTarea" oninput="validateInput3(this); concatenarValores()"> </td>
                                                 <td style="width:5%"> / </td>
-                                                <td style="text-align:left; font-size:  1em; border:none; "><strong>Tiempo establecido por el Ayuntamiento</strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="tiempoAyu" name="tiempoAyu" oninput="validateInput3(this)" ></td>
+                                                <td style="text-align:left; font-size:  1em; border:none; "><strong>Tiempo establecido por el Ayuntamiento (T2)</strong><br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0 " id="tiempoAyu" name="tiempoAyu" oninput="validateInput3(this); concatenarValores()" ></td>
                                             </tr>
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>T<sup>2</sup></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="T" name="T" oninput="validateInput3(this)" readonly> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>T<sup>2</sup></strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="T" name="T" oninput="validateInput3(this); concatenarValores()" readonly> </td>
 
                                             </tr>
 
                                             <tr>
                                                 <td style="text-align:justify;font-size: 1em; border:none; width:50%">
                                                     <strong>D</strong><br>
-                                                    <select style="width: 100%; font-size:1em; text-align: left; white-space: pre-wrap;" id="D" name="D" onchange="" oninput="">
+                                                    <select style="width: 100%; font-size:1em; text-align: left; white-space: pre-wrap;" id="D" name="D" onchange="" oninput="; concatenarValores()">
                                                         <option value="" disabled selected hidden>Selecciona una opción</option>
                                                         <option value="500">1- Estudios, elaboración de presupuestos e informes: D = 500 €</option>
                                                         <option value="400">2- Nuevos procedimientos: D = 400 €</option>
@@ -135,13 +135,13 @@ $("#contenpartes").removeClass('d-none');
                                             </tr>
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>K</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="K" name="K" oninput="validateInput(this)"> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>K</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="K" name="K" oninput="validateInput(this); concatenarValores()"> </td>
                                             </tr>
 
                                             <tr>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%" class="float-right" > <strong>F</strong> <br><input type="text" style="width: 100%; font-size:1em; text-align: right " value="1000 " id="F" name="F" oninput="validateInput3(this);; calcularSuma()" readonly> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%" class="float-right" > <strong>F</strong> <br><input type="text" style="width: 100%; font-size:1em; text-align: right " value="1000 " id="F" name="F" oninput="validateInput3(this);; calcularSuma(); concatenarValores()" readonly> </td>
                                                 <td style="text-align: center"> + </td>
-                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>Resultado ( T<sup>2</sup> * D * K )</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="resultado" name="resultado" oninput="validateInput3(this);; calcularSuma()" readonly> </td>
+                                                <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>Resultado ( T<sup>2</sup> * D * K )</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="resultado" name="resultado" oninput="validateInput3(this);; calcularSuma(); concatenarValores()" readonly> </td>
                                             </tr>
 
 
@@ -174,21 +174,17 @@ $("#contenpartes").removeClass('d-none');
                                     }
 
                                     function calcularT() {
-                                        // Obtener los valores de los campos de entrada
-                                        var tiempoTarea = parseFloat(document.getElementById("tiempoTarea").value.replace(',', '.'));
-                                        var tiempoAyu = parseFloat(document.getElementById("tiempoAyu").value.replace(',', '.'));
+                                        var tiempo1 = parseFloat(document.getElementById("tiempoTarea").value);
+                                        var tiempo2 = parseFloat(document.getElementById("tiempoAyu").value);
 
-                                        // Calcular el resultado de la división
-                                        var resultado = tiempoTarea / tiempoAyu;
-
-                                        // Elevar el resultado al cuadrado
-                                        resultado *= resultado;
-
-                                        // Formatear el resultado con coma para las centésimas
-                                        var resultadoFormateado = resultado.toFixed(2).replace('.', ',');
-
-                                        // Mostrar el resultado en el campo "T"
-                                        document.getElementById("T").value = resultadoFormateado;
+                                        if (!isNaN(tiempo1) && !isNaN(tiempo2) && tiempo2 !== 0) {
+                                            var resultado = (tiempo1 / tiempo2).toFixed(2); // Limitar a dos decimales
+                                            resultado = resultado.replace('.', ',');
+                                            document.getElementById("T").value = resultado;
+                                            calcularS6(); // Actualizar S6 después de actualizar Texponente
+                                        } else {
+                                            document.getElementById("T").value = '';
+                                        }
                                     }
 
                                     // Llamar a la función calcularT() cada vez que cambie el valor en los campos de entrada
@@ -245,6 +241,29 @@ $("#contenpartes").removeClass('d-none');
                                         document.getElementById("S8").value = sumaFormateada + ' €';
                                     }
 
+                                    function concatenarValores() {
+                                        // Obtener los valores de los campos de entrada
+                                        var tiempoTarea = document.getElementById("tiempoTarea").value;
+                                        var tiempoAyu = document.getElementById("tiempoAyu").value;
+                                        var valT = document.getElementById("T").value;
+                                        var valD = document.getElementById("D").value;
+                                        var valK = document.getElementById("K").value;
+                                        var valF = document.getElementById("F").value;
+                                        var resultado = document.getElementById("resultado").value;
+
+
+                                        // Concatenar los valores
+                                        /*var operaciones = valvalorFijo + "\n" +
+                                                        "N: " + valN;*/
+
+                                        var operaciones = "F: " + valF + " ( " + " < " + "T1: " + tiempoTarea + " / " + " T2: " + tiempoAyu + " > " + "--> " + "T^2: " + valT + " * " + "D: " +  valD +"€" + " * " + "K: " + valK + " ) ";
+
+                                        // Mostrar el resultado en el campo de texto
+                                        document.getElementById("operaciones").value = operaciones;
+                                    }
+
+                                </script>
+
 
                                 </script>
 
@@ -288,10 +307,20 @@ $("#contenpartes").removeClass('d-none');
 
 
 
-                <table width="95%" style="margin: auto; padding: 3% 3% 3% 3%; display:block ">
+                <table width="95%" style="margin: auto; padding: 3% 3% 3% 3%" >
                     <tr>
-                        <td  style="text-align:justify;font-size: 1em"> <strong> S<sub>8</sub> (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 40%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S8" name="S8" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>8</sub> = F ( T<sup>2</sup> * D * K )</strong></td>
+                        <td style="text-align:justify;font-size: 1em"> <strong> S<sub>8</sub> (Importe de la penalidad en euros) : </strong> <input type="text" style="width: 30%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S8" name="S8" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>8</sub> = F ( T<sup>2</sup> * D * K )</strong></td>
                     </tr>
+                </table>
+
+                <table style="margin: auto; padding: 3% 3% 3% 3% ;display:none;width:95%" id="operAritmeticaMaster" >
+                    <!--<th style="text-align:justify;font-size: 1em; width:100%; padding: 3% 3% 3% 3%"> </th>
+                    <td><input type="text" style="font-size:1em; text-align: right; width:90% " placeholder="Solo Lectura " id="operaciones" name="operaciones" readonly></td>-->
+                    <div class="form-group" style="display: none">
+                        {{ Form::label('Valores de las Operaciones') }}
+                        {!! $errors->first('operaciones', '<div class="invalid-feedback">:message</div>') !!}
+                        <textarea class="form-control" id="operaciones" name="operaciones" style="white-space: pre-line;"></textarea>
+                    </div>
                 </table>
 
                  <br><br>
@@ -307,7 +336,7 @@ $("#contenpartes").removeClass('d-none');
                         </div>
                     </div>
 
-</form>
+        </form>
 
 
                 </div>

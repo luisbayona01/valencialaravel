@@ -30,6 +30,7 @@
         }
 
         function lisdataelements() {
+    var estadoparte_id = {{$parte->estadoparte_id}};
     var idParte = {{ $parte->id }};
     fetch(`/api/partes/elementos/${idParte}`)
         .then(response => {
@@ -43,12 +44,43 @@
             if (data && Object.keys(data).length > 0) {
                 $(".contenido").removeClass("d-none");
                 $(".contenidoElements").html("");
-        let  totales=0;
+                let totales = 0;
                 data.forEach(item => {
-                     totales = item.precio_total +  totales;
-                     let  totale= item.precio_total.toFixed(2);
-                      let totalstring=  totale.replace('.',',')
+                    totales = item.precio_total + totales;
+                    let totale = item.precio_total.toFixed(2);
+                    let totalstring = totale.replace('.', ',');
                     console.log('iditem', item.idelementos_parte);
+
+                    let botonEditar = ''; // Inicializar la variable del botón de edición
+                    let botonEliminar = ''; // Inicializar la variable del botón de edición
+
+                    // Verificar si el estadoparte_id es 3 o 4
+                    if (estadoparte_id === 3 || estadoparte_id === 4 || estadoparte_id === 5 || estadoparte_id === 6) {
+                        // Si es 3 o 4, ocultar el botón de edición
+                        botonEditar = `<a style="text-align: center; margin-right: 10px; font-size: 1.3em; " type="button" class="b" id="selecione" hidden>
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true">
+                                                <input type="hidden" id="editar" class="idelementoP"  value='${item.idelementos_parte}'>
+                                            </i>
+                                        </a>`;
+                        botonEliminar = `<a style="text-align: center; margin-right: 10px; font-size: 1.3em; " type="button" class="b" id="selecione" hidden>
+                            <i class="fa fa-trash" aria-hidden="true">
+                                <input type="hidden" id="delet" class="idelementoP" value='${item.idelementos_parte}'>
+                            </i>
+                        </a>`;
+                    } else {
+                        // Si no es 3 o 4, mostrar el botón de edición normalmente
+                        botonEditar = `<a style="text-align: center; margin-right: 10px; font-size: 1.3em; " type="button" class="b" id="selecione">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true">
+                                                <input type="hidden" id="editar" class="idelementoP"  value='${item.idelementos_parte}'>
+                                            </i>
+                                        </a>`;
+                        botonEliminar = `<a style="text-align: center; margin-right: 10px; font-size: 1.3em; " type="button" class="b" id="selecione">
+                            <i class="fa fa-trash" aria-hidden="true">
+                                <input type="hidden" id="delet" class="idelementoP" value='${item.idelementos_parte}'>
+                            </i>
+                        </a>`;
+                    }
+
                     let rows = `<tr>
                         <td style="text-align: center;">${item.elemento}</td>
                         <td>${item.descripcion}</td>
@@ -58,17 +90,9 @@
 
                         <td style="text-align: center;" id="acciones">
                             <form action="{{ route('partes.destroy', $parte->id) }}" method="POST">
-                                <a style="text-align: center; margin-right: 10px; font-size: 1.3em; " type="button" class="b" id="selecione">
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true">
-                                        <input type="hidden" id="editar" class="idelementoP"  value='${item.idelementos_parte}'>
-                                    </i>
-                                </a>
+                                ${botonEditar} <!-- Aquí se inserta el botón de edición -->
+                                ${botonEliminar} <!-- Aquí se inserta el botón de eliminación -->
                                 @csrf
-                                <a style="text-align: center; margin-right: 10px; font-size: 1.3em; " type="button" class="b" id="selecione">
-                                    <i class="fa fa-trash" aria-hidden="true">
-                                        <input type="hidden" id="delet" class="idelementoP" value='${item.idelementos_parte}'>
-                                    </i>
-                                </a>
                             </form>
                         </td>
                     </tr>`;
@@ -77,24 +101,11 @@
                     $(".contenidoElements").append(rows);
                 });
 
-
-                // Calcular la suma de la columna "Total" después de agregar todas las filas
-                /*var totalImportes = 0;
-                $('.contenidoElements tr').each(function () {
-                    var totalColumn = parseFloat($(this).find('td:eq(4)').text().replace('€', '').trim());
-                    if (!isNaN(totalColumn)) {
-                        totalImportes += totalColumn;
-                    }
-                });*/
-
                 let total = totales.toFixed(2)
-   let   totalstring= total.replace(".", ",");
+                let totalstring = total.replace(".", ",");
 
                 // Mostrar el resultado en el label
                 $('#totalImportes').text(totalstring + ' €');
-                // Asignar la suma total a una variable global
-                //sumaTotalGlobal = sumaTotal;
-                //sumaTotalGlobal = sumaTotal;
             } else {
                 // No hay datos o los datos están vacíos
                 console.log('La respuesta de la API no contiene datos.');
@@ -103,7 +114,6 @@
         .catch(error => {
             console.error('Error:', error);
         });
-
 }
 
 // Llamar a la función después de cargar la página o en el momento apropiado

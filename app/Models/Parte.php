@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $fecha_validacion
  * @property $obscliente
  * @property $estadoparte_id
+ * @property $ParteEnCertificado
  *
  * @property Estadoparte $estadoparte
  * @property Localizacion $localizacion
@@ -47,7 +48,7 @@ class Parte extends Model
      *
      * @var array
      */
-    protected $fillable = ['id','id_localizacion','idtipoparte','creadopor','fechacreacion','reportadopor', 'fechareporte','obscreadorparte','asignadoa','fechaAsignacion','obsOperador','validado_por','fecha_validacion','obscliente','estadoparte_id','autorizado_por','fechaautorizacion' ];
+    protected $fillable = ['id','id_localizacion','idtipoparte','creadopor','fechacreacion','reportadopor', 'fechareporte','obscreadorparte','asignadoa','fechaAsignacion','obsOperador','validado_por','fecha_validacion','obscliente','estadoparte_id','autorizado_por','fechaautorizacion', 'ParteEnCertificado','ParteEnCertificado'];
 
 
     /**

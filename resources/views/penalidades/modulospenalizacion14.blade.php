@@ -103,13 +103,13 @@ $("#contenpartes").removeClass('d-none');
 
                         <!-- Valor T  -->
                         <tr>
-                            <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>Valor de Referencia</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="3000 " id="referencia" name="referencia" oninput="validateInput3(this)" readonly> </td>
+                            <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>Valor de Referencia</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="3000 " id="referencia" name="referencia" oninput="validateInput3(this); concatenarValores()" readonly> </td>
                         </tr>
                         <tr>
-                            <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>PDi = número de personas con alguna deficiencia o con riesgo de exclusión social</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="pdi" name="pdi" oninput="validateInput3(this)"> </td>
-                            <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%; display: none"> <strong>Valor Fijo de Referencia -1</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="1" id="valorfijo" name="valorfijo" oninput="validateInput3(this)" readonly> </td>
+                            <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>PDi = número de personas con alguna deficiencia o con riesgo de exclusión social</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="0" id="pdi" name="pdi" oninput="validateInput3(this); concatenarValores()"> </td>
+                            <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%; display: none"> <strong>Valor Fijo de Referencia -1</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " value="1" id="valorfijo" name="valorfijo" oninput="validateInput3(this); concatenarValores()" readonly> </td>
                             <td style="text-align: center"> = </td>
-                            <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>(1 - PDi)</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="resultado" name="resultado" oninput="validateInput3(this)" readonly > </td>
+                            <td  style="text-align:justify;font-size: 1em; border-bottom: 0; width:50%"> <strong>(1 - PDi)</strong> <br><input type="text" style="width: 50%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="resultado" name="resultado" oninput="validateInput3(this); concatenarValores()" readonly > </td>
                         </tr>
 
                     </tbody>
@@ -166,6 +166,20 @@ $("#contenpartes").removeClass('d-none');
             // Llama a la función restar cuando se cambie el valor de "pdi"
             document.getElementById("pdi").addEventListener("input", restar);
 
+            function concatenarValores() {
+                // Obtener los valores de los campos de entrada
+                var referencia = document.getElementById("referencia").value;
+                var pdi = document.getElementById("pdi").value;
+
+
+
+                // Concatenar los valores
+                var resultado = referencia + " * " + " ( " + "pdi: " + pdi + " - " + " 1 " + " ) " + "==>";
+
+                // Asignar el resultado al campo de entrada "operaciones"
+                document.getElementById("operaciones").value = resultado;
+            }
+
             </script>
 
                 <!-- Seccion Resultado del Formulario -->
@@ -210,8 +224,17 @@ $("#contenpartes").removeClass('d-none');
 
                 <table width="95%" style="margin: auto; padding: 3% 3% 3% 3%; display:block ">
                     <tr>
-                        <td  style="text-align:justify;font-size: 1em; width:50%"> <strong> S<sub>14</sub> (el importe de la penalidad en euros, en el mes i) : </strong> <input type="text" style="width: 25%; font-size:1em; text-align: right " placeholder="Solo Lectura (resultado €)" id="S14" name="S14" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>14</sub> = 3000 ( 1 - PDi )</strong></td>
+                        <td  style="text-align:justify;font-size: 1em; width:50%"> <strong> S<sub>14</sub> (el importe de la penalidad en euros, en el mes i) : </strong> <input type="text" style="width: 25%; font-size:1em; text-align: right " placeholder="Solo Lectura" id="S14" name="S14" oninput="validateInput3(this)" readonly> &nbsp &nbsp <strong> S <sub>14</sub> = 3000 ( 1 - PDi )</strong></td>
                     </tr>
+                </table>
+                <table style="margin: auto; padding: 3% 3% 3% 3% ;display:none;width:95%" id="operAritmeticaMaster" >
+                    <!--<th style="text-align:justify;font-size: 1em; width:100%; padding: 3% 3% 3% 3%"> </th>
+                    <td><input type="text" style="font-size:1em; text-align: right; width:90% " placeholder="Solo Lectura " id="operaciones" name="operaciones" readonly></td>-->
+                    <div class="form-group" style="display: none ">
+                        {{ Form::label('Valores de las Operaciones') }}
+                        {!! $errors->first('operaciones', '<div class="invalid-feedback">:message</div>') !!}
+                        <textarea class="form-control" id="operaciones" name="operaciones" style="white-space: pre-line;"></textarea>
+                    </div>
                 </table>
 
                  <br><br>

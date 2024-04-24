@@ -85,36 +85,36 @@
 <div class="box box-info padding-1"
     style="background-color:
     @php
-if ($parte->estadoparte_id == 1) {
-            echo '#00FF0020'; // Set the background color to #00FF0020 for estado 1
-        } elseif ($parte->estadoparte_id == 2) {
-            echo '#ff000005'; // Set the background color to #ff000020 for estado 2
-        } elseif ($parte->estadoparte_id == 3) {
-            echo '#ffff0020'; // Set the background color to #FFD70060 for estado 3
-        } elseif ($parte->estadoparte_id == 4) {
-            echo '#ED912109'; // Set the background color to #ED912170 for estado 4
-        } elseif ($parte->estadoparte_id == 5) {
-            echo '#ED912109'; // Set the background color to #ED912109 for estado 5
-        } elseif ($parte->estadoparte_id == 6) {
-            echo '#00a2d310'; // Set the background color to #00a2d310 for estado 6
-        } elseif ($parte->estadoparte_id == 7) {
-            echo '#ff000050'; // Set the background color to #ff000090 for estado 7
-        } elseif ($parte->estadoparte_id == 8) {
-            echo '#84857d10'; // Set the background color to #84857d for estado 8
-        } else {
-            echo 'initial'; // Set the default background color here
-        } @endphp ">
+    if ($parte->estadoparte_id == 1) {
+                echo '#00FF0020'; // Set the background color to #00FF0020 for estado 1
+            } elseif ($parte->estadoparte_id == 2) {
+                echo '#ff000005'; // Set the background color to #ff000020 for estado 2
+            } elseif ($parte->estadoparte_id == 3) {
+                echo '#ffff0020'; // Set the background color to #FFD70060 for estado 3
+            } elseif ($parte->estadoparte_id == 4) {
+                echo '#ED912109'; // Set the background color to #ED912170 for estado 4
+            } elseif ($parte->estadoparte_id == 5) {
+                echo '#ED912109'; // Set the background color to #ED912109 for estado 5
+            } elseif ($parte->estadoparte_id == 6) {
+                echo '#00a2d310'; // Set the background color to #00a2d310 for estado 6
+            } elseif ($parte->estadoparte_id == 7) {
+                echo '#ff000050'; // Set the background color to #ff000090 for estado 7
+            } elseif ($parte->estadoparte_id == 8) {
+                echo '#84857d10'; // Set the background color to #84857d for estado 8
+            } else {
+                echo 'initial'; // Set the default background color here
+            } @endphp ">
 
 
-    @if (Auth::user()->idrol == 4)
-        @php
-            $dnone = 'd-none';
-        @endphp
-    @else
-        @php
-            $dnone = '';
-        @endphp
-    @endif
+        @if (Auth::user()->idrol == 4)
+            @php
+                $dnone = 'd-none';
+            @endphp
+        @else
+            @php
+                $dnone = '';
+            @endphp
+        @endif
 
 
 
@@ -352,7 +352,7 @@ if ($parte->estadoparte_id == 1) {
                             <th style="width: 10%">Precio</th>
                             <th style="width: 10%">Cantidad</th>
                             <th style="width: 10%">Total</th>
-                            <th style="width: 10%">Acción</th>
+                            <th style="width: 10%" id="accionesHeader">Acción</th>
                         </tr>
                     </thead>
                     <tbody class="contenidoElements">
@@ -376,34 +376,10 @@ if ($parte->estadoparte_id == 1) {
             </div>
 
             <script>
-                // Espera a que el DOM esté completamente cargado
-                /*document.addEventListener("DOMContentLoaded", function() {
-                    // Obtiene la tabla
-                    var tablaRecibe2 = document.getElementById("tabla-recibe2");
 
-                    // Obtiene todas las filas de la tabla, excluyendo la primera (encabezados)
-                    var filas = tablaRecibe2.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
 
-                    // Inicializa la variable para la suma total
-                    var total = 0;
 
-                    // Recorre todas las filas y suma los valores de la columna "Total"
-                    for (var i = 0; i < filas.length; i++) {
-                        var celdaTotal = filas[i].getElementsByTagName("td")[4]; // La columna "Total" es la quinta (índice 4)
-                        var valorTotal = parseFloat(celdaTotal.textContent || celdaTotal.innerText);
-
-                        // Asegúrate de que el valor sea un número válido antes de sumarlo
-                        if (!isNaN(valorTotal)) {
-                            total += valorTotal;
-                        }
-                    }
-
-                    let total = total.toFixed(2)
-               let   totalstring= total.replace(".", ",");
-                    // Actualiza el contenido del label "totalImportes" con la suma total
-                    document.getElementById("totalImportes").textContent =totalstring + " €1"; // Puedes ajustar el número de decimales según tus necesidades
-                });*/
-            </script>
+ </script>
 
 
 
@@ -440,34 +416,7 @@ if ($parte->estadoparte_id == 1) {
                 <div id="imageList" style="display: flex; flex-wrap: wrap;"></div>
             </div>
 
-            <!-- SCRIPT PARA EL CARGE DE LAS IMAGENES -->
-            <script>
-                function handleFileSelect(input) {
-                    var fileList = input.files;
-                    var imageListContainer = document.getElementById("imageList");
 
-                    for (var i = 0; i < fileList.length; i++) {
-                        var file = fileList[i];
-                        var imageURL = URL.createObjectURL(file);
-
-                        // Crear miniatura de la imagen
-                        var thumbnail = document.createElement("div");
-                        thumbnail.style.width = "100px"; // Ancho de la miniatura
-                        thumbnail.style.height = "100px"; // Altura de la miniatura
-                        thumbnail.style.backgroundImage = "url('" + imageURL + "')";
-                        thumbnail.style.backgroundSize = "cover";
-                        thumbnail.style.margin = "5px"; // Espaciado entre miniaturas
-                        thumbnail.style.cursor = "pointer";
-                        thumbnail.onclick = function() {
-                            // Mostrar la imagen grande al hacer clic en la miniatura
-                            window.open(imageURL, "_blank");
-                        };
-
-                        // Agregar la miniatura a la lista de imágenes
-                        imageListContainer.appendChild(thumbnail);
-                    }
-                }
-            </script>
 
             <br><br>
 
