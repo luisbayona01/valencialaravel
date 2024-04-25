@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use App\Models\Penalidades;
+
 
 /**
  * Class certificados
@@ -19,6 +21,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property $totalCertificacion
  * @property $Val_LisConservacion
  * @property $anioCertificacion
+ * @property $penalidadS
 
  * @property Certificados[] $certificados
  * @package App
@@ -38,6 +41,6 @@ class Certificados extends Model
       *
       * @var array
       */
-     protected $fillable = ['noCertificado', 'mesCertificado', 'penalidades', 'totalCertificacion', 'Val_LisConservacion', 'anioCertificacion','partes'];
+     protected $fillable = ['noCertificado', 'mesCertificado', 'penalidades', 'totalCertificacion', 'Val_LisConservacion', 'anioCertificacion','partes', 'penalidadS'];
 
 }

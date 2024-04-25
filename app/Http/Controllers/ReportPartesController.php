@@ -247,15 +247,17 @@ mesActualN
 ano_actual
 penalidad
 totalSum*/
-  public function certificarpartes(Request $request){
-  $parteIds= $request->parte_ids;
-  $cadenaDelimitadaPorComas='';
-  if (is_array($parteIds)) {
-    // Paso 2: Convertir el array en una cadena delimitada por comas
-    $cadenaDelimitadaPorComas = implode(',', $parteIds);
+public function certificarpartes(Request $request){
 
-
-}
+    $parteIds= $request->parte_ids;
+    $penalidadIds= $request->penalidades;
+    $cadenaDelimitadaPorComas='';
+    //$cadenaDelimitadaPorComa='';
+    if (is_array($parteIds) )  {
+      // Paso 2: Convertir el array en una cadena delimitada por comas
+      $cadenaDelimitadaPorComas = implode(',', $parteIds);
+      //$cadenaDelimitadaPorComas = implode(',', $penalidadIds);
+  }
 
 
   $Certificados= Certificados::where('mesCertificado',$request->mesActualN)->where('partes',$cadenaDelimitadaPorComas)->first();
@@ -279,11 +281,11 @@ totalSum*/
   //die();
     $Certificados->save();
     Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
-    //penalidades::whereIn('id', $penalidad)->update(['estadopenalidad_Id' => 3]);
+    penalidades::whereIn('idpenalidad', $penalidadIds)->update(['estadopenalidad_Id' => 3]);
 
 //
 Parte::whereIn('id', $parteIds)->update(['ParteEnCertificado' =>$request->noCertificado]);
-//penalidades::whereIn('id', $penalidad)->update(['penalidadEnCertificado' =>$request->noCertificado]);
+//penalidades::whereIn('id', $penalidadIds)->update(['penalidadEnCertificado' =>$request->noCertificado]);
  }
 
 
@@ -295,6 +297,7 @@ return response()->json([
         ]);
 
    }
+
 
 
    public function store(Request $request)
