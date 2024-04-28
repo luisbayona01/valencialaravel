@@ -26,7 +26,7 @@
             <input type="hidden" id="ano_actual"name="ano_actual" value="{{$ano_actual}}">
             <input type="hidden" id="penalidad"name="penalidad" value="{{$penalidad}}">
             <input type="hidden" id="totalSuma"name="totalSuma" value="{{$totalSum}}">
-
+            <input  type="hidden" id="idspenalidades" name="idspenalidades" value="{{$idspenalidades}}"
 
 
 <iframe src="{{ $pdfUrl }}" width="100%" height="90%"></iframe>
@@ -50,7 +50,7 @@ let mesActualN=document.getElementById('mesActualN').value;
 let ano_actual=document.getElementById('ano_actual').value;
 let penalidad=document.getElementById('penalidad').value;
 let totalSuma=document.getElementById('totalSuma').value;
-
+let  idspenalidades= document.getElementById('idspenalidades').value;
 // Agregar el token CSRF al formData
 formData.append('_token', token);
 formData.append('noCertificado',noCertificado);
@@ -58,6 +58,7 @@ formData.append('mesActualN',mesActualN) ;
 formData.append('ano_actual',ano_actual);
 formData.append('penalidad',penalidad) ;
 formData.append('totalSuma',totalSuma);
+formData.append('idspenalidades',idspenalidades);
 // Crear una nueva solicitud AJAX
 var xhr = new XMLHttpRequest();
 

@@ -14,39 +14,35 @@ use App\Models\User;
 use App\Models\Certificados;
 use App\Models\Penalidades;
 use Illuminate\Support\Facades\Log;
+
 class ReportPartesController extends Controller
 {
     public function generarinforme(Request $request)
     {
 
-
-   //dd($request->fechacorrectivo);
-$fechacorectivo= explode("-",$request->fechacorrectivo);
-$mesC=$fechacorectivo[0];
-$anioC=$fechacorectivo[1];
-//dd($dia,$mes,$fechacorectivo);
+        //dd($request->input());
+        //dd($request->fechacorrectivo);
+        $idspenalidades=$request->idspenalidades;
+        $fechacorectivo = explode("-", $request->fechacorrectivo);
+        $mesC = $fechacorectivo[0];
+        $anioC = $fechacorectivo[1];
+        //dd($dia,$mes,$fechacorectivo);
         $currentDateTimes = Carbon::now();
-     Carbon::setLocale('es');
-// Obtener día, mes y año en formato de cadena
-$dia = $currentDateTimes->day;
-$mes = $currentDateTimes->format('m'); // Obtener el número del mes
-$anio = $currentDateTimes->year;
-$nombreMes = $currentDateTimes->isoFormat('MMMM');
-/*   "fechaautorizacionInicio" => "2024-01-01"
-"fechaautorizacionFin" => "2024-02-28*/
-//dd($request);
+        Carbon::setLocale('es');
+        // Obtener día, mes y año en formato de cadena
+        $dia = $currentDateTimes->day;
+        $mes = $currentDateTimes->format('m'); // Obtener el número del mes
+        $anio = $currentDateTimes->year;
+        $nombreMes = $currentDateTimes->isoFormat('MMMM');
 
-$currentDateTime=$dia.'-'.$nombreMes.'-'.$anio;
+
+        $currentDateTime = $dia . '-' . $nombreMes . '-' . $anio;
         $partesid = $request->input('parte_ids');
-  //dd( $partesid);
+
         $penalidad_raw = $request->input('penalidad');
 
-        // Reemplazar comas por puntos (si las comas son el separador decimal)
-        $penalidad = str_replace(',', '.', $penalidad_raw);
-        //dd($partesid);
-//die();
 
-        //$portada = DB::table('portada')->latest()->first();
+        $penalidad = str_replace(',', '.', $penalidad_raw);
         $portada = DB::table('portada')->orderBy('noCertificado', 'desc')->first();
         $fechaInicio = $request->input('fechaautorizacionInicio');
         $fechaFin = $request->input('fechaautorizacionFin');
@@ -60,7 +56,7 @@ $currentDateTime=$dia.'-'.$nombreMes.'-'.$anio;
         }
 
         $img = base_path('public/img/icono_representativo_caratulapdf.png');
-//die();
+
         $partes = DB::table('parte as P')
             ->select(
                 'P.id',
@@ -87,48 +83,34 @@ $currentDateTime=$dia.'-'.$nombreMes.'-'.$anio;
 
             ->where('EST.id', '5')->wherein('P.id', $partesid)->get();
 
-//dd($partes);
         $parteIds = $partes->pluck('id')->toArray();
 
-// Realiza la segunda consulta utilizando los IDs obtenidos
         $totalPartes = DB::table('elemtos_parte')
             ->select(DB::raw('SUM(precio_total) as total'))
             ->whereIn('parteid', $parteIds)
             ->first();
 
-//dd($totalPartes);
-
-// Consulta para obtener la suma de 'Total' entre las fechas indicadas
         $totalSum = DB::table('informecorrectivo')
-             ->whereRaw('YEAR(Fecha_de_carga) = ?', [$anioC])
-             ->whereRaw('MONTH(Fecha_de_carga) = ?', [$mesC])
+            ->whereRaw('YEAR(Fecha_de_carga) = ?', [$anioC])
+            ->whereRaw('MONTH(Fecha_de_carga) = ?', [$mesC])
             ->sum('Total');
 
 
-//dd($fechaInicio, $fechaFin);
-
-
-// Consulta para obtener los informes correctivos entre las fechas indicadas
         $informeCorrectivo = DB::table('informecorrectivo')
-     ->whereRaw('YEAR(Fecha_de_carga) = ?', [$anioC])
-    ->whereRaw('MONTH(Fecha_de_carga) = ?', [$mesC])
-    ->get()
-    ->toArray();
-//dd($informeCorrectivo,$totalSum);
+            ->whereRaw('YEAR(Fecha_de_carga) = ?', [$anioC])
+            ->whereRaw('MONTH(Fecha_de_carga) = ?', [$mesC])
+            ->get()
+            ->toArray();
 
         $chunkSize = 28;
         $totalItems = count($informeCorrectivo);
 
-// Calcular cuántos conjuntos completos se pueden formar
         $numCompleteChunks = intdiv($totalItems, $chunkSize);
 
-// Calcular el tamaño del último conjunto
         $lastChunkSize = $totalItems % $chunkSize;
 
-// Dividir el array en conjuntos
         $conjuntosDeInformes = array_chunk($informeCorrectivo, $chunkSize);
 
-// Si el último conjunto es menor que $chunkSize, agrégale más elementos del inicio para completarlo
         if ($lastChunkSize > 0) {
             $conjuntosDeInformes[$numCompleteChunks] = array_merge(
                 $conjuntosDeInformes[$numCompleteChunks],
@@ -136,88 +118,60 @@ $currentDateTime=$dia.'-'.$nombreMes.'-'.$anio;
             );
         }
 
-
-        // Obtener el mes y el año actual
         $currentDateTime = Carbon::now();
         $mes_actual_espanol = $currentDateTime->translatedFormat('F');
         $ano_actual = $currentDateTime->year;
 
-  $fechaActual = now()->format('Ymd');
-$mesActualN = now()->format('m');
-// Obtener el ID del usuario logeado
-$idUsuario = Auth::id();
-$user=new User();
-$rollname=  $user->rolname();
+        $fechaActual = now()->format('Ymd');
+        $mesActualN = now()->format('m');
+        // Obtener el ID del usuario logeado
+        $idUsuario = Auth::id();
+        $user = new User();
+        $rollname = $user->rolname();
 
- //$portada = DB::table('portada')->latest()->first();
- /*$portada = DB::table('portada')->orderBy('noCertificado', 'desc')->first();
- $fechaInicio = $request->input('fechaautorizacionInicio');
- $fechaFin = $request->input('fechaautorizacionFin');*/
+        //$portada = DB::table('portada')->latest()->first();
+        /*$portada = DB::table('portada')->orderBy('noCertificado', 'desc')->first();
+        $fechaInicio = $request->input('fechaautorizacionInicio');
+        $fechaFin = $request->input('fechaautorizacionFin');*/
 
-//dd($parteIds);
-$cadenaDelimitadaPorComas='';
-if (is_array($parteIds)) {
-    $cadenaDelimitadaPorComas = implode(',', $parteIds);
-}
- $Certificados= Certificados::where('mesCertificado', $mesActualN)->latest('noCertificado')->first();
- //echo $cadenaDelimitadaPorComas;
- //die();
- //var_dump($Certificados);
- if($Certificados != null){
-   // echo  "aaaa";
-    //die();
- $noCertificado=$Certificados->noCertificado + 1;
-}else{
-    //echo 0;
-     //die();
-$noCertificado=1;
+        //dd($parteIds);
+        $cadenaDelimitadaPorComas = '';
+        if (is_array($parteIds)) {
+            $cadenaDelimitadaPorComas = implode(',', $parteIds);
+        }
+        $Certificados = Certificados::where('mesCertificado', $mesActualN)->latest('noCertificado')->first();
+        //echo $cadenaDelimitadaPorComas;
+        //die();
+        //var_dump($Certificados);
+        if ($Certificados != null) {
+            // echo  "aaaa";
+            //die();
+            $noCertificado = $Certificados->noCertificado + 1;
+        } else {
+            //echo 0;
+            //die();
+            $noCertificado = 1;
 
-}
-
-
-/*
-
-$noCertificado
-$mesActualN
-ano_actual
-$penalidad,
-$totalSum]
-
-*/
+        }
 
 
-// Generar el nombre del archivo PDF con la fecha actual y el ID del usuario
- $nombreArchivo = 'Certificado_'.$noCertificado.'_'.$fechaActual.'_' . $idUsuario . '.pdf';
-/*Certificado_6_20240422_2*/
-        //dd($totalSum);
-        $pdf = Pdf::loadView('pdf.informeParte', compact('portada','penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes', 'fechaInicio', 'fechaFin','currentDateTime', 'mes_actual_espanol', 'ano_actual','noCertificado'));
+
+
+
+        $nombreArchivo = 'Certificado_' . $noCertificado . '_' . $fechaActual . '_' . $idUsuario . '.pdf';
+
+        $pdf = Pdf::loadView('pdf.informeParte', compact('portada', 'penalidad', 'partes', 'img', 'conjuntosDeInformes', 'totalSum', 'totalPartes', 'fechaInicio', 'fechaFin', 'currentDateTime', 'mes_actual_espanol', 'ano_actual', 'noCertificado'));
         //$pdf->inline('informeParte.pdf');
         $pdf->setPaper('legal');
         //Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
-        $pdfPath = public_path('pdfs/'.$nombreArchivo);
+        $pdfPath = public_path('pdfs/' . $nombreArchivo);
         $pdf->save($pdfPath);
-     return view('pdf.pdf_viewer', ['pdfUrl' => asset('pdfs/'.$nombreArchivo),'idspartes'=>$parteIds,'noCertificado'=>$noCertificado,'mesActualN'=>$mesActualN,'ano_actual'=>$ano_actual,'penalidad'=>$penalidad,'totalSum'=>$totalSum]);
-     //return $pdf->stream();
+        return view('pdf.pdf_viewer', ['pdfUrl' => asset('pdfs/' . $nombreArchivo), 'idspartes' => $parteIds, 'noCertificado' => $noCertificado, 'mesActualN' => $mesActualN, 'ano_actual' => $ano_actual, 'penalidad' => $penalidad, 'totalSum' => $totalSum,'idspenalidades'=>$idspenalidades]);
+        //return $pdf->stream();
 
     }
 
-    /* public function procesarFormulario(Request $request)
-    {
-    // Obtener el valor del input "penalidad" del formulario
-    $penalidad = $request->input('penalidad');
 
-    // Pasar la variable $penalidad a la vista
-    return view('informeParte', ['penalidad' => $penalidad]);
-    }
-     */
-    /*public function numerosletras($valor)
-    {
-
-    $valor_formateado = number_format($valor / 100, 2, '.', '');
-    $formatter = new NumeroALetras();
-    $texto =$formatter->toMoney($valor_formateado, 2, 'EUROS', 'CÉNTIMOS');
-    return  $texto;
-    }*/
 
 
     public function numerosletras($valor)
@@ -227,77 +181,84 @@ $totalSum]
         return $texto;
     }
 
-  public  function validarchecks( Request $request){
+    public function validarchecks(Request $request)
+    {
 
-$partesid=$request->parte_ids;
-  $totalPartes = DB::table('elemtos_parte')
+        $partesid = $request->parte_ids;
+        $totalPartes = DB::table('elemtos_parte')
             ->select(DB::raw('SUM(precio_total) as total'))
             ->whereIn('parteid', $partesid)
             ->first();
 
- return response()->json([
+        return response()->json([
             'ok' => true,
             'totalPartes' => $totalPartes,
         ]);
 
-}
+    }
 
-/*noCertificado
-mesActualN
-ano_actual
-penalidad
-totalSum*/
-  public function certificarpartes(Request $request){
-  $parteIds= $request->parte_ids;
-  $cadenaDelimitadaPorComas='';
-  if (is_array($parteIds)) {
-    // Paso 2: Convertir el array en una cadena delimitada por comas
-    $cadenaDelimitadaPorComas = implode(',', $parteIds);
+    public function certificarpartes(Request $request)
+    {
+        $parteIds = $request->parte_ids;
+        $cadenaDelimitadaPorComas = '';
+        if (is_array($parteIds)) {
+            // Paso 2: Convertir el array en una cadena delimitada por comas
+            $cadenaDelimitadaPorComas = implode(',', $parteIds);
 
 
-}
+        }
 
-
-  $Certificados= Certificados::where('mesCertificado',$request->mesActualN)->where('partes',$cadenaDelimitadaPorComas)->first();
-  //dd($Certificados);
-
-
-  if($Certificados !== null){
-    return response()->json([
-        'ok' => true,
-        'respuesta' => 'ya se  han certificado los partes',
-    ]);
- }else{
-    $Certificados = new certificados(["noCertificado" => $request->noCertificado,
-    "mesCertificado" => $request->mesActualN,
-    "anioCertificacion" => $request->ano_actual,
-    "penalidades" => $request->penalidad,
-    "Val_LisConservacion" => $request->totalSuma,
-    "partes"=> $cadenaDelimitadaPorComas
-       ]);
-  //var_dump($Certificados);
-  //die();
-    $Certificados->save();
-    Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
-    //penalidades::whereIn('id', $penalidad)->update(['estadopenalidad_Id' => 3]);
-
-//
-Parte::whereIn('id', $parteIds)->update(['ParteEnCertificado' =>$request->noCertificado]);
-//penalidades::whereIn('id', $penalidad)->update(['penalidadEnCertificado' =>$request->noCertificado]);
- }
+         $Certificados = Certificados::where('mesCertificado', $request->mesActualN)->where('partes', $cadenaDelimitadaPorComas)->first();
 
 
 
-//
-return response()->json([
+        if ($Certificados !== null) {
+            return response()->json([
+                'ok' => true,
+                'respuesta' => 'ya se  han certificado los partes',
+            ]);
+        } else {
+            $Certificados = new certificados([
+                "noCertificado" => $request->noCertificado,
+                "mesCertificado" => $request->mesActualN,
+                "anioCertificacion" => $request->ano_actual,
+                "penalidades" => $request->penalidad,
+                "Val_LisConservacion" => $request->totalSuma,
+                "partes" => $cadenaDelimitadaPorComas
+            ]);
+            //var_dump($Certificados);
+            //die();
+            $Certificados->save();
+            Parte::whereIn('id', $parteIds)->update(['estadoparte_id' => 6]);
+            //penalidades::whereIn('id', $penalidad)->update(['estadopenalidad_Id' => 3]);
+
+            //
+            Parte::whereIn('id', $parteIds)->update(['ParteEnCertificado' => $request->noCertificado]);
+             $idString = $request->idspenalidades;
+
+                        if (!empty($idString)) {
+                    // Convertir el string en un array de IDs
+                    $penalidadesArray = explode(',', $idString);
+
+                    // Actualizar los registros en la base de datos utilizando el constructor de consultas
+                    DB::table('penalidades')
+                        ->whereIn('id', $penalidadesArray)
+                        ->update(['penalidadEnCertificado' => $request->noCertificado]);
+                }
+        }
+
+
+
+        //
+        return response()->json([
             'ok' => true,
             'respuesta' => 'se han certificado los partes',
         ]);
 
-   }
+    }
 
 
-   public function store(Request $request)
+    public function store(Request $request)
     {
 
         //$password='Etra1234';//
@@ -317,60 +278,62 @@ return response()->json([
             // Guardar la imagen en la ruta public/img/imaPartes
             $imagenes->move(public_path('/public/img/imgPortadas'), $nombreImagen);
             //dd($request);
-            }
+        }
 
 
-            $Usuarios = new certificados(["anoCertificado" => $request->anoCertificado,
-                "AnoVigente" => $request->AnoVigente,
-                "mesVigente" => $request->mesVigente,
-                "contratista" => $request->contratista,
-                "contactoContratista" => $request->contactoContratista,
-                "ubicacion" => $request->ubicacion,
-                "obra"=>$request->obra,
-                "fechaInicioContrato"=>$request->fechaInicioContrato,
-                "plazoejecucion" => $request->plazoejecucion,
-                "iva" => $request->iva,
-                "bajaobtenida" => $request->bajaobtenida,
-                "fechaAdjudicacion"=>$request->fechaAdjudicacion,
-                "beneficioind" => $request->beneficioind,
-                "gastosgenerales" => $request->gastosgenerales,
-                "imgportada" => $nombreImagen]);
+        $Usuarios = new certificados([
+            "anoCertificado" => $request->anoCertificado,
+            "AnoVigente" => $request->AnoVigente,
+            "mesVigente" => $request->mesVigente,
+            "contratista" => $request->contratista,
+            "contactoContratista" => $request->contactoContratista,
+            "ubicacion" => $request->ubicacion,
+            "obra" => $request->obra,
+            "fechaInicioContrato" => $request->fechaInicioContrato,
+            "plazoejecucion" => $request->plazoejecucion,
+            "iva" => $request->iva,
+            "bajaobtenida" => $request->bajaobtenida,
+            "fechaAdjudicacion" => $request->fechaAdjudicacion,
+            "beneficioind" => $request->beneficioind,
+            "gastosgenerales" => $request->gastosgenerales,
+            "imgportada" => $nombreImagen
+        ]);
 
-            if ($Usuarios->save()) {
+        if ($Usuarios->save()) {
 
-                //$menssage = "Usuario registrado correctamente";
+            //$menssage = "Usuario registrado correctamente";
 
 
 
-                return redirect()->route('configPortada')
-            ->with('success', 'Portada certificacion Actualizada correctamente');
+            return redirect()->route('configPortada')
+                ->with('success', 'Portada certificacion Actualizada correctamente');
 
-            }
+        }
 
-            $data = $request->all();
-            // Obtener las imágenes del formulario
-            if ($request->hasFile('file')) {
+        $data = $request->all();
+        // Obtener las imágenes del formulario
+        if ($request->hasFile('file')) {
             $imagenes = $request->file('file');
 
             foreach ($imagenes as $imagen) {
                 //dd($imagen);
-                    $nombreImagen = Str::slug($imagen->getClientOriginalName(), '_');
+                $nombreImagen = Str::slug($imagen->getClientOriginalName(), '_');
 
-                    $imagen->storeAs('img/imgPortadas', $nombreImagen, 'public');
+                $imagen->storeAs('img/imgPortadas', $nombreImagen, 'public');
 
-                    // Almacenar la ruta completa en la base de datos
-                    $data['file'] = 'img/imgimgPortadas/' . $nombreImagen;
+                // Almacenar la ruta completa en la base de datos
+                $data['file'] = 'img/imgimgPortadas/' . $nombreImagen;
 
-                    $evidencia = portada::configPortada($data);
+                $evidencia = portada::configPortada($data);
 
-                    if (!$evidencia) {
+                if (!$evidencia) {
 
-                        return response()->json(['success' => false, 'message' => 'Error al guardar la evidencia']);
-
-                    }
+                    return response()->json(['success' => false, 'message' => 'Error al guardar la evidencia']);
 
                 }
+
             }
+        }
     }
 
 

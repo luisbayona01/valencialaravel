@@ -141,7 +141,7 @@
                                         <input type="hidden" id="fechaautorizacionFinHidden" name="fechaautorizacionFin">
                                         <input type="hidden" id="penalidadtxt" name="penalidad">
                                         <input type="hidden" id="fechacorrectivo" name="fechacorrectivo">
-
+                                         <input type="hidden" id="idspenalidades" name="idspenalidades">
 
 
                                         @foreach ($partes as $parte)
@@ -234,11 +234,11 @@
                                     </thead>
                                     <tbody>
 
-                                    <form id="pdfForm" action="{{ route('report') }}" method="POST" target="_blank">
                                         @foreach ($penalidades as $penalidad)
                                         @if ($penalidad->estadopenalidad_Id == 2)
                                         <tr>
                                             <td style="text-align: center; font-size: 0.9em">{{ $penalidad->idpenalidad }}</td>
+
                                             <td style="text-align: center; font-size: 0.9em">
                                                 @switch($penalidad->tipoPenalidad)
                                                     @case(1) P-1 @break
@@ -304,13 +304,13 @@
                                             </td>-->
                                             <td style="text-align: center">
                                                 @csrf
-                                                <input type="checkbox" name="penalidad_ids[]" id="penalidad_ids penalidad" value="{{ $penalidad->valorPenalidad4 }}"
-                                                    onchange="actualizarFormulario2()">
+                                                <input type="checkbox" name="penalidad_ids[]" id="penalidad_{{$penalidad->idpenalidad}}" value="{{ $penalidad->idpenalidad}}"
+                                                    onchange="actualizarFormulario2({{$penalidad->idpenalidad}})">
                                             </td>
                                         </tr>
                                         @endif
                                         @endforeach
-                                    </form>
+
                                         <tr style="font-size:0.9em;">
 
                                             <td></td> <!-- No. Parte -->
@@ -415,9 +415,31 @@
                                 })
                                 .catch(error => console.error('Error:', error), $(".totalpartesSEleccionados").text(0));
                         }
+                        var valoresCheckbox = [];
+                        function actualizarFormulario2(idPenalidad) {
 
-                        function actualizarFormulario2() {
-                        var totalPenalidades = 0;
+                                var checkbox = document.getElementById("penalidad_"+idPenalidad);
+
+                            // Verificar si el checkbox está marcado
+                            if (checkbox.checked) {
+                                // Agregar el valor del parámetro al array
+                                valoresCheckbox.push(idPenalidad);
+                            } else {
+                                // Si el checkbox no está marcado, eliminar el valor del array
+                                var index = valoresCheckbox.indexOf(idPenalidad);
+                                if (index !== -1) {
+                                    valoresCheckbox.splice(index, 1);
+                                }
+                            }
+
+                            // Mostrar los valores actuales del array en la consola
+                            //console.log("Valores del array:", valoresCheckbox);
+                         $("#idspenalidades").val('');
+                         var resultado = valoresCheckbox.join(", ");
+
+                         $("#idspenalidades").val(valoresCheckbox);
+                            //console.log('result-implodejs',resultado);
+                             var totalPenalidades = 0;
 
                         // Obtener todos los checkboxes seleccionados
                         var checkboxes = document.querySelectorAll('input[name="penalidad_ids[]"]:checked');
@@ -426,6 +448,7 @@
                         checkboxes.forEach(function(checkbox) {
                             // Obtener la fila padre del checkbox (tr)
                             var row = checkbox.closest('tr');
+                         console.log(row);
 
                             // Obtener el valor de la columna valorPenalidad4 y reemplazar la coma por un punto para manejar correctamente el valor
                             var valorPenalidad4 = parseFloat(row.querySelector('.valorPenalidad4').textContent.replace(',', '.'));
@@ -477,7 +500,8 @@
 
 
                         function pdf() {
-
+                           //console.log("Valores del array:", valoresCheckbox);
+   //return false;
                             //window.open("{{ url('/pdf') }}", "_blank");
 
                             var searchParams = new URLSearchParams(window.location.search);
