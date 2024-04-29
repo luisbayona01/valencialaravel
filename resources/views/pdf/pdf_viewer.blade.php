@@ -26,7 +26,7 @@
             <input type="hidden" id="ano_actual"name="ano_actual" value="{{$ano_actual}}">
             <input type="hidden" id="penalidad"name="penalidad" value="{{$penalidad}}">
             <input type="hidden" id="totalSuma"name="totalSuma" value="{{$totalSum}}">
-            <input  type="hidden" id="idspenalidades" name="idspenalidades" value="{{$idspenalidades}}"
+            <input  type="hidden" id="idspenalidades" name="idspenalidades" value="{{$idspenalidades}}">
 
 
 <iframe src="{{ $pdfUrl }}" width="100%" height="90%"></iframe>

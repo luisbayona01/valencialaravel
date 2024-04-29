@@ -241,9 +241,10 @@ class ReportPartesController extends Controller
                     $penalidadesArray = explode(',', $idString);
 
                     // Actualizar los registros en la base de datos utilizando el constructor de consultas
-                    DB::table('penalidades')
-                        ->whereIn('id', $penalidadesArray)
-                        ->update(['penalidadEnCertificado' => $request->noCertificado]);
+                    $penalidad= DB::table('penalidades')
+                        ->whereIn('idpenalidad', $penalidadesArray)
+                        ->update(['penalidadEnCertificado' => $request->noCertificado,'estadopenalidad_Id'=>3]);
+                       //var_dump($penalidad);
                 }
         }
 
