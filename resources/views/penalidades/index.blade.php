@@ -74,13 +74,14 @@ $(document).ready( function () {
                             <table class="table table-striped table-hover" id="penalidades">
                                 <thead class="thead">
                                     <tr>
-                                        <th style="text-align: center">Id penalidad</th>
+                                        <th style="text-align: center">No. Penalidad</th>
                                         <th style="text-align: center">Tipo</th>
                                         <th style="text-align: center">Fecha creación</th>
                                         <th style="text-align: center">Creado por</th>
                                         <th style="text-align: center">Observaciones creación</th>
                                         <th style="text-align: center">Operaciones</th>
                                         <th style="text-align: center">Valor penalidad</th>
+                                        <th style="text-align: center">Certificado</th>
                                         <th style="text-align: center">Estado</th>
                                         <th></th>
                                     </tr>
@@ -123,13 +124,24 @@ $(document).ready( function () {
                                         <td style="text-align: justify; font-size: 0.9em">{{ $penalidad->obsCreacion }}</td>
                                         <td style="text-align: right; font-size: 0.9em">{{ $penalidad->operaciones }}</td>
                                         <td style="text-align: right; font-size: 0.9em">{{ $penalidad->valorPenalidad4 }}</td>
+                                        <td style="text-align: center;">N. {{ $penalidad->penalidadEnCertificado }}</td>
                                         <td style="text-align: center; font-size: 0.7em">
-                                            <span class="{{ $penalidad->estadopenalidad_Id }}" style="display: block; width: 100%; height: 100%; text-align: center; @switch($penalidad->estadopenalidad_Id) @case(1) background-color: #00FF0090; color: black; @break @case(2) background-color: #0000ee; color: white; @break @case(3) background-color: #ff000090; color: black; @break @case(4) background-color: gray; color: white; @break @default background-color: red; color: white; @endswitch">
+                                            <span class="{{ $penalidad->estadopenalidad_Id }}" style="display: block; width: 100%; height: 100%; text-align: center;
+                                            @switch($penalidad->estadopenalidad_Id)
+                                            @case(1) background-color: #00FF0050; color: black; @break
+                                            @case(2) background-color: #0000ee90; color: white; @break
+                                            @case(3) background-color: #ff000090; color: black; @break
+                                            @case(4) background-color: #84857d90; color: white; @break
+                                            @case(5) background-color: gray; color: white; @break
+                                            @case(6) background-color: #00a2d360; color:black; @break
+                                            @default background-color: white; color: black; @endswitch">
                                                 @switch($penalidad->estadopenalidad_Id)
                                                     @case(1) Activo @break
                                                     @case(2) Aceptado @break
                                                     @case(3) Rechazado @break
                                                     @case(4) Anulado @break
+                                                    @case(5) Cerrado @break
+                                                    @case(6) Certificado @break
                                                     @default Estado no válido
                                                 @endswitch
                                             </span>

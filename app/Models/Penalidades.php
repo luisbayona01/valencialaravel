@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $valorPenalidad4
  * @property $estadopenalidad_Id
  * @property $tipoPenalidad
+ * @property $penalidadEnCertificado
  *
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
@@ -35,7 +36,7 @@ class Penalidades extends Model
      *
      * @var array
      */
-    protected $fillable = ['creadoPor','fechaCreacion','valorPenalidad4','obsCreacion','obsCreacion', 'tipoPenalidad', 'operaciones'];
+    protected $fillable = ['creadoPor','fechaCreacion','valorPenalidad4','obsCreacion','obsCreacion', 'tipoPenalidad', 'operaciones', 'penalidadEnCertificado'];
 
 
 
